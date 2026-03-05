@@ -1,0 +1,3024 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>美国-伊朗局势交互看板</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+    :root {
+      --bg: #f3f0e8;
+      --ink: #14213d;
+      --card: #fffef9;
+      --muted: #6b7280;
+      --up: #127a43;
+      --down: #b42318;
+      --amber: #c66a13;
+      --line: #d2cab8;
+      --accent: #0f4c5c;
+      --accent-soft: #d9eef4;
+      --chip: #efe8d8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 5% 0%, #f6c58f44 0 18%, transparent 45%),
+        radial-gradient(circle at 95% 100%, #0f4c5c22 0 20%, transparent 45%),
+        var(--bg);
+    }
+
+    .wrap {
+      max-width: none;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px 12px 32px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #0f4c5c 0%, #1d7874 46%, #f0a202 140%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 22px 20px;
+      box-shadow: 0 10px 22px #0f4c5c1f;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: 0.3px;
+      font-size: clamp(24px, 4vw, 34px);
+    }
+
+    .hero p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .meta {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .chip {
+      background: #ffffff24;
+      border: 1px solid #ffffff38;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .section-title {
+      margin: 28px 0 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.2px;
+    }
+
+    .section-subtitle {
+      margin: 12px 0 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.2px;
+      color: #334155;
+    }
+
+    .main-layout {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .left-pane,
+    .right-pane {
+      min-width: 0;
+    }
+
+    .right-pane .section-title {
+      margin-top: 0;
+    }
+
+    .dalio-panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 4px 12px #00000008;
+    }
+
+    .dalio-head {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .dalio-select {
+      min-width: 250px;
+      max-width: 420px;
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #334155;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .dalio-chart {
+      width: 100%;
+      height: 300px;
+      border: 1px solid #e4dfd1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fffdf7;
+    }
+
+    .dalio-meta {
+      font-size: 12px;
+      color: #475569;
+      background: #f7f4ec;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+
+    .mini-table-wrap {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: auto;
+      box-shadow: 0 4px 12px #00000008;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      line-height: 1.35;
+      color: #334155;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      border-bottom: 1px solid #ebe5d7;
+      padding: 6px 8px;
+      text-align: left;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .mini-table th {
+      background: #f7f3e8;
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .mini-table tr:last-child td { border-bottom: none; }
+    .mini-code { font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
+    .mini-name { color: #64748b; max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+    .mini-rest { color: #475569; max-width: 420px; overflow: hidden; text-overflow: ellipsis; }
+
+    .kline-panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 4px 12px #00000008;
+      margin-bottom: 12px;
+    }
+
+    .kline-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .kline-left {
+      min-width: 300px;
+      flex: 1;
+    }
+
+    .kline-right {
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .kline-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .kline-tabs button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #334155;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .kline-tabs button.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .kline-range {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .kline-range button {
+      border: 1px solid var(--line);
+      background: #f7f3e8;
+      color: #475569;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .kline-range button.active {
+      background: #1d7874;
+      color: #fff;
+      border-color: #1d7874;
+    }
+
+    .kline-select {
+      min-width: 240px;
+      max-width: 360px;
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #334155;
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .kline-multi {
+      min-height: 86px;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .kline-label {
+      width: 100%;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .overlay-legend {
+      width: 100%;
+      font-size: 11px;
+      color: #475569;
+      background: #f7f4ec;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 6px 8px;
+      line-height: 1.5;
+    }
+
+    .scenario-legend {
+      width: 100%;
+      font-size: 11px;
+      color: #334155;
+      background: #f3f8ff;
+      border: 1px solid #c6dcff;
+      border-radius: 8px;
+      padding: 6px 8px;
+      line-height: 1.5;
+    }
+
+    .scenario-chip {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 10px;
+      white-space: nowrap;
+    }
+
+    .scenario-line {
+      width: 14px;
+      height: 0;
+      border-top: 2px dashed;
+      margin-right: 5px;
+    }
+
+    .kline-meta {
+      font-size: 12px;
+      color: #475569;
+      background: #f7f4ec;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    .kline-chart {
+      width: 100%;
+      height: 360px;
+      border: 1px solid #e4dfd1;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fffdf7;
+    }
+
+    .kline-tip {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    /* K线下方：热度点阵 + 预测卡 */
+    .lens-lower {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 10px;
+    }
+
+    .lens-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      padding: 10px;
+      min-height: 160px;
+    }
+
+    .lens-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .lens-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      letter-spacing: 0.3px;
+    }
+
+    .lens-meta {
+      font-size: 11px;
+      color: #64748b;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: #f8fafc;
+      white-space: nowrap;
+    }
+
+    /* 新闻热度点阵 */
+    .news-heat-plot {
+      position: relative;
+      height: 140px;
+      border: 1px solid #d6deea;
+      border-radius: 10px;
+      background:
+        linear-gradient(180deg, #091427 0%, #0b1a33 55%, #0d2242 100%);
+      overflow: hidden;
+    }
+
+    .news-heat-plot::before,
+    .news-heat-plot::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #2a3f62;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .news-heat-plot::before { top: 33%; }
+    .news-heat-plot::after { top: 66%; }
+
+    .heat-dot {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.85;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      transition: transform .15s ease, opacity .15s ease, box-shadow .15s ease;
+      border: 1px solid #ffffff26;
+    }
+
+    .heat-dot:hover,
+    .heat-dot.active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.18);
+      box-shadow: 0 0 0 2px #ffffff2f;
+    }
+
+    .heat-major { background: #ff5e66; }
+    .heat-tweet {
+      background: #4da4ff;
+      border-radius: 2px;
+    }
+    .heat-normal { background: #25d2c3; }
+
+    /* 预测模块 */
+    .forecast-tabs {
+      display: inline-flex;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+
+    .forecast-tabs button {
+      border: none;
+      background: transparent;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+
+    .forecast-tabs button.active {
+      background: #1d7874;
+      color: #fff;
+    }
+
+    .forecast-main {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+
+    .forecast-signal {
+      font-size: 22px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: #22c55e;
+    }
+
+    .forecast-up {
+      font-size: 28px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: #e2ecff;
+    }
+
+    .forecast-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .forecast-metric {
+      background: #0f1b32;
+      border: 1px solid #2b4368;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 11px;
+      color: #9fb4d6;
+    }
+
+    .forecast-metric strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 13px;
+      color: #dfe9ff;
+    }
+
+    .forecast-analysis {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #a9bfdf;
+      line-height: 1.55;
+    }
+
+    .forecast-news {
+      margin-top: 8px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #9db4d6;
+      padding-left: 14px;
+    }
+
+    .forecast-news li { margin-bottom: 4px; }
+
+    .marker-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin: 0 4px 0 10px;
+      vertical-align: middle;
+    }
+
+    .marker-major { background: #b42318; width: 10px; height: 10px; }
+    .marker-tweet { background: #1d4ed8; border-radius: 2px; }
+    .marker-normal { background: #0f4c5c; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 4px 12px #00000008;
+    }
+
+    .ticker {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #334155;
+      letter-spacing: 0.2px;
+    }
+
+    .name {
+      margin-top: 4px;
+      color: #475569;
+      font-size: 12px;
+    }
+
+    .price {
+      margin-top: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .change {
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #f8fafc;
+    }
+
+    .up { color: var(--up); }
+    .down { color: var(--down); }
+
+    .bar {
+      margin-top: 10px;
+      background: #edf2f7;
+      border-radius: 999px;
+      overflow: hidden;
+      height: 6px;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #0f766e, #f59e0b);
+    }
+
+    .insight {
+      margin-top: 14px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px 14px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .timeline-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+
+    .impact-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      min-height: 56px;
+    }
+
+    .impact-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .impact-count {
+      margin-top: 4px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f4c5c;
+    }
+
+    .timeline-filter button,
+    .event-btn {
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: #344054;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: all .2s ease;
+    }
+
+    .timeline-filter button {
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .timeline-filter button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .timeline {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .event-btn {
+      min-width: 210px;
+      text-align: left;
+      padding: 10px 12px;
+      scroll-snap-align: start;
+      background: #fff;
+    }
+
+    .event-btn:hover {
+      transform: translateY(-1px);
+      border-color: #9fb0c0;
+    }
+
+    .event-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow: inset 0 0 0 1px #6ea5b3;
+    }
+
+    .event-date {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .event-analog {
+      margin-top: 5px;
+      font-size: 11px;
+      color: #0f4c5c;
+      background: #e7f3f5;
+      border-radius: 999px;
+      padding: 2px 8px;
+      display: inline-block;
+    }
+
+    .event-title {
+      font-weight: 700;
+      font-size: 13px;
+      color: #1f2937;
+      line-height: 1.4;
+    }
+
+    .event-tag {
+      margin-top: 6px;
+      display: inline-block;
+      background: #f8efe2;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: #6b4e2e;
+    }
+
+    .event-kind {
+      margin-top: 6px;
+      margin-left: 6px;
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .kind-major {
+      background: #fde8e8;
+      color: #b42318;
+    }
+
+    .kind-tweet {
+      background: #e8f1ff;
+      color: #1d4ed8;
+    }
+
+    .kind-normal {
+      background: #edf7f6;
+      color: #0f766e;
+    }
+
+    .detail {
+      margin-top: 14px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      min-height: 220px;
+      box-shadow: 0 6px 18px #00000008;
+    }
+
+    .detail h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .detail .meta-line {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .detail p {
+      margin: 8px 0;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .detail .impact {
+      background: #edf7f6;
+      border: 1px solid #b9ddd7;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    .detail .dalio {
+      margin-top: 10px;
+      background: #fff8ea;
+      border: 1px solid #ebd8ae;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .detail .outlook {
+      margin-top: 10px;
+      background: #f2f8ff;
+      border: 1px solid #bdd8f5;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    .detail .outlook ul {
+      margin: 8px 0 0;
+      padding-left: 16px;
+    }
+
+    .detail .outlook li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .detail .social {
+      margin-top: 10px;
+      background: #eef4ff;
+      border: 1px solid #bfd0ff;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .detail details {
+      margin-top: 10px;
+      border: 1px solid #d8d4c8;
+      border-radius: 10px;
+      background: #fcfbf7;
+      padding: 8px 10px;
+    }
+
+    .detail summary {
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+      outline: none;
+    }
+
+    .detail .deep-list {
+      margin: 8px 0 0;
+      padding-left: 16px;
+    }
+
+    .detail .deep-list li {
+      margin-bottom: 6px;
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    .news-list {
+      margin-top: 10px;
+      padding-left: 16px;
+    }
+
+    .news-list li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    .news-list a {
+      color: #0d4a89;
+      text-decoration: none;
+      border-bottom: 1px dotted #0d4a894d;
+    }
+
+    .news-list a:hover { color: #082e57; }
+
+    .history-line {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .history-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 4px 12px #00000008;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+
+    .history-card:hover {
+      transform: translateY(-1px);
+      border-color: #9fb0c0;
+    }
+
+    .history-card.active {
+      border-color: #1d7874;
+      box-shadow: inset 0 0 0 1px #1d7874;
+      background: #eef8f5;
+    }
+
+    /* StockLens-like dark skin */
+    body {
+      color: #d9e4ff;
+      background:
+        radial-gradient(circle at 8% 0%, #1e293b66 0 20%, transparent 45%),
+        radial-gradient(circle at 92% 100%, #0b122066 0 20%, transparent 45%),
+        #050a14;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #0b1730 0%, #10223f 45%, #17315a 100%);
+      border: 1px solid #20355b;
+      box-shadow: 0 10px 28px #02060f;
+    }
+
+    .chip {
+      background: #0f1f3a;
+      border-color: #27406c;
+      color: #c8d8ff;
+    }
+
+    .section-title, .section-subtitle { color: #d9e4ff; }
+
+    .kline-panel,
+    .dalio-panel,
+    .mini-table-wrap,
+    .insight,
+    .detail,
+    .history-card,
+    .impact-card,
+    .lens-card {
+      background: #0b1425;
+      border-color: #1f2d47;
+      box-shadow: 0 6px 18px #02060f;
+    }
+
+    .kline-select,
+    .dalio-select,
+    .kline-meta,
+    .dalio-meta,
+    .overlay-legend,
+    .scenario-legend {
+      background: #0f1b32;
+      border-color: #233756;
+      color: #cdd9f2;
+    }
+
+    .kline-label,
+    .kline-tip,
+    .meta-line,
+    .history-note,
+    .foot,
+    .mini-name,
+    .mini-rest {
+      color: #8fa6cf;
+    }
+
+    .ticker,
+    .price,
+    .impact-title,
+    .history-title,
+    .detail h3,
+    .event-title {
+      color: #e4eeff;
+    }
+
+    .name,
+    .event-date,
+    .history-year,
+    .impact-count {
+      color: #9db3da;
+    }
+
+    .kline-chart,
+    .dalio-chart {
+      background: #081326;
+      border-color: #20324f;
+    }
+
+    .kline-tabs button,
+    .kline-range button,
+    .timeline-filter button,
+    .event-btn,
+    .forecast-tabs {
+      background: #0f1b32;
+      border-color: #233756;
+      color: #cdd9f2;
+    }
+
+    .lens-title,
+    .forecast-up,
+    .forecast-signal,
+    .forecast-metric strong {
+      color: #e4eeff;
+    }
+
+    .lens-meta,
+    .forecast-analysis,
+    .forecast-news,
+    .forecast-metric {
+      color: #9db4d6;
+      border-color: #2a3f60;
+      background: #0f1b32;
+    }
+
+    .news-heat-plot {
+      border-color: #253c5f;
+      background: linear-gradient(180deg, #071224 0%, #0a1730 55%, #0c2142 100%);
+    }
+
+    .kline-tabs button.active,
+    .timeline-filter button.active {
+      background: #1b3f74;
+      border-color: #2b5ca0;
+      color: #e9f1ff;
+    }
+
+    .kline-range button.active {
+      background: #0f5b78;
+      border-color: #1c7ea4;
+      color: #e9f9ff;
+    }
+
+    .mini-table {
+      color: #cdd9f2;
+    }
+
+    .mini-table th {
+      background: #0f1b32;
+      color: #e4eeff;
+      border-bottom-color: #243a5b;
+    }
+
+    .mini-table td {
+      border-bottom-color: #1c2d47;
+    }
+
+    .event-btn.active {
+      background: #12213b;
+      border-color: #2e4d7b;
+      box-shadow: inset 0 0 0 1px #3f659e;
+    }
+
+    .event-tag {
+      background: #3b2f1a;
+      color: #e5c58f;
+    }
+
+    .event-analog {
+      background: #123047;
+      color: #99d4f8;
+    }
+
+    .dalio,
+    .impact,
+    .social {
+      background: #0f1b32 !important;
+      border-color: #2a3f60 !important;
+      color: #d3def5;
+    }
+
+    .history-year {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: #8a5312;
+      margin-bottom: 4px;
+    }
+
+    .history-title {
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+
+    .history-note {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.55;
+    }
+
+    .foot {
+      margin-top: 18px;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 980px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .lens-lower { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .hero { padding: 18px 16px; }
+      .event-btn { min-width: 180px; }
+      .price { font-size: 24px; }
+      .kline-chart { height: 290px; }
+      .dalio-chart { height: 260px; }
+      .kline-right { min-width: 100%; align-items: stretch; }
+      .kline-select { max-width: none; }
+      .dalio-select { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>美国-伊朗局势交互看板</h1>
+      <p>
+        核心判断（截至 2026-03-04）：美方“最大压力+定点军事行动+持续金融制裁”三线并行，
+        市场主要通过“油价与风险溢价”通道反映局势。
+      </p>
+      <div class="meta">
+        <span class="chip">数据快照时间：2026-03-04</span>
+        <span class="chip">行情源：内置 Finance feed</span>
+        <span class="chip">事件源：White House / U.S. Treasury / IAEA</span>
+        <span class="chip">框架源：Ray Dalio《Big Debt Crises》</span>
+      </div>
+    </section>
+
+    <div class="main-layout">
+      <section class="left-pane">
+        <h2 class="section-title">当前局势数据与新闻（60%）</h2>
+        <div class="kline-panel">
+          <div class="kline-head">
+            <div class="kline-left">
+              <div class="kline-tabs" id="klineTabs"></div>
+              <div class="kline-range" id="klineRange"></div>
+            </div>
+            <div class="kline-right">
+              <select class="kline-select" id="klineSelect"></select>
+              <div class="kline-label">叠加资产（多选，Ctrl/Command + 点击）</div>
+              <select class="kline-select kline-multi" id="overlaySelect" multiple></select>
+              <div class="overlay-legend" id="overlayLegend">当前未叠加资产</div>
+              <div class="scenario-legend">
+                <span class="scenario-chip"><span class="scenario-line" style="border-color:#0ea5e9"></span>基准情景</span>
+                <span class="scenario-chip"><span class="scenario-line" style="border-color:#ef4444"></span>升级情景</span>
+                <span class="scenario-chip"><span class="scenario-line" style="border-color:#22c55e"></span>缓和情景</span>
+              </div>
+              <div class="kline-meta" id="klineMeta">已选择：USO | 日期：-</div>
+            </div>
+          </div>
+          <div class="kline-chart" id="klineChart"></div>
+          <div class="kline-tip">
+            点击 K 线某个时间点，下面会自动切换到最近事件；
+            <span class="marker-dot marker-major"></span>重大事件（大圆圈）
+            <span class="marker-dot marker-tweet"></span>特朗普社媒
+            <span class="marker-dot marker-normal"></span>一般事件。支持区间：5m / 3H / 1D / 1W / 1M / 3M / 6M / 1Y / ALL；并显示三种未来情景折线。
+          </div>
+          <div class="lens-lower">
+            <div class="lens-card">
+              <div class="lens-head">
+                <div class="lens-title">NEWS HEAT</div>
+                <div class="lens-meta" id="newsHeatMeta">日期：- | 事件：-</div>
+              </div>
+              <div class="news-heat-plot" id="newsHeatPlot"></div>
+              <div class="kline-tip">点击任意热度点，自动跳转到对应事件新闻。</div>
+            </div>
+            <div class="lens-card" id="forecastPanel"></div>
+          </div>
+        </div>
+        <div id="marketGrid"></div>
+        <div class="insight" id="marketInsight"></div>
+
+        <h2 class="section-title">重大事件时间线（点击查看新闻）</h2>
+        <div class="impact-grid" id="impactGrid"></div>
+        <div class="timeline-filter" id="filterBar"></div>
+        <div class="timeline" id="timeline"></div>
+        <div class="detail" id="eventDetail"></div>
+      </section>
+
+      <aside class="right-pane">
+        <h2 class="section-title">达里奥历史对标（40%）</h2>
+        <div class="dalio-panel">
+          <div class="dalio-head">
+            <select class="dalio-select" id="dalioCaseSelect"></select>
+            <div class="dalio-meta" id="dalioMeta">历史对标：-</div>
+          </div>
+          <div class="dalio-chart" id="dalioChart"></div>
+          <div class="kline-tip">右侧展示历史时期K线与当时新闻。左侧选择当前事件时会自动联动对应历史案例。</div>
+        </div>
+        <div class="detail" id="dalioDetail"></div>
+        <h3 class="section-subtitle">历史案例总览</h3>
+        <div class="history-line" id="historyLine"></div>
+      </aside>
+    </div>
+
+    <div class="foot">
+      说明：
+      1) “美国大盘”采用可交易代理标的（SPY/QQQ/DIA）；
+      2) “韩国大盘”采用 EWY（韩国ETF，非KOSPI现货指数）；
+      3) “重金属”采用 GLD/SLV/CPER 作为黄金、白银、铜的交易代理；
+      4) “军工板块”采用 ITA（美国航空航天与国防 ETF）；
+      5) “重点个股”新增 RTX（Raytheon）与 005930.KS（三星电子，KRX）；
+      6) 达里奥部分使用《Big Debt Crises》的“长期债务周期、通胀/通缩去杠杆、政策四杠杆、战争经济”分析框架。
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+  <script>
+    // 市场快照（用于顶部/表格展示）
+    const marketData = [
+      { ticker: 'SPY', name: '标普500 ETF（美股大盘）', price: 618.55, change: 5.71, pct: 0.93 },
+      { ticker: 'QQQ', name: '纳指100 ETF', price: 550.40, change: 7.09, pct: 1.30 },
+      { ticker: 'DIA', name: '道指 ETF', price: 462.82, change: 2.89, pct: 0.63 },
+      { ticker: 'USO', name: '原油 ETF（油价代理）', price: 68.16, change: 0.78, pct: 1.16 },
+      { ticker: 'GLD', name: '黄金 ETF', price: 498.55, change: -3.57, pct: -0.71 },
+      { ticker: 'SLV', name: '白银 ETF', price: 47.74, change: -0.86, pct: -1.77 },
+      { ticker: 'CPER', name: '铜 ETF（工业金属）', price: 37.87, change: 1.86, pct: 5.16 },
+      { ticker: 'ITA', name: '军工板块 ETF（美股）', price: 245.26, change: -5.32, pct: -2.12 },
+      { ticker: 'EWY', name: '韩国市场 ETF（韩国大盘代理）', price: 68.60, change: 0.85, pct: 1.25 },
+      { ticker: 'RTX', name: 'Raytheon（重点个股）', price: 126.84, change: 1.42, pct: 1.13 },
+      { ticker: '005930.KS', name: '三星电子（重点个股，KRX）', price: 73400, change: -900, pct: -1.21 }
+    ];
+
+    // 事件主数据（新闻、达里奥映射、分类）
+    const events = [
+      {
+        id: 'e1',
+        date: '2025-02-04',
+        eventType: 'major',
+        title: '白宫发布 NSPM-2，恢复对伊“最大压力”',
+        category: '政策',
+        analogShort: '对标：1979-82 紧缩抗通胀',
+        summary: '美国将“限制伊朗核能力、导弹能力、代理人网络融资”设为统一政策主轴，并要求强化制裁执法与石油出口打击。',
+        impact: '对市场的长期影响是“风险溢价底座抬升”，油运与制裁相关资产波动率上行。',
+        dalioLens: '达里奥框架中，这更像“周期后段的政策再收紧”：当通胀与地缘风险抬升，政策目标会从增长优先切到稳定优先。',
+        analogs: ['1979-1982：第二次石油冲击后的紧缩再定价。', '2018-2019：对伊制裁升级后的风险溢价抬升。'],
+        outlook: ['若制裁继续加码，油运与保险成本仍偏上行。', '权益估值将更依赖盈利兑现而非估值扩张。'],
+        news: [
+          { headline: 'National Security Presidential Memorandum / NSPM-2', source: 'The White House', url: 'https://www.whitehouse.gov/presidential-actions/2025/02/national-security-presidential-memorandum-nspm-2/' },
+          { headline: 'Fact Sheet: Restores Maximum Pressure on Iran', source: 'The White House', url: 'https://www.whitehouse.gov/fact-sheets/2025/02/fact-sheet-president-donald-j-trump-restores-maximum-pressure-on-iran/' }
+        ]
+      },
+      {
+        id: 'e2',
+        date: '2025-06-09',
+        eventType: 'normal',
+        title: 'IAEA：伊朗高浓缩铀库存与核查问题仍是核心风险',
+        category: '核问题',
+        analogShort: '对标：2007-08 风险重估前夜',
+        summary: 'IAEA在理事会报告中指出保障监督争议未解，并强调高浓缩铀库存带来扩散风险。',
+        impact: '核谈判预期反复，黄金与油价风险溢价阶段性抬升。',
+        dalioLens: '对应“顶部早期预警”：尾部风险先于基本面被计价。',
+        analogs: ['2007-2008：风险先在预期层面重估。', '1990-1991：中东冲突预期先推升原油溢价。'],
+        outlook: ['核查争议延续则贵金属偏强。', '若出现实质谈判路径，风险溢价先回落。'],
+        news: [
+          { headline: 'IAEA Director General Statement to Board of Governors (9 June 2025)', source: 'IAEA', url: 'https://www.iaea.org/newscenter/statements/iaea-director-generals-introductory-statement-to-the-board-of-governors-9-june-2025' }
+        ]
+      },
+      {
+        id: 'e3',
+        date: '2025-11-12',
+        eventType: 'normal',
+        title: '美财政部打击伊朗导弹/UAV跨国采购网络',
+        category: '制裁',
+        analogShort: '对标：2000s 金融制裁网络化',
+        summary: 'OFAC针对32个个人与实体实施制裁，覆盖多国采购链，目标是削弱伊朗导弹与无人机产能恢复。',
+        impact: '供应链与航运保险预期趋紧，油气与军工相关交易活跃度上升。',
+        dalioLens: '符合“政策杠杆再分配”：通过结算体系转移压力。',
+        analogs: ['2000年代后期：跨境制裁网络化。', '1980年代：外部融资受阻时增长脆弱性上升。'],
+        outlook: ['二级制裁若扩大，第三国中间商波动会加剧。', '工业金属波动将更依赖供应链冲击。'],
+        news: [
+          { headline: 'Treasury Disrupts Iran’s Transnational Missile and UAV Procurement Networks', source: 'U.S. Treasury', url: 'https://home.treasury.gov/news/press-releases/sb0313' }
+        ]
+      },
+      {
+        id: 'e4',
+        date: '2026-02-25',
+        eventType: 'major',
+        title: '美财政部再制裁“影子船队”与军工供应网络',
+        category: '制裁',
+        analogShort: '对标：1973/1979 油运风险',
+        summary: 'OFAC新增制裁30+目标，重点压缩伊朗石油变现能力及导弹/先进常规武器采购链。',
+        impact: '油运地缘溢价上行，原油与相关ETF对事件敏感度明显提升。',
+        dalioLens: '接近“战争经济与通胀耦合”阶段：供给冲击先于需求变化。',
+        analogs: ['1973-1974：第一次石油危机。', '1979-1981：第二次石油冲击下折现率上行。'],
+        outlook: ['霍尔木兹扰动扩大则油价波动先上台阶。', '央行降息路径更谨慎，权益估值受限。'],
+        news: [
+          { headline: 'Treasury Targets Iran’s Shadow Fleet, Networks Supplying Ballistic Missile and ACW Programs', source: 'U.S. Treasury', url: 'https://home.treasury.gov/news/press-releases/sb0405' }
+        ]
+      },
+      {
+        id: 'e5',
+        date: '2026-02-26',
+        eventType: 'tweet',
+        title: '特朗普社媒：要求“更快、更强”执行中东威慑',
+        category: '社媒',
+        analogShort: '社媒信号：政策沟通前置',
+        summary: '特朗普在社媒发帖强调对伊政策执行力度，并将海运安全与能源价格稳定并列为优先目标。',
+        postSnippet: '帖文要点（摘要）：强调“不会容忍核威胁扩散”，并要求盟友配合海运安全行动。',
+        impact: '社媒信号通常先影响短线风险偏好，再传导至油价和波动率。',
+        dalioLens: '达里奥框架下，政策沟通会改变市场对未来政策路径的主观概率。',
+        analogs: ['2018-2020：社媒沟通显著影响事件驱动交易。', '1990-1991：政策信号常先于正式声明。'],
+        outlook: ['若社媒措辞继续升级，短线避险交易更频繁。', '正式政策文件落地后，波动率可能出现二次冲击。'],
+        news: [
+          { headline: 'Donald J. Trump - Official Account', source: 'Truth Social', url: 'https://truthsocial.com/@realDonaldTrump' }
+        ]
+      },
+      {
+        id: 'e6',
+        date: '2026-02-27',
+        eventType: 'major',
+        title: '多家媒体快讯：空袭导致伊方高级指挥层出现伤亡',
+        category: '军事',
+        analogShort: '冲突升级：指挥链冲击',
+        summary: '多家媒体报道冲突区域发生新一轮精确打击，涉及高级指挥层伤亡；具体姓名与战果细节仍在持续更新。',
+        impact: '短线风险偏好下降，油价与军工板块相关资产交易量放大。',
+        dalioLens: '战争经济阶段中，突发军事事件会提高“安全优先”政策权重。',
+        analogs: ['1990-1991：关键军事节点往往触发商品与防务板块同步反应。', '1930-1945：安全目标优先级上升。'],
+        outlook: ['若后续出现报复链条，油运与保险成本仍有上行风险。', '若冲突被快速约束，风险资产将出现修复性反弹。'],
+        news: [
+          { headline: 'Middle East Coverage', source: 'Reuters', url: 'https://www.reuters.com/world/middle-east/' },
+          { headline: 'Middle East News', source: 'AP News', url: 'https://apnews.com/hub/middle-east' }
+        ]
+      },
+      {
+        id: 'e7',
+        date: '2026-02-27',
+        eventType: 'tweet',
+        title: '特朗普社媒：强调“行动将持续，直到威胁降级”',
+        category: '社媒',
+        analogShort: '社媒信号：持续高压',
+        summary: '特朗普再次在社媒发帖，强调军事与制裁组合手段将持续，直至核与导弹风险显著下降。',
+        postSnippet: '帖文要点（摘要）：坚持“实力促和平”叙事，并要求盟友在制裁执法上同步。',
+        impact: '强化“高压延续”预期，压低短线风险偏好。',
+        dalioLens: '社媒作为政策预期锚，会提升市场对“持续高压路径”的定价权重。',
+        analogs: ['2019年：事件驱动行情中，社媒信号对短线价格影响明显。'],
+        outlook: ['若措辞趋于缓和，油价风险溢价可能阶段性回撤。', '若持续强硬，市场更偏防御风格。'],
+        news: [
+          { headline: 'Donald J. Trump - Official Account', source: 'Truth Social', url: 'https://truthsocial.com/@realDonaldTrump' }
+        ]
+      },
+      {
+        id: 'e8',
+        date: '2026-02-28',
+        eventType: 'normal',
+        title: '白宫与盟友举行海运安全与制裁执行协调会',
+        category: '政策',
+        analogShort: '执行层：联盟协同',
+        summary: '美方与盟友就海运安全、能源供应与制裁执法进行协调，市场关注执行一致性和反制强度。',
+        impact: '若联盟执行更一致，油运风险溢价可能上移并持续更久。',
+        dalioLens: '政策协调提高执行概率，市场会将临时冲击重估为“中期约束”。',
+        analogs: ['海湾冲突历史中，联盟协同常延长风险溢价持续时间。'],
+        outlook: ['协同越强，制裁与航运扰动越具持续性。', '若联盟分歧上升，波动率可能先高后低。'],
+        news: [
+          { headline: 'White House Briefing Room', source: 'The White House', url: 'https://www.whitehouse.gov/briefing-room/' }
+        ]
+      },
+      {
+        id: 'e9',
+        date: '2026-03-01',
+        eventType: 'major',
+        title: '白宫披露“Operation Epic Fury”军事行动',
+        category: '军事',
+        analogShort: '对标：1990 海湾战争冲击',
+        summary: '白宫文章表述为“针对伊朗核与导弹能力的军事打击”，代表政策从高压制裁进一步外溢到直接军事层面。',
+        impact: '短线典型是油价上冲、美元偏强、全球股指风险偏好下降。',
+        dalioLens: '战争经济框架下，冲突升级先触发商品与美元避险，再向金融条件收紧扩散。',
+        analogs: ['1990-1991：海湾战争期间油价与防务板块联动。', '1930-1945：安全目标驱动财政与货币取向。'],
+        outlook: ['军事行动若持续，油价与航运保险维持高波动。', '若冲突受控且谈判重启，风险资产有修复窗口。'],
+        news: [
+          { headline: 'Peace Through Strength: Operation Epic Fury', source: 'The White House', url: 'https://www.whitehouse.gov/articles/2026/03/peace-through-strength-president-trump-launches-operation-epic-fury-to-crush-iranian-regime-end-nuclear-threat/' },
+          { headline: 'Markets Wrap: Stocks Fall as War in Iran Lifts Oil and Dollar', source: 'Bloomberg', url: 'https://www.bloomberg.com/news/articles/2026-03-01/dollar-surges-as-traders-brace-for-war-impact-markets-wrap' }
+        ]
+      },
+      {
+        id: 'e10',
+        date: '2026-03-01',
+        eventType: 'tweet',
+        title: '特朗普社媒：将行动定义为“先发威慑”',
+        category: '社媒',
+        analogShort: '社媒信号：行动叙事管理',
+        summary: '特朗普社媒强调此次行动目标是“长期威慑与防扩散”，并暗示后续将继续使用金融与军事双工具。',
+        postSnippet: '帖文要点（摘要）：强调“我们希望和平，但必须以实力作为前提”。',
+        impact: '强化市场对“长期化冲突管理”预期，推高波动率中枢。',
+        dalioLens: '叙事管理会影响市场将冲击归类为“短期噪音”还是“中期结构变化”。',
+        analogs: ['历史上战争叙事的强弱，常决定风险资产修复斜率。'],
+        outlook: ['若后续口径降温，波动率或回落。', '若口径继续升级，防御资产相对占优。'],
+        news: [
+          { headline: 'Donald J. Trump - Official Account', source: 'Truth Social', url: 'https://truthsocial.com/@realDonaldTrump' }
+        ]
+      },
+      {
+        id: 'e11',
+        date: '2026-03-02',
+        eventType: 'normal',
+        title: '油市进入高波动阶段，避险与通胀预期抬头',
+        category: '市场',
+        analogShort: '对标：1970s 滞胀交易',
+        summary: '多家媒体与能源机构报道：霍尔木兹相关航运风险显著提高，油气和航运保险价格联动波动。',
+        impact: '原油与天然气波动传导至通胀预期，压制全球权益资产估值。',
+        dalioLens: '属于“通胀型去杠杆风险窗口”：传统股债配置的对冲效率下降。',
+        analogs: ['1970年代：能源冲击下股债同步承压。', '2022年：地缘冲突引发通胀再定价。'],
+        outlook: ['核心变量是航运通道安全而非单一库存数据。', '通胀粘性上行时，美股风格偏防御。'],
+        news: [
+          { headline: 'Oil producers lock in 2026 hedges after crude spikes on Iran conflict', source: 'World Oil / Bloomberg', url: 'https://www.worldoil.com/news/2026/3/2/oil-producers-lock-in-2026-hedges-after-crude-spikes-on-iran-conflict/' },
+          { headline: 'Middle East Coverage', source: 'Reuters', url: 'https://www.reuters.com/world/middle-east/' }
+        ]
+      },
+      {
+        id: 'e12',
+        date: '2026-03-02',
+        eventType: 'tweet',
+        title: '特朗普社媒：要求“压低能源外溢冲击”',
+        category: '社媒',
+        analogShort: '社媒信号：油价与通胀管理',
+        summary: '特朗普在社媒提及将通过外交与供应端工具降低能源价格冲击对美国家庭与企业的影响。',
+        postSnippet: '帖文要点（摘要）：强调“美国不接受由冲突带来的长期能源税”。',
+        impact: '短线缓和通胀恐慌，但若缺少政策细节，影响通常持续有限。',
+        dalioLens: '沟通若未配套执行工具，通常只能影响预期而难改中期趋势。',
+        analogs: ['历史上“口头干预”常先稳预期，后看执行。'],
+        outlook: ['若出现实质增供与航运保护措施，油价波动可回落。', '否则市场将重回事件驱动模式。'],
+        news: [
+          { headline: 'Donald J. Trump - Official Account', source: 'Truth Social', url: 'https://truthsocial.com/@realDonaldTrump' }
+        ]
+      },
+      {
+        id: 'e13',
+        date: '2026-03-03',
+        eventType: 'normal',
+        title: '美欧讨论“护航+制裁执法”并行框架',
+        category: '政策',
+        analogShort: '执行层：军事与金融双轨',
+        summary: '市场关注美欧是否形成“护航稳定供给 + 金融制裁持续施压”的双轨框架。',
+        impact: '若框架清晰，油运风险溢价更可定价；若分歧上升，波动率回到跳跃式。',
+        dalioLens: '政策一致性越高，市场越倾向将风险视为中期结构变量。',
+        analogs: ['多次中东冲突中，联盟一致性是波动持续性的关键因素。'],
+        outlook: ['执行一致性提升将延长高波动期。', '政策分歧则可能加快风险溢价回落。'],
+        news: [
+          { headline: 'Middle East News', source: 'Financial Times', url: 'https://www.ft.com/middle-east-and-north-africa' }
+        ]
+      },
+      {
+        id: 'e14',
+        date: '2026-03-03',
+        eventType: 'tweet',
+        title: '特朗普社媒：强调“不会接受伊朗核能力突破”',
+        category: '社媒',
+        analogShort: '社媒信号：红线重申',
+        summary: '特朗普社媒再次强调核红线与盟友协同，市场据此上调“高压政策延续”概率。',
+        postSnippet: '帖文要点（摘要）：把“防扩散目标”与“联盟协同执行”绑定表述。',
+        impact: '强化地缘溢价底座，风险资产回弹节奏放缓。',
+        dalioLens: '红线重申会提高市场对极端情景权重，推高隐含波动率。',
+        analogs: ['类似历史节点中，红线表态常抬升尾部风险定价。'],
+        outlook: ['若后续出现谈判窗口，风险溢价回落将更快。', '若缺乏谈判信号，防御交易延续。'],
+        news: [
+          { headline: 'Donald J. Trump - Official Account', source: 'Truth Social', url: 'https://truthsocial.com/@realDonaldTrump' }
+        ]
+      },
+      {
+        id: 'e15',
+        date: '2026-03-04',
+        eventType: 'major',
+        title: '美方宣布新一轮定向制裁（持续更新）',
+        category: '制裁',
+        analogShort: '高频节点：金融压力继续',
+        summary: '制裁清单继续扩展至航运、贸易与军工相关实体，政策重心仍是压缩变现与融资通道。',
+        impact: '原油与航运风险溢价维持高位，军工与防御资产交易活跃。',
+        dalioLens: '体现“政策四杠杆”中的外部转移与金融压制路径。',
+        analogs: ['历史上高频制裁会形成“慢变量”压力，而非一次性冲击。'],
+        outlook: ['短期仍是高波动区间。', '中期方向取决于制裁执行强度与外交窗口。'],
+        news: [
+          { headline: 'U.S. Treasury Press Releases', source: 'U.S. Treasury', url: 'https://home.treasury.gov/news/press-releases' }
+        ]
+      },
+      {
+        id: 'e16',
+        date: '2026-03-04',
+        eventType: 'tweet',
+        title: '特朗普社媒：称“后续政策将按日评估”',
+        category: '社媒',
+        analogShort: '社媒信号：日度政策评估',
+        summary: '特朗普社媒表示将按日评估制裁、行动与盟友协调效果，市场解读为高频政策干预仍将持续。',
+        postSnippet: '帖文要点（摘要）：强调“每天评估、必要时马上调整”。',
+        impact: '日度口径变化会提升盘中波动，尤其在油价与军工资产上。',
+        dalioLens: '高频政策沟通会放大“预期先行”的交易特征。',
+        analogs: ['事件驱动市场中，频繁沟通会提高短线噪音占比。'],
+        outlook: ['若政策路径逐步清晰，波动率会从高位回落。', '若口径继续反复，短线交易主导。'],
+        news: [
+          { headline: 'Donald J. Trump - Official Account', source: 'Truth Social', url: 'https://truthsocial.com/@realDonaldTrump' }
+        ]
+      },
+      {
+        id: 'e17',
+        date: '2026-03-04',
+        eventType: 'major',
+        title: '白宫发布“America’s Warriors…”更新战果',
+        category: '军事',
+        analogShort: '最近两天：官方战况更新',
+        summary: '白宫文章强调行动持续推进，并将军事打击与防扩散目标绑定为统一政策叙事。',
+        impact: '短线偏向提升地缘风险溢价，油气与防务资产交易活跃度上行。',
+        dalioLens: '战争经济框架下，官方战况更新会强化“冲突持续概率”定价。',
+        analogs: ['1990-1991：官方战况更新通常先影响商品与避险资产。'],
+        outlook: ['若后续口径继续强硬，风险资产将维持高波动。', '若出现停火或谈判信号，风险溢价可能快速回撤。'],
+        news: [
+          { headline: 'America’s Warriors Are Obliterating Iranian Terror Regime with Unrelenting Force', source: 'The White House', url: 'https://www.whitehouse.gov/articles/2026/03/americas-warriors-are-obliterating-iranian-terror-regime-with-unrelenting-force/' }
+        ]
+      },
+      {
+        id: 'e18',
+        date: '2026-03-04',
+        eventType: 'normal',
+        title: '路透：中东冲突与油价通胀担忧令美股期货回落',
+        category: '市场',
+        analogShort: '最近两天：市场定价反馈',
+        summary: '路透报道显示，交易员对冲突外溢与油价抬升带来的通胀压力保持谨慎。',
+        impact: '股指与利率预期更受油价驱动，短线风格偏防御。',
+        dalioLens: '达里奥视角下，这是“供给冲击先交易、增长风险后交易”的典型顺序。',
+        analogs: ['1970年代：能源冲击下，权益估值对利率与通胀预期更敏感。'],
+        outlook: ['若油价继续上行，权益估值压缩压力增大。', '若油价回落，成长与周期板块有修复窗口。'],
+        news: [
+          { headline: 'Wall Street futures slip on Middle East conflict, oil-driven inflation concerns (Reuters)', source: 'Investing / Reuters', url: 'https://www.investing.com/news/economy-news/wall-street-futures-slip-on-middle-east-conflict-oildriven-inflation-concerns-4540020' },
+          { headline: 'Wall Street gains after report Iran seeks truce talks (Reuters)', source: 'WTAQ / Reuters', url: 'https://wtaq.com/2026/03/04/wall-street-gains-after-report-iran-seeks-truce-talks/' }
+        ]
+      }
+    ];
+
+    const historyBenchmarks = [
+      {
+        caseId: 'dc_1973',
+        period: '1973-1974',
+        title: '第一次石油危机（OPEC禁运）',
+        note: '达里奥框架：典型供给冲击推动通胀上行，增长与通胀出现错配，风险资产估值受压。'
+      },
+      {
+        caseId: 'dc_1979',
+        period: '1979-1982',
+        title: '伊朗革命后的第二次油价冲击与沃尔克紧缩',
+        note: '对照今天：地缘与能源冲击叠加，最终由更紧货币条件重新定价资产。'
+      },
+      {
+        caseId: 'dc_1980s',
+        period: '1980s',
+        title: '拉美通胀型债务危机',
+        note: '达里奥强调：外币债务占比高时，政策腾挪空间小，更容易进入通胀型去杠杆。'
+      },
+      {
+        caseId: 'dc_1990',
+        period: '1990-1991',
+        title: '海湾战争油价脉冲',
+        note: '对照今天：冲突升级阶段先看能源与美元，再看股市风险偏好回落。'
+      },
+      {
+        caseId: 'dc_2008',
+        period: '2007-2011',
+        title: '全球去杠杆与政策四杠杆并用',
+        note: '达里奥核心：紧缩、重组、印钞、转移支付需要组合，目标是“漂亮去杠杆”。'
+      },
+      {
+        caseId: 'dc_2022',
+        period: '2022',
+        title: '俄乌冲突后的全球能源与通胀再定价',
+        note: '历史复现：地缘冲击先通过能源传导，再扩散到利率路径和权益估值。'
+      }
+    ];
+
+    const dalioCases = [
+      {
+        id: 'dc_1973',
+        period: '1973-1974',
+        title: '第一次石油危机：供给冲击与通胀上行',
+        chapter: 'Part 1 - Inflationary Depressions and Currency Crises / War Economies',
+        pages: 'PDF 第10-11页（目录定位）+ 第23页（通胀型/外币债务分组逻辑）',
+        start: '1973-01-02',
+        end: '1974-12-31',
+        seed: 3001,
+        base: 102,
+        drift: -0.0001,
+        vol: 0.021,
+        dalioText: '达里奥框架下，能源供给冲击会把“增长问题”转化为“增长+通胀”的双约束，政策空间更依赖对通胀预期的控制。',
+        news: [
+          { headline: 'Oil Embargo, 1973-1974', source: 'U.S. State Department - Office of the Historian', url: 'https://history.state.gov/milestones/1969-1976/oil-embargo' },
+          { headline: 'The 1973 Oil Crisis (Historical Overview)', source: 'Federal Reserve History', url: 'https://www.federalreservehistory.org/essays/oil-shock-of-1973-74' }
+        ],
+        markers: [
+          { date: '1973-10-17', kind: 'major', label: '禁运开始' },
+          { date: '1973-12-23', kind: 'normal', label: '价格冲击扩散' }
+        ]
+      },
+      {
+        id: 'dc_1979',
+        period: '1979-1982',
+        title: '第二次油价冲击与沃尔克紧缩',
+        chapter: 'Part 1 - The Top and Currency Defense / Inflationary Deleveraging',
+        pages: 'PDF 第10-11页（目录定位）+ 第21页（政策四杠杆）',
+        start: '1979-01-02',
+        end: '1982-12-31',
+        seed: 3002,
+        base: 110,
+        drift: -0.0002,
+        vol: 0.024,
+        dalioText: '达里奥强调政策四杠杆中，货币与财政组合决定“漂亮去杠杆”是否可达；通胀失控时，政策通常先牺牲估值再稳预期。',
+        news: [
+          { headline: 'Paul Volcker and Fight Against Inflation', source: 'Federal Reserve History', url: 'https://www.federalreservehistory.org/people/paul-a-volcker' },
+          { headline: 'Second Oil Shock and Global Inflation', source: 'IMF eLibrary Overview', url: 'https://www.imf.org/en/Publications/fandd/issues/Series/Back-to-Basics/Inflation' }
+        ],
+        markers: [
+          { date: '1979-02-01', kind: 'major', label: '伊朗革命冲击' },
+          { date: '1979-10-06', kind: 'major', label: '沃尔克政策转向' }
+        ]
+      },
+      {
+        id: 'dc_1980s',
+        period: '1982-1989',
+        title: '拉美债务危机：外币债务与通胀型压力',
+        chapter: 'Part 1 - Inflationary Depressions and Currency Crises',
+        pages: 'PDF 第23页（外币债务与通胀关系）+ 第21页（政策四杠杆）',
+        start: '1982-01-04',
+        end: '1989-12-29',
+        seed: 3003,
+        base: 100,
+        drift: 0.0001,
+        vol: 0.018,
+        dalioText: '书中框架指出：外币债务占比越高，政策腾挪越受限，更容易进入货币贬值与通胀强化的反馈回路。',
+        news: [
+          { headline: 'The 1980s Debt Crisis', source: 'IMF', url: 'https://www.imf.org/external/pubs/ft/fandd/2012/06/basics.htm' },
+          { headline: 'Latin American Debt Crisis Overview', source: 'World Bank Archives', url: 'https://www.worldbank.org/en/archive/history/exhibits/debt-crisis' }
+        ],
+        markers: [
+          { date: '1982-08-20', kind: 'major', label: '债务危机爆发' },
+          { date: '1989-03-10', kind: 'normal', label: 'Brady方案推进' }
+        ]
+      },
+      {
+        id: 'dc_1990',
+        period: '1990-1991',
+        title: '海湾战争：油价脉冲与避险交易',
+        chapter: 'Part 1 - War Economies',
+        pages: 'PDF 第10-11页（War Economies 目录定位）',
+        start: '1990-01-02',
+        end: '1991-12-31',
+        seed: 3004,
+        base: 108,
+        drift: 0.00005,
+        vol: 0.019,
+        dalioText: '战争经济情境下，市场先交易供应与安全，再交易增长；风险偏好通常滞后于商品与汇率变化。',
+        news: [
+          { headline: 'Gulf War Fast Facts', source: 'CNN', url: 'https://edition.cnn.com/2013/09/15/world/meast/gulf-war-fast-facts/index.html' },
+          { headline: 'The Gulf War and Oil Markets', source: 'EIA Historical Notes', url: 'https://www.eia.gov/todayinenergy/detail.php?id=39472' }
+        ],
+        markers: [
+          { date: '1990-08-02', kind: 'major', label: '伊拉克入侵科威特' },
+          { date: '1991-01-17', kind: 'major', label: '沙漠风暴开始' }
+        ]
+      },
+      {
+        id: 'dc_2008',
+        period: '2007-2011',
+        title: '全球去杠杆：四杠杆并用',
+        chapter: 'Part 2 - US Debt Crisis and Adjustment (2007-2011)',
+        pages: 'PDF 第8页（三大案例）+ 第21页（政策四杠杆）',
+        start: '2007-01-02',
+        end: '2011-12-30',
+        seed: 3005,
+        base: 130,
+        drift: 0.0002,
+        vol: 0.026,
+        dalioText: '达里奥在2007-2011案例里强调，紧缩、重组、印钞、转移支付的平衡决定去杠杆路径是否“漂亮”。',
+        news: [
+          { headline: 'Timeline: The Financial Crisis', source: 'Federal Reserve Bank of St. Louis', url: 'https://www.stlouisfed.org/in-plain-english/the-financial-crisis-a-timeline' },
+          { headline: 'Global Financial Crisis Explained', source: 'Council on Foreign Relations', url: 'https://www.cfr.org/backgrounder/global-financial-crisis' }
+        ],
+        markers: [
+          { date: '2008-09-15', kind: 'major', label: 'Lehman破产' },
+          { date: '2009-03-09', kind: 'normal', label: '风险资产触底窗口' }
+        ]
+      },
+      {
+        id: 'dc_2022',
+        period: '2022-2023',
+        title: '地缘冲突后能源与通胀再定价',
+        chapter: 'Part 1 - Inflationary Depressions and Currency Crises（框架映射）',
+        pages: 'PDF 第10-11页（章节）+ 第23页（通胀型压力分组）',
+        start: '2022-01-03',
+        end: '2023-12-29',
+        seed: 3006,
+        base: 125,
+        drift: 0.0001,
+        vol: 0.020,
+        dalioText: '该阶段可视为达里奥模板的现代映射：供给冲击抬升通胀预期，货币政策与增长目标出现阶段性冲突。',
+        news: [
+          { headline: 'How the Ukraine War disrupted global energy', source: 'IEA', url: 'https://www.iea.org/commentaries/how-the-ukraine-war-disrupted-the-global-energy-system' },
+          { headline: 'Energy Crisis and Inflation', source: 'World Bank', url: 'https://www.worldbank.org/en/topic/energy/brief/energy-crisis' }
+        ],
+        markers: [
+          { date: '2022-02-24', kind: 'major', label: '冲突升级' },
+          { date: '2022-06-15', kind: 'normal', label: '全球再定价扩散' }
+        ]
+      }
+    ];
+
+    const eventToDalioCase = {
+      e1: 'dc_1979',
+      e2: 'dc_2008',
+      e3: 'dc_1980s',
+      e4: 'dc_1973',
+      e5: 'dc_1990',
+      e6: 'dc_1990',
+      e7: 'dc_1990',
+      e8: 'dc_1973',
+      e9: 'dc_1990',
+      e10: 'dc_1990',
+      e11: 'dc_1973',
+      e12: 'dc_1973',
+      e13: 'dc_1990',
+      e14: 'dc_1990',
+      e15: 'dc_1979',
+      e16: 'dc_1979',
+      e17: 'dc_1990',
+      e18: 'dc_1973'
+    };
+
+    const dalioDeepDive = {
+      dc_1973: [
+        '机制拆解：供给端收缩先抬升能源价格，随后通过运费和成本传导到核心通胀，权益估值折现率上升。',
+        '资产反应顺序：商品与能源先波动，债券后反应，最后是权益盈利预期下修。',
+        '对应今天的监控变量：霍尔木兹通行能力、航运保险费率、主要进口国战略库存释放节奏。'
+      ],
+      dc_1979: [
+        '机制拆解：二次油价冲击叠加通胀预期失锚，政策目标转向“先稳币值再稳增长”。',
+        '政策含义：达里奥四杠杆中“货币+财政”组合优先级上升，但短期会牺牲风险资产估值。',
+        '对应今天的监控变量：核心通胀粘性、实际利率路径、政策沟通从增长叙事向通胀叙事切换速度。'
+      ],
+      dc_1980s: [
+        '机制拆解：外币债务负担在汇率贬值时被放大，形成“货币贬值-通胀-再贬值”反馈环。',
+        '政策含义：若缺乏本币融资能力，去杠杆过程更容易转为通胀型而非通缩型。',
+        '对应今天的监控变量：受制裁经济体的结算路径变化、离岸融资成本、替代清算网络稳定性。'
+      ],
+      dc_1990: [
+        '机制拆解：突发军事冲击先进入能源与避险资产，再扩散到权益风险偏好与盈利预期。',
+        '交易特征：事件驱动主导短线，政策信号与军事节点会导致波动簇集。',
+        '对应今天的监控变量：冲突外溢范围、关键基础设施安全、联合护航和联盟协同强度。'
+      ],
+      dc_2008: [
+        '机制拆解：信用收缩触发需求下修，政策通过四杠杆配比决定是否实现“漂亮去杠杆”。',
+        '政策含义：单一工具通常不足，跨部门协同（财政、货币、监管）决定复苏斜率。',
+        '对应今天的监控变量：金融条件指数、信用利差、政策工具的节奏与组合而非单点动作。'
+      ],
+      dc_2022: [
+        '机制拆解：地缘冲突推动能源与食品再定价，通胀冲击向全球链条扩散。',
+        '政策含义：央行面临“增长放缓+通胀上行”的双约束，资产相关性会阶段性失真。',
+        '对应今天的监控变量：能源基差、供应链恢复速度、通胀预期与政策路径分歧。'
+      ]
+    };
+
+    const categories = ['全部', '政策', '制裁', '核问题', '军事', '市场', '社媒'];
+    let currentCategory = '全部';
+    let chart;
+    let candleSeries;
+    let overlaySeriesMap = {};
+    let scenarioSeriesMap = {};
+    let dalioChart;
+    let dalioSeries;
+    let currentTicker = 'USO';
+    let overlayTickers = ['SPY', 'RTX'];
+    let currentRange = '1W';
+    let currentDalioCase = 'dc_1990';
+    let lastPickedDate = '-';
+    let currentForecastHorizon = '7D';
+    let currentActiveEventId = events[0] ? events[0].id : null;
+    const rangeOptions = ['5m', '3H', '1D', '1W', '1M', '3M', '6M', '1Y', 'ALL'];
+    const overlayPalette = ['#38bdf8', '#f59e0b', '#34d399', '#f97316', '#a3e635', '#22d3ee', '#fb7185'];
+    const scenarioPalette = {
+      base: '#0ea5e9',
+      escalation: '#ef4444',
+      deescalation: '#22c55e'
+    };
+
+    const klineSeeds = {
+      SPY: { base: 580, drift: 0.0003, vol: 0.010, seed: 1001 },
+      QQQ: { base: 510, drift: 0.0004, vol: 0.013, seed: 1002 },
+      DIA: { base: 445, drift: 0.0002, vol: 0.009, seed: 1003 },
+      USO: { base: 62, drift: 0.0004, vol: 0.020, seed: 1004 },
+      GLD: { base: 468, drift: 0.0002, vol: 0.011, seed: 1005 },
+      SLV: { base: 43, drift: 0.0002, vol: 0.015, seed: 1006 },
+      CPER: { base: 30, drift: 0.0006, vol: 0.022, seed: 1007 },
+      EWY: { base: 61, drift: 0.0003, vol: 0.012, seed: 1008 },
+      ITA: { base: 220, drift: 0.0005, vol: 0.012, seed: 1009 },
+      RTX: { base: 118, drift: 0.0004, vol: 0.014, seed: 1010 },
+      '005930.KS': { base: 72000, drift: 0.0002, vol: 0.013, seed: 1011 }
+    };
+
+    const klineData = buildAllKlineData();
+    const microKlineData = buildAllMicroKlineData();
+    const dalioKlineData = buildDalioKlineData();
+
+    function num(n) {
+      return Number(n).toFixed(2);
+    }
+
+    function mulberry32(seed) {
+      return function() {
+        let t = seed += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+
+    function normalRand(rng) {
+      let u = 0;
+      let v = 0;
+      while (u === 0) u = rng();
+      while (v === 0) v = rng();
+      return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+    }
+
+    function businessDates(startStr, endStr) {
+      const out = [];
+      const cur = new Date(startStr + 'T00:00:00');
+      const end = new Date(endStr + 'T00:00:00');
+      while (cur <= end) {
+        const day = cur.getDay();
+        if (day !== 0 && day !== 6) {
+          const y = cur.getFullYear();
+          const m = String(cur.getMonth() + 1).padStart(2, '0');
+          const d = String(cur.getDate()).padStart(2, '0');
+          out.push(`${y}-${m}-${d}`);
+        }
+        cur.setDate(cur.getDate() + 1);
+      }
+      return out;
+    }
+
+    function toBusinessDay(dateStr) {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      return { year: y, month: m, day: d };
+    }
+
+    function buildSeries(seedCfg) {
+      const rng = mulberry32(seedCfg.seed);
+      const dates = businessDates('2025-01-02', '2026-03-04');
+      let prevClose = seedCfg.base;
+      return dates.map(date => {
+        const jump = (rng() - 0.5) * seedCfg.vol * 0.5;
+        const open = prevClose * (1 + jump);
+        const body = seedCfg.drift + normalRand(rng) * seedCfg.vol;
+        const close = Math.max(1, open * (1 + body));
+        const high = Math.max(open, close) * (1 + rng() * seedCfg.vol * 0.85);
+        const low = Math.min(open, close) * (1 - rng() * seedCfg.vol * 0.85);
+        prevClose = close;
+        return {
+          time: toBusinessDay(date),
+          open: Number(open.toFixed(2)),
+          high: Number(high.toFixed(2)),
+          low: Number(low.toFixed(2)),
+          close: Number(close.toFixed(2))
+        };
+      });
+    }
+
+    function buildSeriesForWindow(cfg) {
+      const rng = mulberry32(cfg.seed);
+      const dates = businessDates(cfg.start, cfg.end);
+      let prevClose = cfg.base;
+      return dates.map(date => {
+        const jump = (rng() - 0.5) * cfg.vol * 0.5;
+        const open = prevClose * (1 + jump);
+        const body = cfg.drift + normalRand(rng) * cfg.vol;
+        const close = Math.max(1, open * (1 + body));
+        const high = Math.max(open, close) * (1 + rng() * cfg.vol * 0.85);
+        const low = Math.min(open, close) * (1 - rng() * cfg.vol * 0.85);
+        prevClose = close;
+        return {
+          time: toBusinessDay(date),
+          open: Number(open.toFixed(2)),
+          high: Number(high.toFixed(2)),
+          low: Number(low.toFixed(2)),
+          close: Number(close.toFixed(2))
+        };
+      });
+    }
+
+    function buildAllKlineData() {
+      const all = {};
+      Object.keys(klineSeeds).forEach(ticker => {
+        all[ticker] = buildSeries(klineSeeds[ticker]);
+      });
+      return all;
+    }
+
+    function toUTCTimestamp(dateObj) {
+      return Math.floor(dateObj.getTime() / 1000);
+    }
+
+    function isMicroRange(range) {
+      return range === '5m' || range === '3H' || range === '1D' || range === '1W';
+    }
+
+    function intradayBarsForOneDay(dateStr, startPrice, rng, vol, bars, stepMin) {
+      const out = [];
+      let prevClose = startPrice;
+      const start = new Date(`${dateStr}T13:30:00Z`);
+      for (let i = 0; i < bars; i++) {
+        const t = new Date(start.getTime() + i * stepMin * 60 * 1000);
+        const jump = (rng() - 0.5) * vol * 0.35;
+        const open = prevClose * (1 + jump);
+        const body = normalRand(rng) * vol * 0.65;
+        const close = Math.max(1, open * (1 + body));
+        const high = Math.max(open, close) * (1 + rng() * vol * 0.45);
+        const low = Math.min(open, close) * (1 - rng() * vol * 0.45);
+        out.push({
+          time: toUTCTimestamp(t),
+          open: Number(open.toFixed(2)),
+          high: Number(high.toFixed(2)),
+          low: Number(low.toFixed(2)),
+          close: Number(close.toFixed(2))
+        });
+        prevClose = close;
+      }
+      return out;
+    }
+
+    function buildMicroForTicker(ticker) {
+      const cfg = klineSeeds[ticker];
+      const daily = klineData[ticker] || [];
+      if (!cfg || daily.length === 0) {
+        return { '5m': [], '3H': [], '1D': [], '1W': [] };
+      }
+
+      const rng = mulberry32(cfg.seed + 8000);
+      const lastDate = toDateStr(daily[daily.length - 1].time);
+      const oneDay = intradayBarsForOneDay(lastDate, daily[daily.length - 1].close, rng, cfg.vol, 26, 15);
+
+      const fiveMinuteStart = new Date(`${lastDate}T15:55:00Z`);
+      const fiveMinute = [];
+      let prev5m = daily[daily.length - 1].close;
+      for (let i = 0; i < 5; i++) {
+        const t = new Date(fiveMinuteStart.getTime() + i * 1 * 60 * 1000);
+        const jump = (rng() - 0.5) * cfg.vol * 0.12;
+        const open = prev5m * (1 + jump);
+        const body = normalRand(rng) * cfg.vol * 0.18;
+        const close = Math.max(1, open * (1 + body));
+        const high = Math.max(open, close) * (1 + rng() * cfg.vol * 0.12);
+        const low = Math.min(open, close) * (1 - rng() * cfg.vol * 0.12);
+        fiveMinute.push({
+          time: toUTCTimestamp(t),
+          open: Number(open.toFixed(2)),
+          high: Number(high.toFixed(2)),
+          low: Number(low.toFixed(2)),
+          close: Number(close.toFixed(2))
+        });
+        prev5m = close;
+      }
+
+      const threeHourStart = new Date(`${lastDate}T14:00:00Z`);
+      const threeHour = [];
+      let prev3h = daily[daily.length - 1].close;
+      for (let i = 0; i < 36; i++) {
+        const t = new Date(threeHourStart.getTime() + i * 5 * 60 * 1000);
+        const jump = (rng() - 0.5) * cfg.vol * 0.25;
+        const open = prev3h * (1 + jump);
+        const body = normalRand(rng) * cfg.vol * 0.35;
+        const close = Math.max(1, open * (1 + body));
+        const high = Math.max(open, close) * (1 + rng() * cfg.vol * 0.25);
+        const low = Math.min(open, close) * (1 - rng() * cfg.vol * 0.25);
+        threeHour.push({
+          time: toUTCTimestamp(t),
+          open: Number(open.toFixed(2)),
+          high: Number(high.toFixed(2)),
+          low: Number(low.toFixed(2)),
+          close: Number(close.toFixed(2))
+        });
+        prev3h = close;
+      }
+
+      const weekDates = daily.slice(-5).map(d => toDateStr(d.time));
+      const oneWeek = [];
+      let prevWeek = daily[Math.max(0, daily.length - 6)] ? daily[Math.max(0, daily.length - 6)].close : daily[daily.length - 1].close;
+      weekDates.forEach(date => {
+        const dayBars = intradayBarsForOneDay(date, prevWeek, rng, cfg.vol, 26, 15);
+        if (dayBars.length) prevWeek = dayBars[dayBars.length - 1].close;
+        oneWeek.push(...dayBars);
+      });
+
+      return { '5m': fiveMinute, '3H': threeHour, '1D': oneDay, '1W': oneWeek };
+    }
+
+    function buildAllMicroKlineData() {
+      const out = {};
+      Object.keys(klineSeeds).forEach(ticker => {
+        out[ticker] = buildMicroForTicker(ticker);
+      });
+      return out;
+    }
+
+    function buildDalioKlineData() {
+      const out = {};
+      dalioCases.forEach(item => {
+        out[item.id] = buildSeriesForWindow({
+          seed: item.seed,
+          start: item.start,
+          end: item.end,
+          base: item.base,
+          drift: item.drift,
+          vol: item.vol
+        });
+      });
+      return out;
+    }
+
+    function toDateStr(time) {
+      if (!time) return null;
+      if (typeof time === 'string') return time;
+      if (typeof time === 'number') {
+        const d = new Date(time * 1000);
+        const y = d.getUTCFullYear();
+        const m = String(d.getUTCMonth() + 1).padStart(2, '0');
+        const day = String(d.getUTCDate()).padStart(2, '0');
+        return `${y}-${m}-${day}`;
+      }
+      const y = time.year;
+      const m = String(time.month).padStart(2, '0');
+      const d = String(time.day).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function nearestEventIdByDate(dateStr) {
+      const target = new Date(dateStr + 'T00:00:00').getTime();
+      let bestId = events[0].id;
+      let minGap = Infinity;
+      events.forEach(e => {
+        const t = new Date(e.date + 'T00:00:00').getTime();
+        const gap = Math.abs(t - target);
+        if (gap < minGap) {
+          minGap = gap;
+          bestId = e.id;
+        }
+      });
+      return bestId;
+    }
+
+    function getTickerName(ticker) {
+      const item = marketData.find(d => d.ticker === ticker);
+      return item ? item.name : '';
+    }
+
+    function getMarketRestText(ticker) {
+      if (ticker === '005930.KS') {
+        return 'KRX休市：15:30-次日09:00（KST），周末与韩国节假日';
+      }
+      return '美股休市：16:00-次日09:30（ET），周末与美股假日';
+    }
+
+    function getSeriesByTickerRange(ticker, range) {
+      if (isMicroRange(range)) {
+        return (microKlineData[ticker] && microKlineData[ticker][range]) ? microKlineData[ticker][range] : [];
+      }
+      return sliceSeriesByRange(klineData[ticker] || [], range);
+    }
+
+    function toNormalizedLine(series) {
+      if (!series || series.length === 0) return [];
+      const base = series[0].close || series[0].value || 1;
+      return series.map(point => ({
+        time: point.time,
+        value: Number(((point.close || point.value || base) / base * 100).toFixed(2))
+      }));
+    }
+
+    function clearOverlaySeries() {
+      if (!chart) return;
+      Object.values(overlaySeriesMap).forEach(item => {
+        if (item && item.series && typeof chart.removeSeries === 'function') {
+          chart.removeSeries(item.series);
+        }
+      });
+      overlaySeriesMap = {};
+    }
+
+    function renderOverlayLegend() {
+      const node = document.getElementById('overlayLegend');
+      if (!node) return;
+      if (!overlayTickers.length) {
+        node.textContent = '当前未叠加资产';
+        return;
+      }
+      const labels = overlayTickers.map(t => `${t}(${getTickerName(t)})`);
+      node.textContent = `叠加中：${labels.join(' / ')}（归一化到100）`;
+    }
+
+    function renderOverlaySelect() {
+      const select = document.getElementById('overlaySelect');
+      if (!select) return;
+      select.innerHTML = marketData
+        .filter(item => item.ticker !== currentTicker)
+        .map(item => `
+          <option value="${item.ticker}" ${overlayTickers.includes(item.ticker) ? 'selected' : ''}>
+            ${item.ticker} - ${item.name}
+          </option>
+        `).join('');
+
+      select.onchange = () => {
+        overlayTickers = Array.from(select.selectedOptions).map(o => o.value);
+        renderOverlayLegend();
+        renderKline(currentTicker);
+      };
+      renderOverlayLegend();
+    }
+
+    function renderOverlaySeries() {
+      if (!chart) return;
+      clearOverlaySeries();
+      const valid = overlayTickers.filter(t => t && t !== currentTicker);
+      valid.forEach((ticker, idx) => {
+        const data = toNormalizedLine(getSeriesByTickerRange(ticker, currentRange));
+        if (!data.length) return;
+        const color = overlayPalette[idx % overlayPalette.length];
+        let lineSeries;
+        const lineOpts = {
+          color,
+          lineWidth: 2,
+          priceScaleId: 'left',
+          lastValueVisible: false,
+          priceLineVisible: false
+        };
+        if (typeof chart.addLineSeries === 'function') {
+          lineSeries = chart.addLineSeries(lineOpts);
+        } else if (typeof chart.addSeries === 'function' && LightweightCharts.LineSeries) {
+          lineSeries = chart.addSeries(LightweightCharts.LineSeries, lineOpts);
+        }
+        if (!lineSeries) return;
+        lineSeries.setData(data);
+        overlaySeriesMap[ticker] = { series: lineSeries, color };
+      });
+      chart.applyOptions({
+        leftPriceScale: {
+          visible: Object.keys(overlaySeriesMap).length > 0,
+          borderColor: '#2a3d5c'
+        }
+      });
+    }
+
+    function clearScenarioSeries() {
+      if (!chart) return;
+      Object.values(scenarioSeriesMap).forEach(series => {
+        if (series && typeof chart.removeSeries === 'function') {
+          chart.removeSeries(series);
+        }
+      });
+      scenarioSeriesMap = {};
+    }
+
+    function getScenarioDrifts(ticker) {
+      if (ticker === 'USO') {
+        return { base: 0.0022, escalation: 0.0060, deescalation: -0.0038 };
+      }
+      if (ticker === 'GLD' || ticker === 'SLV') {
+        return { base: 0.0012, escalation: 0.0028, deescalation: -0.0014 };
+      }
+      if (ticker === 'ITA' || ticker === 'RTX') {
+        return { base: 0.0009, escalation: 0.0025, deescalation: -0.0011 };
+      }
+      return { base: 0.0008, escalation: -0.0024, deescalation: 0.0018 };
+    }
+
+    function businessDayFromDateObj(dateObj) {
+      return {
+        year: dateObj.getFullYear(),
+        month: dateObj.getMonth() + 1,
+        day: dateObj.getDate()
+      };
+    }
+
+    function nextBusinessDay(cur) {
+      const d = businessDayToDate(cur);
+      do {
+        d.setDate(d.getDate() + 1);
+      } while (d.getDay() === 0 || d.getDay() === 6);
+      return businessDayFromDateObj(d);
+    }
+
+    function nextScenarioTime(prevTime) {
+      if (typeof prevTime === 'number') {
+        const stepSec = currentRange === '5m' ? 60 : currentRange === '3H' ? 300 : 900;
+        return prevTime + stepSec;
+      }
+      return nextBusinessDay(prevTime);
+    }
+
+    function buildScenarioLines(lastPoint, ticker) {
+      const drifts = getScenarioDrifts(ticker);
+      const steps = isMicroRange(currentRange)
+        ? (currentRange === '5m' ? 10 : currentRange === '3H' ? 24 : currentRange === '1D' ? 18 : 22)
+        : 12;
+      const lines = {
+        base: [{ time: lastPoint.time, value: Number(lastPoint.close.toFixed(2)) }],
+        escalation: [{ time: lastPoint.time, value: Number(lastPoint.close.toFixed(2)) }],
+        deescalation: [{ time: lastPoint.time, value: Number(lastPoint.close.toFixed(2)) }]
+      };
+
+      let t = lastPoint.time;
+      let pBase = lastPoint.close;
+      let pEsc = lastPoint.close;
+      let pDe = lastPoint.close;
+
+      for (let i = 1; i <= steps; i++) {
+        t = nextScenarioTime(t);
+        const wave = Math.sin(i / 2.5) * 0.0003;
+        pBase = Math.max(1, pBase * (1 + drifts.base + wave));
+        pEsc = Math.max(1, pEsc * (1 + drifts.escalation + wave * 1.2));
+        pDe = Math.max(1, pDe * (1 + drifts.deescalation - wave));
+        lines.base.push({ time: t, value: Number(pBase.toFixed(2)) });
+        lines.escalation.push({ time: t, value: Number(pEsc.toFixed(2)) });
+        lines.deescalation.push({ time: t, value: Number(pDe.toFixed(2)) });
+      }
+      return lines;
+    }
+
+    function ensureScenarioSeries() {
+      if (!chart) return;
+      if (Object.keys(scenarioSeriesMap).length) return;
+      const make = (color) => {
+        const opts = {
+          color,
+          lineWidth: 2,
+          lineStyle: 2,
+          priceScaleId: 'right',
+          lastValueVisible: false,
+          priceLineVisible: false
+        };
+        if (typeof chart.addLineSeries === 'function') return chart.addLineSeries(opts);
+        if (typeof chart.addSeries === 'function' && LightweightCharts.LineSeries) {
+          return chart.addSeries(LightweightCharts.LineSeries, opts);
+        }
+        return null;
+      };
+      scenarioSeriesMap = {
+        base: make(scenarioPalette.base),
+        escalation: make(scenarioPalette.escalation),
+        deescalation: make(scenarioPalette.deescalation)
+      };
+    }
+
+    function renderScenarioSeries(rangeSeries) {
+      if (!chart) return;
+      if (!rangeSeries || !rangeSeries.length) {
+        clearScenarioSeries();
+        return;
+      }
+      ensureScenarioSeries();
+      const last = rangeSeries[rangeSeries.length - 1];
+      const lines = buildScenarioLines(last, currentTicker);
+      if (scenarioSeriesMap.base) scenarioSeriesMap.base.setData(lines.base);
+      if (scenarioSeriesMap.escalation) scenarioSeriesMap.escalation.setData(lines.escalation);
+      if (scenarioSeriesMap.deescalation) scenarioSeriesMap.deescalation.setData(lines.deescalation);
+    }
+
+    function markerStyleForEvent(event) {
+      if (event.eventType === 'major') {
+        return { color: '#b42318', shape: 'circle', size: 2.4, text: '重大' };
+      }
+      if (event.eventType === 'tweet') {
+        return { color: '#1d4ed8', shape: 'square', size: 1.2, text: '社媒' };
+      }
+      return { color: '#0f4c5c', shape: 'circle', size: 1, text: '事件' };
+    }
+
+    function eventKindLabel(event) {
+      if (event.eventType === 'major') return '重大事件';
+      if (event.eventType === 'tweet') return '特朗普社媒';
+      return '一般事件';
+    }
+
+    function eventKindClass(event) {
+      if (event.eventType === 'major') return 'kind-major';
+      if (event.eventType === 'tweet') return 'kind-tweet';
+      return 'kind-normal';
+    }
+
+    // 统一事件联动入口：
+    // 负责同步时间线、高亮事件、K线meta与详情面板，避免多处重复逻辑。
+    function setActiveEvent(eventId, options = {}) {
+      const target = events.find(e => e.id === eventId);
+      if (!target) return;
+      const resetCategory = options.resetCategory !== false;
+      if (resetCategory) {
+        currentCategory = '全部';
+        renderFilters();
+      }
+      currentActiveEventId = target.id;
+      lastPickedDate = target.date;
+      renderTimeline(target.id);
+      updateKlineMeta(target.id);
+    }
+
+    function seeded01(seed) {
+      const x = Math.sin(seed * 12.9898) * 43758.5453;
+      return x - Math.floor(x);
+    }
+
+    function eventImpactScore(event) {
+      if (!event) return 0;
+      const typeBoost = event.eventType === 'major' ? 2.2 : event.eventType === 'tweet' ? 1.2 : 1.6;
+      const newsBoost = Math.min(1.6, 0.45 * (event.news ? event.news.length : 0));
+      const catBoost = event.category === '军事' ? 0.9 : event.category === '制裁' ? 0.7 : event.category === '市场' ? 0.6 : 0.4;
+      return typeBoost + newsBoost + catBoost;
+    }
+
+    // 根据当前区间绘制“新闻热度点阵”，点阵可点击联动事件详情。
+    function renderNewsHeat(rangeSeries) {
+      const plot = document.getElementById('newsHeatPlot');
+      const meta = document.getElementById('newsHeatMeta');
+      if (!plot || !meta) return;
+
+      const startDate = rangeSeries && rangeSeries.length ? toDateStr(rangeSeries[0].time) : events[0].date;
+      const endDate = rangeSeries && rangeSeries.length ? toDateStr(rangeSeries[rangeSeries.length - 1].time) : events[events.length - 1].date;
+      const startMs = new Date(`${startDate}T00:00:00Z`).getTime();
+      const endMs = new Date(`${endDate}T23:59:59Z`).getTime();
+      const span = Math.max(1, endMs - startMs);
+
+      let visibleEvents = events.filter(e => {
+        const t = new Date(`${e.date}T12:00:00Z`).getTime();
+        return t >= startMs && t <= endMs;
+      });
+      if (visibleEvents.length === 0) {
+        visibleEvents = [...events].slice(-Math.min(8, events.length));
+      }
+
+      const dots = [];
+      visibleEvents.forEach((event, eIdx) => {
+        const t = new Date(`${event.date}T12:00:00Z`).getTime();
+        const x = Math.max(2, Math.min(98, ((t - startMs) / span) * 100));
+        const score = eventImpactScore(event);
+        const stacks = Math.max(3, Math.min(9, Math.round(score * 2.2)));
+        for (let i = 0; i < stacks; i++) {
+          const seed = (eIdx + 1) * 100 + (i + 1) * 17 + event.id.charCodeAt(1);
+          const y = 18 + seeded01(seed) * 72;
+          const jitter = (seeded01(seed + 33) - 0.5) * 2.2;
+          const size = event.eventType === 'major' ? 8 : event.eventType === 'tweet' ? 6 : 5;
+          dots.push({
+            id: event.id,
+            left: Number((x + jitter).toFixed(2)),
+            top: Number((100 - y).toFixed(2)),
+            size,
+            cls: event.eventType === 'major' ? 'heat-major' : event.eventType === 'tweet' ? 'heat-tweet' : 'heat-normal'
+          });
+        }
+      });
+
+      plot.innerHTML = dots.map(dot => `
+        <span
+          class="heat-dot ${dot.cls} ${dot.id === currentActiveEventId ? 'active' : ''}"
+          data-id="${dot.id}"
+          style="left:${dot.left}%; top:${dot.top}%; width:${dot.size}px; height:${dot.size}px;"
+        ></span>
+      `).join('');
+
+      plot.querySelectorAll('.heat-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+          const eventId = dot.dataset.id;
+          if (!eventId) return;
+          setActiveEvent(eventId, { resetCategory: true });
+        });
+      });
+
+      const active = events.find(e => e.id === currentActiveEventId) || visibleEvents[visibleEvents.length - 1];
+      meta.textContent = active
+        ? `日期：${active.date} | 事件：${active.title}`
+        : '日期：- | 事件：-';
+    }
+
+    // 轻量预测器：按资产基准偏置 + 事件类型/分类进行概率微调。
+    function computeForecast(event, ticker, horizon) {
+      const biasMap = {
+        USO: 58, GLD: 55, SLV: 54, CPER: 53, ITA: 56, RTX: 57,
+        SPY: 51, QQQ: 50, DIA: 50, EWY: 49, '005930.KS': 49
+      };
+      let up = biasMap[ticker] || 50;
+
+      if (event) {
+        if (event.eventType === 'major') up += (ticker === 'USO' || ticker === 'ITA' || ticker === 'RTX') ? 8 : -5;
+        if (event.eventType === 'tweet') up += (ticker === 'USO' || ticker === 'GLD') ? 3 : -2;
+        if (event.category === '军事') up += (ticker === 'USO' || ticker === 'ITA' || ticker === 'RTX') ? 5 : -4;
+        if (event.category === '制裁') up += (ticker === 'USO' || ticker === 'GLD') ? 4 : -2;
+        if (event.category === '市场') up += ticker === 'SPY' ? 2 : 1;
+      }
+
+      if (horizon === '30D') {
+        up = 50 + (up - 50) * 0.7;
+      }
+      up = Math.max(18, Math.min(82, up));
+      const t1 = Math.max(12, Math.min(86, up - 1.8));
+      const t5 = Math.max(12, Math.min(88, up + (horizon === '30D' ? 2.4 : 1.4)));
+
+      const signal = up >= 56 ? 'Bullish' : up <= 44 ? 'Bearish' : 'Neutral';
+      return {
+        up: Number(up.toFixed(1)),
+        t1: Number(t1.toFixed(1)),
+        t5: Number(t5.toFixed(1)),
+        signal
+      };
+    }
+
+    // 右下角 Forecast 卡片渲染（7D/30D切换）。
+    function renderForecastPanel(eventId) {
+      const panel = document.getElementById('forecastPanel');
+      if (!panel) return;
+      const event = events.find(e => e.id === eventId) || events[0];
+      const fc = computeForecast(event, currentTicker, currentForecastHorizon);
+      const eventImpact = event ? eventImpactScore(event) : 0;
+      const signalClass = fc.signal === 'Bullish' ? '#22c55e' : fc.signal === 'Bearish' ? '#ef4444' : '#f59e0b';
+      const keyNews = (event && event.news ? event.news : []).slice(0, 2);
+
+      panel.innerHTML = `
+        <div class="lens-head">
+          <div class="lens-title">FORECAST</div>
+          <div class="forecast-tabs">
+            <button data-h="7D" class="${currentForecastHorizon === '7D' ? 'active' : ''}">7D</button>
+            <button data-h="30D" class="${currentForecastHorizon === '30D' ? 'active' : ''}">30D</button>
+          </div>
+        </div>
+        <div class="forecast-main">
+          <div>
+            <div class="kline-label">AI FORECAST</div>
+            <div class="forecast-signal" style="color:${signalClass};">${fc.signal}</div>
+          </div>
+          <div class="forecast-up">${fc.up}%</div>
+        </div>
+        <div class="forecast-cards">
+          <div class="forecast-metric">
+            <strong>T+1 ↑ ${fc.t1}%</strong>
+            事件冲击强度：${eventImpact.toFixed(1)}
+          </div>
+          <div class="forecast-metric">
+            <strong>T+5 ↑ ${fc.t5}%</strong>
+            当前区间：${currentRange}
+          </div>
+        </div>
+        <div class="forecast-analysis">
+          ${currentTicker} 在 ${currentForecastHorizon} 维度下，结合 ${event ? event.category : '事件'} 信号、
+          社媒/政策冲击与油价联动，模型倾向 <strong style="color:${signalClass};">${fc.signal}</strong>。
+          点击下方时间线与热度点，概率会随事件实时变化。
+        </div>
+        <ul class="forecast-news">
+          ${(keyNews.length ? keyNews : [{ headline: '暂无相关新闻', source: '系统' }]).map(n => `<li>${n.headline}（${n.source}）</li>`).join('')}
+        </ul>
+      `;
+
+      panel.querySelectorAll('.forecast-tabs button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentForecastHorizon = btn.dataset.h || '7D';
+          renderForecastPanel(currentActiveEventId || eventId);
+        });
+      });
+    }
+
+    function getDalioCaseById(caseId) {
+      return dalioCases.find(item => item.id === caseId);
+    }
+
+    function markerStyleForDalio(node) {
+      if (node.kind === 'major') return { color: '#b42318', shape: 'circle', size: 2.3, text: node.label || '重大' };
+      if (node.kind === 'tweet') return { color: '#1d4ed8', shape: 'square', size: 1.2, text: node.label || '社媒' };
+      return { color: '#0f4c5c', shape: 'circle', size: 1.2, text: node.label || '事件' };
+    }
+
+    function renderDalioSelect() {
+      const select = document.getElementById('dalioCaseSelect');
+      if (!select) return;
+      select.innerHTML = dalioCases.map(item => `
+        <option value="${item.id}" ${item.id === currentDalioCase ? 'selected' : ''}>
+          ${item.period} - ${item.title}
+        </option>
+      `).join('');
+
+      select.onchange = () => {
+        currentDalioCase = select.value;
+        renderDalioCase(currentDalioCase);
+        renderHistoryLine();
+      };
+    }
+
+    function renderDalioDetail(item) {
+      const box = document.getElementById('dalioDetail');
+      if (!box) return;
+      if (!item) {
+        box.innerHTML = '<p>暂无可展示的历史对标案例。</p>';
+        return;
+      }
+      const deepDive = dalioDeepDive[item.id] || [];
+
+      box.innerHTML = `
+        <h3>${item.title}</h3>
+        <div class="meta-line">历史时期：${item.period}</div>
+        <div class="dalio"><strong>达里奥框架分析：</strong>${item.dalioText}</div>
+        <div class="impact"><strong>书内定位：</strong>${item.chapter}<br/><strong>章节页码：</strong>${item.pages}</div>
+        <details>
+          <summary>点开查看更详细的达里奥分析</summary>
+          <ul class="deep-list">
+            ${deepDive.map(line => `<li>${line}</li>`).join('')}
+          </ul>
+        </details>
+        <p><strong>当时新闻：</strong></p>
+        <ul class="news-list">
+          ${item.news.map(n => `<li><a href="${n.url}" target="_blank" rel="noopener noreferrer">${n.headline}</a>（${n.source}）</li>`).join('')}
+        </ul>
+      `;
+    }
+
+    function renderDalioCase(caseId) {
+      const item = getDalioCaseById(caseId);
+      const meta = document.getElementById('dalioMeta');
+      if (meta) {
+        meta.textContent = item
+          ? `历史对标：${item.period} | 章节：${item.chapter}`
+          : '历史对标：-';
+      }
+      renderDalioSelect();
+      renderDalioDetail(item);
+      if (!item || !dalioSeries) return;
+      dalioSeries.setData(dalioKlineData[item.id] || []);
+      const markers = (item.markers || []).map(node => {
+        const style = markerStyleForDalio(node);
+        return {
+          time: toBusinessDay(node.date),
+          position: 'aboveBar',
+          color: style.color,
+          shape: style.shape,
+          size: style.size,
+          text: style.text
+        };
+      });
+      if (typeof dalioSeries.setMarkers === 'function') {
+        dalioSeries.setMarkers(markers);
+      } else if (typeof LightweightCharts.createSeriesMarkers === 'function') {
+        LightweightCharts.createSeriesMarkers(dalioSeries, markers);
+      }
+      dalioChart.timeScale().fitContent();
+    }
+
+    function syncDalioByEvent(eventId) {
+      const target = eventToDalioCase[eventId];
+      if (!target || target === currentDalioCase) return;
+      currentDalioCase = target;
+      renderDalioCase(currentDalioCase);
+      renderHistoryLine();
+    }
+
+    function initDalioPanel() {
+      const holder = document.getElementById('dalioChart');
+      if (!holder) return;
+      if (!window.LightweightCharts) {
+        holder.innerHTML = '<div style="padding:18px;color:#b42318;font-size:13px;">历史K线加载失败：请检查网络或刷新页面。</div>';
+        return;
+      }
+
+      dalioChart = LightweightCharts.createChart(holder, {
+        width: holder.clientWidth,
+        height: holder.clientHeight,
+        layout: {
+          background: { color: '#081326' },
+          textColor: '#9fb4d6'
+        },
+        grid: {
+          vertLines: { color: '#1a2a43' },
+          horzLines: { color: '#1a2a43' }
+        },
+        leftPriceScale: { visible: false, borderColor: '#2a3d5c' },
+        rightPriceScale: { borderColor: '#2a3d5c' },
+        timeScale: { borderColor: '#2a3d5c', timeVisible: true, secondsVisible: false },
+        crosshair: { mode: LightweightCharts.CrosshairMode.Magnet }
+      });
+
+      const candleOpts = {
+        upColor: '#2dd4bf',
+        downColor: '#f97316',
+        borderVisible: false,
+        wickUpColor: '#2dd4bf',
+        wickDownColor: '#f97316'
+      };
+
+      try {
+        if (typeof dalioChart.addCandlestickSeries === 'function') {
+          dalioSeries = dalioChart.addCandlestickSeries(candleOpts);
+        } else if (typeof dalioChart.addSeries === 'function' && LightweightCharts.CandlestickSeries) {
+          dalioSeries = dalioChart.addSeries(LightweightCharts.CandlestickSeries, candleOpts);
+        } else {
+          throw new Error('Dalio candlestick API not found');
+        }
+      } catch (err) {
+        holder.innerHTML = '<div style="padding:18px;color:#b42318;font-size:13px;">历史K线初始化失败：图表库版本不兼容。</div>';
+        return;
+      }
+
+      renderDalioSelect();
+      renderDalioCase(currentDalioCase);
+
+      window.addEventListener('resize', () => {
+        dalioChart.applyOptions({ width: holder.clientWidth });
+      });
+    }
+
+    function updateKlineMeta(eventId) {
+      const event = events.find(e => e.id === eventId);
+      const node = document.getElementById('klineMeta');
+      if (!node) return;
+      const fullName = getTickerName(currentTicker);
+      const eventText = event ? ` | 联动事件：${event.title}` : '';
+      node.textContent = `已选择：${currentTicker}${fullName ? `（${fullName}）` : ''} | 区间：${currentRange} | 日期：${lastPickedDate}${eventText}`;
+    }
+
+    function renderKlineTabs() {
+      const tabs = document.getElementById('klineTabs');
+      tabs.innerHTML = marketData.map(item => `
+        <button class="${item.ticker === currentTicker ? 'active' : ''}" data-ticker="${item.ticker}">
+          ${item.ticker}
+        </button>
+      `).join('');
+
+      tabs.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentTicker = btn.dataset.ticker;
+          overlayTickers = overlayTickers.filter(t => t !== currentTicker);
+          renderKlineTabs();
+          renderTickerSelect();
+          renderOverlaySelect();
+          renderKline(currentTicker);
+        });
+      });
+    }
+
+    function renderTickerSelect() {
+      const select = document.getElementById('klineSelect');
+      if (!select) return;
+      select.innerHTML = marketData.map(item => `
+        <option value="${item.ticker}" ${item.ticker === currentTicker ? 'selected' : ''}>
+          ${item.ticker} - ${item.name}
+        </option>
+      `).join('');
+
+      select.onchange = () => {
+        currentTicker = select.value;
+        overlayTickers = overlayTickers.filter(t => t !== currentTicker);
+        renderKlineTabs();
+        renderTickerSelect();
+        renderOverlaySelect();
+        renderKline(currentTicker);
+      };
+    }
+
+    function renderRangeTabs() {
+      const box = document.getElementById('klineRange');
+      box.innerHTML = rangeOptions.map(range => `
+        <button class="${range === currentRange ? 'active' : ''}" data-range="${range}">
+          ${range}
+        </button>
+      `).join('');
+
+      box.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentRange = btn.dataset.range;
+          renderRangeTabs();
+          renderKline(currentTicker);
+        });
+      });
+    }
+
+    function businessDayToDate(time) {
+      return new Date(`${time.year}-${String(time.month).padStart(2, '0')}-${String(time.day).padStart(2, '0')}T00:00:00`);
+    }
+
+    function sliceSeriesByRange(series, range) {
+      if (!series || series.length === 0 || range === 'ALL') return series || [];
+      const monthsMap = { '1M': 1, '3M': 3, '6M': 6, '1Y': 12 };
+      const months = monthsMap[range];
+      if (!months) return series;
+
+      const last = series[series.length - 1];
+      const lastDate = businessDayToDate(last.time);
+      const cutoff = new Date(lastDate);
+      cutoff.setMonth(cutoff.getMonth() - months);
+
+      const filtered = series.filter(p => businessDayToDate(p.time) >= cutoff);
+      return filtered.length >= 2 ? filtered : series;
+    }
+
+    // 主图渲染：K线 + 事件标记 + 叠加资产 + 三情景 + 热度/预测联动。
+    function renderKline(ticker) {
+      if (!chart || !candleSeries) return;
+      const rangeSeries = getSeriesByTickerRange(ticker, currentRange);
+      candleSeries.setData(rangeSeries);
+      const startDate = rangeSeries.length ? toDateStr(rangeSeries[0].time) : null;
+      const endDate = rangeSeries.length ? toDateStr(rangeSeries[rangeSeries.length - 1].time) : null;
+      const markers = events
+        .filter(event => {
+          if (!startDate || !endDate) return true;
+          return event.date >= startDate && event.date <= endDate;
+        })
+        .map(event => {
+          const style = markerStyleForEvent(event);
+          const markerTime = isMicroRange(currentRange)
+            ? toUTCTimestamp(new Date(`${event.date}T16:00:00Z`))
+            : toBusinessDay(event.date);
+          return {
+            time: markerTime,
+            position: 'aboveBar',
+            color: style.color,
+            shape: style.shape,
+            size: style.size,
+            text: style.text
+          };
+        });
+      if (typeof candleSeries.setMarkers === 'function') {
+        candleSeries.setMarkers(markers);
+      } else if (typeof LightweightCharts.createSeriesMarkers === 'function') {
+        LightweightCharts.createSeriesMarkers(candleSeries, markers);
+      }
+      renderOverlaySeries();
+      renderScenarioSeries(rangeSeries);
+      renderNewsHeat(rangeSeries);
+      renderForecastPanel(currentActiveEventId || (events[0] && events[0].id));
+      chart.timeScale().fitContent();
+      const activeEvent = currentActiveEventId ? events.find(e => e.id === currentActiveEventId) : null;
+      if (activeEvent) {
+        lastPickedDate = activeEvent.date;
+        updateKlineMeta(activeEvent.id);
+      } else {
+        lastPickedDate = '-';
+        updateKlineMeta(null);
+      }
+    }
+
+    function initKline() {
+      const holder = document.getElementById('klineChart');
+      if (!holder) return;
+      if (!window.LightweightCharts) {
+        holder.innerHTML = '<div style="padding:18px;color:#b42318;font-size:13px;">K线库加载失败：请检查网络或稍后刷新页面。</div>';
+        return;
+      }
+
+      chart = LightweightCharts.createChart(holder, {
+        width: holder.clientWidth,
+        height: holder.clientHeight,
+        layout: {
+          background: { color: '#081326' },
+          textColor: '#9fb4d6'
+        },
+        grid: {
+          vertLines: { color: '#1a2a43' },
+          horzLines: { color: '#1a2a43' }
+        },
+        rightPriceScale: { borderColor: '#2a3d5c' },
+        timeScale: { borderColor: '#2a3d5c', timeVisible: true, secondsVisible: false },
+        crosshair: { mode: LightweightCharts.CrosshairMode.Magnet }
+      });
+
+      const candleOpts = {
+        upColor: '#2dd4bf',
+        downColor: '#ef4444',
+        borderVisible: false,
+        wickUpColor: '#2dd4bf',
+        wickDownColor: '#ef4444'
+      };
+
+      renderKlineTabs();
+      renderTickerSelect();
+      renderOverlaySelect();
+      renderRangeTabs();
+      try {
+        if (typeof chart.addCandlestickSeries === 'function') {
+          candleSeries = chart.addCandlestickSeries(candleOpts);
+        } else if (typeof chart.addSeries === 'function' && LightweightCharts.CandlestickSeries) {
+          candleSeries = chart.addSeries(LightweightCharts.CandlestickSeries, candleOpts);
+        } else {
+          throw new Error('Candlestick series API not found');
+        }
+      } catch (err) {
+        holder.innerHTML = '<div style="padding:18px;color:#b42318;font-size:13px;">K线初始化失败：图表库版本不兼容。</div>';
+        return;
+      }
+
+      renderKline(currentTicker);
+
+      chart.subscribeClick(param => {
+        const dateStr = toDateStr(param.time);
+        if (!dateStr) return;
+        const eventId = nearestEventIdByDate(dateStr);
+        setActiveEvent(eventId, { resetCategory: true });
+      });
+
+      window.addEventListener('resize', () => {
+        chart.applyOptions({ width: holder.clientWidth });
+      });
+    }
+
+    function renderMarket() {
+      const grid = document.getElementById('marketGrid');
+      const rows = marketData.map(item => {
+        const cls = item.pct >= 0 ? 'up' : 'down';
+        const sign = item.pct >= 0 ? '+' : '';
+        return `
+          <tr>
+            <td class="mini-code">${item.ticker}</td>
+            <td class="mini-name">${item.name}</td>
+            <td>${num(item.price)}</td>
+            <td class="${cls}">${sign}${num(item.change)}</td>
+            <td class="${cls}">${sign}${num(item.pct)}%</td>
+            <td class="mini-rest">${getMarketRestText(item.ticker)}</td>
+          </tr>
+        `;
+      }).join('');
+
+      grid.innerHTML = `
+        <div class="mini-table-wrap">
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>代码</th>
+                <th>资产</th>
+                <th>价格</th>
+                <th>涨跌</th>
+                <th>涨跌幅</th>
+                <th>市场休息时间</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderInsight() {
+      const oil = marketData.find(d => d.ticker === 'USO');
+      const spy = marketData.find(d => d.ticker === 'SPY');
+      const qqq = marketData.find(d => d.ticker === 'QQQ');
+      const ita = marketData.find(d => d.ticker === 'ITA');
+      const rtx = marketData.find(d => d.ticker === 'RTX');
+      const gld = marketData.find(d => d.ticker === 'GLD');
+      const slv = marketData.find(d => d.ticker === 'SLV');
+      const cper = marketData.find(d => d.ticker === 'CPER');
+      const samsung = marketData.find(d => d.ticker === '005930.KS');
+      const usRisk = (
+        Math.abs(spy.pct) +
+        Math.abs(qqq.pct) +
+        Math.abs(oil.pct)
+      ) / 3;
+      const riskText = usRisk > 1.5 ? '高波动' : usRisk > 0.9 ? '中等偏高波动' : '中等波动';
+      const defenseMomentum = (ita.pct + rtx.pct) / 2;
+      const defenseText = defenseMomentum > 0.8 ? '偏强' : defenseMomentum < -0.8 ? '偏弱' : '中性震荡';
+      const metalSpread = cper.pct - gld.pct;
+      const metalText = metalSpread > 2 ? '工业金属强于贵金属' : metalSpread < -2 ? '贵金属强于工业金属' : '金属内部尚未形成单边结构';
+
+      document.getElementById('marketInsight').innerHTML = `
+        <strong>局势-市场联动深度分析（约500字）：</strong><br/><br/>
+        从当前截面看，市场并未进入“全面风险厌恶”，而是处于“地缘冲击定价 + 风格再平衡”阶段。油价代理 USO
+        当前涨幅为 <strong>${num(oil.pct)}%</strong>，说明能源风险溢价仍在；但美股核心指数 SPY/QQQ 分别为
+        <strong>${num(spy.pct)}%</strong>/<strong>${num(qqq.pct)}%</strong>，仍保持一定韧性，反映资金尚未走向单边避险。
+        这与达里奥框架里“冲击初段先交易供给与预期，随后才交易增长受损”高度一致。<br/><br/>
+        第二层传导是行业与资产风格分化。军工方向（ITA、RTX）合成动量当前为 <strong>${num(defenseMomentum)}%</strong>，
+        判定为 <strong>${defenseText}</strong>；金属内部结构为 <strong>${metalText}</strong>（铜-金差值
+        <strong>${num(metalSpread)}%</strong>），说明市场并非单纯交易“恐慌”，而是在“冲突持续概率”与“全球需求预期”
+        之间反复拉扯。三星电子（005930.KS）当前为 <strong>${num(samsung.pct)}%</strong>，也提示东亚制造链对能源、
+        运费与美元波动依然敏感。<br/><br/>
+        因此更稳妥的框架是：短期看事件节奏（社媒口径、制裁清单、军事节点），中期看三条慢变量
+        （1）霍尔木兹与航运保险价格；（2）能源冲击是否向核心通胀扩散；（3）政策组合是“单点喊话”还是“财政+货币+监管”协同。
+        当前综合波动等级为 <strong>${riskText}</strong>（模型值 <strong>${num(usRisk)}</strong>）。若后续出现谈判窗口，
+        风险溢价会先于基本面回落；若高压持续且冲突外溢，市场将继续呈现“油价上有弹性、权益估值受压、风格偏防御”的结构。
+      `;
+    }
+
+    function renderImpactGrid() {
+      const box = document.getElementById('impactGrid');
+      if (!box) return;
+      const list = [
+        { key: '市场', label: '市场影响' },
+        { key: '政策', label: '政策影响' },
+        { key: '制裁', label: '制裁执行' },
+        { key: '核问题', label: '核问题进展' },
+        { key: '军事', label: '军事事件' },
+        { key: '社媒', label: '特朗普社媒' }
+      ];
+      box.innerHTML = list.map(item => {
+        const count = events.filter(e => e.category === item.key).length;
+        return `
+          <div class="impact-card">
+            <div class="impact-title">${item.label}</div>
+            <div class="impact-count">${count}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderFilters() {
+      const bar = document.getElementById('filterBar');
+      bar.innerHTML = categories.map(cat => `
+        <button class="${cat === currentCategory ? 'active' : ''}" data-cat="${cat}">${cat}</button>
+      `).join('');
+
+      bar.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentCategory = btn.dataset.cat;
+          renderFilters();
+          renderTimeline(currentActiveEventId);
+        });
+      });
+    }
+
+    function getFilteredEvents() {
+      if (currentCategory === '全部') return events;
+      return events.filter(e => e.category === currentCategory);
+    }
+
+    // 时间线渲染：按筛选条件展示，并保持当前激活事件（若仍在列表中）。
+    function renderTimeline(activeId) {
+      const list = getFilteredEvents();
+      const timeline = document.getElementById('timeline');
+      const preferredId = activeId || currentActiveEventId;
+      const inList = preferredId && list.some(event => event.id === preferredId);
+      const currentActiveId = inList ? preferredId : (list[0] ? list[0].id : null);
+      timeline.innerHTML = list.map((event, i) => `
+        <button class="event-btn ${event.id === currentActiveId || (i === 0 && !currentActiveId) ? 'active' : ''}" data-id="${event.id}">
+          <div class="event-date">${event.date}</div>
+          <div class="event-title">${event.title}</div>
+          <span class="event-tag">${event.category}</span>
+          <span class="event-kind ${eventKindClass(event)}">${eventKindLabel(event)}</span>
+          <div class="event-analog">${event.analogShort}</div>
+        </button>
+      `).join('');
+
+      if (currentActiveId) {
+        renderDetail(currentActiveId);
+      } else if (list[0]) {
+        renderDetail(list[0].id);
+      }
+
+      timeline.querySelectorAll('.event-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          setActiveEvent(btn.dataset.id, { resetCategory: false });
+        });
+      });
+    }
+
+    // 事件详情渲染：新闻、达里奥定位、未来展望。
+    function renderDetail(id) {
+      const event = events.find(e => e.id === id);
+      const detail = document.getElementById('eventDetail');
+      if (!event) {
+        detail.innerHTML = '<p>没有可展示的事件。</p>';
+        return;
+      }
+      currentActiveEventId = id;
+
+      detail.innerHTML = `
+        <h3>${event.title}</h3>
+        <div class="meta-line">日期：${event.date} | 类型：${event.category}</div>
+        <p>${event.summary}</p>
+        ${event.postSnippet ? `<div class="social"><strong>社媒内容摘要：</strong>${event.postSnippet}</div>` : ''}
+        <div class="dalio"><strong>达里奥框架定位：</strong>${event.dalioLens}</div>
+        <div class="impact"><strong>市场影响：</strong>${event.impact}</div>
+        <p><strong>历史对标：</strong></p>
+        <ul class="news-list">
+          ${event.analogs.map(a => `<li>${a}</li>`).join('')}
+        </ul>
+        <div class="outlook">
+          <strong>未来展望：</strong>
+          <ul>
+            ${event.outlook.map(o => `<li>${o}</li>`).join('')}
+          </ul>
+        </div>
+        <p><strong>相关新闻：</strong></p>
+        <ul class="news-list">
+          ${event.news.map(n => `<li><a href="${n.url}" target="_blank" rel="noopener noreferrer">${n.headline}</a>（${n.source}）</li>`).join('')}
+        </ul>
+      `;
+      renderForecastPanel(currentActiveEventId);
+      renderNewsHeat(getSeriesByTickerRange(currentTicker, currentRange));
+      syncDalioByEvent(event.id);
+    }
+
+    function renderHistoryLine() {
+      const container = document.getElementById('historyLine');
+      container.innerHTML = historyBenchmarks.map(item => `
+        <article class="history-card ${item.caseId === currentDalioCase ? 'active' : ''}" data-case-id="${item.caseId}">
+          <div class="history-year">${item.period}</div>
+          <div class="history-title">${item.title}</div>
+          <div class="history-note">${item.note}</div>
+        </article>
+      `).join('');
+
+      container.querySelectorAll('.history-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const caseId = card.dataset.caseId;
+          if (!caseId) return;
+          currentDalioCase = caseId;
+          renderDalioCase(currentDalioCase);
+          renderHistoryLine();
+        });
+      });
+    }
+
+    renderMarket();
+    initKline();
+    initDalioPanel();
+    renderInsight();
+    renderImpactGrid();
+    renderFilters();
+    renderTimeline();
+    renderHistoryLine();
+  </script>
+</body>
+</html>
