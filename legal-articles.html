@@ -19,6 +19,19 @@
       color: var(--ink);
       font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       background: var(--bg);
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 64px 0 0 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.94)),
+        url("assets/georgetown-logo.png") right 6% top 160px / 360px auto no-repeat;
+      opacity: 0.75;
     }
     .topbar {
       position: sticky;
@@ -74,7 +87,9 @@
       font-weight: 700;
     }
     .hero {
-      background: #f5f5f7;
+      background:
+        linear-gradient(135deg, rgba(245, 245, 247, 0.98), rgba(245, 245, 247, 0.92)),
+        url("assets/georgetown-logo.png") right 7% center / 260px auto no-repeat;
       padding: 56px 20px 30px;
       text-align: center;
       border-bottom: 12px solid #fff;
@@ -175,6 +190,16 @@
       .topbar { padding: 10px 12px 10px 148px; }
       .floating-logo { left: 8px; top: 8px; }
       .floating-logo svg { width: 130px; }
+      body::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.96)),
+          url("assets/georgetown-logo.png") right 10% top 140px / 220px auto no-repeat;
+      }
+      .hero {
+        background:
+          linear-gradient(135deg, rgba(245, 245, 247, 0.98), rgba(245, 245, 247, 0.94)),
+          url("assets/georgetown-logo.png") right 10% center / 170px auto no-repeat;
+      }
       .content {
         width: 92%;
         grid-template-columns: 1fr;
