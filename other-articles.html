@@ -183,6 +183,7 @@
     }
   </style>
 
+
   <style>
     .site-footer {
       margin-top: 48px;
@@ -199,27 +200,42 @@
     .site-footer__top {
       display: flex;
       justify-content: space-between;
-      gap: 24px;
+      gap: 28px;
       align-items: flex-start;
       flex-wrap: wrap;
     }
-    .site-footer__brand {
-      font-size: 18px;
-      font-weight: 700;
-      color: #1d1d1f;
-      margin-bottom: 6px;
+    .site-footer__logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex: 0 0 auto;
     }
-    .site-footer__desc {
+    .site-footer__logo {
+      width: 178px;
+      height: auto;
+      display: block;
+    }
+    .site-footer__content {
+      flex: 1 1 640px;
+      min-width: 280px;
+      display: grid;
+      gap: 14px;
+    }
+    .site-footer__section {
+      display: grid;
+      gap: 8px;
+    }
+    .site-footer__section p {
       margin: 0;
-      max-width: 520px;
+      max-width: 720px;
       line-height: 1.7;
       font-size: 14px;
+      color: #4b5563;
     }
     .site-footer__links {
       display: flex;
       flex-wrap: wrap;
       gap: 10px 16px;
-      justify-content: flex-end;
       align-items: center;
     }
     .site-footer__links a {
@@ -231,16 +247,12 @@
     .site-footer__links a:hover {
       text-decoration: underline;
     }
-    .site-footer__bottom {
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(229, 231, 235, 0.9);
-      font-size: 12px;
-      color: #6b7280;
-    }
     @media (max-width: 720px) {
-      .site-footer__links {
-        justify-content: flex-start;
+      .site-footer__top {
+        gap: 18px;
+      }
+      .site-footer__logo {
+        width: 150px;
       }
     }
   </style>
@@ -315,21 +327,37 @@
     </aside>
   </main>
 
+
+
+
   <footer class="site-footer">
     <div class="site-footer__inner">
       <div class="site-footer__top">
-        <div>
-          <div class="site-footer__brand">LyraLab | Contact</div>
-          <p class="site-footer__desc">For project discussions, collaboration, application questions, or a quick hello, use any of the contact links below.</p>
+        <a class="site-footer__logo-link" href="./index.html#index" aria-label="LyraLab Home">
+          <img class="site-footer__logo" src="./logo.svg" alt="LyraLab logo">
+        </a>
+        <div class="site-footer__content">
+        <div class="site-footer__section">
+          <p>&#20320;&#21487;&#20197;&#22312;&#36825;&#37324;&#21457;&#36865;&#30041;&#35328;&#12290;&#21246;&#36873;&#8220;&#31169;&#23494;&#30041;&#35328;&#8221;&#21518;&#65292;&#37038;&#20214;&#20027;&#39064;&#20250;&#26631;&#35760;&#20026;&#31169;&#23494;&#65292;&#20165;&#29992;&#20110;&#31169;&#19979;&#27807;&#36890;&#12290;</p>
+          <div class="site-footer__links">
+            <a href="mailto:hj160@georgetown.edu">&#20320;&#30340;: hj160@georgetown.edu</a>
+            <a href="./index.html#message">&#30041;&#35328;&#26495;</a>
+            <a href="https://xhslink.com/m/78yzft3G60q" target="_blank" rel="noopener noreferrer">&#23567;&#32418;&#20070;&#20027;&#39029;</a>
+            <a href="./index.html#index">&#39318;&#39029;</a>
+          </div>
         </div>
-        <div class="site-footer__links">
-          <a href="mailto:hj160@georgetown.edu">Email: hj160@georgetown.edu</a>
-          <a href="index.html#message">Message Board</a>
-          <a href="https://xhslink.com/m/78yzft3G60q" target="_blank" rel="noopener noreferrer">Xiaohongshu</a>
-          <a href="index.html#index">Home</a>
+
+        <div class="site-footer__section">
+          <p>For project discussions, collaboration, application questions, or a quick hello, use any of the contact links below.</p>
+          <div class="site-footer__links">
+            <a href="mailto:hj160@georgetown.edu">Email: hj160@georgetown.edu</a>
+            <a href="./index.html#message">Message Board</a>
+            <a href="https://xhslink.com/m/78yzft3G60q" target="_blank" rel="noopener noreferrer">Xiaohongshu</a>
+            <a href="./index.html#index">Home</a>
+          </div>
+        </div>
         </div>
       </div>
-      <div class="site-footer__bottom">LyraLab</div>
     </div>
   </footer>
 
