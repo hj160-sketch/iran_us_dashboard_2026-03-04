@@ -345,10 +345,12 @@
     }
 
     .check-group {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px 20px;
       flex-wrap: wrap;
+      flex: 1 1 360px;
+      min-width: 280px;
     }
 
     .privacy-check {
@@ -357,6 +359,14 @@
       gap: 8px;
       color: #374151;
       font-size: 13px;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+
+    .privacy-check span {
+      display: inline-block;
+      white-space: nowrap;
+      line-height: 1.35;
     }
 
     .send-btn {
@@ -641,7 +651,11 @@
       .about { width: 92%; }
       .message-board { width: 92%; }
       .message-form .row { grid-template-columns: 1fr; }
-      .check-group { width: 100%; }
+      .check-group {
+        width: 100%;
+        min-width: 0;
+      }
+      .message-form .submit-row { align-items: flex-start; }
       .about-main h2 { font-size: 26px; }
       .about-main p { font-size: 15px; line-height: 1.75; }
       .main { width: 92%; gap: 16px; }
