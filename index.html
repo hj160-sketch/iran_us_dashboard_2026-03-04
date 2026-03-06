@@ -250,6 +250,21 @@
       color: #374151;
     }
 
+    .contact-jump {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #0a84ff;
+      background: #0a84ff;
+      color: #fff;
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
     .message-board {
       width: 85%;
       margin: 0 auto 28px;
@@ -667,39 +682,8 @@
             <li id="about_item_3">合作：研究协作、内容共创、咨询支持</li>
             <li id="about_item_4">联系：可放邮箱 / LinkedIn / 微信二维码</li>
           </ul>
+          <a class="contact-jump" href="#message" id="contact_message_btn">点此留言</a>
         </aside>
-      </div>
-    </section>
-
-    <section class="message-board" id="message">
-      <h2 id="message_title">留言给我</h2>
-      <p id="message_desc">你可以在这里发送留言。勾选“私密留言”后，邮件主题会标记为私密，仅用于私下沟通。</p>
-      <form class="message-form" id="message_form">
-        <div class="row">
-          <input id="message_name" name="name" type="text" placeholder="你的名字" required>
-          <input id="message_email" name="email" type="email" placeholder="你的邮箱（便于我回复）" required>
-        </div>
-        <textarea id="message_content" name="message" placeholder="请输入你的留言..." required></textarea>
-        <div class="submit-row">
-          <div class="check-group">
-            <label class="privacy-check">
-              <input id="private_message" name="private_message" type="checkbox" value="Yes">
-              <span id="private_label">是否私密留言</span>
-            </label>
-            <label class="privacy-check">
-              <input id="allow_delete" name="allow_delete" type="checkbox" value="Yes" checked>
-              <span id="allow_delete_label">发布后允许我删除留言</span>
-            </label>
-          </div>
-          <button class="send-btn" type="submit" id="send_btn">发送留言</button>
-        </div>
-        <p class="message-status" id="message_status"></p>
-      </form>
-      <div class="public-messages">
-        <h3 id="public_messages_title">公开留言</h3>
-        <p id="public_messages_desc">未勾选私密的留言会显示在这里。勾选“发布后允许我删除留言”的发布者，可在当前浏览器删除自己留言。</p>
-        <div class="public-messages-list" id="public_messages_list"></div>
-        <p class="public-empty" id="public_messages_empty">暂时还没有公开留言。</p>
       </div>
     </section>
 
@@ -782,6 +766,38 @@
       </aside>
     </section>
 
+    <section class="message-board" id="message">
+      <h2 id="message_title">留言给我</h2>
+      <p id="message_desc">你可以在这里发送留言。勾选“私密留言”后，邮件主题会标记为私密，仅用于私下沟通。</p>
+      <form class="message-form" id="message_form">
+        <div class="row">
+          <input id="message_name" name="name" type="text" placeholder="你的名字" required>
+          <input id="message_email" name="email" type="email" placeholder="你的邮箱（便于我回复）" required>
+        </div>
+        <textarea id="message_content" name="message" placeholder="请输入你的留言..." required></textarea>
+        <div class="submit-row">
+          <div class="check-group">
+            <label class="privacy-check">
+              <input id="private_message" name="private_message" type="checkbox" value="Yes">
+              <span id="private_label">是否私密留言</span>
+            </label>
+            <label class="privacy-check">
+              <input id="allow_delete" name="allow_delete" type="checkbox" value="Yes" checked>
+              <span id="allow_delete_label">发布后允许我删除留言</span>
+            </label>
+          </div>
+          <button class="send-btn" type="submit" id="send_btn">发送留言</button>
+        </div>
+        <p class="message-status" id="message_status"></p>
+      </form>
+      <div class="public-messages">
+        <h3 id="public_messages_title">公开留言</h3>
+        <p id="public_messages_desc">未勾选私密的留言会显示在这里。勾选“发布后允许我删除留言”的发布者，可在当前浏览器删除自己留言。</p>
+        <div class="public-messages-list" id="public_messages_list"></div>
+        <p class="public-empty" id="public_messages_empty">暂时还没有公开留言。</p>
+      </div>
+    </section>
+
   </div>
   <script>
     const I18N = {
@@ -804,6 +820,7 @@
         about_item_2: "方向：法律相关项目、效率系统、内容写作",
         about_item_3: "合作：研究协作、内容共创、咨询支持",
         about_item_4: "联系：可放邮箱 / LinkedIn / 微信二维码",
+        contact_message_btn: "点此留言",
         message_title: "留言给我",
         message_desc: "你可以在这里发送留言。勾选“私密留言”后，邮件主题会标记为私密，仅用于私下沟通。",
         message_name: "你的名字",
@@ -873,6 +890,7 @@
         about_item_2: "Focus: Legal projects, productivity systems, writing",
         about_item_3: "Collaboration: Research, content co-creation, consulting",
         about_item_4: "Contact: Email / LinkedIn / WeChat QR",
+        contact_message_btn: "Leave a Message",
         message_title: "Leave Me a Message",
         message_desc: "You can send a message here. If you check 'Private', the email subject will be marked as private for direct communication.",
         message_name: "Your Name",
@@ -942,6 +960,7 @@
         about_item_2: "テーマ: 法律関連PJ、生産性システム、執筆",
         about_item_3: "協業: リサーチ、共同制作、コンサル",
         about_item_4: "連絡先: メール / LinkedIn / WeChat QR",
+        contact_message_btn: "メッセージを送る",
         message_title: "メッセージを送る",
         message_desc: "ここからメッセージを送信できます。「非公開メッセージ」を選ぶと、メール件名に非公開として表示されます。",
         message_name: "お名前",
