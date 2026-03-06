@@ -1,0 +1,142 @@
+.timeline-grid {
+  grid-template-columns: minmax(480px, 1.05fr) minmax(420px, 0.95fr);
+}
+
+.timeline-hint {
+  margin: 0 0 8px;
+  color: #5f7377;
+  font-size: 0.9rem;
+}
+
+.timeline-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #d7d7cf;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.timeline-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.timeline-table th,
+.timeline-table td {
+  border-bottom: 1px solid #ebebe2;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.timeline-table th {
+  background: #f5f4ee;
+  color: #304448;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.timeline-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.timeline-table input[type="number"],
+.timeline-table select {
+  min-width: 96px;
+}
+
+.timeline-table input[type="checkbox"] {
+  transform: scale(1.15);
+}
+
+.time-pill {
+  display: inline-block;
+  border-radius: 999px;
+  border: 1px solid #c2d2d5;
+  background: #eaf4f5;
+  color: #24484d;
+  padding: 2px 9px;
+  font-weight: 700;
+  font-size: 0.84rem;
+}
+
+.step-note {
+  color: #4d6368;
+  font-size: 0.84rem;
+}
+
+.step-note.warn {
+  color: #8e4334;
+  font-weight: 600;
+}
+
+#timelineChart {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d5dfdf;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.chart-note {
+  margin: 10px 0 0;
+  color: #53696e;
+  font-size: 0.9rem;
+}
+
+.timeline-kpis {
+  margin-top: 12px;
+}
+
+.threat-wrap {
+  margin-top: 8px;
+}
+
+.threat-table td {
+  white-space: nowrap;
+}
+
+.threat-ok {
+  color: #2f7f44;
+  font-weight: 700;
+}
+
+.threat-risk {
+  color: #9a3f2e;
+  font-weight: 700;
+}
+
+.threat-kpis {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.timeline-results {
+  display: grid;
+  gap: 8px;
+}
+
+.timeline-point {
+  border: 1px solid #d8dfdd;
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px 10px;
+}
+
+.timeline-point strong {
+  color: #24363a;
+}
+
+.timeline-point p {
+  margin: 4px 0 0;
+  color: #567075;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 1200px) {
+  .timeline-grid {
+    grid-template-columns: 1fr;
+  }
+}

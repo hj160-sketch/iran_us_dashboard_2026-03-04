@@ -1,0 +1,183 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="pageTitle">AoE4 时间线折线图模拟器</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./timeline_simulator.css">
+</head>
+<body>
+  <div class="bg-shape shape-a"></div>
+  <div class="bg-shape shape-b"></div>
+
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">AOE4 TIMELINE LAB</p>
+      <h1 id="heroTitle">时间线折线图模拟器</h1>
+      <p id="heroSubtitle" class="subtitle">在 4-20 分钟逐点设置出兵、TC 和经济设施，实时看曲线与防守压力。</p>
+      <div class="hero-actions">
+        <a id="btnBack" class="btn btn-link" href="./index.html">返回主模拟器</a>
+      </div>
+      <div class="lang-switch">
+        <label id="langLabel" for="langSelect">语言</label>
+        <select id="langSelect">
+          <option value="zh">中文</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+    </header>
+
+    <section class="grid timeline-grid">
+      <section class="card controls">
+        <h2 id="setupTitle">初始设定</h2>
+        <div class="row triple">
+          <div>
+            <label id="labelStartVillagers" for="startVillagers">起始农民（4 分钟）</label>
+            <input id="startVillagers" type="number" min="10" max="120" value="22">
+          </div>
+          <div>
+            <label id="labelStartTc" for="startTc">起始 TC</label>
+            <select id="startTc">
+              <option value="1">1 TC</option>
+              <option value="2">2 TC</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelChartMetric" for="chartMetric">折线图指标</label>
+            <select id="chartMetric">
+              <option id="metricIncome" value="incomePerMin">每分钟总收入</option>
+              <option id="metricVillagers" value="villagers">农民数</option>
+              <option id="metricArmyUnits" value="armyUnits">累计兵量</option>
+              <option id="metricArmyPower" value="armyPower">累计兵力评分</option>
+              <option id="metricTotalBank" value="totalBank">总资源库存</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row quad">
+          <div>
+            <label id="labelStartFood" for="startFood">起始食物</label>
+            <input id="startFood" type="number" min="0" max="5000" value="150">
+          </div>
+          <div>
+            <label id="labelStartWood" for="startWood">起始木材</label>
+            <input id="startWood" type="number" min="0" max="5000" value="200">
+          </div>
+          <div>
+            <label id="labelStartGold" for="startGold">起始黄金</label>
+            <input id="startGold" type="number" min="0" max="5000" value="100">
+          </div>
+          <div>
+            <label id="labelStartStone" for="startStone">起始石头</label>
+            <input id="startStone" type="number" min="0" max="5000" value="100">
+          </div>
+        </div>
+
+        <div class="row">
+          <label id="labelDifficulty" for="easternDifficulty">Eastern DLC 难度模型</label>
+          <select id="easternDifficulty">
+            <option value="story">剧情/入门</option>
+            <option value="easy">简单</option>
+            <option value="normal" selected>标准</option>
+            <option value="hard">困难</option>
+            <option value="brutal">极难</option>
+          </select>
+        </div>
+
+        <h3 id="timelineTitle">每个时间点选项（核心）</h3>
+        <p id="timelineHint" class="timeline-hint">支持设置经济设施建设：你可以在每个时间点下磨坊/伐木场/采矿营地/采石营地，后续收入会变化。</p>
+        <div class="timeline-table-wrap">
+          <table class="timeline-table">
+            <thead>
+              <tr>
+                <th id="colTime">时间</th>
+                <th id="colUnit">兵种</th>
+                <th id="colUnitCount">数量</th>
+                <th id="colBuildTc">新建 TC</th>
+                <th id="colEcon">经济设施</th>
+                <th id="colEconCount">数量</th>
+                <th id="colResult">该点结果</th>
+              </tr>
+            </thead>
+            <tbody id="timelineBody"></tbody>
+          </table>
+        </div>
+        <div class="row">
+          <button id="resetPlan" class="btn">重置时间线方案</button>
+        </div>
+      </section>
+
+      <section class="card outputs">
+        <h2 id="chartTitle">模拟折线图</h2>
+        <canvas id="timelineChart" width="920" height="420"></canvas>
+        <p id="chartNote" class="chart-note">-</p>
+
+        <div class="kpis timeline-kpis">
+          <article class="kpi">
+            <p id="kpiVillagersLabel" class="label">20 分钟农民</p>
+            <p class="value" id="finalVillagers">0</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiTcLabel" class="label">20 分钟 TC</p>
+            <p class="value" id="finalTc">0</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiArmyLabel" class="label">20 分钟兵量</p>
+            <p class="value" id="finalArmyUnits">0</p>
+          </article>
+        </div>
+
+        <h3 id="econBonusTitle">经济设施累计加成（20 分钟）</h3>
+        <p id="finalEconSummary" class="chart-note">-</p>
+
+        <h3 id="threatTitle">Eastern DLC 敌方出兵波次</h3>
+        <p id="easternModelHint" class="chart-note">-</p>
+        <div class="timeline-table-wrap threat-wrap">
+          <table class="timeline-table threat-table">
+            <thead>
+              <tr>
+                <th id="waveTime">时间</th>
+                <th id="waveEnemy">敌方兵力点数</th>
+                <th id="waveNeed">建议你方最低点数</th>
+                <th id="waveOwn">你的当前点数</th>
+                <th id="waveStatus">状态</th>
+              </tr>
+            </thead>
+            <tbody id="easternWaveBody"></tbody>
+          </table>
+        </div>
+        <div class="kpis timeline-kpis threat-kpis">
+          <article class="kpi">
+            <p id="kpiDefendedLabel" class="label">守住波次数</p>
+            <p class="value" id="finalDefendedWaves">0/0</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiDeficitLabel" class="label">最大兵力缺口</p>
+            <p class="value" id="maxPowerDeficit">0</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiCriticalLabel" class="label">最危险时间点</p>
+            <p class="value" id="criticalWaveMinute">-</p>
+          </article>
+        </div>
+
+        <h3 id="bankTitle">资源结余（20 分钟）</h3>
+        <div class="totals" id="finalBanks"></div>
+
+        <h3 id="adviceTitle">自动建议</h3>
+        <ul id="timelineAdvice" class="alternatives"></ul>
+
+        <h3 id="resultTitle">关键时间点回放</h3>
+        <div id="timelineResultList" class="timeline-results"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="./timeline_simulator.js"></script>
+</body>
+</html>

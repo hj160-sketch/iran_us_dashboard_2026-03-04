@@ -1,0 +1,55 @@
+.best-grid {
+  grid-template-columns: minmax(400px, 0.95fr) minmax(520px, 1.05fr);
+}
+
+.plan-table-card {
+  margin-top: 16px;
+}
+
+.best-table {
+  min-width: 1220px;
+}
+
+#bestPlanChart {
+  width: 100%;
+  height: auto;
+  border: 1px solid #d5dfdf;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.mistake-box {
+  margin-top: 14px;
+  border: 1px solid #ecd9c9;
+  border-radius: 12px;
+  background: #fff7ef;
+  padding: 10px 12px;
+}
+
+.mistake-box h3 {
+  margin-top: 0;
+}
+
+.mistake-list {
+  margin: 0;
+}
+
+.mistake-list li {
+  margin-bottom: 8px;
+  color: #3d5054;
+}
+
+.mistake-list li:last-child {
+  margin-bottom: 0;
+}
+
+.mistake-tag {
+  font-weight: 700;
+  color: #7b3f2f;
+}
+
+@media (max-width: 1150px) {
+  .best-grid {
+    grid-template-columns: 1fr;
+  }
+}

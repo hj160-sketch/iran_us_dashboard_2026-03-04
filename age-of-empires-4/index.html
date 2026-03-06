@@ -1,0 +1,219 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="pageTitle">AoE4 策略模拟器</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="bg-shape shape-a"></div>
+  <div class="bg-shape shape-b"></div>
+
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">AOE4 STRATEGY LAB</p>
+      <h1 id="heroTitle">AoE4 策略模拟器</h1>
+      <p id="heroSubtitle" class="subtitle">选择文明、地图、科技和农民分配后，实时更新资源收入并推荐当前最优打法。</p>
+      <p id="heroNote" class="note">说明：本工具用于训练与决策辅助，不是游戏引擎级精确复制。</p>
+      <div class="hero-actions">
+        <a id="btnTimeline" class="btn btn-link btn-alt" href="./timeline_simulator.html">打开时间线折线图模拟器</a>
+        <a id="btnBest" class="btn btn-link" href="./best_strategy_analysis.html">打开最佳策略折线分析</a>
+      </div>
+      <div class="lang-switch">
+        <label id="langLabel" for="langSelect">语言</label>
+        <select id="langSelect">
+          <option value="zh">中文</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+    </header>
+
+    <section class="grid">
+      <section class="card controls">
+        <h2 id="inputsTitle">输入参数</h2>
+
+        <div class="row">
+          <label id="labelCiv" for="civSelect">文明（含全部 DLC）</label>
+          <select id="civSelect"></select>
+        </div>
+
+        <div class="row">
+          <label id="labelMap" for="mapSelect">地图（当前图池）</label>
+          <select id="mapSelect"></select>
+        </div>
+
+        <div class="row triple">
+          <div>
+            <label id="labelAge" for="ageSelect">时代</label>
+            <select id="ageSelect">
+              <option id="optAge2" value="2">封建（II）</option>
+              <option id="optAge3" value="3">城堡（III）</option>
+              <option id="optAge4" value="4">帝王（IV）</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelCurrentMinute" for="currentMinute">当前分钟</label>
+            <input id="currentMinute" type="number" min="1" max="60" value="8">
+          </div>
+          <div>
+            <label id="labelHorizon" for="horizonMinutes">模拟时长（分钟）</label>
+            <input id="horizonMinutes" type="number" min="1" max="40" value="8">
+          </div>
+        </div>
+
+        <div class="row triple">
+          <div>
+            <label id="labelVillagers" for="villagerCount">当前农民</label>
+            <input id="villagerCount" type="number" min="8" max="200" value="28">
+          </div>
+          <div>
+            <label id="labelTcCount" for="tcCount">城镇中心数</label>
+            <select id="tcCount">
+              <option value="1">1 TC</option>
+              <option value="2">2 TC</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelEnemyAllIn" for="enemyAllIn">对手封建 all-in</label>
+            <select id="enemyAllIn">
+              <option id="optNo" value="no">否</option>
+              <option id="optYes" value="yes">是</option>
+            </select>
+          </div>
+        </div>
+
+        <h3 id="splitTitle">农民分配（%）</h3>
+        <div class="row quad">
+          <div>
+            <label id="labelFoodPct" for="foodPct">食物</label>
+            <input id="foodPct" type="number" min="0" max="100" value="42">
+          </div>
+          <div>
+            <label id="labelWoodPct" for="woodPct">木材</label>
+            <input id="woodPct" type="number" min="0" max="100" value="33">
+          </div>
+          <div>
+            <label id="labelGoldPct" for="goldPct">黄金</label>
+            <input id="goldPct" type="number" min="0" max="100" value="20">
+          </div>
+          <div>
+            <label id="labelStonePct" for="stonePct">石头</label>
+            <input id="stonePct" type="number" min="0" max="100" value="5">
+          </div>
+        </div>
+        <div class="row">
+          <button id="normalizeBtn" class="btn">自动归一到 100%</button>
+          <p id="splitHint" class="hint"></p>
+        </div>
+
+        <div class="row">
+          <label id="labelFarmShare" for="farmShare">食物来源中“农田占比”</label>
+          <input id="farmShare" type="range" min="0" max="100" value="70">
+          <span id="farmShareValue" class="pill">70%</span>
+        </div>
+
+        <h3 id="techTitle">科技与加成</h3>
+        <div class="checks">
+          <label><input type="checkbox" id="techHorticulture" checked> <span id="labelTechHort">园艺学 Horticulture（+10% 食物）</span></label>
+          <label><input type="checkbox" id="techFertilization"> <span id="labelTechFert">施肥 Fertilization（+10% 食物）</span></label>
+          <label><input type="checkbox" id="techCrossBreeding"> <span id="labelTechCross">精准杂交育种 Precision Cross-Breeding（+10% 食物）</span></label>
+          <label><input type="checkbox" id="techAgriculture"> <span id="labelTechAgri">农业 Agriculture（阿拔斯农田 +15%）</span></label>
+        </div>
+
+        <div class="row triple">
+          <div>
+            <label id="labelGranary" for="granaryStacks">粮仓叠加层数</label>
+            <select id="granaryStacks">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelAura" for="japaneseFarmAura">日本农田光环</label>
+            <select id="japaneseFarmAura">
+              <option id="auraNone" value="0">无</option>
+              <option id="aura20" value="0.2">+20%（大名庄园 Daimyo Manor）</option>
+              <option id="aura40" value="0.4">+40%（大名宫殿 Daimyo Palace）</option>
+              <option id="aura60" value="0.6">+60%（幕府城塞 Shogunate Castle）</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelStock" for="startingStock">起始资源（各项）</label>
+            <input id="startingStock" type="number" min="0" max="5000" value="0">
+          </div>
+        </div>
+      </section>
+
+      <section class="card outputs">
+        <h2 id="outputsTitle">模拟结果</h2>
+        <div class="map-preview">
+          <img id="mapPreviewImage" alt="地图预览图" loading="eager">
+          <div class="map-preview-meta">
+            <p id="mapPreviewTitle" class="map-title">-</p>
+            <p id="mapPreviewInfo" class="map-info">-</p>
+          </div>
+        </div>
+
+        <div class="kpis">
+          <article class="kpi">
+            <p id="kpiIncomeLabel" class="label">当前总收入 / 分钟</p>
+            <p class="value" id="totalIncomePerMin">0</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiVillagerLabel" class="label">模拟结束农民数</p>
+            <p class="value" id="projectedVillagers">0</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiScoreLabel" class="label">策略建议置信分</p>
+            <p class="value" id="bestScore">0</p>
+          </article>
+        </div>
+
+        <div class="resource-grid">
+          <div class="res">
+            <span id="resFoodLabel">食物 / 分钟</span>
+            <strong id="foodIncome">0</strong>
+            <div class="bar"><div id="barFood"></div></div>
+          </div>
+          <div class="res">
+            <span id="resWoodLabel">木材 / 分钟</span>
+            <strong id="woodIncome">0</strong>
+            <div class="bar"><div id="barWood"></div></div>
+          </div>
+          <div class="res">
+            <span id="resGoldLabel">黄金 / 分钟</span>
+            <strong id="goldIncome">0</strong>
+            <div class="bar"><div id="barGold"></div></div>
+          </div>
+          <div class="res">
+            <span id="resStoneLabel">石头 / 分钟</span>
+            <strong id="stoneIncome">0</strong>
+            <div class="bar"><div id="barStone"></div></div>
+          </div>
+        </div>
+
+        <h3 id="totalsTitle">模拟期资源累计（含起始资源）</h3>
+        <div class="totals" id="projectedTotals"></div>
+
+        <h3 id="bestTitle">最佳策略建议</h3>
+        <div class="recommend">
+          <p class="best" id="bestStrategyName">-</p>
+          <p id="bestStrategyReason">-</p>
+          <ol id="nextSteps"></ol>
+        </div>
+
+        <h3 id="altTitle">备选策略</h3>
+        <ul id="alternativeStrategies" class="alternatives"></ul>
+      </section>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

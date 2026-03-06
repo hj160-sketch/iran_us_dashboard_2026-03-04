@@ -1,0 +1,139 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="pageTitle">AoE4 最佳策略折线分析</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./best_strategy_analysis.css">
+</head>
+<body>
+  <div class="bg-shape shape-a"></div>
+  <div class="bg-shape shape-b"></div>
+
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">AOE4 BEST STRATEGY TIMELINE</p>
+      <h1 id="heroTitle">最佳策略折线分析</h1>
+      <p id="heroSubtitle" class="subtitle">自动推演从当前分钟到中期的最优节奏：何时开 TC、多少人吃肉/农田、资源分工与兵力压力。</p>
+      <div class="hero-actions">
+        <a id="btnBack" class="btn btn-link" href="./index.html">返回主模拟器</a>
+      </div>
+      <div class="lang-switch">
+        <label id="langLabel" for="langSelect">语言</label>
+        <select id="langSelect">
+          <option value="zh">中文</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+    </header>
+
+    <section class="grid best-grid">
+      <section class="card controls">
+        <h2 id="inputsTitle">输入参数</h2>
+        <div class="row">
+          <label id="labelCiv" for="bestCiv">文明</label>
+          <select id="bestCiv"></select>
+        </div>
+        <div class="row">
+          <label id="labelMap" for="bestMap">地图</label>
+          <select id="bestMap"></select>
+        </div>
+        <div class="row triple">
+          <div>
+            <label id="labelEnemyAllIn" for="bestEnemyAllIn">对手封建 all-in</label>
+            <select id="bestEnemyAllIn">
+              <option value="no">否</option>
+              <option value="yes">是</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelCurrentMinute" for="bestCurrentMinute">当前分钟</label>
+            <input id="bestCurrentMinute" type="number" min="2" max="18" value="6">
+          </div>
+          <div>
+            <label id="labelEndMinute" for="bestEndMinute">分析结束分钟</label>
+            <input id="bestEndMinute" type="number" min="10" max="30" value="20">
+          </div>
+        </div>
+        <div class="row triple">
+          <div>
+            <label id="labelStartVillagers" for="bestStartVillagers">起始农民</label>
+            <input id="bestStartVillagers" type="number" min="8" max="120" value="24">
+          </div>
+          <div>
+            <label id="labelStartTc" for="bestStartTc">起始 TC</label>
+            <select id="bestStartTc">
+              <option value="1">1 TC</option>
+              <option value="2">2 TC</option>
+            </select>
+          </div>
+          <div>
+            <label id="labelChartMetric" for="bestChartMetric">折线图主指标</label>
+            <select id="bestChartMetric">
+              <option value="incomePerMin">收入/分钟</option>
+              <option value="villagers">农民数</option>
+              <option value="armyPressure">兵力压力分</option>
+              <option value="foodVillagers">食物村民数</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="card outputs">
+        <h2 id="overviewTitle">策略总览</h2>
+        <div class="kpis">
+          <article class="kpi">
+            <p id="kpiPlanLabel" class="label">推荐主线</p>
+            <p class="value" id="bestPlanName">-</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiTcMinuteLabel" class="label">建议开 2TC 时间</p>
+            <p class="value" id="bestTcMinute">-</p>
+          </article>
+          <article class="kpi">
+            <p id="kpiFinalVillagersLabel" class="label">结束时农民</p>
+            <p class="value" id="bestFinalVillagers">0</p>
+          </article>
+        </div>
+        <p id="bestPlanReason" class="chart-note">-</p>
+        <canvas id="bestPlanChart" width="920" height="420"></canvas>
+        <p id="bestChartNote" class="chart-note">-</p>
+      </section>
+    </section>
+
+    <section class="card plan-table-card">
+      <h2 id="tableTitle">时间点执行表</h2>
+      <div class="timeline-table-wrap">
+        <table class="timeline-table best-table">
+          <thead>
+            <tr>
+              <th id="colTime">时间</th>
+              <th id="colAction">动作建议</th>
+              <th id="colTc">TC</th>
+              <th id="colFood">食物（吃肉/农田）</th>
+              <th id="colWood">木材</th>
+              <th id="colGold">黄金</th>
+              <th id="colStone">石头</th>
+              <th id="colIncome">收入/分钟</th>
+              <th id="colPressure">兵力压力分</th>
+              <th id="colNote">备注</th>
+            </tr>
+          </thead>
+          <tbody id="bestPlanBody"></tbody>
+        </table>
+      </div>
+      <section class="mistake-box">
+        <h3 id="mistakeTitle">错误示例与后果</h3>
+        <ul id="bestMistakeExamples" class="alternatives mistake-list"></ul>
+      </section>
+    </section>
+  </main>
+
+  <script src="./best_strategy_analysis.js"></script>
+</body>
+</html>
