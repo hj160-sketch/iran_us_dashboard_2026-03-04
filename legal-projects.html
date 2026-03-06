@@ -115,16 +115,27 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
     }
+    .card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
     .card {
       border: 1px solid var(--line);
       border-radius: 14px;
       background: #fff;
       overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card-link:hover .card {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     }
     .cover {
       height: 150px;
       position: relative;
       background: linear-gradient(125deg, #dcecff, #adcdf9 55%, #7ab2f6 100%);
+      overflow: hidden;
     }
     .cover.warm { background: linear-gradient(125deg, #fde7db, #f9c7af 60%, #f2a57f 100%); }
     .cover.dark { background: linear-gradient(125deg, #2d3d52, #335f89, #4da0d8); }
@@ -139,6 +150,21 @@
       background: rgba(255, 255, 255, 0.92);
       border: 1px solid rgba(255, 255, 255, 0.95);
       font-weight: 700;
+      z-index: 2;
+    }
+    .hover-preview {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      opacity: 0;
+      transition: opacity .22s ease;
+      pointer-events: none;
+      background: #fff;
+    }
+    .card-link:hover .hover-preview {
+      opacity: 1;
     }
     .body { padding: 12px; }
     .body h3 {
@@ -162,6 +188,10 @@
     }
     .meta a {
       text-decoration: none;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .enter {
       color: var(--accent);
       font-weight: 700;
     }
@@ -211,38 +241,58 @@
       <span>共 4 个真实条目</span>
     </div>
     <section class="grid">
-      <article class="card">
-        <div class="cover dark"><span class="tag">Regulation</span></div>
-        <div class="body">
-          <h3>美国-伊朗交互分析看板（整合页）</h3>
-          <p>整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。</p>
-          <div class="meta"><span>2026</span><span class="chip">Dashboard</span><a href="us-iran-dashboard.html">打开 →</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="cover warm"><span class="tag">Compliance</span></div>
-        <div class="body">
-          <h3>美国-伊朗交互分析看板（原始 HTML）</h3>
-          <p>项目原始交互文件版本，保留完整前端交互逻辑与数据展示界面。</p>
-          <div class="meta"><span>2026</span><span class="chip">Raw HTML</span><a href="iran_us_interactive_dashboard.html">打开 →</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="cover green"><span class="tag">Policy</span></div>
-        <div class="body">
-          <h3>法律相关文章目录页</h3>
-          <p>已发布文章入口，集中维护法律主题写作和后续扩展目录结构。</p>
-          <div class="meta"><span>2026</span><span class="chip">Article Hub</span><a href="legal-articles.html">打开 →</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="cover"><span class="tag">Research</span></div>
-        <div class="body">
-          <h3>LyraLab 主站（含中英日切换）</h3>
-          <p>站点主页与项目总入口，包含 About、项目分流和多语言切换功能。</p>
-          <div class="meta"><span>2026</span><span class="chip">Homepage</span><a href="index.html">打开 →</a></div>
-        </div>
-      </article>
+      <a class="card-link" href="us-iran-dashboard.html">
+        <article class="card">
+          <div class="cover dark">
+            <span class="tag">Regulation</span>
+            <iframe class="hover-preview" src="iran_us_interactive_dashboard.html" title="美国-伊朗交互分析看板预览"></iframe>
+          </div>
+          <div class="body">
+            <h3>美国-伊朗交互分析看板（整合页）</h3>
+            <p>整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。</p>
+            <div class="meta"><span>2026</span><span class="chip">Dashboard</span><span class="enter">点击进入 →</span></div>
+          </div>
+        </article>
+      </a>
+      <a class="card-link" href="iran_us_interactive_dashboard.html">
+        <article class="card">
+          <div class="cover warm">
+            <span class="tag">Compliance</span>
+            <iframe class="hover-preview" src="iran_us_interactive_dashboard.html" title="美国-伊朗原始看板预览"></iframe>
+          </div>
+          <div class="body">
+            <h3>美国-伊朗交互分析看板（原始 HTML）</h3>
+            <p>项目原始交互文件版本，保留完整前端交互逻辑与数据展示界面。</p>
+            <div class="meta"><span>2026</span><span class="chip">Raw HTML</span><span class="enter">点击进入 →</span></div>
+          </div>
+        </article>
+      </a>
+      <a class="card-link" href="legal-articles.html">
+        <article class="card">
+          <div class="cover green">
+            <span class="tag">Policy</span>
+            <iframe class="hover-preview" src="legal-articles.html" title="法律文章目录预览"></iframe>
+          </div>
+          <div class="body">
+            <h3>法律相关文章目录页</h3>
+            <p>已发布文章入口，集中维护法律主题写作和后续扩展目录结构。</p>
+            <div class="meta"><span>2026</span><span class="chip">Article Hub</span><span class="enter">点击进入 →</span></div>
+          </div>
+        </article>
+      </a>
+      <a class="card-link" href="index.html">
+        <article class="card">
+          <div class="cover">
+            <span class="tag">Research</span>
+            <iframe class="hover-preview" src="index.html" title="LyraLab 首页预览"></iframe>
+          </div>
+          <div class="body">
+            <h3>LyraLab 主站（含中英日切换）</h3>
+            <p>站点主页与项目总入口，包含 About、项目分流和多语言切换功能。</p>
+            <div class="meta"><span>2026</span><span class="chip">Homepage</span><span class="enter">点击进入 →</span></div>
+          </div>
+        </article>
+      </a>
     </section>
   </main>
 </body>
