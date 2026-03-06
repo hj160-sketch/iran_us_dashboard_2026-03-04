@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lyra Lab - 文章（法律相关）</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #1d1d1f;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #0a84ff;
+      --chip: #f3f4f6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0 24px;
+      min-height: 44px;
+      border-bottom: 1px solid #ececf0;
+      background: rgba(251, 251, 253, 0.9);
+      backdrop-filter: saturate(180%) blur(18px);
+      display: flex;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      margin-right: 30px;
+    }
+    .brand img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
+    .actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      font-size: 13px;
+      color: #1d1d1f;
+      text-decoration: none;
+      opacity: 0.92;
+    }
+    .btn.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .hero {
+      background: #f5f5f7;
+      padding: 56px 20px 30px;
+      text-align: center;
+      border-bottom: 12px solid #fff;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(34px, 6vw, 60px);
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      margin: 12px auto 0;
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    .content {
+      width: 85%;
+      margin: 0 auto;
+      padding: 10px 0 36px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .article-list {
+      display: grid;
+      gap: 12px;
+    }
+    .article {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+    .meta {
+      font-size: 11px;
+      color: #9ca3af;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .article h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+    .article p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .article a {
+      margin-top: 10px;
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .side {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      background: #fff;
+    }
+    .side h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #4b5563;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--chip);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+    }
+    .note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    @media (max-width: 980px) {
+      .content {
+        width: 92%;
+        grid-template-columns: 1fr;
+      }
+      .hero p { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html#index" aria-label="LyraLab 首页">
+      <img src="branding/logo_option_6_hex_solid_L.svg" alt="LyraLab 莱拉的试验田">
+    </a>
+    <div class="actions">
+      <a class="btn" href="index.html#about">关于我</a>
+      <a class="btn" href="legal-projects.html">法律相关项目</a>
+      <a class="btn active" href="legal-articles.html">文章-法律相关</a>
+      <a class="btn" href="index.html#articles">文章-其他</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>文章 · 法律相关</h1>
+    <p>这里是法律主题写作页，适合放政策解读、判例评论、合规笔记与方法论总结。</p>
+  </section>
+
+  <main class="content">
+    <section class="article-list">
+      <article class="article">
+        <div class="meta">2026-03-06 · Regulation Notes</div>
+        <h2>跨境数据流项目启动前：五个最容易忽略的合规节点</h2>
+        <p>从数据分类、处理场景、传输路径到合同安排，逐项拆解早期阶段常见的误区和修正动作。</p>
+        <a href="#">阅读全文 →</a>
+      </article>
+      <article class="article">
+        <div class="meta">2026-03-01 · Case Reading</div>
+        <h2>判例精读模板：如何把“案情”转成“可复用规则”</h2>
+        <p>给出一套统一结构，帮助把零散阅读转化为可检索、可比较、可引用的知识资产。</p>
+        <a href="#">阅读全文 →</a>
+      </article>
+      <article class="article">
+        <div class="meta">2026-02-24 · Policy Brief</div>
+        <h2>政策追踪周报的写作框架：信息密度与可读性的平衡</h2>
+        <p>通过“结论先行 + 依据分层 + 风险标记”的方式，提升报告在决策场景中的实用性。</p>
+        <a href="#">阅读全文 →</a>
+      </article>
+    </section>
+
+    <aside class="side">
+      <h3>文章标签</h3>
+      <div class="tags">
+        <span class="chip">数据合规</span>
+        <span class="chip">平台治理</span>
+        <span class="chip">AI 监管</span>
+        <span class="chip">判例研究</span>
+        <span class="chip">政策观察</span>
+      </div>
+      <p class="note">你后续可以把这页接到 Notion、Substack 或 Markdown 自动生成流程；现在先用静态页面占位，先上线再迭代。</p>
+    </aside>
+  </main>
+</body>
+</html>
