@@ -41,7 +41,7 @@
       top: 0;
       z-index: 10;
       margin-bottom: 0;
-      padding: 0 24px;
+      padding: 0 24px 0 320px;
       min-height: 44px;
       border-bottom: 1px solid #ececf0;
       background: rgba(251, 251, 253, 0.86);
@@ -51,6 +51,22 @@
       justify-content: flex-start;
       align-items: center;
       box-shadow: var(--shadow);
+    }
+
+    .floating-logo {
+      position: fixed;
+      top: 8px;
+      left: 14px;
+      z-index: 30;
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .floating-logo svg {
+      width: 280px;
+      height: auto;
+      display: block;
     }
 
     .brand {
@@ -467,8 +483,15 @@
 
     @media (max-width: 1024px) {
       .topbar {
-        padding: 10px 14px;
+        padding: 10px 14px 10px 196px;
         justify-content: flex-start;
+      }
+      .floating-logo {
+        left: 10px;
+        top: 8px;
+      }
+      .floating-logo svg {
+        width: 168px;
       }
       .actions { gap: 12px; }
       .spacer { display: none; }
@@ -487,23 +510,30 @@
       .about-main h2 { font-size: 26px; }
       .about-main p { font-size: 15px; line-height: 1.75; }
       .main { width: 92%; gap: 16px; }
-      .topbar { padding: 10px 10px; }
+      .topbar { padding: 10px 10px 10px 128px; }
+      .floating-logo {
+        left: 8px;
+        top: 8px;
+      }
+      .floating-logo svg {
+        width: 112px;
+      }
       .lang-switch { width: 100%; justify-content: flex-end; margin-top: 2px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
+    <a class="floating-logo" href="#index" aria-label="LyraLab 首页" id="brand_link">
+      <svg viewBox="0 0 320 64" role="img" aria-label="LyraLab" id="brand_img">
+        <circle cx="18" cy="22" r="6.5" fill="#0a84ff"></circle>
+        <circle cx="34" cy="22" r="6.5" fill="#0a84ff" opacity="0.6"></circle>
+        <circle cx="50" cy="22" r="6.5" fill="#0a84ff" opacity="0.35"></circle>
+        <text x="74" y="28" font-size="19" font-weight="700" font-family="Avenir Next, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" fill="#1f2937">LyraLab</text>
+        <text x="74" y="50" font-size="10.5" font-weight="500" font-family="Avenir Next, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" fill="#6b7280">莱拉的试验田</text>
+      </svg>
+    </a>
     <header class="topbar">
-      <a class="brand" href="#index" aria-label="LyraLab 首页" id="brand_link">
-        <svg viewBox="0 0 320 64" role="img" aria-label="LyraLab" id="brand_svg">
-          <circle cx="18" cy="22" r="6.5" fill="#0a84ff"></circle>
-          <circle cx="34" cy="22" r="6.5" fill="#0a84ff" opacity="0.6"></circle>
-          <circle cx="50" cy="22" r="6.5" fill="#0a84ff" opacity="0.35"></circle>
-          <text x="74" y="28" font-size="19" font-weight="700" font-family="Avenir Next, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" fill="#1f2937">LyraLab</text>
-          <text x="74" y="50" font-size="10.5" font-weight="500" font-family="Avenir Next, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" fill="#6b7280">莱拉的试验田</text>
-        </svg>
-      </a>
       <div class="actions">
         <a class="btn" href="legal-projects.html" id="nav_about">项目-法律相关</a>
         <a class="btn" href="projects-tools.html" id="nav_legal_projects">项目-其他/效率工具</a>
@@ -842,7 +872,12 @@
       const brandLink = document.getElementById("brand_link");
       const brandImg = document.getElementById("brand_img");
       if (brandLink) brandLink.setAttribute("aria-label", pack.__brand_aria);
-      if (brandImg) brandImg.setAttribute("alt", pack.__brand_alt);
+      if (brandImg) {
+        brandImg.setAttribute("aria-label", pack.__brand_alt);
+        if (brandImg.tagName === "IMG") {
+          brandImg.setAttribute("alt", pack.__brand_alt);
+        }
+      }
 
       Object.keys(pack).forEach((key) => {
         if (key.startsWith("__")) return;
