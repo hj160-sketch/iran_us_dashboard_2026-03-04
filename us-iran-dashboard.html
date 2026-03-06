@@ -11,6 +11,7 @@
       --muted: #6b7280;
       --line: #e5e7eb;
       --accent: #0a84ff;
+      --topbar-h: 44px;
     }
     * { box-sizing: border-box; }
     body {
@@ -68,81 +69,17 @@
       text-decoration: none;
       opacity: 0.92;
     }
-    .hero {
-      background: #f5f5f7;
-      padding: 56px 20px 30px;
-      text-align: center;
-      border-bottom: 12px solid #fff;
-    }
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(34px, 6vw, 56px);
-      letter-spacing: -0.03em;
-    }
-    .hero p {
-      margin: 12px auto 0;
-      max-width: 1000px;
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.6;
-    }
-    .content {
-      width: 92%;
-      margin: 0 auto;
-      padding: 12px 0 36px;
-    }
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      display: inline-block;
-      border: 1px solid var(--line);
-      background: #f8fafc;
-      color: #374151;
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-    .cta {
-      display: inline-block;
-      text-decoration: none;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .frame-wrap {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      overflow: hidden;
-      background: #fff;
-    }
-    iframe {
-      display: block;
+    .dashboard-full {
       width: 100%;
-      height: min(78vh, 920px);
+      height: calc(100vh - var(--topbar-h));
       border: 0;
-    }
-    .note {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.6;
+      display: block;
     }
     @media (max-width: 900px) {
+      :root { --topbar-h: 64px; }
       .topbar { padding: 10px 12px 10px 148px; }
       .floating-logo { left: 8px; top: 8px; }
       .floating-logo svg { width: 130px; }
-      .hero p { font-size: 17px; }
-      iframe { height: 70vh; }
     }
   </style>
 </head>
@@ -163,22 +100,6 @@
       <a class="btn" href="legal-articles.html">文章-JD申请/法学院生活/Big Law找工作</a>
     </div>
   </header>
-
-  <section class="hero">
-    <h1>美国-伊朗交互分析看板</h1>
-    <p>这个页面已经连接你之前做的交互项目。你可以直接在这里查看，也可以点击按钮单独打开完整页面。</p>
-  </section>
-
-  <main class="content">
-    <div class="toolbar">
-      <span class="badge">Data Story · Dashboard</span>
-      <a class="cta" href="iran_us_interactive_dashboard.html" target="_blank" rel="noopener">打开完整看板</a>
-    </div>
-
-    <div class="frame-wrap">
-      <iframe src="iran_us_interactive_dashboard.html" title="美国-伊朗交互分析看板"></iframe>
-    </div>
-    <p class="note">如果你后续更新 `iran_us_interactive_dashboard.html`，这个页面会自动同步显示最新版本。</p>
-  </main>
+  <iframe class="dashboard-full" src="iran_us_interactive_dashboard.html" title="美国-伊朗交互分析看板"></iframe>
 </body>
 </html>
