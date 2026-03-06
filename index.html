@@ -50,21 +50,17 @@
     }
 
     .brand {
-      font-size: 14px;
-      font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 0;
       margin-right: 30px;
       white-space: nowrap;
     }
 
-    .dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      background: linear-gradient(120deg, #f7bf45, #f59e0b);
-      display: inline-block;
+    .brand img {
+      height: 34px;
+      width: auto;
+      display: block;
     }
 
     .actions {
@@ -319,7 +315,9 @@
 <body>
   <div class="wrap">
     <header class="topbar">
-      <div class="brand"><span class="dot"></span> Lyra Lab</div>
+      <a class="brand" href="#about" aria-label="LyraLab 首页">
+        <img src="branding/logo_option_6_hex_solid_L.svg" alt="LyraLab 莱拉的试验田">
+      </a>
       <div class="actions">
         <a class="btn" href="#about">关于我</a>
         <a class="btn" href="#projects">法律相关项目</a>
