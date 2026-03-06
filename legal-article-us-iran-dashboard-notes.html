@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lyra Lab - 美国-伊朗交互分析看板：页面结构与使用说明</title>
+  <style>
+    body { margin: 0; font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: #1d1d1f; background: #fff; }
+    .wrap { width: min(900px, 92vw); margin: 0 auto; padding: 28px 0 48px; }
+    a { color: #0a84ff; text-decoration: none; }
+    .back { font-size: 13px; margin-bottom: 16px; display: inline-block; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 5vw, 44px); letter-spacing: -0.02em; }
+    .meta { color: #6b7280; font-size: 13px; margin-bottom: 18px; }
+    p, li { line-height: 1.8; color: #374151; font-size: 16px; }
+    h2 { margin-top: 22px; font-size: 22px; }
+    code { background: #f3f4f6; border-radius: 6px; padding: 2px 6px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="legal-articles.html">← 返回法律相关文章目录</a>
+    <h1>美国-伊朗交互分析看板：页面结构与使用说明</h1>
+    <div class="meta">2026-03-06 · Project Notes</div>
+    <p>这个项目目前采用“双入口”结构，方便在展示场景和开发场景之间切换。</p>
+
+    <h2>页面关系</h2>
+    <ul>
+      <li><code>us-iran-dashboard.html</code>：整合展示页，含顶部导航、内嵌看板和“打开完整看板”按钮。</li>
+      <li><code>iran_us_interactive_dashboard.html</code>：原始项目页面，保留完整交互逻辑。</li>
+      <li><code>index.html</code>：主页项目卡片已加超链接，点击截图区域或标题即可进入整合展示页。</li>
+    </ul>
+
+    <h2>为什么这样做</h2>
+    <p>整合页便于访客快速理解项目，原始页便于你后续持续迭代。这样既保证展示体验，也不影响开发效率。</p>
+
+    <h2>后续扩展建议</h2>
+    <p>如果后续加入更多仪表盘项目，可以复用同样的结构：<code>project-name.html</code>（整合页）+ <code>project-name-raw.html</code>（原始页）。</p>
+  </main>
+</body>
+</html>

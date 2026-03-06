@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lyra Lab - lyralab.app 上线与域名验证实操记录</title>
+  <style>
+    body { margin: 0; font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: #1d1d1f; background: #fff; }
+    .wrap { width: min(900px, 92vw); margin: 0 auto; padding: 28px 0 48px; }
+    a { color: #0a84ff; text-decoration: none; }
+    .back { font-size: 13px; margin-bottom: 16px; display: inline-block; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 5vw, 44px); letter-spacing: -0.02em; }
+    .meta { color: #6b7280; font-size: 13px; margin-bottom: 18px; }
+    p, li { line-height: 1.8; color: #374151; font-size: 16px; }
+    h2 { margin-top: 22px; font-size: 22px; }
+    code { background: #f3f4f6; border-radius: 6px; padding: 2px 6px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="legal-articles.html">← 返回法律相关文章目录</a>
+    <h1>lyralab.app 上线与域名验证实操记录</h1>
+    <div class="meta">2026-03-06 · Deployment Log</div>
+    <p>这篇记录的是网站从本地页面到正式域名上线的完整流程，目的是留下一份可复用、可回看、可交接的部署文档。</p>
+
+    <h2>关键步骤</h2>
+    <ul>
+      <li>域名注册后，配置根域名 A 记录到 GitHub Pages IP。</li>
+      <li>配置 <code>www</code> 的 CNAME 指向 <code>hj160-sketch.github.io</code>。</li>
+      <li>在仓库根目录添加 <code>CNAME</code> 文件，写入 <code>lyralab.app</code>。</li>
+      <li>在 GitHub Pages 设置里填入自定义域名并等待证书签发。</li>
+      <li>完成 verified domain 校验后，启用 HTTPS。</li>
+    </ul>
+
+    <h2>排障结论</h2>
+    <p>出现 <code>NET::ERR_CERT_COMMON_NAME_INVALID</code> 时，通常不是 DNS 错，而是证书尚未签发完成。对 <code>.app</code> 域名而言，这个阶段会更明显，因为它强制 HTTPS。</p>
+
+    <h2>当前状态</h2>
+    <p>域名已可稳定访问主页，部署流程可作为后续新项目子站上线模板。</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lyra Lab - 法律研究作品页结构：从项目到文章的目录化组织</title>
+  <style>
+    body { margin: 0; font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; color: #1d1d1f; background: #fff; }
+    .wrap { width: min(900px, 92vw); margin: 0 auto; padding: 28px 0 48px; }
+    a { color: #0a84ff; text-decoration: none; }
+    .back { font-size: 13px; margin-bottom: 16px; display: inline-block; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 5vw, 44px); letter-spacing: -0.02em; }
+    .meta { color: #6b7280; font-size: 13px; margin-bottom: 18px; }
+    p, li { line-height: 1.8; color: #374151; font-size: 16px; }
+    h2 { margin-top: 22px; font-size: 22px; }
+    code { background: #f3f4f6; border-radius: 6px; padding: 2px 6px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="legal-articles.html">← 返回法律相关文章目录</a>
+    <h1>法律研究作品页结构：从项目到文章的目录化组织</h1>
+    <div class="meta">2026-03-06 · Writing Framework</div>
+    <p>为了减少重复改版，当前站点采用了三层结构：主页入口、主题目录页、详情页。</p>
+
+    <h2>三层结构</h2>
+    <ul>
+      <li>主页：<code>index.html</code>，负责总览和导航。</li>
+      <li>目录页：如 <code>legal-projects.html</code> 与 <code>legal-articles.html</code>，负责分类聚合。</li>
+      <li>详情页：单个项目页或文章页，负责完整内容呈现。</li>
+    </ul>
+
+    <h2>65/35 布局的作用</h2>
+    <p>主页主区 65% 放项目，侧栏 35% 放文章，形成“先看作品，再看文字”的访问路径，对初次访客更友好。</p>
+
+    <h2>维护策略</h2>
+    <p>后续新增内容时优先改目录页，不频繁改主页结构。这样可以降低维护成本，同时保持整体视觉稳定。</p>
+  </main>
+</body>
+</html>
