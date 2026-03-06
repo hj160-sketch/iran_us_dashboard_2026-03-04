@@ -75,6 +75,36 @@
       align-items: center;
     }
 
+    .spacer {
+      flex: 1;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 16px;
+    }
+
+    .lang-btn {
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #1d1d1f;
+      border-radius: 999px;
+      height: 26px;
+      padding: 0 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      line-height: 24px;
+    }
+
+    .lang-btn.active {
+      border-color: #0a84ff;
+      color: #0a84ff;
+      background: #eff6ff;
+    }
+
     .btn {
       border: 0;
       background: transparent;
@@ -351,6 +381,8 @@
         justify-content: flex-start;
       }
       .actions { gap: 12px; }
+      .spacer { display: none; }
+      .lang-switch { margin-left: auto; }
       .about-grid { grid-template-columns: 1fr; }
       .main { grid-template-columns: 1fr; }
     }
@@ -364,45 +396,52 @@
       .about-main p { font-size: 15px; line-height: 1.75; }
       .main { width: 92%; gap: 16px; }
       .topbar { padding: 10px 10px; }
+      .lang-switch { width: 100%; justify-content: flex-end; margin-top: 2px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header class="topbar">
-      <a class="brand" href="#index" aria-label="LyraLab 首页">
-        <img src="branding/logo_option_6_hex_solid_L.svg" alt="LyraLab 莱拉的试验田">
+      <a class="brand" href="#index" aria-label="LyraLab 首页" id="brand_link">
+        <img src="branding/logo_option_6_hex_solid_L.svg" alt="LyraLab 莱拉的试验田" id="brand_img">
       </a>
       <div class="actions">
-        <a class="btn" href="#about">关于我</a>
-        <a class="btn" href="legal-projects.html">法律相关项目</a>
-        <a class="btn" href="legal-articles.html">文章-法律相关</a>
-        <a class="btn" href="other-articles.html">文章-其他</a>
+        <a class="btn" href="#about" id="nav_about">关于我</a>
+        <a class="btn" href="legal-projects.html" id="nav_legal_projects">法律相关项目</a>
+        <a class="btn" href="legal-articles.html" id="nav_legal_articles">文章-法律相关</a>
+        <a class="btn" href="other-articles.html" id="nav_other_articles">文章-其他</a>
+      </div>
+      <div class="spacer"></div>
+      <div class="lang-switch" aria-label="Language Switcher">
+        <button class="lang-btn active" type="button" data-lang="zh">中文</button>
+        <button class="lang-btn" type="button" data-lang="en">EN</button>
+        <button class="lang-btn" type="button" data-lang="ja">日本語</button>
       </div>
     </header>
 
     <section class="hero" id="index">
       <div class="hero-copy">
-        <span class="kicker">Portfolio</span>
-        <h1>Lyra 的项目与写作空间</h1>
-        <p>这里是你的个人主页开场。用最短的文字讲清楚你做什么、为什么做，以及别人能在这里找到什么。</p>
+        <span class="kicker" id="hero_kicker">Portfolio</span>
+        <h1 id="hero_title">Lyra 的项目与写作空间</h1>
+        <p id="hero_desc">这里是你的个人主页开场。用最短的文字讲清楚你做什么、为什么做，以及别人能在这里找到什么。</p>
       </div>
     </section>
 
     <section class="about" id="about">
       <div class="about-grid">
         <div class="about-main">
-          <h2>关于我 About Lyra</h2>
-          <p>你好，我是 Lyra。我的工作重点是把复杂议题拆成可执行结构，包括法律研究、政策追踪与信息可视化表达。这个网站会持续更新我的项目、写作与工具方法。</p>
-          <p>如果你希望了解我的背景、合作方向或过往成果，可以从这里开始。你后续只需要替换这两段文案，就能快速形成完整的“关于我”页。</p>
+          <h2 id="about_title">关于我 About Lyra</h2>
+          <p id="about_p1">你好，我是 Lyra。我的工作重点是把复杂议题拆成可执行结构，包括法律研究、政策追踪与信息可视化表达。这个网站会持续更新我的项目、写作与工具方法。</p>
+          <p id="about_p2">如果你希望了解我的背景、合作方向或过往成果，可以从这里开始。你后续只需要替换这两段文案，就能快速形成完整的“关于我”页。</p>
         </div>
         <aside class="about-side">
-          <h3>Quick Profile</h3>
+          <h3 id="about_quick_profile">Quick Profile</h3>
           <ul class="about-list">
-            <li>定位：法律 × 研究 × 数据表达</li>
-            <li>方向：法律相关项目、效率系统、内容写作</li>
-            <li>合作：研究协作、内容共创、咨询支持</li>
-            <li>联系：可放邮箱 / LinkedIn / 微信二维码</li>
+            <li id="about_item_1">定位：法律 × 研究 × 数据表达</li>
+            <li id="about_item_2">方向：法律相关项目、效率系统、内容写作</li>
+            <li id="about_item_3">合作：研究协作、内容共创、咨询支持</li>
+            <li id="about_item_4">联系：可放邮箱 / LinkedIn / 微信二维码</li>
           </ul>
         </aside>
       </div>
@@ -411,43 +450,43 @@
     <section class="main">
       <div class="panel" id="projects">
         <div class="panel-head">
-          <h2>项目 Projects</h2>
-          <span class="sub">主内容区域 · 65%</span>
+          <h2 id="projects_head">项目 Projects</h2>
+          <span class="sub" id="projects_sub">主内容区域 · 65%</span>
         </div>
         <div class="project-grid">
           <article class="project">
-            <div class="project-cover dark"><span class="tag">Data Story</span></div>
+            <div class="project-cover dark"><span class="tag" id="project1_tag">Data Story</span></div>
             <div class="project-body">
-              <h3 class="project-title">美国-伊朗交互分析看板</h3>
-              <p class="project-desc">事件新闻、K线联动、策略预测，支持按时间点回看市场与地缘互动。</p>
-              <div class="project-meta"><span>2026</span><span class="chip">Dashboard</span></div>
+              <h3 class="project-title" id="project1_title">美国-伊朗交互分析看板</h3>
+              <p class="project-desc" id="project1_desc">事件新闻、K线联动、策略预测，支持按时间点回看市场与地缘互动。</p>
+              <div class="project-meta"><span>2026</span><span class="chip" id="project1_chip">Dashboard</span></div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-cover warm"><span class="tag">Research</span></div>
+            <div class="project-cover warm"><span class="tag" id="project2_tag">Research</span></div>
             <div class="project-body">
-              <h3 class="project-title">市场研究自动化工作流</h3>
-              <p class="project-desc">从数据抓取、清洗到报告输出，形成一条可复用研究生产线。</p>
-              <div class="project-meta"><span>2026</span><span class="chip">Automation</span></div>
+              <h3 class="project-title" id="project2_title">市场研究自动化工作流</h3>
+              <p class="project-desc" id="project2_desc">从数据抓取、清洗到报告输出，形成一条可复用研究生产线。</p>
+              <div class="project-meta"><span>2026</span><span class="chip" id="project2_chip">Automation</span></div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-cover green"><span class="tag">Tooling</span></div>
+            <div class="project-cover green"><span class="tag" id="project3_tag">Tooling</span></div>
             <div class="project-body">
-              <h3 class="project-title">个人知识系统与归档</h3>
-              <p class="project-desc">把分散的信息压缩成稳定结构，方便长期沉淀与复盘。</p>
-              <div class="project-meta"><span>2025</span><span class="chip">System</span></div>
+              <h3 class="project-title" id="project3_title">个人知识系统与归档</h3>
+              <p class="project-desc" id="project3_desc">把分散的信息压缩成稳定结构，方便长期沉淀与复盘。</p>
+              <div class="project-meta"><span>2025</span><span class="chip" id="project3_chip">System</span></div>
             </div>
           </article>
 
           <article class="project">
-            <div class="project-cover"><span class="tag">Quant</span></div>
+            <div class="project-cover"><span class="tag" id="project4_tag">Quant</span></div>
             <div class="project-body">
-              <h3 class="project-title">回测报告自动生成</h3>
-              <p class="project-desc">策略回测后自动产出关键指标和 PDF 报告，减少重复工作。</p>
-              <div class="project-meta"><span>2026</span><span class="chip">Backtest</span></div>
+              <h3 class="project-title" id="project4_title">回测报告自动生成</h3>
+              <p class="project-desc" id="project4_desc">策略回测后自动产出关键指标和 PDF 报告，减少重复工作。</p>
+              <div class="project-meta"><span>2026</span><span class="chip" id="project4_chip">Backtest</span></div>
             </div>
           </article>
         </div>
@@ -455,38 +494,245 @@
 
       <aside class="panel" id="articles">
         <div class="panel-head">
-          <h2>文章 Writing</h2>
-          <span class="sub">侧边栏 · 35%</span>
+          <h2 id="articles_head">文章 Writing</h2>
+          <span class="sub" id="articles_sub">侧边栏 · 35%</span>
         </div>
         <div class="articles">
           <article class="article">
-            <div class="meta">2026-03-05 · Essay</div>
-            <h3>从本地 HTML 到独立域名上线：一条最短路径</h3>
-            <p>记录从 file:// 到公开 HTTPS 的完整过程和关键节点。</p>
-            <a href="#">阅读全文 →</a>
+            <div class="meta" id="article1_meta">2026-03-05 · Essay</div>
+            <h3 id="article1_title">从本地 HTML 到独立域名上线：一条最短路径</h3>
+            <p id="article1_desc">记录从 file:// 到公开 HTTPS 的完整过程和关键节点。</p>
+            <a href="#" id="article1_link">阅读全文 →</a>
           </article>
           <article class="article">
-            <div class="meta">2026-03-03 · Workflow</div>
-            <h3>研究项目如何做成可展示作品</h3>
-            <p>把“做过”转换成“看得懂、记得住、能验证”的展示结构。</p>
-            <a href="#">阅读全文 →</a>
+            <div class="meta" id="article2_meta">2026-03-03 · Workflow</div>
+            <h3 id="article2_title">研究项目如何做成可展示作品</h3>
+            <p id="article2_desc">把“做过”转换成“看得懂、记得住、能验证”的展示结构。</p>
+            <a href="#" id="article2_link">阅读全文 →</a>
           </article>
           <article class="article">
-            <div class="meta">2026-02-24 · Notes</div>
-            <h3>写作与项目并行的周节奏模板</h3>
-            <p>一套兼顾输出密度与可持续性的轻量执行方案。</p>
-            <a href="#">阅读全文 →</a>
+            <div class="meta" id="article3_meta">2026-02-24 · Notes</div>
+            <h3 id="article3_title">写作与项目并行的周节奏模板</h3>
+            <p id="article3_desc">一套兼顾输出密度与可持续性的轻量执行方案。</p>
+            <a href="#" id="article3_link">阅读全文 →</a>
           </article>
           <article class="article">
-            <div class="meta">Archive</div>
-            <h3>更多文章</h3>
-            <p>后续可接 Notion、Substack 或本地 Markdown 生成列表。</p>
-            <a href="#">进入归档 →</a>
+            <div class="meta" id="article4_meta">Archive</div>
+            <h3 id="article4_title">更多文章</h3>
+            <p id="article4_desc">后续可接 Notion、Substack 或本地 Markdown 生成列表。</p>
+            <a href="#" id="article4_link">进入归档 →</a>
           </article>
         </div>
       </aside>
     </section>
 
   </div>
+  <script>
+    const I18N = {
+      zh: {
+        __title: "Lyra Lab",
+        __html_lang: "zh-CN",
+        __brand_aria: "LyraLab 首页",
+        __brand_alt: "LyraLab 莱拉的试验田",
+        nav_about: "关于我",
+        nav_legal_projects: "法律相关项目",
+        nav_legal_articles: "文章-法律相关",
+        nav_other_articles: "文章-其他",
+        hero_kicker: "Portfolio",
+        hero_title: "Lyra 的项目与写作空间",
+        hero_desc: "这里是你的个人主页开场。用最短的文字讲清楚你做什么、为什么做，以及别人能在这里找到什么。",
+        about_title: "关于我 About Lyra",
+        about_p1: "你好，我是 Lyra。我的工作重点是把复杂议题拆成可执行结构，包括法律研究、政策追踪与信息可视化表达。这个网站会持续更新我的项目、写作与工具方法。",
+        about_p2: "如果你希望了解我的背景、合作方向或过往成果，可以从这里开始。你后续只需要替换这两段文案，就能快速形成完整的“关于我”页。",
+        about_quick_profile: "Quick Profile",
+        about_item_1: "定位：法律 × 研究 × 数据表达",
+        about_item_2: "方向：法律相关项目、效率系统、内容写作",
+        about_item_3: "合作：研究协作、内容共创、咨询支持",
+        about_item_4: "联系：可放邮箱 / LinkedIn / 微信二维码",
+        projects_head: "项目 Projects",
+        projects_sub: "主内容区域 · 65%",
+        project1_tag: "Data Story",
+        project1_title: "美国-伊朗交互分析看板",
+        project1_desc: "事件新闻、K线联动、策略预测，支持按时间点回看市场与地缘互动。",
+        project1_chip: "Dashboard",
+        project2_tag: "Research",
+        project2_title: "市场研究自动化工作流",
+        project2_desc: "从数据抓取、清洗到报告输出，形成一条可复用研究生产线。",
+        project2_chip: "Automation",
+        project3_tag: "Tooling",
+        project3_title: "个人知识系统与归档",
+        project3_desc: "把分散的信息压缩成稳定结构，方便长期沉淀与复盘。",
+        project3_chip: "System",
+        project4_tag: "Quant",
+        project4_title: "回测报告自动生成",
+        project4_desc: "策略回测后自动产出关键指标和 PDF 报告，减少重复工作。",
+        project4_chip: "Backtest",
+        articles_head: "文章 Writing",
+        articles_sub: "侧边栏 · 35%",
+        article1_meta: "2026-03-05 · Essay",
+        article1_title: "从本地 HTML 到独立域名上线：一条最短路径",
+        article1_desc: "记录从 file:// 到公开 HTTPS 的完整过程和关键节点。",
+        article1_link: "阅读全文 →",
+        article2_meta: "2026-03-03 · Workflow",
+        article2_title: "研究项目如何做成可展示作品",
+        article2_desc: "把“做过”转换成“看得懂、记得住、能验证”的展示结构。",
+        article2_link: "阅读全文 →",
+        article3_meta: "2026-02-24 · Notes",
+        article3_title: "写作与项目并行的周节奏模板",
+        article3_desc: "一套兼顾输出密度与可持续性的轻量执行方案。",
+        article3_link: "阅读全文 →",
+        article4_meta: "Archive",
+        article4_title: "更多文章",
+        article4_desc: "后续可接 Notion、Substack 或本地 Markdown 生成列表。",
+        article4_link: "进入归档 →"
+      },
+      en: {
+        __title: "Lyra Lab",
+        __html_lang: "en",
+        __brand_aria: "LyraLab Home",
+        __brand_alt: "LyraLab Logo",
+        nav_about: "About",
+        nav_legal_projects: "Legal Projects",
+        nav_legal_articles: "Legal Articles",
+        nav_other_articles: "Other Articles",
+        hero_kicker: "Portfolio",
+        hero_title: "Lyra's Projects and Writing Space",
+        hero_desc: "This is the opening section of your homepage. In a few lines, explain what you do, why you do it, and what people can find here.",
+        about_title: "About Lyra",
+        about_p1: "Hi, I'm Lyra. I focus on turning complex topics into executable structures, including legal research, policy tracking, and visual storytelling. This site will keep updating with my projects, writing, and methods.",
+        about_p2: "If you want to know my background, collaboration focus, or selected work, start here. You can later replace these paragraphs with your final profile text.",
+        about_quick_profile: "Quick Profile",
+        about_item_1: "Positioning: Law x Research x Data Expression",
+        about_item_2: "Focus: Legal projects, productivity systems, writing",
+        about_item_3: "Collaboration: Research, content co-creation, consulting",
+        about_item_4: "Contact: Email / LinkedIn / WeChat QR",
+        projects_head: "Projects",
+        projects_sub: "Main Area · 65%",
+        project1_tag: "Data Story",
+        project1_title: "U.S.-Iran Interactive Analysis Dashboard",
+        project1_desc: "News events, market moves, and scenario analysis linked on a timeline for geopolitical and market review.",
+        project1_chip: "Dashboard",
+        project2_tag: "Research",
+        project2_title: "Market Research Automation Workflow",
+        project2_desc: "A reusable pipeline from data collection and cleaning to structured report output.",
+        project2_chip: "Automation",
+        project3_tag: "Tooling",
+        project3_title: "Personal Knowledge System & Archive",
+        project3_desc: "Compress scattered information into stable structures for long-term accumulation and review.",
+        project3_chip: "System",
+        project4_tag: "Quant",
+        project4_title: "Automated Backtest Report Generator",
+        project4_desc: "Generate key metrics and PDF reports after strategy backtesting to reduce repetitive work.",
+        project4_chip: "Backtest",
+        articles_head: "Writing",
+        articles_sub: "Sidebar · 35%",
+        article1_meta: "2026-03-05 · Essay",
+        article1_title: "From Local HTML to a Live Domain: The Shortest Path",
+        article1_desc: "A practical log from file:// to public HTTPS with key milestones.",
+        article1_link: "Read More →",
+        article2_meta: "2026-03-03 · Workflow",
+        article2_title: "How to Turn Research Work into Portfolio Projects",
+        article2_desc: "Transform raw effort into a clear, memorable, and verifiable project presentation.",
+        article2_link: "Read More →",
+        article3_meta: "2026-02-24 · Notes",
+        article3_title: "A Weekly Rhythm for Writing and Projects",
+        article3_desc: "A lightweight execution model balancing output density and long-term sustainability.",
+        article3_link: "Read More →",
+        article4_meta: "Archive",
+        article4_title: "More Articles",
+        article4_desc: "Can later connect to Notion, Substack, or a local Markdown-generated archive.",
+        article4_link: "Open Archive →"
+      },
+      ja: {
+        __title: "Lyra Lab",
+        __html_lang: "ja",
+        __brand_aria: "LyraLab ホーム",
+        __brand_alt: "LyraLab ロゴ",
+        nav_about: "自己紹介",
+        nav_legal_projects: "法律関連プロジェクト",
+        nav_legal_articles: "法律関連の記事",
+        nav_other_articles: "その他の記事",
+        hero_kicker: "Portfolio",
+        hero_title: "Lyra のプロジェクトと執筆スペース",
+        hero_desc: "ここはあなたのホームページの導入です。何をしているか、なぜしているか、ここで何が見られるかを短く伝えます。",
+        about_title: "About Lyra",
+        about_p1: "こんにちは、Lyra です。法律リサーチ、政策トラッキング、可視化表現を中心に、複雑なテーマを実行可能な構造に整理しています。このサイトではプロジェクトや執筆内容を継続的に更新します。",
+        about_p2: "経歴や協業方針、実績を知りたい方はここからご覧ください。後でこの2段落をあなたの正式プロフィールに置き換えられます。",
+        about_quick_profile: "Quick Profile",
+        about_item_1: "領域: 法律 x リサーチ x データ表現",
+        about_item_2: "テーマ: 法律関連PJ、生産性システム、執筆",
+        about_item_3: "協業: リサーチ、共同制作、コンサル",
+        about_item_4: "連絡先: メール / LinkedIn / WeChat QR",
+        projects_head: "プロジェクト",
+        projects_sub: "メイン領域 · 65%",
+        project1_tag: "Data Story",
+        project1_title: "米・イラン相互分析ダッシュボード",
+        project1_desc: "ニュース、相場、シナリオ分析を時系列で統合し、地政学と市場の関係を振り返れます。",
+        project1_chip: "Dashboard",
+        project2_tag: "Research",
+        project2_title: "市場調査オートメーションワークフロー",
+        project2_desc: "データ収集・整形からレポート出力までを再利用可能な流れに設計。",
+        project2_chip: "Automation",
+        project3_tag: "Tooling",
+        project3_title: "個人知識システムとアーカイブ",
+        project3_desc: "分散情報を安定した構造に圧縮し、長期的な蓄積と振り返りを支援。",
+        project3_chip: "System",
+        project4_tag: "Quant",
+        project4_title: "バックテスト報告自動生成",
+        project4_desc: "戦略バックテスト後に主要指標とPDFを自動生成し、反復作業を削減。",
+        project4_chip: "Backtest",
+        articles_head: "執筆",
+        articles_sub: "サイドバー · 35%",
+        article1_meta: "2026-03-05 · Essay",
+        article1_title: "ローカルHTMLから独自ドメイン公開までの最短ルート",
+        article1_desc: "file:// から HTTPS 公開までの実務フローを記録。",
+        article1_link: "続きを読む →",
+        article2_meta: "2026-03-03 · Workflow",
+        article2_title: "調査プロジェクトを見せる作品にする方法",
+        article2_desc: "作業実績を、理解しやすく検証可能な構成へ変換する。",
+        article2_link: "続きを読む →",
+        article3_meta: "2026-02-24 · Notes",
+        article3_title: "執筆とプロジェクトを両立する週次テンプレート",
+        article3_desc: "出力密度と持続性を両立する軽量な実行モデル。",
+        article3_link: "続きを読む →",
+        article4_meta: "Archive",
+        article4_title: "さらに読む",
+        article4_desc: "将来的に Notion、Substack、Markdown 生成アーカイブと連携可能。",
+        article4_link: "アーカイブへ →"
+      }
+    };
+
+    const langButtons = document.querySelectorAll(".lang-btn");
+
+    function applyLanguage(lang) {
+      const selected = I18N[lang] ? lang : "zh";
+      const pack = I18N[selected];
+      document.title = pack.__title;
+      document.documentElement.lang = pack.__html_lang;
+
+      const brandLink = document.getElementById("brand_link");
+      const brandImg = document.getElementById("brand_img");
+      if (brandLink) brandLink.setAttribute("aria-label", pack.__brand_aria);
+      if (brandImg) brandImg.setAttribute("alt", pack.__brand_alt);
+
+      Object.keys(pack).forEach((key) => {
+        if (key.startsWith("__")) return;
+        const node = document.getElementById(key);
+        if (node) node.textContent = pack[key];
+      });
+
+      langButtons.forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === selected);
+      });
+
+      localStorage.setItem("lyralab_lang", selected);
+    }
+
+    langButtons.forEach((btn) => {
+      btn.addEventListener("click", () => applyLanguage(btn.dataset.lang));
+    });
+
+    applyLanguage(localStorage.getItem("lyralab_lang") || "zh");
+  </script>
 </body>
 </html>
