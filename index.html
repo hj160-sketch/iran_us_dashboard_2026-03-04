@@ -307,6 +307,13 @@
       flex-wrap: wrap;
     }
 
+    .check-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
     .privacy-check {
       display: inline-flex;
       align-items: center;
@@ -331,6 +338,95 @@
       font-size: 13px;
       color: #2563eb;
       min-height: 20px;
+    }
+
+    .public-messages {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed #d9dee8;
+    }
+
+    .public-messages h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: #111827;
+    }
+
+    .public-messages p {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    .public-messages-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .public-message-item {
+      border: 1px solid #e6ebf2;
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #fff;
+    }
+
+    .public-message-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+      color: #4b5563;
+      font-size: 12px;
+    }
+
+    .public-message-name {
+      font-weight: 700;
+      color: #1f2937;
+      font-size: 13px;
+    }
+
+    .public-message-time {
+      white-space: nowrap;
+    }
+
+    .public-message-text {
+      margin: 0;
+      color: #1f2937;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .public-message-action {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .delete-message-btn {
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      color: #4b5563;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .delete-message-btn:hover {
+      border-color: #cfd6e2;
+      color: #1f2937;
+    }
+
+    .public-empty {
+      margin: 0;
+      font-size: 13px;
+      color: #9aa3b2;
     }
 
     .panel {
@@ -507,6 +603,7 @@
       .about { width: 92%; }
       .message-board { width: 92%; }
       .message-form .row { grid-template-columns: 1fr; }
+      .check-group { width: 100%; }
       .about-main h2 { font-size: 26px; }
       .about-main p { font-size: 15px; line-height: 1.75; }
       .main { width: 92%; gap: 16px; }
@@ -584,14 +681,26 @@
         </div>
         <textarea id="message_content" name="message" placeholder="请输入你的留言..." required></textarea>
         <div class="submit-row">
-          <label class="privacy-check">
-            <input id="private_message" name="private_message" type="checkbox" value="Yes">
-            <span id="private_label">是否私密留言</span>
-          </label>
+          <div class="check-group">
+            <label class="privacy-check">
+              <input id="private_message" name="private_message" type="checkbox" value="Yes">
+              <span id="private_label">是否私密留言</span>
+            </label>
+            <label class="privacy-check">
+              <input id="allow_delete" name="allow_delete" type="checkbox" value="Yes" checked>
+              <span id="allow_delete_label">发布后允许我删除留言</span>
+            </label>
+          </div>
           <button class="send-btn" type="submit" id="send_btn">发送留言</button>
         </div>
         <p class="message-status" id="message_status"></p>
       </form>
+      <div class="public-messages">
+        <h3 id="public_messages_title">公开留言</h3>
+        <p id="public_messages_desc">未勾选私密的留言会显示在这里。勾选“发布后允许我删除留言”的发布者，可在当前浏览器删除自己留言。</p>
+        <div class="public-messages-list" id="public_messages_list"></div>
+        <p class="public-empty" id="public_messages_empty">暂时还没有公开留言。</p>
+      </div>
     </section>
 
     <section class="main">
@@ -701,7 +810,15 @@
         message_email: "你的邮箱（便于我回复）",
         message_content: "请输入你的留言...",
         private_label: "是否私密留言",
+        allow_delete_label: "发布后允许我删除留言",
         send_btn: "发送留言",
+        public_messages_title: "公开留言",
+        public_messages_desc: "未勾选私密的留言会显示在这里。勾选“发布后允许我删除留言”的发布者，可在当前浏览器删除自己留言。",
+        public_messages_empty: "暂时还没有公开留言。",
+        delete_message_btn: "删除我的留言",
+        anonymous_name: "访客",
+        message_sent_private: "私密留言已发送。若为首次提交，请到邮箱完成 FormSubmit 激活。",
+        message_sent_public: "留言已发送并公开显示。若为首次提交，请到邮箱完成 FormSubmit 激活。",
         projects_head: "项目 Projects",
         project1_tag: "Data Story",
         project1_title: "美国-伊朗交互分析看板",
@@ -762,7 +879,15 @@
         message_email: "Your Email (for my reply)",
         message_content: "Write your message...",
         private_label: "Private Message",
+        allow_delete_label: "Allow me to delete after posting",
         send_btn: "Send Message",
+        public_messages_title: "Public Messages",
+        public_messages_desc: "Messages without 'Private' will be shown here. If 'Allow me to delete' is checked, the sender can remove the message from this browser later.",
+        public_messages_empty: "No public messages yet.",
+        delete_message_btn: "Delete My Message",
+        anonymous_name: "Visitor",
+        message_sent_private: "Private message sent. Check your inbox for FormSubmit activation email if this is your first submission.",
+        message_sent_public: "Message sent and published. Check your inbox for FormSubmit activation email if this is your first submission.",
         projects_head: "Projects",
         project1_tag: "Data Story",
         project1_title: "U.S.-Iran Interactive Analysis Dashboard",
@@ -823,7 +948,15 @@
         message_email: "メールアドレス（返信用）",
         message_content: "メッセージを入力してください...",
         private_label: "非公開メッセージ",
+        allow_delete_label: "投稿後に自分で削除できるようにする",
         send_btn: "送信",
+        public_messages_title: "公開メッセージ",
+        public_messages_desc: "「非公開」を選択しない投稿はここに表示されます。「投稿後に削除可」を選ぶと、このブラウザから自分の投稿を削除できます。",
+        public_messages_empty: "公開メッセージはまだありません。",
+        delete_message_btn: "自分の投稿を削除",
+        anonymous_name: "ゲスト",
+        message_sent_private: "非公開メッセージを送信しました。初回送信時は FormSubmit の有効化メールを確認してください。",
+        message_sent_public: "メッセージを送信し、公開表示しました。初回送信時は FormSubmit の有効化メールを確認してください。",
         projects_head: "プロジェクト",
         project1_tag: "Data Story",
         project1_title: "米・イラン相互分析ダッシュボード",
@@ -895,6 +1028,7 @@
       });
 
       localStorage.setItem("lyralab_lang", selected);
+      renderPublicMessages();
     }
 
     langButtons.forEach((btn) => {
@@ -906,17 +1040,129 @@
     const messageForm = document.getElementById("message_form");
     const messageStatus = document.getElementById("message_status");
     const privateMessage = document.getElementById("private_message");
+    const allowDelete = document.getElementById("allow_delete");
     const sendBtn = document.getElementById("send_btn");
+    const publicMessagesList = document.getElementById("public_messages_list");
+    const publicMessagesEmpty = document.getElementById("public_messages_empty");
+
+    const PUBLIC_MESSAGES_KEY = "lyralab_public_messages_v1";
+    const CLIENT_ID_KEY = "lyralab_client_id_v1";
+
+    function getCurrentLanguagePack() {
+      const lang = localStorage.getItem("lyralab_lang") || "zh";
+      return I18N[lang] || I18N.zh;
+    }
+
+    function getClientId() {
+      const existing = localStorage.getItem(CLIENT_ID_KEY);
+      if (existing) return existing;
+      const generated = (window.crypto && window.crypto.randomUUID)
+        ? window.crypto.randomUUID()
+        : `cid_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+      localStorage.setItem(CLIENT_ID_KEY, generated);
+      return generated;
+    }
+
+    const clientId = getClientId();
+
+    function loadPublicMessages() {
+      try {
+        const raw = localStorage.getItem(PUBLIC_MESSAGES_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function savePublicMessages(messages) {
+      localStorage.setItem(PUBLIC_MESSAGES_KEY, JSON.stringify(messages));
+    }
+
+    function formatMessageTime(isoTime) {
+      const lang = localStorage.getItem("lyralab_lang") || "zh";
+      const locale = lang === "en" ? "en-US" : (lang === "ja" ? "ja-JP" : "zh-CN");
+      try {
+        return new Intl.DateTimeFormat(locale, {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        }).format(new Date(isoTime));
+      } catch (error) {
+        return isoTime;
+      }
+    }
+
+    function deletePublicMessage(messageId) {
+      const messages = loadPublicMessages();
+      const nextMessages = messages.filter((item) => item.id !== messageId);
+      savePublicMessages(nextMessages);
+      renderPublicMessages();
+    }
+
+    function renderPublicMessages() {
+      const pack = getCurrentLanguagePack();
+      const messages = loadPublicMessages().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      publicMessagesList.innerHTML = "";
+
+      if (messages.length === 0) {
+        publicMessagesEmpty.style.display = "block";
+        return;
+      }
+
+      publicMessagesEmpty.style.display = "none";
+
+      messages.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "public-message-item";
+
+        const meta = document.createElement("div");
+        meta.className = "public-message-meta";
+
+        const sender = document.createElement("span");
+        sender.className = "public-message-name";
+        sender.textContent = item.name || pack.anonymous_name;
+
+        const time = document.createElement("span");
+        time.className = "public-message-time";
+        time.textContent = formatMessageTime(item.createdAt);
+
+        meta.appendChild(sender);
+        meta.appendChild(time);
+
+        const text = document.createElement("p");
+        text.className = "public-message-text";
+        text.textContent = item.message || "";
+
+        card.appendChild(meta);
+        card.appendChild(text);
+
+        if (item.ownerId === clientId && item.deletable) {
+          const action = document.createElement("div");
+          action.className = "public-message-action";
+
+          const deleteBtn = document.createElement("button");
+          deleteBtn.type = "button";
+          deleteBtn.className = "delete-message-btn";
+          deleteBtn.textContent = pack.delete_message_btn;
+          deleteBtn.addEventListener("click", () => deletePublicMessage(item.id));
+
+          action.appendChild(deleteBtn);
+          card.appendChild(action);
+        }
+
+        publicMessagesList.appendChild(card);
+      });
+    }
 
     async function submitMessage(event) {
       event.preventDefault();
       const lang = localStorage.getItem("lyralab_lang") || "zh";
+      const pack = I18N[lang] || I18N.zh;
       const sendingText = lang === "en" ? "Sending..." : (lang === "ja" ? "送信中..." : "正在发送...");
-      const okText = lang === "en"
-        ? "Message sent. Check your inbox for FormSubmit activation email if this is your first submission."
-        : (lang === "ja"
-          ? "送信しました。初回送信時は FormSubmit の有効化メールを確認してください。"
-          : "留言已发送。若为首次提交，请到邮箱完成 FormSubmit 激活。");
       const errText = lang === "en"
         ? "Send failed. Please try again in a moment."
         : (lang === "ja" ? "送信に失敗しました。少ししてから再試行してください。" : "发送失败，请稍后重试。");
@@ -927,7 +1173,12 @@
 
       const formData = new FormData(messageForm);
       const privateFlag = privateMessage.checked ? "Yes" : "No";
+      const allowDeleteFlag = allowDelete.checked ? "Yes" : "No";
+      const senderName = String(formData.get("name") || "").trim() || pack.anonymous_name;
+      const messageText = String(formData.get("message") || "").trim();
+
       formData.set("is_private", privateFlag);
+      formData.set("allow_delete", allowDeleteFlag);
       formData.set("_subject", privateFlag === "Yes" ? "[LyraLab] 私密留言 / Private Message" : "[LyraLab] New Message");
       formData.set("_captcha", "false");
       formData.set("_template", "table");
@@ -939,8 +1190,25 @@
           body: formData
         });
         if (!response.ok) throw new Error("form submit failed");
+
+        if (privateFlag !== "Yes" && messageText) {
+          const messages = loadPublicMessages();
+          messages.push({
+            id: (window.crypto && window.crypto.randomUUID)
+              ? window.crypto.randomUUID()
+              : `msg_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+            ownerId: clientId,
+            name: senderName,
+            message: messageText,
+            createdAt: new Date().toISOString(),
+            deletable: allowDeleteFlag === "Yes"
+          });
+          savePublicMessages(messages);
+          renderPublicMessages();
+        }
+
         messageForm.reset();
-        messageStatus.textContent = okText;
+        messageStatus.textContent = privateFlag === "Yes" ? pack.message_sent_private : pack.message_sent_public;
       } catch (error) {
         messageStatus.textContent = errText;
       } finally {
@@ -951,6 +1219,7 @@
 
     messageForm.addEventListener("submit", submitMessage);
 
+    renderPublicMessages();
     applyLanguage(localStorage.getItem("lyralab_lang") || "zh");
   </script>
 </body>
