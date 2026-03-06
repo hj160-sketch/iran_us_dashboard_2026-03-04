@@ -282,6 +282,12 @@
       background: linear-gradient(125deg, #dcecff, #adcdf9 55%, #7ab2f6 100%);
     }
 
+    .project-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
     .project-cover.warm { background: linear-gradient(125deg, #fde7db, #f9c7af 60%, #f2a57f 100%); }
     .project-cover.dark { background: linear-gradient(125deg, #2d3d52, #335f89, #4da0d8); }
     .project-cover.green { background: linear-gradient(125deg, #dff6e3, #9adba8, #5fb575); }
@@ -455,9 +461,11 @@
         </div>
         <div class="project-grid">
           <article class="project">
-            <div class="project-cover dark"><span class="tag" id="project1_tag">Data Story</span></div>
+            <a class="project-link" href="us-iran-dashboard.html" aria-label="打开美国-伊朗交互分析看板">
+              <div class="project-cover dark"><span class="tag" id="project1_tag">Data Story</span></div>
+            </a>
             <div class="project-body">
-              <h3 class="project-title" id="project1_title">美国-伊朗交互分析看板</h3>
+              <h3 class="project-title"><a class="project-link" id="project1_title" href="us-iran-dashboard.html">美国-伊朗交互分析看板</a></h3>
               <p class="project-desc" id="project1_desc">事件新闻、K线联动、策略预测，支持按时间点回看市场与地缘互动。</p>
               <div class="project-meta"><span>2026</span><span class="chip" id="project1_chip">Dashboard</span></div>
             </div>

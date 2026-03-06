@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lyra Lab - 美国-伊朗交互分析看板</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #1d1d1f;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #0a84ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0 24px;
+      min-height: 44px;
+      border-bottom: 1px solid #ececf0;
+      background: rgba(251, 251, 253, 0.9);
+      backdrop-filter: saturate(180%) blur(18px);
+      display: flex;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      margin-right: 30px;
+    }
+    .brand img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
+    .actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn {
+      font-size: 13px;
+      color: #1d1d1f;
+      text-decoration: none;
+      opacity: 0.92;
+    }
+    .hero {
+      background: #f5f5f7;
+      padding: 56px 20px 30px;
+      text-align: center;
+      border-bottom: 12px solid #fff;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(34px, 6vw, 56px);
+      letter-spacing: -0.03em;
+    }
+    .hero p {
+      margin: 12px auto 0;
+      max-width: 1000px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    .content {
+      width: 92%;
+      margin: 0 auto;
+      padding: 12px 0 36px;
+    }
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      color: #374151;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .cta {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .frame-wrap {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    iframe {
+      display: block;
+      width: 100%;
+      height: min(78vh, 920px);
+      border: 0;
+    }
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .hero p { font-size: 17px; }
+      iframe { height: 70vh; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html#index" aria-label="LyraLab 首页">
+      <img src="branding/logo_option_6_hex_solid_L.svg" alt="LyraLab 莱拉的试验田">
+    </a>
+    <div class="actions">
+      <a class="btn" href="index.html#about">关于我</a>
+      <a class="btn" href="legal-projects.html">法律相关项目</a>
+      <a class="btn" href="legal-articles.html">文章-法律相关</a>
+      <a class="btn" href="other-articles.html">文章-其他</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>美国-伊朗交互分析看板</h1>
+    <p>这个页面已经连接你之前做的交互项目。你可以直接在这里查看，也可以点击按钮单独打开完整页面。</p>
+  </section>
+
+  <main class="content">
+    <div class="toolbar">
+      <span class="badge">Data Story · Dashboard</span>
+      <a class="cta" href="iran_us_interactive_dashboard.html" target="_blank" rel="noopener">打开完整看板</a>
+    </div>
+
+    <div class="frame-wrap">
+      <iframe src="iran_us_interactive_dashboard.html" title="美国-伊朗交互分析看板"></iframe>
+    </div>
+    <p class="note">如果你后续更新 `iran_us_interactive_dashboard.html`，这个页面会自动同步显示最新版本。</p>
+  </main>
+</body>
+</html>
