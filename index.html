@@ -819,11 +819,7 @@
           <div class="check-group">
             <label class="privacy-check">
               <input id="private_message" name="private_message" type="checkbox" value="Yes">
-              <span id="private_label">是否私密留言</span>
-            </label>
-            <label class="privacy-check">
-              <input id="allow_delete" name="allow_delete" type="checkbox" value="Yes" checked>
-              <span id="allow_delete_label">发布后允许我删除留言</span>
+              <span id="private_label">私密留言</span>
             </label>
           </div>
           <button class="send-btn" type="submit" id="send_btn">发送留言</button>
@@ -832,7 +828,7 @@
       </form>
       <div class="public-messages">
         <h3 id="public_messages_title">公开留言</h3>
-        <p id="public_messages_desc">未勾选私密的留言会显示在这里。勾选“发布后允许我删除留言”的发布者，可在当前浏览器删除自己留言。</p>
+        <p id="public_messages_desc">未勾选私密的留言会显示在这里。发布者可在当前浏览器删除自己留言。</p>
         <div class="public-messages-list" id="public_messages_list"></div>
         <p class="public-empty" id="public_messages_empty">暂时还没有公开留言。</p>
       </div>
@@ -867,11 +863,10 @@
         message_name: "你的名字",
         message_email: "你的邮箱或者其他联系方式（便于我回复）",
         message_content: "请输入你的留言...",
-        private_label: "是否私密留言",
-        allow_delete_label: "发布后允许我删除留言",
+        private_label: "私密留言",
         send_btn: "发送留言",
         public_messages_title: "公开留言",
-        public_messages_desc: "未勾选私密的留言会显示在这里。勾选“发布后允许我删除留言”的发布者，可在当前浏览器删除自己留言。",
+        public_messages_desc: "未勾选私密的留言会显示在这里。发布者可在当前浏览器删除自己留言。",
         public_messages_empty: "暂时还没有公开留言。",
         delete_message_btn: "删除我的留言",
         anonymous_name: "访客",
@@ -939,10 +934,9 @@
         message_email: "Your Email or Other Contact (for my reply)",
         message_content: "Write your message...",
         private_label: "Private Message",
-        allow_delete_label: "Allow me to delete after posting",
         send_btn: "Send Message",
         public_messages_title: "Public Messages",
-        public_messages_desc: "Messages without 'Private' will be shown here. If 'Allow me to delete' is checked, the sender can remove the message from this browser later.",
+        public_messages_desc: "Messages without 'Private' will be shown here. The sender can remove the message from this browser later.",
         public_messages_empty: "No public messages yet.",
         delete_message_btn: "Delete My Message",
         anonymous_name: "Visitor",
@@ -1010,10 +1004,9 @@
         message_email: "メールアドレスまたは連絡先（返信用）",
         message_content: "メッセージを入力してください...",
         private_label: "非公開メッセージ",
-        allow_delete_label: "投稿後に自分で削除できるようにする",
         send_btn: "送信",
         public_messages_title: "公開メッセージ",
-        public_messages_desc: "「非公開」を選択しない投稿はここに表示されます。「投稿後に削除可」を選ぶと、このブラウザから自分の投稿を削除できます。",
+        public_messages_desc: "「非公開」を選択しない投稿はここに表示されます。このブラウザから自分の投稿を削除できます。",
         public_messages_empty: "公開メッセージはまだありません。",
         delete_message_btn: "自分の投稿を削除",
         anonymous_name: "ゲスト",
@@ -1102,7 +1095,6 @@
     const messageForm = document.getElementById("message_form");
     const messageStatus = document.getElementById("message_status");
     const privateMessage = document.getElementById("private_message");
-    const allowDelete = document.getElementById("allow_delete");
     const sendBtn = document.getElementById("send_btn");
     const publicMessagesList = document.getElementById("public_messages_list");
     const publicMessagesEmpty = document.getElementById("public_messages_empty");
@@ -1202,7 +1194,7 @@
         card.appendChild(meta);
         card.appendChild(text);
 
-        if (item.ownerId === clientId && item.deletable) {
+        if (item.ownerId === clientId && item.deletable !== false) {
           const action = document.createElement("div");
           action.className = "public-message-action";
 
@@ -1235,12 +1227,10 @@
 
       const formData = new FormData(messageForm);
       const privateFlag = privateMessage.checked ? "Yes" : "No";
-      const allowDeleteFlag = allowDelete.checked ? "Yes" : "No";
       const senderName = String(formData.get("name") || "").trim() || pack.anonymous_name;
       const messageText = String(formData.get("message") || "").trim();
 
       formData.set("is_private", privateFlag);
-      formData.set("allow_delete", allowDeleteFlag);
       formData.set("_subject", privateFlag === "Yes" ? "[LyraLab] 私密留言 / Private Message" : "[LyraLab] New Message");
       formData.set("_captcha", "false");
       formData.set("_template", "table");
@@ -1263,7 +1253,7 @@
             name: senderName,
             message: messageText,
             createdAt: new Date().toISOString(),
-            deletable: allowDeleteFlag === "Yes"
+            deletable: true
           });
           savePublicMessages(messages);
           renderPublicMessages();
