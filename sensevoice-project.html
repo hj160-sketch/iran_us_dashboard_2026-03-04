@@ -23,9 +23,58 @@
     .eyebrow { display:inline-flex; padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; background:#eef5ff; color:#2457a6; margin-bottom:10px; }
     h2 { margin:0 0 8px; font-size:18px; }
     p { margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
-    .actions-row { display:flex; gap:10px; flex-wrap:wrap; }
+    .actions-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
     .cta { display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:999px; padding:10px 16px; font-size:13px; font-weight:700; text-decoration:none; }
     .cta.secondary { background:#fff; color:var(--accent); }
+    .showcase {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+    .showcase__head {
+      padding: 18px 18px 14px;
+      background: linear-gradient(135deg, #eef4ff, #fbfdff);
+      border-bottom: 1px solid var(--line);
+    }
+    .showcase__head h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .showcase__head p {
+      margin: 0;
+      max-width: 760px;
+    }
+    .showcase__body {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+    .showcase__figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+    .showcase__figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .showcase__caption {
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+      background: #fff;
+    }
+    .showcase__note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
     @media (max-width:900px) { .topbar { padding:10px 12px 10px 148px; } .floating-logo { left:8px; top:8px; } .floating-logo svg { width:130px; } .grid { grid-template-columns:1fr; } .content { width:92%; } .hero p { font-size:17px; } }
 
     .contact-link {
@@ -214,8 +263,22 @@
       </article>
     </section>
     <section class="actions-row">
-      <a class="cta" href="https://github.com/FunAudioLLM/SenseVoice" target="_blank" rel="noreferrer">查看 GitHub 仓库</a>
-      <a class="cta secondary" href="legal-projects.html">返回项目页</a>
+      <a class="cta sensevoice-github" href="https://github.com/FunAudioLLM/SenseVoice" target="_blank" rel="noreferrer">查看 GitHub 仓库</a>
+      <a class="cta sensevoice-zip" href="https://github.com/FunAudioLLM/SenseVoice/archive/refs/heads/main.zip" target="_blank" rel="noreferrer">下载 ZIP 文件</a>
+      <a class="cta secondary sensevoice-back" href="legal-projects.html">返回项目页</a>
+    </section>
+    <section class="showcase">
+      <div class="showcase__head">
+        <h2 class="showcase-title">应用界面截图</h2>
+        <p class="showcase-copy">下面放的是 SenseVoice WebUI 的实际界面截图，可以直接看上传音频、语言选择和结果输出的布局。</p>
+      </div>
+      <div class="showcase__body">
+        <figure class="showcase__figure">
+          <img class="showcase-image" src="sensevoice-webui.png" alt="SenseVoice WebUI screenshot">
+          <figcaption class="showcase__caption">SenseVoice WebUI 截图：左侧上传 / 麦克风入口，右侧样例与结果区域。</figcaption>
+        </figure>
+        <div class="showcase__note">当前 ZIP 下载入口提供的是官方仓库源码压缩包，便于直接获取代码与文档；如果后续整理出独立桌面打包版，可以再替换为安装包链接。</div>
+      </div>
     </section>
   </main>
 

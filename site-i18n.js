@@ -316,10 +316,49 @@
             "現在はポートフォリオ用の入口ページとして公開しており、LyraLab 上に単独製品版はまだありませんが、上流リポジトリとドキュメントは公開済みです。"
           ]
         },
-        ".actions-row .cta": {
-          zh: ["查看 GitHub 仓库", "返回项目页"],
-          en: ["View GitHub Repository", "Back to Projects"],
-          ja: ["GitHub リポジトリを見る", "プロジェクト一覧へ戻る"]
+        ".sensevoice-github": {
+          zh: ["查看 GitHub 仓库"],
+          en: ["View GitHub Repository"],
+          ja: ["GitHub リポジトリを見る"]
+        },
+        ".sensevoice-zip": {
+          zh: ["下载 ZIP 文件"],
+          en: ["Download ZIP File"],
+          ja: ["ZIP ファイルをダウンロード"]
+        },
+        ".sensevoice-back": {
+          zh: ["返回项目页"],
+          en: ["Back to Projects"],
+          ja: ["プロジェクト一覧へ戻る"]
+        },
+        ".showcase-title": {
+          zh: ["应用界面截图"],
+          en: ["App Screenshot"],
+          ja: ["アプリ画面スクリーンショット"]
+        },
+        ".showcase-copy": {
+          zh: ["下面放的是 SenseVoice WebUI 的实际界面截图，可以直接看上传音频、语言选择和结果输出的布局。"],
+          en: ["Below is a real screenshot of the SenseVoice WebUI, showing the upload area, language controls, and result output layout."],
+          ja: ["下には SenseVoice WebUI の実際の画面を置いてあり、音声アップロード、言語選択、結果表示のレイアウトをそのまま確認できます。"]
+        },
+        ".showcase__caption": {
+          zh: ["SenseVoice WebUI 截图：左侧上传 / 麦克风入口，右侧样例与结果区域。"],
+          en: ["SenseVoice WebUI: upload and microphone entry on the left, examples and result area on the right."],
+          ja: ["SenseVoice WebUI: 左側にアップロード / マイク入力、右側にサンプルと結果表示エリア。"]
+        },
+        ".showcase__note": {
+          zh: ["当前 ZIP 下载入口提供的是官方仓库源码压缩包，便于直接获取代码与文档；如果后续整理出独立桌面打包版，可以再替换为安装包链接。"],
+          en: ["The current ZIP entry points to the official source-code archive so people can pull the code and docs directly. If a packaged desktop build is prepared later, this link can be replaced with the installer package."],
+          ja: ["現在の ZIP ダウンロード先は公式リポジトリのソースコード圧縮版です。コードと文書を直接取得しやすくするためのもので、独立したデスクトップ版を後で整理したら、ここをインストーラのリンクへ差し替えられます。"]
+        }
+      },
+      attrs: {
+        ".showcase-image": {
+          alt: {
+            zh: ["SenseVoice WebUI 截图"],
+            en: ["SenseVoice WebUI screenshot"],
+            ja: ["SenseVoice WebUI のスクリーンショット"]
+          }
         }
       }
     },
