@@ -69,6 +69,106 @@
   const PAGES = {};
 
   Object.assign(PAGES, {
+    "about.html": {
+      title: {
+        zh: "Lyra Lab - 关于我",
+        en: "Lyra Lab - About",
+        ja: "Lyra Lab - 私について"
+      },
+      single: {
+        ".about-page-title": {
+          zh: "关于我",
+          en: "About",
+          ja: "私について"
+        },
+        ".about-page-subtitle": {
+          zh: "我把法律研究、政策追踪与信息表达做成可执行项目、结构化写作和可展示成果。",
+          en: "I turn legal research, policy tracking, and information expression into executable projects, structured writing, and work people can quickly understand.",
+          ja: "法律リサーチ、政策トラッキング、情報表現を、実行可能なプロジェクト、構造化された文章、理解しやすい成果物へ変えています。"
+        },
+        ".about-kicker": {
+          zh: "About Lyra",
+          en: "About Lyra",
+          ja: "About Lyra"
+        },
+        ".about-title": {
+          zh: "把复杂议题拆成可执行结构",
+          en: "Turning complex topics into executable structure",
+          ja: "複雑なテーマを実行可能な構造へ整理する"
+        },
+        ".about-p1": {
+          zh: "你好，我是 Lyra。我的工作重点是把复杂议题拆成可执行结构，包括法律研究、政策追踪与信息可视化表达。这个网站会持续更新我的项目、写作与工具方法。",
+          en: "Hi, I'm Lyra. I focus on turning complex topics into executable structures, including legal research, policy tracking, and visual storytelling. This site keeps a running record of my projects, writing, and tools.",
+          ja: "こんにちは、Lyra です。法律リサーチ、政策トラッキング、可視化表現を含む複雑なテーマを、実行可能な構造へ整理することを主な仕事にしています。このサイトでは、プロジェクト、執筆、ツールの更新を継続的にまとめています。"
+        },
+        ".about-p2": {
+          zh: "如果你希望了解我的背景、合作方向或过往成果，可以从这里开始。我更关注能被验证、能被复用、也能被别人快速理解的成果表达方式。",
+          en: "If you want a quick sense of my background, collaboration focus, or prior work, this page is the right starting point. I care most about outputs that can be checked, reused, and understood quickly by other people.",
+          ja: "経歴、協業の方向性、これまでの成果を手早く把握したい場合は、このページから見るのが最も分かりやすいです。私が重視しているのは、検証でき、再利用でき、他の人にも素早く理解される成果の形です。"
+        },
+        ".about-side-title": {
+          zh: "Quick Profile",
+          en: "Quick Profile",
+          ja: "Quick Profile"
+        }
+      },
+      lists: {
+        ".about-list li": {
+          zh: [
+            "定位：法律 × 研究 × 数据表达",
+            "方向：法律相关项目、效率系统、内容写作",
+            "合作：研究协作、内容共创、咨询支持"
+          ],
+          en: [
+            "Positioning: Law x Research x Data Expression",
+            "Focus: Legal projects, productivity systems, and writing",
+            "Collaboration: Research, content co-creation, and consulting support"
+          ],
+          ja: [
+            "領域：法律 x リサーチ x データ表現",
+            "テーマ：法律関連プロジェクト、生産性システム、執筆",
+            "協業：リサーチ、共同制作、コンサルティング支援"
+          ]
+        },
+        ".about-projects": {
+          zh: ["查看项目"],
+          en: ["View Projects"],
+          ja: ["プロジェクトを見る"]
+        },
+        ".about-writing": {
+          zh: ["查看文章"],
+          en: ["View Writing"],
+          ja: ["文章を見る"]
+        },
+        ".about-message": {
+          zh: ["去留言板"],
+          en: ["Go to Message Board"],
+          ja: ["メッセージボードへ"]
+        },
+        ".focus-card h2": {
+          zh: ["法律与政策研究", "工作流与工具", "写作与展示"],
+          en: ["Legal and Policy Research", "Workflows and Tools", "Writing and Presentation"],
+          ja: ["法律と政策リサーチ", "ワークフローとツール", "執筆と見せ方"]
+        },
+        ".focus-card p": {
+          zh: [
+            "把复杂规则、政策变化和行业背景整理成可以直接使用的研究框架、可视化页面和工作材料。",
+            "我会把重复性的研究、阅读、整理和展示流程压缩成工具或模板，让后续工作更稳定、更容易复用。",
+            "我关心的不只是内容本身，也包括如何让别人更快理解你的逻辑、证据和判断路径。"
+          ],
+          en: [
+            "I turn complex rules, policy changes, and sector context into research frameworks, visual pages, and working materials that can be used directly.",
+            "I compress repetitive research, reading, organization, and presentation work into tools or templates so the next cycle becomes more stable and reusable.",
+            "I care not only about the content itself, but also about how other people can understand your logic, evidence, and decision path more quickly."
+          ],
+          ja: [
+            "複雑なルール、政策変化、業界背景を、すぐ使えるリサーチ枠組み、可視化ページ、作業資料へ整理します。",
+            "繰り返し発生するリサーチ、読書、整理、見せ方の作業を、ツールやテンプレートへ圧縮し、次の作業をより安定して再利用しやすくします。",
+            "私が重視しているのは内容そのものだけでなく、他の人がロジック、証拠、判断の道筋をより速く理解できることです。"
+          ]
+        }
+      }
+    },
     "legal-projects.html": {
       title: {
         zh: "Lyra Lab - 法律相关项目",
@@ -1341,7 +1441,7 @@
         return;
       }
       const pathname = url.pathname.split("/").pop();
-      if (pathname === "index.html" && url.hash === "#about") link.textContent = pack.nav.about;
+      if (pathname === "about.html" || (pathname === "index.html" && url.hash === "#about")) link.textContent = pack.nav.about;
       if (pathname === "legal-projects.html") link.textContent = pack.nav.projects;
       if (pathname === "legal-articles.html") link.textContent = pack.nav.articles;
       if (pathname === "life-travel.html") link.textContent = pack.nav.media;
