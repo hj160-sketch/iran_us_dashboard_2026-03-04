@@ -698,9 +698,9 @@
           ja: "法務ツール"
         },
         ".card-redaction .tag": {
-          zh: "隐私工具",
-          en: "Privacy Tool",
-          ja: "プライバシーツール"
+          zh: "法律信息脱敏工具",
+          en: "Legal Information Redaction Tool",
+          ja: "法務情報脱敏ツール"
         },
         ".card-iran .tag": {
           zh: "宏观看板",
@@ -728,9 +728,9 @@
           ja: "FreeRedline"
         },
         ".card-redaction .body h3": {
-          zh: "敏感信息去除工具（内测）",
-          en: "Sensitive Information Removal Tool (Private Beta)",
-          ja: "機微情報除去ツール（内測）"
+          zh: "法律信息脱敏工具（内测）",
+          en: "Legal Information Redaction Tool (Private Beta)",
+          ja: "法務情報脱敏ツール（内測）"
         },
         ".card-iran .body h3": {
           zh: "美国-伊朗交互分析看板（整合页）",
@@ -758,9 +758,9 @@
           ja: "Word・PDF・Excel などに対応した文書比較 / redline 生成ツールで、HTML・PDF・Markdown などへの出力も可能です。"
         },
         ".card-redaction .body p": {
-          zh: "面向法律文件与材料整理的去标识化 / 脱敏工具，用于先清理个人与案件敏感信息，再进入分享、审阅或后续处理流程。",
-          en: "A de-identification and redaction tool for legal documents and working materials, built to remove personal and case-sensitive information before sharing, review, or downstream processing.",
-          ja: "法律文書や作業資料向けの匿名化 / 脱敏ツールで、共有・レビュー・後続処理の前に個人情報や案件の機微情報を除去します。"
+          zh: "方便法律 AI 的使用者，面向法律文件与材料整理的去标识化 / 脱敏工具，用于先清理个人与案件敏感信息，再进入分享、审阅或后续处理流程，便于进行 AI 分析的时候保护客户隐私，在极度合规的范围内使用 AI。",
+          en: "A de-identification and redaction tool for legal documents and working materials. It helps legal AI users clean personal and case-sensitive information before sharing, review, or downstream processing, so AI analysis can protect client privacy within a highly compliant workflow.",
+          ja: "法律 AI の利用者向けに、法律文書や作業資料を整理する前段で個人情報や案件の機微情報を除去する匿名化 / 脱敏ツールです。共有・レビュー・後続処理の前に情報を整え、厳格なコンプライアンスの範囲で AI 分析を使いながら顧客のプライバシーを守れるようにします。"
         },
         ".card-iran .body p": {
           zh: "整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。",
