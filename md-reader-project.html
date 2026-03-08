@@ -33,6 +33,10 @@
       background: #fff;
       box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
     }
+    .web-demo__stage {
+      position: relative;
+      cursor: pointer;
+    }
     .web-demo__head {
       padding: 18px 18px 14px;
       background: linear-gradient(135deg, #eef4ff, #fbfdff);
@@ -52,6 +56,37 @@
       height: 920px;
       border: 0;
       background: #fff;
+      pointer-events: none;
+    }
+    .web-demo__overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 16px;
+      text-decoration: none;
+      background: linear-gradient(180deg, rgba(10, 132, 255, 0.08) 0%, rgba(10, 132, 255, 0.02) 12%, rgba(255, 255, 255, 0) 28%);
+    }
+    .web-demo__badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(10, 132, 255, 0.22);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .web-demo__overlay:hover .web-demo__badge {
+      transform: translateY(-1px);
+      background: #fff;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
     }
     .web-demo__hint {
       padding: 10px 18px 16px;
@@ -257,8 +292,13 @@
         <h2 class="web-demo-title">网页版演示</h2>
         <p class="web-demo-copy">下面直接嵌入网页版，适合快速体验逐句阅读、摘录和笔记整理流程。</p>
       </div>
-      <iframe class="web-demo__frame" src="readquicker-web.html" title="ReadQuicker web demo" loading="lazy"></iframe>
-      <div class="web-demo__hint">如果你想全屏使用，点击上方“打开网页版”会在新标签页中打开完整版本。</div>
+      <div class="web-demo__stage">
+        <iframe class="web-demo__frame" src="readquicker-web.html" title="ReadQuicker web demo" loading="lazy"></iframe>
+        <a class="web-demo__overlay" href="readquicker-web.html" target="_blank" rel="noopener noreferrer" aria-label="打开 ReadQuicker 网页版">
+          <span class="web-demo__badge">点击进入网页版</span>
+        </a>
+      </div>
+      <div class="web-demo__hint">点击演示区域或上方“打开网页版”，会在新标签页中打开完整版本。</div>
     </section>
   </main>
 

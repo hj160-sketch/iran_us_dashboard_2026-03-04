@@ -242,10 +242,15 @@
           en: ["The live web version is embedded below so people can quickly try the sentence-by-sentence reading, excerpting, and note workflow."],
           ja: ["下には Web 版をそのまま埋め込んであり、文ごとの読書・抜粋・ノート整理の流れをすぐ試せます。"]
         },
+        ".web-demo__badge": {
+          zh: ["点击进入网页版"],
+          en: ["Click to Open Web Version"],
+          ja: ["クリックして Web 版を開く"]
+        },
         ".web-demo__hint": {
-          zh: ["如果你想全屏使用，点击上方“打开网页版”会在新标签页中打开完整版本。"],
-          en: ["If you want to use it in full view, the button above opens the complete version in a new tab."],
-          ja: ["全画面に近い形で使いたい場合は、上のボタンから新しいタブで完全版を開けます。"]
+          zh: ["点击演示区域或上方“打开网页版”，会在新标签页中打开完整版本。"],
+          en: ["Click the demo area or the button above to open the complete version in a new tab."],
+          ja: ["デモ領域または上のボタンをクリックすると、完全版が新しいタブで開きます。"]
         }
       },
       attrs: {
@@ -254,6 +259,13 @@
             zh: ["读得快网页版演示"],
             en: ["ReadQuicker web demo"],
             ja: ["ReadQuicker Web デモ"]
+          }
+        },
+        ".web-demo__overlay": {
+          "aria-label": {
+            zh: ["打开 ReadQuicker 网页版"],
+            en: ["Open ReadQuicker web version"],
+            ja: ["ReadQuicker の Web 版を開く"]
           }
         }
       }
