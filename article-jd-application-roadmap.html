@@ -13,6 +13,13 @@
     .meta { color:#6b7280; font-size:13px; margin-bottom:18px; }
     p, li { line-height:1.8; color:#374151; font-size:16px; }
     h2 { margin-top:22px; font-size:22px; }
+    .topbar { position:sticky; top:0; z-index:10; padding:0 24px 0 320px; min-height:44px; border-bottom:1px solid #ececf0; background:rgba(251,251,253,.9); backdrop-filter:saturate(180%) blur(18px); display:flex; align-items:center; }
+    .floating-logo { position:fixed; top:8px; left:14px; z-index:30; display:inline-flex; align-items:center; text-decoration:none; }
+    .floating-logo svg { width:280px; height:auto; display:block; }
+    .actions { display:flex; gap:18px; flex-wrap:wrap; align-items:center; }
+    .btn { font-size:13px; color:#1d1d1f; text-decoration:none; opacity:.92; }
+    .btn.active { color:#0a84ff; font-weight:700; }
+    @media (max-width:900px) { .topbar { padding:10px 12px 10px 148px; } .floating-logo { left:8px; top:8px; } .floating-logo svg { width:130px; } }
 
     .contact-link {
       display: inline-flex;
@@ -160,6 +167,23 @@
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+  <a class="floating-logo" href="index.html#index" aria-label="LyraLab Home">
+    <svg viewBox="0 0 320 64" role="img" aria-label="LyraLab">
+      <circle cx="18" cy="22" r="6.5" fill="#0a84ff"></circle>
+      <circle cx="34" cy="22" r="6.5" fill="#0a84ff" opacity="0.6"></circle>
+      <circle cx="50" cy="22" r="6.5" fill="#0a84ff" opacity="0.35"></circle>
+      <text x="74" y="28" font-size="19" font-weight="700" font-family="Avenir Next, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" fill="#1f2937">LyraLab</text>
+      <text x="74" y="50" font-size="10.5" font-weight="500" font-family="Avenir Next, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif" fill="#6b7280">&#33713;&#25289;&#30340;&#35797;&#39564;&#30000;</text>
+    </svg>
+  </a>
+  <header class="topbar">
+    <div class="actions">
+      <a class="btn" href="index.html#about">&#20851;&#20110;&#25105;</a>
+      <a class="btn" href="legal-projects.html">&#39033;&#30446;</a>
+      <a class="btn active" href="legal-articles.html">&#25991;&#31456;</a>
+      <a class="btn" href="life-travel.html">&#33258;&#23186;&#20307;-&#26053;&#28216;/Vlog</a>
+    </div>
+  </header>
   <main class="wrap">
     <a class="back" href="legal-articles.html">← 返回文章目录</a>
     <h1>JD 申请路线图：时间线、材料、推荐信与选校逻辑</h1>
