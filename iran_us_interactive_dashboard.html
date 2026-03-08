@@ -1317,8 +1317,15 @@
     }
   </style>
 
-<script data-goatcounter="https://lyralab.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+<script>
+  if (window.self === window.top) {
+    const goatCounter = document.createElement("script");
+    goatCounter.dataset.goatcounter = "https://lyralab.goatcounter.com/count";
+    goatCounter.async = true;
+    goatCounter.src = "//gc.zgo.at/count.js";
+    document.head.appendChild(goatCounter);
+  }
+</script>
 </head>
 <body>
   <a class="floating-logo" href="index.html#index" aria-label="LyraLab Home">
