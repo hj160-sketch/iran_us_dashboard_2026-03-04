@@ -184,6 +184,32 @@
       line-height: 1.55;
       min-height: 42px;
     }
+    .card-actions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .project-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid #d7dce5;
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #1f2937;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .project-action:hover {
+      transform: translateY(-1px);
+      border-color: #9ac0f0;
+      background: #edf5ff;
+    }
     .meta {
       margin-top: 8px;
       display: flex;
@@ -397,18 +423,21 @@
         <span>1 个公开项目 + 1 个内测工具</span>
       </div>
       <section class="grid">
-        <a class="card-link card-redline" href="https://github.com/hj160-sketch/Free-Redline" target="_blank" rel="noopener noreferrer">
-          <article class="card">
-            <div class="cover warm">
-              <span class="tag">Legal Tool</span>
+        <article class="card card-redline">
+          <div class="cover warm">
+            <span class="tag">Legal Tool</span>
+          </div>
+          <div class="body">
+            <h3>FreeRedline</h3>
+            <p>文档对比与 redline 生成工具，支持 Word、PDF、Excel 等文件格式，并可导出 HTML、PDF、Markdown 等结果。</p>
+            <div class="card-actions">
+              <a class="project-action action-web" href="freeredline-web-demo.html">使用网页版</a>
+              <a class="project-action action-github" href="https://github.com/hj160-sketch/Free-Redline" target="_blank" rel="noopener noreferrer">GitHub 仓库</a>
+              <a class="project-action action-zip" href="https://github.com/hj160-sketch/Free-Redline/releases/download/v0.1.1-r2/FreeRedline_Install_Package_0_1_1_r2.zip" target="_blank" rel="noopener noreferrer">下载 ZIP</a>
             </div>
-            <div class="body">
-              <h3>FreeRedline</h3>
-              <p>文档对比与 redline 生成工具，支持 Word、PDF、Excel 等文件格式，并可导出 HTML、PDF、Markdown 等结果。</p>
-              <div class="meta"><span>2026</span><span class="chip">GitHub Repo</span><span class="enter">查看项目 →</span></div>
-            </div>
-          </article>
-        </a>
+            <div class="meta"><span>2026</span><span class="chip">3 个入口</span><span class="enter">网页 / Repo / ZIP</span></div>
+          </div>
+        </article>
         <article class="card card-redaction">
           <div class="cover">
             <span class="tag">Privacy Tool</span>

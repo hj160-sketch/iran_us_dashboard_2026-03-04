@@ -293,6 +293,79 @@
           ja: ["GitHub リポジトリを見る", "プロジェクト一覧へ戻る"]
         }
       }
+    },
+    "freeredline-web-demo.html": {
+      title: {
+        zh: "Lyra Lab - FreeRedline 网页版",
+        en: "Lyra Lab - FreeRedline Web Demo",
+        ja: "Lyra Lab - FreeRedline Web Demo"
+      },
+      single: {
+        ".hero h1": {
+          zh: "FreeRedline 网页版",
+          en: "FreeRedline Web Demo",
+          ja: "FreeRedline Web Demo"
+        },
+        ".hero p": {
+          zh: "这里展示 FreeRedline 的浏览器侧 redline 结果样式。完整的本地处理流程和打包版仍建议通过 ZIP 安装包使用。",
+          en: "This page shows the browser-side FreeRedline output style. For the full local workflow and packaged app, the ZIP build remains the recommended path.",
+          ja: "このページでは FreeRedline のブラウザ側出力スタイルを表示しています。完全なローカル処理フローとパッケージ版は ZIP 版の利用を推奨します。"
+        }
+      },
+      lists: {
+        ".eyebrow": {
+          zh: ["网页预览", "GitHub", "ZIP 安装包"],
+          en: ["Web Preview", "GitHub", "ZIP Package"],
+          ja: ["Web Preview", "GitHub", "ZIP パッケージ"]
+        },
+        "main .card h2": {
+          zh: ["直接打开结果页", "查看仓库与文档", "下载本地可运行版本"],
+          en: ["Open the Result Page Directly", "View Repository and Docs", "Download a Local Runnable Build"],
+          ja: ["結果ページを直接開く", "リポジトリとドキュメントを見る", "ローカル実行版をダウンロード"]
+        },
+        "main .card p": {
+          zh: [
+            "适合快速向别人展示 redline 输出长什么样，不需要先安装桌面环境，也不需要启动本地 Flask 服务。",
+            "如果你要看安装说明、CLI 用法、依赖结构或后续版本记录，可以直接跳转到仓库主页。",
+            "ZIP 版本更接近完整使用方式，适合本地文档对比、导出结果以及后续接入你自己的材料处理流程。"
+          ],
+          en: [
+            "This is useful when you want to show the redline output format quickly without installing the desktop environment or starting a local Flask server.",
+            "Go to the repository if you want installation notes, CLI usage, dependency structure, or version history.",
+            "The ZIP package is closer to the full usage path and works better for local comparisons, export flows, and your own document-processing pipeline."
+          ],
+          ja: [
+            "デスクトップ環境のインストールやローカル Flask サービスの起動なしで、redline 出力の見た目をすぐ共有したい場合に向いています。",
+            "インストール手順、CLI の使い方、依存関係、今後のバージョン記録を確認したい場合はリポジトリへ進んでください。",
+            "ZIP 版はより完全な利用形態に近く、ローカル比較、結果の書き出し、自分の資料処理フローへの接続に向いています。"
+          ]
+        },
+        ".actions-row .cta": {
+          zh: ["下载 ZIP 安装包", "查看 GitHub 仓库", "返回项目页"],
+          en: ["Download ZIP Package", "View GitHub Repository", "Back to Projects"],
+          ja: ["ZIP パッケージをダウンロード", "GitHub リポジトリを見る", "プロジェクト一覧へ戻る"]
+        },
+        ".demo-top h2": {
+          zh: ["Git-Style Diff 示例"],
+          en: ["Git-Style Diff Sample"],
+          ja: ["Git-Style Diff サンプル"]
+        },
+        ".demo-top p": {
+          zh: ["这一页展示的是公开可访问的输出预览，用于快速理解 FreeRedline 的结果版式。"],
+          en: ["This page exposes a public output preview so the FreeRedline result layout can be understood quickly."],
+          ja: ["このページは公開可能な出力プレビューを表示し、FreeRedline の結果レイアウトを素早く把握できるようにしています。"]
+        },
+        ".demo-badge": {
+          zh: ["结果预览"],
+          en: ["Output Preview"],
+          ja: ["Output Preview"]
+        },
+        ".meta-note": {
+          zh: ["示例统计：Lines +0 / -0 / ~1"],
+          en: ["Sample stats: Lines +0 / -0 / ~1"],
+          ja: ["サンプル統計: Lines +0 / -0 / ~1"]
+        }
+      }
     }
   });
 
@@ -710,9 +783,9 @@
           ja: "戦略シミュレーター、タイムラインシミュレーター、最適戦略分析をまとめたハブで、build order や文明ルート比較に向いています。"
         },
         ".card-redline .chip": {
-          zh: "GitHub 仓库",
-          en: "GitHub Repo",
-          ja: "GitHub リポジトリ"
+          zh: "3 个入口",
+          en: "3 Entry Points",
+          ja: "3つの入口"
         },
         ".card-redaction .chip": {
           zh: "内测中",
@@ -740,9 +813,24 @@
           ja: "ゲームハブ"
         },
         ".card-redline .enter": {
-          zh: "查看项目 →",
-          en: "View Project →",
-          ja: "プロジェクトを見る →"
+          zh: "网页 / Repo / ZIP",
+          en: "Web / Repo / ZIP",
+          ja: "Web / Repo / ZIP"
+        },
+        ".card-redline .action-web": {
+          zh: "使用网页版",
+          en: "Use Web Demo",
+          ja: "Web 版を使う"
+        },
+        ".card-redline .action-github": {
+          zh: "GitHub 仓库",
+          en: "GitHub Repo",
+          ja: "GitHub リポジトリ"
+        },
+        ".card-redline .action-zip": {
+          zh: "下载 ZIP",
+          en: "Download ZIP",
+          ja: "ZIP をダウンロード"
         },
         ".card-redaction .enter": {
           zh: "联系查看",
