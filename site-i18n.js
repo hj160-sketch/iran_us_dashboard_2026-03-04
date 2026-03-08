@@ -10,6 +10,7 @@
   const COMMON = {
     zh: {
       nav: {
+        home: "回主页",
         about: "关于我",
         projects: "项目",
         articles: "文章",
@@ -28,6 +29,7 @@
     },
     en: {
       nav: {
+        home: "Home",
         about: "About",
         projects: "Projects",
         articles: "Writing",
@@ -47,6 +49,7 @@
     },
     ja: {
       nav: {
+        home: "ホームへ",
         about: "私について",
         projects: "プロジェクト",
         articles: "文章",
@@ -1399,6 +1402,19 @@
     });
   }
 
+  function ensureHomeLink(lang) {
+    const topbar = qs(".topbar");
+    if (!topbar || qs(".topbar [data-nav-home]")) return;
+    const navContainer = qs(".topbar .actions") || qs(".topbar .topbar-actions");
+    if (!navContainer) return;
+    const link = document.createElement("a");
+    link.setAttribute("data-nav-home", "true");
+    link.setAttribute("href", "index.html");
+    link.textContent = COMMON[lang].nav.home;
+    link.className = navContainer.classList.contains("topbar-actions") ? "nav-link" : "btn";
+    navContainer.prepend(link);
+  }
+
   function ensureSwitch(lang) {
     const topbar = qs(".topbar");
     if (!topbar || qs(".lang-switch")) return;
@@ -1433,6 +1449,10 @@
     const pack = COMMON[lang];
     document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
 
+    qsa(".topbar [data-nav-home]").forEach((link) => {
+      link.textContent = pack.nav.home;
+    });
+
     qsa(".topbar a[href]").forEach((link) => {
       let url;
       try {
@@ -1441,6 +1461,7 @@
         return;
       }
       const pathname = url.pathname.split("/").pop();
+      if (pathname === "index.html" && !url.hash && link.hasAttribute("data-nav-home")) link.textContent = pack.nav.home;
       if (pathname === "about.html" || (pathname === "index.html" && url.hash === "#about")) link.textContent = pack.nav.about;
       if (pathname === "legal-projects.html") link.textContent = pack.nav.projects;
       if (pathname === "legal-articles.html") link.textContent = pack.nav.articles;
@@ -1508,6 +1529,7 @@
   function applyLanguage(lang) {
     if (!SUPPORTED.includes(lang)) return;
     localStorage.setItem(STORAGE_KEY, lang);
+    ensureHomeLink(lang);
     syncUrl(lang);
     updateSwitch(lang);
     updateLinksAndFrames(lang);
@@ -1519,5 +1541,6 @@
   injectStyles();
   const initialLang = resolveLang();
   ensureSwitch(initialLang);
+  ensureHomeLink(initialLang);
   applyLanguage(initialLang);
 })();
