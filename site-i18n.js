@@ -105,19 +105,19 @@
         },
         ".body h3": {
           zh: [
-            "美国-伊朗交互分析看板（整合页）",
+            "美国-伊朗交互分析看板",
             "声析 SenseVoice",
             "读得快 ReadQuicker",
             "FreeRedline"
           ],
           en: [
-            "US-Iran Interactive Analysis Dashboard (Integrated)",
+            "US-Iran Interactive Analysis Dashboard",
             "声析 SenseVoice",
             "读得快 ReadQuicker",
             "FreeRedline"
           ],
           ja: [
-            "米国・イラン情勢インタラクティブ分析ダッシュボード（統合ページ）",
+            "米国・イラン情勢インタラクティブ分析ダッシュボード",
             "声析 SenseVoice",
             "读得快 ReadQuicker",
             "FreeRedline"
@@ -125,19 +125,19 @@
         },
         ".body p": {
           zh: [
-            "整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。",
+            "在伊朗发生战争的期间，用来监控政治和军事信息对于股市之类金融市场的影响。对标达里奥的《big debt》中的分析的历史时期，便于使用者进行分析。",
             "多语言语音识别与音频理解工具，覆盖转写、语种识别、情绪线索判断与声音事件检测。",
             "面向 Markdown 与长文阅读的笔记工具，支持逐句摘录、PDF OCR 与更专注的阅读模式。",
             "文档对比与 redline 生成工具，支持 Word、PDF、Excel 等文件格式，并可导出 HTML、PDF、Markdown 等结果。"
           ],
           en: [
-            "An integrated entry with the dashboard embed, a standalone full view, and navigation back to the main site structure.",
+            "Built to monitor how political and military developments during wartime in Iran affect financial markets such as equities. It is benchmarked against the historical periods analyzed in Ray Dalio's Big Debt Crises so users can compare patterns and run their own analysis.",
             "A multilingual speech and audio understanding tool covering transcription, language identification, emotion cues, and acoustic event detection.",
             "A reading and note-taking tool for Markdown and long-form materials, with sentence-level excerpts, PDF OCR, and a lower-friction reading mode.",
             "A document comparison and redline tool for Word, PDF, Excel, and more, with export to HTML, PDF, Markdown, and other formats."
           ],
           ja: [
-            "ダッシュボード埋め込み、独立表示、サイト全体の導線をまとめた統合入口です。",
+            "イランで戦争が起きている期間に、政治・軍事情報が株式市場などの金融市場へ与える影響を追跡するための看板です。Ray Dalio の Big Debt Crises で分析される歴史局面を参照しながら、利用者が比較と分析をしやすいように設計しています。",
             "文字起こし、言語識別、感情の手がかり抽出、音響イベント検出をまとめた多言語音声理解ツールです。",
             "Markdown や長文資料向けの読書・ノートツールで、逐文抜粋、PDF OCR、集中しやすい読書モードを備えています。",
             "Word、PDF、Excel などに対応した文書比較・redline 生成ツールで、HTML、PDF、Markdown などへの出力も可能です。"
@@ -733,9 +733,9 @@
           ja: "法務情報脱敏ツール（内測）"
         },
         ".card-iran .body h3": {
-          zh: "美国-伊朗交互分析看板（整合页）",
-          en: "US-Iran Interactive Analysis Dashboard (Integrated)",
-          ja: "米国・イラン情勢インタラクティブ分析ダッシュボード（統合）"
+          zh: "美国-伊朗交互分析看板",
+          en: "US-Iran Interactive Analysis Dashboard",
+          ja: "米国・イラン情勢インタラクティブ分析ダッシュボード"
         },
         ".card-reader .body h3": {
           zh: "读得快 ReadQuicker",
@@ -763,9 +763,9 @@
           ja: "法律 AI の利用者向けに、法律文書や作業資料を整理する前段で個人情報や案件の機微情報を除去する匿名化 / 脱敏ツールです。共有・レビュー・後続処理の前に情報を整え、厳格なコンプライアンスの範囲で AI 分析を使いながら顧客のプライバシーを守れるようにします。"
         },
         ".card-iran .body p": {
-          zh: "整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。",
-          en: "An integrated entry with the dashboard embed, a standalone full view, and navigation back to the main site structure.",
-          ja: "ダッシュボード埋め込み、独立表示、サイト本体への導線をまとめた統合入口です。"
+          zh: "在伊朗发生战争的期间，用来监控政治和军事信息对于股市之类金融市场的影响。对标达里奥的《big debt》中的分析的历史时期，便于使用者进行分析。",
+          en: "Built to monitor how political and military developments during wartime in Iran affect financial markets such as equities. It is benchmarked against the historical periods analyzed in Ray Dalio's Big Debt Crises so users can compare patterns and run their own analysis.",
+          ja: "イランで戦争が起きている期間に、政治・軍事情報が株式市場などの金融市場へ与える影響を追跡するための看板です。Ray Dalio の Big Debt Crises で分析される歴史局面を参照しながら、利用者が比較と分析をしやすいように設計しています。"
         },
         ".card-reader .body p": {
           zh: "面向 Markdown 与长文阅读的笔记工具，支持逐句摘录、PDF OCR 与更专注的阅读模式。",
