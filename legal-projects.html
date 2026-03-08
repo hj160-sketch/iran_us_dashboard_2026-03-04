@@ -133,7 +133,8 @@
       overflow: hidden;
       transition: transform .2s ease, box-shadow .2s ease;
     }
-    .card-link:hover .card {
+    .card-link:hover .card,
+    .card-previewable:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     }
@@ -169,8 +170,13 @@
       pointer-events: none;
       background: #fff;
     }
-    .card-link:hover .hover-preview {
+    .card-link:hover .hover-preview,
+    .card-previewable:hover .hover-preview {
       opacity: 1;
+    }
+    .hover-preview--image {
+      display: block;
+      object-fit: cover;
     }
     .body { padding: 12px; }
     .body h3 {
@@ -423,9 +429,10 @@
         <span>1 个公开项目 + 1 个内测工具</span>
       </div>
       <section class="grid">
-        <article class="card card-redline">
+        <article class="card card-redline card-previewable">
           <div class="cover warm">
             <span class="tag">Legal Tool</span>
+            <img class="hover-preview hover-preview--image" src="freeredline-preview.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
           </div>
           <div class="body">
             <h3>FreeRedline</h3>
