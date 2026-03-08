@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lyra Lab - 法律相关项目</title>
+  <title>Lyra Lab - 项目</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -114,6 +114,12 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
+    }
+    .project-group + .project-group {
+      margin-top: 28px;
+    }
+    .project-summary {
+      margin-bottom: 18px;
     }
     .card-link {
       display: block;
@@ -376,65 +382,120 @@
   </header>
 
   <section class="hero">
-    <h1>法律相关项目</h1>
-    <p>这里是当前已上线、可直接访问的真实项目目录（持续更新）。</p>
+    <h1>项目</h1>
+    <p>这里按法律、金融、工作效率和游戏四个板块整理当前项目。</p>
   </section>
 
   <main class="content">
-    <div class="section-head">
-      <h2>Projects</h2>
-      <span>共 4 个真实条目</span>
+    <div class="section-head project-summary">
+      <h2>项目总览</h2>
+      <span>4 个板块 · 5 个公开入口 + 1 个内测工具</span>
     </div>
-    <section class="grid">
-      <a class="card-link" href="us-iran-dashboard.html">
-        <article class="card">
-          <div class="cover dark">
-            <span class="tag">Regulation</span>
-            <iframe class="hover-preview" src="iran_us_interactive_dashboard.html" title="美国-伊朗交互分析看板预览"></iframe>
+    <section class="project-group group-legal">
+      <div class="section-head">
+        <h2>法律相关</h2>
+        <span>1 个公开项目 + 1 个内测工具</span>
+      </div>
+      <section class="grid">
+        <a class="card-link card-redline" href="https://github.com/hj160-sketch/Free-Redline" target="_blank" rel="noopener noreferrer">
+          <article class="card">
+            <div class="cover warm">
+              <span class="tag">Legal Tool</span>
+            </div>
+            <div class="body">
+              <h3>FreeRedline</h3>
+              <p>文档对比与 redline 生成工具，支持 Word、PDF、Excel 等文件格式，并可导出 HTML、PDF、Markdown 等结果。</p>
+              <div class="meta"><span>2026</span><span class="chip">GitHub Repo</span><span class="enter">查看项目 →</span></div>
+            </div>
+          </article>
+        </a>
+        <article class="card card-redaction">
+          <div class="cover">
+            <span class="tag">Privacy Tool</span>
           </div>
           <div class="body">
-            <h3>美国-伊朗交互分析看板（整合页）</h3>
-            <p>整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。</p>
-            <div class="meta"><span>2026</span><span class="chip">Dashboard</span><span class="enter">点击进入 →</span></div>
+            <h3>敏感信息去除工具（内测）</h3>
+            <p>面向法律文件与材料整理的去标识化 / 脱敏工具，用于先清理个人与案件敏感信息，再进入分享、审阅或后续处理流程。</p>
+            <div class="meta"><span>2026</span><span class="chip">Private Beta</span><span class="enter">联系查看</span></div>
           </div>
         </article>
-      </a>
-      <a class="card-link" href="sensevoice-project.html">
-        <article class="card">
-          <div class="cover dark">
-            <span class="tag">Speech AI</span>
-          </div>
-          <div class="body">
-            <h3>声析 SenseVoice</h3>
-            <p>多语言语音识别与音频理解工具，覆盖转写、语种识别、情绪线索判断与声音事件检测。</p>
-            <div class="meta"><span>2026</span><span class="chip">语音工具</span><span class="enter">详情 →</span></div>
-          </div>
-        </article>
-      </a>
-      <a class="card-link" href="md-reader-project.html">
-        <article class="card">
-          <div class="cover green">
-            <span class="tag">Reader Tool</span>
-          </div>
-          <div class="body">
-            <h3>读得快 ReadQuicker</h3>
-            <p>面向 Markdown 与长文阅读的笔记工具，支持逐句摘录、PDF OCR 与更专注的阅读模式。</p>
-            <div class="meta"><span>2026</span><span class="chip">阅读工具</span><span class="enter">详情 →</span></div>
-          </div>
-        </article>
-      </a>
-      <a class="card-link" href="https://github.com/hj160-sketch/Free-Redline" target="_blank" rel="noopener noreferrer">
-        <article class="card">
-          <div class="cover warm">
-            <span class="tag">Legal Tool</span>
-          </div>
-          <div class="body">
-            <h3>FreeRedline</h3>
-            <p>文档对比与 redline 生成工具，支持 Word、PDF、Excel 等文件格式，并可导出 HTML、PDF、Markdown 等结果。</p>
-            <div class="meta"><span>2026</span><span class="chip">GitHub Repo</span><span class="enter">查看项目 →</span></div>
-          </div>
-        </article>
-      </a>
+      </section>
+    </section>
+
+    <section class="project-group group-finance">
+      <div class="section-head">
+        <h2>金融相关</h2>
+        <span>1 个项目</span>
+      </div>
+      <section class="grid">
+        <a class="card-link card-iran" href="us-iran-dashboard.html">
+          <article class="card">
+            <div class="cover dark">
+              <span class="tag">Macro Dashboard</span>
+              <iframe class="hover-preview" src="iran_us_interactive_dashboard.html" title="美国-伊朗交互分析看板预览"></iframe>
+            </div>
+            <div class="body">
+              <h3>美国-伊朗交互分析看板（整合页）</h3>
+              <p>整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。</p>
+              <div class="meta"><span>2026</span><span class="chip">Dashboard</span><span class="enter">点击进入 →</span></div>
+            </div>
+          </article>
+        </a>
+      </section>
+    </section>
+
+    <section class="project-group group-productivity">
+      <div class="section-head">
+        <h2>工作效率</h2>
+        <span>2 个项目</span>
+      </div>
+      <section class="grid">
+        <a class="card-link card-reader" href="md-reader-project.html">
+          <article class="card">
+            <div class="cover green">
+              <span class="tag">Reader Tool</span>
+            </div>
+            <div class="body">
+              <h3>读得快 ReadQuicker</h3>
+              <p>面向 Markdown 与长文阅读的笔记工具，支持逐句摘录、PDF OCR 与更专注的阅读模式。</p>
+              <div class="meta"><span>2026</span><span class="chip">阅读工具</span><span class="enter">详情 →</span></div>
+            </div>
+          </article>
+        </a>
+        <a class="card-link card-sensevoice" href="sensevoice-project.html">
+          <article class="card">
+            <div class="cover dark">
+              <span class="tag">Speech AI</span>
+            </div>
+            <div class="body">
+              <h3>声析 SenseVoice</h3>
+              <p>多语言语音识别与音频理解工具，覆盖转写、语种识别、情绪线索判断与声音事件检测。</p>
+              <div class="meta"><span>2026</span><span class="chip">语音工具</span><span class="enter">详情 →</span></div>
+            </div>
+          </article>
+        </a>
+      </section>
+    </section>
+
+    <section class="project-group group-games">
+      <div class="section-head">
+        <h2>游戏</h2>
+        <span>1 个项目</span>
+      </div>
+      <section class="grid">
+        <a class="card-link card-aoe" href="games-projects.html">
+          <article class="card">
+            <div class="cover">
+              <span class="tag">Strategy Game</span>
+            </div>
+            <div class="body">
+              <h3>Age of Empires IV 项目集</h3>
+              <p>整合策略模拟器、时间线模拟器与最优策略分析三个入口，适合做 build order 和文明路线对比。</p>
+              <div class="meta"><span>2026</span><span class="chip">Game Hub</span><span class="enter">查看项目 →</span></div>
+            </div>
+          </article>
+        </a>
+      </section>
     </section>
   </main>
 

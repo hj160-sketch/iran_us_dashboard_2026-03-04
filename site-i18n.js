@@ -551,6 +551,237 @@
     }
   });
 
+  Object.assign(PAGES, {
+    "legal-projects.html": {
+      title: {
+        zh: "Lyra Lab - 项目",
+        en: "Lyra Lab - Projects",
+        ja: "Lyra Lab - プロジェクト"
+      },
+      single: {
+        ".hero h1": {
+          zh: "项目",
+          en: "Projects",
+          ja: "プロジェクト"
+        },
+        ".hero p": {
+          zh: "这里按法律、金融、工作效率和游戏四个板块整理当前项目。",
+          en: "Projects are organized here into four groups: Legal, Finance, Productivity, and Games.",
+          ja: "ここでは現在のプロジェクトを、法務・金融・生産性・ゲームの4つに分けて整理しています。"
+        },
+        ".project-summary h2": {
+          zh: "项目总览",
+          en: "Project Overview",
+          ja: "プロジェクト一覧"
+        },
+        ".project-summary span": {
+          zh: "4 个板块 · 5 个公开入口 + 1 个内测工具",
+          en: "4 categories · 5 public entries + 1 private beta tool",
+          ja: "4カテゴリ・公開中5件 + 内測ツール1件"
+        },
+        ".group-legal h2": {
+          zh: "法律相关",
+          en: "Legal",
+          ja: "法務"
+        },
+        ".group-legal span": {
+          zh: "1 个公开项目 + 1 个内测工具",
+          en: "1 public project + 1 private beta tool",
+          ja: "公開中1件 + 内測ツール1件"
+        },
+        ".group-finance h2": {
+          zh: "金融相关",
+          en: "Finance",
+          ja: "金融"
+        },
+        ".group-finance span": {
+          zh: "1 个项目",
+          en: "1 project",
+          ja: "1件のプロジェクト"
+        },
+        ".group-productivity h2": {
+          zh: "工作效率",
+          en: "Productivity",
+          ja: "生産性"
+        },
+        ".group-productivity span": {
+          zh: "2 个项目",
+          en: "2 projects",
+          ja: "2件のプロジェクト"
+        },
+        ".group-games h2": {
+          zh: "游戏",
+          en: "Games",
+          ja: "ゲーム"
+        },
+        ".group-games span": {
+          zh: "1 个项目",
+          en: "1 project",
+          ja: "1件のプロジェクト"
+        },
+        ".card-redline .tag": {
+          zh: "法律工具",
+          en: "Legal Tool",
+          ja: "法務ツール"
+        },
+        ".card-redaction .tag": {
+          zh: "隐私工具",
+          en: "Privacy Tool",
+          ja: "プライバシーツール"
+        },
+        ".card-iran .tag": {
+          zh: "宏观看板",
+          en: "Macro Dashboard",
+          ja: "マクロダッシュボード"
+        },
+        ".card-reader .tag": {
+          zh: "阅读工具",
+          en: "Reader Tool",
+          ja: "読書ツール"
+        },
+        ".card-sensevoice .tag": {
+          zh: "语音 AI",
+          en: "Speech AI",
+          ja: "音声AI"
+        },
+        ".card-aoe .tag": {
+          zh: "策略游戏",
+          en: "Strategy Game",
+          ja: "ストラテジーゲーム"
+        },
+        ".card-redline .body h3": {
+          zh: "FreeRedline",
+          en: "FreeRedline",
+          ja: "FreeRedline"
+        },
+        ".card-redaction .body h3": {
+          zh: "敏感信息去除工具（内测）",
+          en: "Sensitive Information Removal Tool (Private Beta)",
+          ja: "機微情報除去ツール（内測）"
+        },
+        ".card-iran .body h3": {
+          zh: "美国-伊朗交互分析看板（整合页）",
+          en: "US-Iran Interactive Analysis Dashboard (Integrated)",
+          ja: "米国・イラン情勢インタラクティブ分析ダッシュボード（統合）"
+        },
+        ".card-reader .body h3": {
+          zh: "读得快 ReadQuicker",
+          en: "ReadQuicker",
+          ja: "ReadQuicker"
+        },
+        ".card-sensevoice .body h3": {
+          zh: "声析 SenseVoice",
+          en: "SenseVoice",
+          ja: "SenseVoice"
+        },
+        ".card-aoe .body h3": {
+          zh: "Age of Empires IV 项目集",
+          en: "Age of Empires IV Project Hub",
+          ja: "Age of Empires IV プロジェクト集"
+        },
+        ".card-redline .body p": {
+          zh: "文档对比与 redline 生成工具，支持 Word、PDF、Excel 等文件格式，并可导出 HTML、PDF、Markdown 等结果。",
+          en: "A document comparison and redline tool for Word, PDF, Excel, and other formats, with export to HTML, PDF, Markdown, and more.",
+          ja: "Word・PDF・Excel などに対応した文書比較 / redline 生成ツールで、HTML・PDF・Markdown などへの出力も可能です。"
+        },
+        ".card-redaction .body p": {
+          zh: "面向法律文件与材料整理的去标识化 / 脱敏工具，用于先清理个人与案件敏感信息，再进入分享、审阅或后续处理流程。",
+          en: "A de-identification and redaction tool for legal documents and working materials, built to remove personal and case-sensitive information before sharing, review, or downstream processing.",
+          ja: "法律文書や作業資料向けの匿名化 / 脱敏ツールで、共有・レビュー・後続処理の前に個人情報や案件の機微情報を除去します。"
+        },
+        ".card-iran .body p": {
+          zh: "整合展示入口：含看板内嵌、独立打开按钮、导航回站点主结构。",
+          en: "An integrated entry with the dashboard embed, a standalone full view, and navigation back to the main site structure.",
+          ja: "ダッシュボード埋め込み、独立表示、サイト本体への導線をまとめた統合入口です。"
+        },
+        ".card-reader .body p": {
+          zh: "面向 Markdown 与长文阅读的笔记工具，支持逐句摘录、PDF OCR 与更专注的阅读模式。",
+          en: "A reading and note-taking tool for Markdown and long-form materials, with sentence-level excerpts, PDF OCR, and a calmer reading mode.",
+          ja: "Markdown や長文資料向けの読書 / ノートツールで、逐文抜粋、PDF OCR、より集中しやすい閲読モードを備えています。"
+        },
+        ".card-sensevoice .body p": {
+          zh: "多语言语音识别与音频理解工具，覆盖转写、语种识别、情绪线索判断与声音事件检测。",
+          en: "A multilingual speech and audio understanding tool covering transcription, language identification, emotion cues, and acoustic event detection.",
+          ja: "文字起こし、言語識別、感情手がかり抽出、音声イベント検知をまとめた多言語音声理解ツールです。"
+        },
+        ".card-aoe .body p": {
+          zh: "整合策略模拟器、时间线模拟器与最优策略分析三个入口，适合做 build order 和文明路线对比。",
+          en: "A hub that brings together the strategy simulator, timeline simulator, and best-strategy analysis for build-order and civilization-route comparisons.",
+          ja: "戦略シミュレーター、タイムラインシミュレーター、最適戦略分析をまとめたハブで、build order や文明ルート比較に向いています。"
+        },
+        ".card-redline .chip": {
+          zh: "GitHub 仓库",
+          en: "GitHub Repo",
+          ja: "GitHub リポジトリ"
+        },
+        ".card-redaction .chip": {
+          zh: "内测中",
+          en: "Private Beta",
+          ja: "内測中"
+        },
+        ".card-iran .chip": {
+          zh: "看板",
+          en: "Dashboard",
+          ja: "ダッシュボード"
+        },
+        ".card-reader .chip": {
+          zh: "阅读工具",
+          en: "Reading Tool",
+          ja: "読書ツール"
+        },
+        ".card-sensevoice .chip": {
+          zh: "语音工具",
+          en: "Speech Tool",
+          ja: "音声ツール"
+        },
+        ".card-aoe .chip": {
+          zh: "游戏入口",
+          en: "Game Hub",
+          ja: "ゲームハブ"
+        },
+        ".card-redline .enter": {
+          zh: "查看项目 →",
+          en: "View Project →",
+          ja: "プロジェクトを見る →"
+        },
+        ".card-redaction .enter": {
+          zh: "联系查看",
+          en: "Contact Me",
+          ja: "連絡して確認"
+        },
+        ".card-iran .enter": {
+          zh: "点击进入 →",
+          en: "Open →",
+          ja: "開く →"
+        },
+        ".card-reader .enter": {
+          zh: "详情 →",
+          en: "Details →",
+          ja: "詳細 →"
+        },
+        ".card-sensevoice .enter": {
+          zh: "详情 →",
+          en: "Details →",
+          ja: "詳細 →"
+        },
+        ".card-aoe .enter": {
+          zh: "查看项目 →",
+          en: "View Project →",
+          ja: "プロジェクトを見る →"
+        }
+      },
+      attrs: {
+        ".hover-preview": {
+          title: {
+            zh: ["美国-伊朗交互分析看板预览"],
+            en: ["US-Iran dashboard preview"],
+            ja: ["米国・イラン分析ダッシュボードのプレビュー"]
+          }
+        }
+      }
+    }
+  });
+
   const RAW_DASHBOARD = {
     title: {
       zh: "美国-伊朗局势交互看板",
