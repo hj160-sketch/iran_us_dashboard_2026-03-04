@@ -222,10 +222,39 @@
             "文字を大きくし、行間を広げ、視覚ノイズを減らした設計で、読書摩擦を下げて集中を持続しやすくします。"
           ]
         },
-        ".cta.secondary": {
+        ".open-web": {
+          zh: ["打开网页版"],
+          en: ["Open Web Version"],
+          ja: ["Web 版を開く"]
+        },
+        ".back-projects": {
           zh: ["返回项目页"],
           en: ["Back to Projects"],
           ja: ["プロジェクト一覧へ戻る"]
+        },
+        ".web-demo-title": {
+          zh: ["网页版演示"],
+          en: ["Web Demo"],
+          ja: ["Web デモ"]
+        },
+        ".web-demo-copy": {
+          zh: ["下面直接嵌入网页版，适合快速体验逐句阅读、摘录和笔记整理流程。"],
+          en: ["The live web version is embedded below so people can quickly try the sentence-by-sentence reading, excerpting, and note workflow."],
+          ja: ["下には Web 版をそのまま埋め込んであり、文ごとの読書・抜粋・ノート整理の流れをすぐ試せます。"]
+        },
+        ".web-demo__hint": {
+          zh: ["如果你想全屏使用，点击上方“打开网页版”会在新标签页中打开完整版本。"],
+          en: ["If you want to use it in full view, the button above opens the complete version in a new tab."],
+          ja: ["全画面に近い形で使いたい場合は、上のボタンから新しいタブで完全版を開けます。"]
+        }
+      },
+      attrs: {
+        ".web-demo__frame": {
+          title: {
+            zh: ["读得快网页版演示"],
+            en: ["ReadQuicker web demo"],
+            ja: ["ReadQuicker Web デモ"]
+          }
         }
       }
     },

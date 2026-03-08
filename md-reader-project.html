@@ -23,10 +23,45 @@
     .eyebrow { display:inline-flex; padding:4px 8px; border-radius:999px; font-size:11px; font-weight:700; background:#eef5ff; color:#2457a6; margin-bottom:10px; }
     h2 { margin:0 0 8px; font-size:18px; }
     p { margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
-    .actions-row { display:flex; gap:10px; flex-wrap:wrap; }
+    .actions-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
     .cta { display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--accent); background:var(--accent); color:#fff; border-radius:999px; padding:10px 16px; font-size:13px; font-weight:700; text-decoration:none; }
     .cta.secondary { background:#fff; color:var(--accent); }
-    @media (max-width:900px) { .topbar { padding:10px 12px 10px 148px; } .floating-logo { left:8px; top:8px; } .floating-logo svg { width:130px; } .grid { grid-template-columns:1fr; } .content { width:92%; } .hero p { font-size:17px; } }
+    .web-demo {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+    }
+    .web-demo__head {
+      padding: 18px 18px 14px;
+      background: linear-gradient(135deg, #eef4ff, #fbfdff);
+      border-bottom: 1px solid var(--line);
+    }
+    .web-demo__head h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .web-demo__head p {
+      margin: 0;
+      max-width: 760px;
+    }
+    .web-demo__frame {
+      display: block;
+      width: 100%;
+      height: 920px;
+      border: 0;
+      background: #fff;
+    }
+    .web-demo__hint {
+      padding: 10px 18px 16px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+      border-top: 1px solid var(--line);
+      background: #fbfcff;
+    }
+    @media (max-width:900px) { .topbar { padding:10px 12px 10px 148px; } .floating-logo { left:8px; top:8px; } .floating-logo svg { width:130px; } .grid { grid-template-columns:1fr; } .content { width:92%; } .hero p { font-size:17px; } .web-demo__frame { height: 760px; } }
 
     .contact-link {
       display: inline-flex;
@@ -214,7 +249,16 @@
       </article>
     </section>
     <section class="actions-row">
-      <a class="cta secondary" href="legal-projects.html">返回项目页</a>
+      <a class="cta open-web" href="readquicker-web.html" target="_blank" rel="noopener noreferrer">打开网页版</a>
+      <a class="cta secondary back-projects" href="legal-projects.html">返回项目页</a>
+    </section>
+    <section class="web-demo">
+      <div class="web-demo__head">
+        <h2 class="web-demo-title">网页版演示</h2>
+        <p class="web-demo-copy">下面直接嵌入网页版，适合快速体验逐句阅读、摘录和笔记整理流程。</p>
+      </div>
+      <iframe class="web-demo__frame" src="readquicker-web.html" title="ReadQuicker web demo" loading="lazy"></iframe>
+      <div class="web-demo__hint">如果你想全屏使用，点击上方“打开网页版”会在新标签页中打开完整版本。</div>
     </section>
   </main>
 

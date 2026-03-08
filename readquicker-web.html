@@ -1,0 +1,2459 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>读得快 ReadQuicker Web</title>
+  <style>
+    :root {
+      --bg: #f3efe3;
+      --panel: #fffdf7;
+      --ink: #1f1f1f;
+      --muted: #6b665a;
+      --line: #d9d2bf;
+      --accent: #205b40;
+      --accent-soft: #e6f2eb;
+      --accent-btn-ink: #0f402b;
+      --user-note: #1d4ed8;
+      --note-quote-ink: #23211b;
+      --placeholder-ink: #77705f;
+      --panel-header-bg: #fcf8ec;
+      --control-bg: #fff;
+      --control-ink: var(--ink);
+      --control-line: var(--line);
+      --bg-layer-a: radial-gradient(circle at 0% 0%, #fef8e8 0%, transparent 45%);
+      --bg-layer-b: radial-gradient(circle at 100% 100%, #e8f5ec 0%, transparent 35%);
+      --pre-bg: #f6f3ea;
+      --quote-border: #b8c9be;
+      --quote-ink: #454238;
+      --quote-bg: #f6f7f1;
+      --adhd-font-size: 20px;
+      --adhd-line-height: 2.1;
+      --shadow: 0 8px 24px rgba(40, 36, 30, 0.08);
+      --radius: 14px;
+      --mono: "Cascadia Code", "Consolas", monospace;
+      --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        var(--bg-layer-a),
+        var(--bg-layer-b),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--serif);
+    }
+
+    body[data-theme="dark"] {
+      --bg: #000000;
+      --panel: #101010;
+      --ink: #f5f5f5;
+      --muted: #b5b5b5;
+      --line: #2e2e2e;
+      --accent: #9dc0ff;
+      --accent-soft: #1b263b;
+      --accent-btn-ink: #dbe8ff;
+      --panel-header-bg: #171717;
+      --control-bg: #151515;
+      --control-ink: #f5f5f5;
+      --control-line: #2e2e2e;
+      --user-note: #7db4ff;
+      --note-quote-ink: #f5f5f5;
+      --placeholder-ink: #8f8f8f;
+      --pre-bg: #151515;
+      --quote-border: #5b7e6a;
+      --quote-ink: #d2ddd7;
+      --quote-bg: #131a17;
+      --bg-layer-a: linear-gradient(transparent, transparent);
+      --bg-layer-b: linear-gradient(transparent, transparent);
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      color-scheme: dark;
+    }
+
+    body[data-theme="sepia"] {
+      --bg: #efe2c8;
+      --panel: #fbf3e2;
+      --ink: #3f3022;
+      --muted: #7b6753;
+      --line: #d2bd9f;
+      --accent: #8a5b3b;
+      --accent-soft: #ead8bd;
+      --accent-btn-ink: #5a351d;
+      --user-note: #a63b1c;
+      --note-quote-ink: #3f3022;
+      --placeholder-ink: #8b745d;
+      --panel-header-bg: #f2e5cf;
+      --control-bg: #fff7ea;
+      --control-ink: #3f3022;
+      --control-line: #ccb696;
+      --bg-layer-a: radial-gradient(circle at 0% 0%, #f8ebd3 0%, transparent 45%);
+      --bg-layer-b: radial-gradient(circle at 100% 100%, #e7d6b5 0%, transparent 35%);
+      --pre-bg: #f6ead3;
+      --quote-border: #b08f6f;
+      --quote-ink: #4a3828;
+      --quote-bg: #f3e4c7;
+      --shadow: 0 8px 24px rgba(73, 56, 38, 0.12);
+    }
+
+    body[data-theme="ocean"] {
+      --bg: #0c1424;
+      --panel: #121f36;
+      --ink: #eaf1ff;
+      --muted: #9eb1d6;
+      --line: #2f4264;
+      --accent: #8dc6ff;
+      --accent-soft: #1d3558;
+      --accent-btn-ink: #d7e9ff;
+      --user-note: #9ed0ff;
+      --note-quote-ink: #eaf1ff;
+      --placeholder-ink: #8fa6d1;
+      --panel-header-bg: #162845;
+      --control-bg: #16243e;
+      --control-ink: #eaf1ff;
+      --control-line: #2f4264;
+      --bg-layer-a: radial-gradient(circle at 0% 0%, #1a2f4f 0%, transparent 42%);
+      --bg-layer-b: radial-gradient(circle at 100% 100%, #162d4b 0%, transparent 35%);
+      --pre-bg: #182842;
+      --quote-border: #4a6e9a;
+      --quote-ink: #cfe0ff;
+      --quote-bg: #15253e;
+      --shadow: 0 8px 24px rgba(5, 13, 24, 0.45);
+      color-scheme: dark;
+    }
+
+    .app {
+      max-width: 1400px;
+      margin: 20px auto;
+      padding: 0 14px 14px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 12px;
+      height: calc(100vh - 40px);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 10px;
+    }
+
+    .toolbar .spacer {
+      flex: 1;
+    }
+
+    .file-name {
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 420px;
+    }
+
+    button,
+    .btn-like,
+    .text-input,
+    .select-input {
+      appearance: none;
+      border: 1px solid var(--control-line);
+      background: var(--control-bg);
+      color: var(--control-ink);
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    button,
+    .btn-like {
+      cursor: pointer;
+      transition: 160ms ease;
+    }
+
+    button:hover,
+    .btn-like:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .btn-accent {
+      background: var(--accent-soft);
+      border-color: #b7d8c5;
+      color: var(--accent-btn-ink);
+    }
+
+    .text-input {
+      min-width: 170px;
+      font-family: var(--mono);
+    }
+
+    .number-input {
+      width: 92px;
+      min-width: 92px;
+      font-family: var(--mono);
+    }
+
+    .select-input {
+      min-width: 128px;
+    }
+
+    .toggle-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid var(--control-line);
+      border-radius: 10px;
+      background: var(--control-bg);
+      color: var(--control-ink);
+      font-size: 14px;
+    }
+
+    .import-drop-zone {
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      padding: 7px 12px;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--panel);
+      min-width: 180px;
+      text-align: center;
+      transition: 140ms ease;
+    }
+
+    .import-drop-zone.drag-active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .range-input {
+      width: 140px;
+      accent-color: var(--accent);
+    }
+
+    .range-value {
+      min-width: 32px;
+      text-align: right;
+      font-family: var(--mono);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border: 1px solid var(--control-line);
+      border-radius: 10px;
+      background: var(--control-bg);
+    }
+
+    .lang-flag {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .lang-select {
+      min-width: 140px;
+      padding: 6px 8px;
+      border: 0;
+      background: transparent;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      min-height: 0;
+      height: 100%;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel-header-bg);
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .panel-body {
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 18px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .reader {
+      user-select: text;
+      cursor: text;
+    }
+
+    .reader p,
+    .reader li,
+    .reader blockquote {
+      margin: 0 0 0.9em;
+    }
+
+    .reader h1,
+    .reader h2,
+    .reader h3,
+    .reader h4 {
+      margin: 1.1em 0 0.5em;
+      line-height: 1.3;
+    }
+
+    .reader code,
+    .reader pre {
+      font-family: var(--mono);
+      font-size: 0.92em;
+    }
+
+    .reader pre {
+      background: var(--pre-bg);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      overflow-x: auto;
+    }
+
+    .reader blockquote {
+      border-left: 4px solid var(--quote-border);
+      padding-left: 12px;
+      color: var(--quote-ink);
+      background: var(--quote-bg);
+    }
+
+    .notes {
+      font-size: 18px;
+      line-height: 1.9;
+      letter-spacing: 0.01em;
+      outline: none;
+    }
+
+    .notes-shell {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 10px;
+      padding: 12px;
+      overflow: hidden;
+    }
+
+    .outline-nav {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: var(--panel);
+      max-height: 180px;
+      overflow: auto;
+    }
+
+    .outline-list {
+      margin: 0;
+      padding-left: 18px;
+      list-style: disc;
+    }
+
+    .outline-list li {
+      margin: 2px 0;
+    }
+
+    .outline-item-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      color: var(--ink);
+      padding: 4px 6px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .outline-item-btn:hover {
+      color: var(--accent);
+      background: var(--accent-soft);
+      transform: none;
+    }
+
+    .outline-item-btn.active {
+      color: var(--accent);
+      font-weight: 600;
+      background: var(--accent-soft);
+    }
+
+    .notes-editor {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      background: var(--panel);
+    }
+
+    .notes:empty::before {
+      content: "在左侧选中一句会追加到这里。你在右侧自己打字的段落会变蓝。";
+      color: var(--placeholder-ink);
+      font-size: 15px;
+      pointer-events: none;
+    }
+
+    .note-block {
+      margin: 0 0 0.9em;
+      white-space: pre-wrap;
+    }
+
+    .note-block.quote-note {
+      color: var(--note-quote-ink);
+    }
+
+    .note-block.user-note {
+      color: var(--user-note);
+    }
+
+    .section-marker {
+      margin: 0.8em 0 0.45em;
+      font-weight: 600;
+      color: var(--muted);
+      border-left: 3px solid var(--line);
+      padding-left: 8px;
+      user-select: none;
+    }
+
+    .status {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .status-strong {
+      color: #0f402b;
+    }
+
+    body[data-theme="dark"] .status-strong {
+      color: #b9d0ff;
+    }
+
+    body.adhd-mode {
+      --bg-layer-a: linear-gradient(transparent, transparent);
+      --bg-layer-b: linear-gradient(transparent, transparent);
+    }
+
+    body.adhd-mode .panel-body {
+      font-size: var(--adhd-font-size);
+      line-height: var(--adhd-line-height);
+    }
+
+    body.adhd-mode .reader,
+    body.adhd-mode .notes {
+      font-family: "Atkinson Hyperlegible", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    body.adhd-mode .reader {
+      max-width: 78ch;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        overflow: auto;
+      }
+
+      .app {
+        height: auto;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .panel {
+        min-height: 45vh;
+      }
+
+      .file-name {
+        max-width: 220px;
+      }
+
+      .text-input {
+        min-width: 130px;
+      }
+
+      .range-input {
+        width: 110px;
+      }
+    }
+  </style>
+  <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/turndown/dist/turndown.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <div class="toolbar">
+      <label id="importFileLabel" class="btn-like btn-accent" for="mdFile">导入文件</label>
+      <input id="mdFile" type="file" accept=".md,.markdown,.txt,.pdf,.epub" hidden />
+      <div id="importDropZone" class="import-drop-zone">拖拽 .txt/.md/.pdf/.epub 到这里导入</div>
+      <label id="pdfOcrLabel" class="toggle-label" for="pdfOcrToggle">
+        <input id="pdfOcrToggle" type="checkbox" />
+        PDF OCR
+      </label>
+      <input id="ocrMaxPagesInput" class="text-input number-input" type="number" min="1" max="500" value="80" title="OCR页数上限" />
+      <select id="recentReadingSelect" class="select-input" title="最近阅读">
+        <option value="">导入最近阅读...</option>
+      </select>
+      <button id="loadRecentReadingBtn" type="button">导入最近阅读</button>
+      <button id="deleteRecentReadingBtn" type="button">删除当前</button>
+      <button id="clearRecentReadingsBtn" type="button">清空列表</button>
+      <button id="resetWorkingCopy" type="button">重置左侧副本</button>
+      <button id="clearNotes" type="button">清空笔记</button>
+      <button id="copyNotes" type="button">复制笔记</button>
+      <button id="loadDemo" type="button">加载示例</button>
+      <div class="spacer"></div>
+      <div id="fileName" class="file-name">未加载文件</div>
+      <div class="lang-switch">
+        <span id="langFlag" class="lang-flag" aria-hidden="true">🇨🇳</span>
+        <select id="languageSelect" class="lang-select" title="Language">
+          <option value="zh-CN">🇨🇳 简体中文</option>
+          <option value="en-US">🇺🇸 English</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button id="pickFolder" type="button">选择保存文件夹</button>
+      <input id="notesFileName" class="text-input" type="text" value="reading_notes.md" />
+      <select id="themeSelect" class="select-input" title="页面主题">
+        <option value="paper">纸张浅色</option>
+        <option value="dark">黑底白字</option>
+        <option value="sepia">米黄护眼</option>
+        <option value="ocean">深蓝夜读</option>
+      </select>
+      <label id="adhdModeLabel" class="toggle-label" for="adhdModeToggle">
+        <input id="adhdModeToggle" type="checkbox" />
+        ADHD 友好
+      </label>
+      <input id="adhdFontSizeRange" class="range-input" type="range" min="18" max="30" step="1" value="20" title="ADHD 字号" />
+      <span id="adhdFontSizeValue" class="range-value">20px</span>
+      <button id="saveNow" type="button">立即保存笔记</button>
+      <div class="spacer"></div>
+      <div id="savePath" class="file-name">默认恢复文件：reading_notes_recovery.md（浏览器内）</div>
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <div class="panel-header">
+          <strong id="readerPanelTitle">阅读区（左）</strong>
+          <span id="readerProgress" class="status">阅读进度 0%</span>
+          <span id="readerStatus" class="status">选中后会追加到右侧，并删除左侧该句及之前内容</span>
+        </div>
+        <article id="reader" class="panel-body reader" tabindex="0"></article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <strong id="notesPanelTitle">读书笔记（右）</strong>
+          <span id="outlineStatus" class="status">目录待生成</span>
+          <span id="noteStatus" class="status">自动保存已开启</span>
+        </div>
+        <div id="notesPanelBody" class="panel-body notes-shell">
+          <nav id="outlineNav" class="outline-nav"></nav>
+          <article id="notes" class="notes notes-editor" contenteditable="true" spellcheck="false"></article>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE = {
+      originalMarkdown: 'md_reader_original_markdown',
+      workingHtml: 'md_reader_working_html',
+      sourceName: 'md_reader_source_name',
+      notesHtml: 'md_reader_notes_html',
+      notesFileName: 'md_reader_notes_file_name',
+      notesFileNameMode: 'md_reader_notes_file_name_mode',
+      recentReadings: 'md_reader_recent_readings',
+      workingMarkdown: 'md_reader_working_markdown',
+      activeOutlineSource: 'md_reader_active_outline_source',
+      activeOutlineTitle: 'md_reader_active_outline_title',
+      pdfOcrEnabled: 'md_reader_pdf_ocr_enabled',
+      ocrMaxPages: 'md_reader_ocr_max_pages',
+      pageTheme: 'md_reader_page_theme',
+      adhdMode: 'md_reader_adhd_mode',
+      adhdFontSize: 'md_reader_adhd_font_size',
+      uiLanguage: 'md_reader_ui_language'
+    };
+
+    const HANDLE_DB_NAME = 'md_reader_handle_db';
+    const HANDLE_STORE = 'handles';
+    const HANDLE_KEY = 'notes_directory_handle';
+    const RECOVERY_FILE_NAME = 'reading_notes_recovery.md';
+    const READER_RECOVERY_FILE_NAME = 'reading_progress_recovery.md';
+
+    const reader = document.getElementById('reader');
+    const readerProgress = document.getElementById('readerProgress');
+    const readerStatus = document.getElementById('readerStatus');
+    const notes = document.getElementById('notes');
+    const outlineNav = document.getElementById('outlineNav');
+    const outlineStatus = document.getElementById('outlineStatus');
+    const noteStatus = document.getElementById('noteStatus');
+    const fileName = document.getElementById('fileName');
+    const savePath = document.getElementById('savePath');
+    const importDropZone = document.getElementById('importDropZone');
+    const pdfOcrToggle = document.getElementById('pdfOcrToggle');
+    const ocrMaxPagesInput = document.getElementById('ocrMaxPagesInput');
+    const languageSelect = document.getElementById('languageSelect');
+    const langFlag = document.getElementById('langFlag');
+    const recentReadingSelect = document.getElementById('recentReadingSelect');
+    const loadRecentReadingBtn = document.getElementById('loadRecentReadingBtn');
+    const deleteRecentReadingBtn = document.getElementById('deleteRecentReadingBtn');
+    const clearRecentReadingsBtn = document.getElementById('clearRecentReadingsBtn');
+
+    const mdFile = document.getElementById('mdFile');
+    const resetWorkingCopyBtn = document.getElementById('resetWorkingCopy');
+    const clearNotesBtn = document.getElementById('clearNotes');
+    const copyNotesBtn = document.getElementById('copyNotes');
+    const loadDemoBtn = document.getElementById('loadDemo');
+    const pickFolderBtn = document.getElementById('pickFolder');
+    const saveNowBtn = document.getElementById('saveNow');
+    const notesFileNameInput = document.getElementById('notesFileName');
+    const themeSelect = document.getElementById('themeSelect');
+    const adhdModeToggle = document.getElementById('adhdModeToggle');
+    const adhdFontSizeRange = document.getElementById('adhdFontSizeRange');
+    const adhdFontSizeValue = document.getElementById('adhdFontSizeValue');
+    const importFileLabel = document.getElementById('importFileLabel');
+    const pdfOcrLabel = document.getElementById('pdfOcrLabel');
+    const readerPanelTitle = document.getElementById('readerPanelTitle');
+    const notesPanelTitle = document.getElementById('notesPanelTitle');
+    const adhdModeLabel = document.getElementById('adhdModeLabel');
+
+    const state = {
+      originalMarkdown: '',
+      sourceName: '内置示例',
+      pendingInputType: '',
+      noteSaveTimer: null,
+      selectedDirectoryHandle: null,
+      notesFileNameMode: 'linked',
+      outlineItems: [],
+      activeOutlineId: '',
+      originalReadableChars: 0,
+      readerPersistTimer: null,
+      turndownService: null,
+      readingSessionId: '',
+      isImporting: false,
+      language: 'zh-CN'
+    };
+
+    const LANG_FLAGS = {
+      'zh-CN': '🇨🇳',
+      'en-US': '🇺🇸'
+    };
+
+    const I18N = {
+      'zh-CN': {
+        appTitle: 'Markdown 阅读器 + 读书笔记',
+        importFile: '导入文件',
+        pdfOcrLabel: 'PDF OCR',
+        importDropZone: '拖拽 .txt/.md/.pdf/.epub 到这里导入',
+        ocrMaxPagesTitle: 'OCR页数上限',
+        recentTitle: '最近阅读',
+        recentPlaceholderSelect: '选择最近阅读...',
+        recentPlaceholderEmpty: '暂无最近阅读',
+        loadRecent: '导入最近阅读',
+        deleteCurrent: '删除当前',
+        clearList: '清空列表',
+        resetLeftCopy: '重置左侧副本',
+        clearNotes: '清空笔记',
+        copyNotes: '复制笔记',
+        loadDemo: '加载示例',
+        sourceIdle: '未加载文件',
+        demoName: '内置示例',
+        chooseFolder: '选择保存文件夹',
+        themeTitle: '页面主题',
+        themePaper: '纸张浅色',
+        themeDark: '黑底白字',
+        themeSepia: '米黄护眼',
+        themeOcean: '深蓝夜读',
+        adhdFriendly: 'ADHD 友好',
+        adhdFontTitle: 'ADHD 字号',
+        saveNow: '立即保存笔记',
+        savePathDefault: '默认恢复文件：{file}（浏览器内）',
+        readerTitle: '阅读区（左）',
+        notesTitle: '读书笔记（右）',
+        readerProgress: '阅读进度 {percent}%',
+        readerStatusInitial: '选中后会追加到右侧，并删除左侧该句及之前内容',
+        outlinePending: '目录待生成',
+        noteAutoSaveOn: '自动保存已开启',
+        sourceCopyEditing: '{name}（副本编辑中，原文件不改）',
+        sourceFallback: '上次导入文件',
+        savePathExternal: '外部保存：{folder}\\{file}（默认使用上次目录）',
+        folderRecovered: '已恢复上次目录：{name}（如失效请重新选择）',
+        folderUnsupported: '当前浏览器不支持目录选择，将继续使用默认恢复文件',
+        folderNotSelected: '未选择目录，继续使用默认恢复文件',
+        onlySupportTypes: '仅支持 txt / md / pdf / epub 文件',
+        importDropDone: '已通过导入区拖拽加载文件',
+        importBusy: '正在导入中，请稍候...',
+        importing: '正在导入：{name}',
+        importDone: '已导入：{name}',
+        importFailed: '导入失败：{msg}',
+        readingDone: '左侧内容已经读完。',
+        readerResetDone: '已重置到导入时的副本起点',
+        readerCopyCreated: '副本已创建：后续删减仅发生在左侧副本',
+        readerTrimDone: '已删除左侧该句及之前内容，继续向后阅读',
+        noteInserted: '已插入到对应目录，右侧会自动保存',
+        noteCopied: 'Markdown 笔记已复制',
+        noteCopyFailed: '复制失败，请手动复制',
+        noteCleared: '笔记已清空，目录结构已保留',
+        noteRestoredLocal: '已恢复上次笔记（本地）',
+        noteRestoredRecovery: '已恢复默认恢复文件中的笔记',
+        noteSavedExternal: '已保存到外部 md 文件（并保留默认恢复）',
+        noteSavedRecoveryOnly: '已保存到默认恢复 md 文件',
+        noteSavedRecoveryWithExternalErr: '已保存默认恢复；外部保存失败：{err}',
+        noteSaveFailed: '保存失败：默认恢复与外部保存都未成功',
+        externalSaveFailed: '外部保存失败',
+        openRecentHint: '请选择一条最近阅读后再导入（将打开新页面）',
+        deleteRecentHint: '请选择一条最近阅读后再删除',
+        deletedRecent: '已删除选中的最近阅读记录',
+        recentEmpty: '最近阅读列表已是空',
+        recentCleared: '已清空最近阅读列表',
+        recentImportedCopy: '已导入最近阅读副本',
+        recentImportedInNewPage: '已在新页面导入最近阅读',
+        recentFallbackName: '最近阅读',
+        unnamed: '未命名',
+        untitled: '未命名章节',
+        chapterPrefix: '章节',
+        unsupportedFormat: '暂不支持该格式：{ext}',
+        unknownError: '未知错误',
+        pdfEngineMissing: 'PDF 引擎未加载完成，请稍后重试',
+        pdfParsing: '正在解析 PDF：第 {page}/{total} 页',
+        pdfOcring: '正在 OCR：第 {page}/{total} 页',
+        pdfNoText: 'PDF 未识别出可用文本，请开启 OCR 后重试',
+        pdfPageTitle: '第{page}页',
+        epubEngineMissing: 'EPUB 引擎未加载完成，请稍后重试',
+        epubParsing: '正在解析 EPUB：{page}/{total}',
+        epubNoContent: 'EPUB 未识别出可用章节内容',
+        currentOutline: '当前目录：{title}',
+        unclassified: '未归类',
+        quoteLabel: '[摘录] ',
+        noteLabel: '[笔记] '
+      },
+      'en-US': {
+        appTitle: 'Markdown Reader + Study Notes',
+        importFile: 'Import File',
+        pdfOcrLabel: 'PDF OCR',
+        importDropZone: 'Drop .txt/.md/.pdf/.epub here to import',
+        ocrMaxPagesTitle: 'OCR Page Limit',
+        recentTitle: 'Recent Reads',
+        recentPlaceholderSelect: 'Select recent reading...',
+        recentPlaceholderEmpty: 'No recent reading',
+        loadRecent: 'Load Recent',
+        deleteCurrent: 'Delete Selected',
+        clearList: 'Clear List',
+        resetLeftCopy: 'Reset Left Copy',
+        clearNotes: 'Clear Notes',
+        copyNotes: 'Copy Notes',
+        loadDemo: 'Load Demo',
+        sourceIdle: 'No file loaded',
+        demoName: 'Built-in Demo',
+        chooseFolder: 'Choose Save Folder',
+        themeTitle: 'Theme',
+        themePaper: 'Paper Light',
+        themeDark: 'Dark',
+        themeSepia: 'Sepia',
+        themeOcean: 'Ocean',
+        adhdFriendly: 'ADHD Friendly',
+        adhdFontTitle: 'ADHD Font Size',
+        saveNow: 'Save Notes Now',
+        savePathDefault: 'Default recovery file: {file} (browser local)',
+        readerTitle: 'Reading (Left)',
+        notesTitle: 'Notes (Right)',
+        readerProgress: 'Progress {percent}%',
+        readerStatusInitial: 'Select text to append to notes, then remove it and all prior content on the left',
+        outlinePending: 'Outline pending',
+        noteAutoSaveOn: 'Auto-save is on',
+        sourceCopyEditing: '{name} (editing copy, source file unchanged)',
+        sourceFallback: 'Previously imported file',
+        savePathExternal: 'External save: {folder}\\{file} (using last selected folder)',
+        folderRecovered: 'Last folder restored: {name} (reselect if invalid)',
+        folderUnsupported: 'Directory picker is unsupported; using default recovery file',
+        folderNotSelected: 'No folder selected; using default recovery file',
+        onlySupportTypes: 'Only txt / md / pdf / epub files are supported',
+        importDropDone: 'Loaded by drag-and-drop from import area',
+        importBusy: 'Import is in progress, please wait...',
+        importing: 'Importing: {name}',
+        importDone: 'Imported: {name}',
+        importFailed: 'Import failed: {msg}',
+        readingDone: 'Reading area is complete.',
+        readerResetDone: 'Reset to the imported copy start',
+        readerCopyCreated: 'Copy created: further trimming only affects the left copy',
+        readerTrimDone: 'Removed selected sentence and all previous left-side content',
+        noteInserted: 'Inserted to matched outline section; notes will auto-save',
+        noteCopied: 'Markdown notes copied',
+        noteCopyFailed: 'Copy failed, please copy manually',
+        noteCleared: 'Notes cleared, outline structure kept',
+        noteRestoredLocal: 'Restored previous local notes',
+        noteRestoredRecovery: 'Restored notes from default recovery file',
+        noteSavedExternal: 'Saved to external md file (default recovery also kept)',
+        noteSavedRecoveryOnly: 'Saved to default recovery md file',
+        noteSavedRecoveryWithExternalErr: 'Saved default recovery; external save failed: {err}',
+        noteSaveFailed: 'Save failed: both default recovery and external save failed',
+        externalSaveFailed: 'External save failed',
+        openRecentHint: 'Select one recent reading before importing (opens in new page)',
+        deleteRecentHint: 'Select one recent reading before deleting',
+        deletedRecent: 'Deleted selected recent reading entry',
+        recentEmpty: 'Recent reading list is already empty',
+        recentCleared: 'Recent reading list cleared',
+        recentImportedCopy: 'Recent reading copy imported',
+        recentImportedInNewPage: 'Recent reading imported in a new page',
+        recentFallbackName: 'Recent Reading',
+        unnamed: 'Untitled',
+        untitled: 'Untitled section',
+        chapterPrefix: 'Chapter ',
+        unsupportedFormat: 'Unsupported format: {ext}',
+        unknownError: 'Unknown error',
+        pdfEngineMissing: 'PDF engine not loaded yet, please retry shortly',
+        pdfParsing: 'Parsing PDF: page {page}/{total}',
+        pdfOcring: 'Running OCR: page {page}/{total}',
+        pdfNoText: 'No usable text detected in PDF; enable OCR and retry',
+        pdfPageTitle: 'Page {page}',
+        epubEngineMissing: 'EPUB engine not loaded yet, please retry shortly',
+        epubParsing: 'Parsing EPUB: {page}/{total}',
+        epubNoContent: 'No usable chapter content detected in EPUB',
+        currentOutline: 'Current outline: {title}',
+        unclassified: 'Unclassified',
+        quoteLabel: '[Quote] ',
+        noteLabel: '[Note] '
+      }
+    };
+
+    function getPreferredLanguage() {
+      const saved = localStorage.getItem(STORAGE.uiLanguage);
+      if (saved && I18N[saved]) return saved;
+      return 'zh-CN';
+    }
+
+    function t(key, params = {}) {
+      const lang = state.language && I18N[state.language] ? state.language : 'zh-CN';
+      const pack = I18N[lang] || I18N['zh-CN'];
+      const fallback = I18N['zh-CN'];
+      let template = pack[key];
+      if (template === undefined) template = fallback[key];
+      if (template === undefined) return key;
+      return String(template).replace(/\{(\w+)\}/g, (_, k) => {
+        if (Object.prototype.hasOwnProperty.call(params, k)) {
+          return String(params[k]);
+        }
+        return '';
+      });
+    }
+
+    function applyLanguage(lang) {
+      const safe = I18N[lang] ? lang : 'zh-CN';
+      state.language = safe;
+      localStorage.setItem(STORAGE.uiLanguage, safe);
+      document.documentElement.lang = safe === 'zh-CN' ? 'zh-CN' : 'en';
+      document.title = t('appTitle');
+      languageSelect.value = safe;
+      languageSelect.title = safe === 'zh-CN' ? '语言' : 'Language';
+      langFlag.textContent = LANG_FLAGS[safe] || '🌐';
+
+      importFileLabel.textContent = t('importFile');
+      importDropZone.textContent = t('importDropZone');
+      pdfOcrLabel.childNodes[pdfOcrLabel.childNodes.length - 1].textContent = ' ' + t('pdfOcrLabel');
+      ocrMaxPagesInput.title = t('ocrMaxPagesTitle');
+      recentReadingSelect.title = t('recentTitle');
+      loadRecentReadingBtn.textContent = t('loadRecent');
+      deleteRecentReadingBtn.textContent = t('deleteCurrent');
+      clearRecentReadingsBtn.textContent = t('clearList');
+      resetWorkingCopyBtn.textContent = t('resetLeftCopy');
+      clearNotesBtn.textContent = t('clearNotes');
+      copyNotesBtn.textContent = t('copyNotes');
+      loadDemoBtn.textContent = t('loadDemo');
+      pickFolderBtn.textContent = t('chooseFolder');
+      themeSelect.title = t('themeTitle');
+      themeSelect.options[0].textContent = t('themePaper');
+      themeSelect.options[1].textContent = t('themeDark');
+      themeSelect.options[2].textContent = t('themeSepia');
+      themeSelect.options[3].textContent = t('themeOcean');
+      adhdModeLabel.childNodes[adhdModeLabel.childNodes.length - 1].textContent = ' ' + t('adhdFriendly');
+      adhdFontSizeRange.title = t('adhdFontTitle');
+      saveNowBtn.textContent = t('saveNow');
+      readerPanelTitle.textContent = t('readerTitle');
+      notesPanelTitle.textContent = t('notesTitle');
+
+      renderRecentReadingsSelect();
+      updateSourceLabel();
+      updateReadingProgress();
+      updateSavePathLabel();
+      if (!outlineStatus.textContent || !state.activeOutlineId) {
+        outlineStatus.textContent = t('outlinePending');
+      }
+      if (!readerStatus.textContent || readerStatus.textContent === I18N['zh-CN'].readerStatusInitial || readerStatus.textContent === I18N['en-US'].readerStatusInitial) {
+        readerStatus.textContent = t('readerStatusInitial');
+      }
+      if (!noteStatus.classList.contains('status-strong')) {
+        noteStatus.textContent = t('noteAutoSaveOn');
+      }
+      if (!state.originalMarkdown) {
+        fileName.textContent = t('sourceIdle');
+      }
+    }
+
+    function generateReadingSessionId() {
+      return 'session-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+    }
+
+    function ensureReadingSessionId() {
+      let id = '';
+      try {
+        id = sessionStorage.getItem('md_reader_session_id') || '';
+      } catch (err) {
+        id = '';
+      }
+      if (!id) {
+        id = generateReadingSessionId();
+        try {
+          sessionStorage.setItem('md_reader_session_id', id);
+        } catch (err) {
+          // Ignore sessionStorage failures.
+        }
+      }
+      state.readingSessionId = id;
+    }
+
+    function startNewReadingSession() {
+      const id = generateReadingSessionId();
+      state.readingSessionId = id;
+      try {
+        sessionStorage.setItem('md_reader_session_id', id);
+      } catch (err) {
+        // Ignore sessionStorage failures.
+      }
+    }
+
+    const DEMO_MD = [
+      '# 韩国史：悲剧的循环与宿命',
+      '',
+      '历史的复杂性在于，它总是把同一类问题换一个外壳后重复出现。',
+      '',
+      '## 读法建议',
+      '',
+      '- 在左侧选中你想摘录的一句，会追加到右侧。',
+      '- 选中后左侧会删除该句及之前的内容，阅读区会逐步向后推进。',
+      '- 右侧你自己打字的段落会变蓝色。',
+      '',
+      '> 悲剧常常不是突然发生，而是长期积累的结构性结果。'
+    ].join('\n');
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function applyPageTheme(themeName) {
+      const allowedThemes = new Set(['paper', 'dark', 'sepia', 'ocean']);
+      const safeTheme = allowedThemes.has(themeName) ? themeName : 'paper';
+      document.body.dataset.theme = safeTheme;
+      localStorage.setItem(STORAGE.pageTheme, safeTheme);
+      themeSelect.value = safeTheme;
+    }
+
+    function applyAdhdFontSize(sizeValue) {
+      const parsed = Number(sizeValue);
+      const safeSize = Number.isFinite(parsed) ? Math.min(30, Math.max(18, parsed)) : 20;
+      const lineHeight = safeSize >= 27 ? 2.2 : safeSize >= 23 ? 2.08 : 1.98;
+      document.documentElement.style.setProperty('--adhd-font-size', safeSize + 'px');
+      document.documentElement.style.setProperty('--adhd-line-height', String(lineHeight));
+      localStorage.setItem(STORAGE.adhdFontSize, String(safeSize));
+      adhdFontSizeRange.value = String(safeSize);
+      adhdFontSizeValue.textContent = safeSize + 'px';
+    }
+
+    function setAdhdMode(enabled) {
+      document.body.classList.toggle('adhd-mode', enabled);
+      localStorage.setItem(STORAGE.adhdMode, enabled ? '1' : '0');
+      adhdModeToggle.checked = enabled;
+      adhdFontSizeRange.disabled = !enabled;
+      adhdFontSizeValue.style.opacity = enabled ? '1' : '0.55';
+    }
+
+    function sanitizeFileName(name) {
+      const clean = (name || '').replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').trim();
+      return clean || 'reading_notes.md';
+    }
+
+    function stripExtension(fileName) {
+      const text = (fileName || '').trim();
+      const dotIndex = text.lastIndexOf('.');
+      if (dotIndex <= 0) return text || t('unnamed');
+      return text.slice(0, dotIndex);
+    }
+
+    function buildDefaultNotesFileName(sourceName) {
+      const base = stripExtension(sourceName || t('unnamed'));
+      return sanitizeFileName(base + '_阅读笔记.md');
+    }
+
+    function setNotesFileName(name) {
+      const clean = sanitizeFileName(name);
+      notesFileNameInput.value = clean;
+      localStorage.setItem(STORAGE.notesFileName, clean);
+      updateSavePathLabel();
+      return clean;
+    }
+
+    function syncNotesFileNameWithSource(force) {
+      if (!force && state.notesFileNameMode !== 'linked') return;
+      const derived = buildDefaultNotesFileName(state.sourceName);
+      setNotesFileName(derived);
+      state.notesFileNameMode = 'linked';
+      localStorage.setItem(STORAGE.notesFileNameMode, 'linked');
+    }
+
+    function markdownToHtml(markdown) {
+      if (window.marked && typeof window.marked.parse === 'function') {
+        return window.marked.parse(markdown, { breaks: true });
+      }
+      return '<pre>' + escapeHtml(markdown) + '</pre>';
+    }
+
+    function getTurndownService() {
+      if (!window.TurndownService) return null;
+      if (!state.turndownService) {
+        state.turndownService = new window.TurndownService({
+          headingStyle: 'atx',
+          codeBlockStyle: 'fenced',
+          bulletListMarker: '-'
+        });
+      }
+      return state.turndownService;
+    }
+
+    function getFileExtension(name) {
+      const value = (name || '').toLowerCase();
+      const idx = value.lastIndexOf('.');
+      if (idx < 0) return '';
+      return value.slice(idx + 1);
+    }
+
+    function getOcrMaxPages() {
+      const parsed = Number(ocrMaxPagesInput.value);
+      if (!Number.isFinite(parsed)) return 80;
+      return Math.min(500, Math.max(1, Math.round(parsed)));
+    }
+
+    function persistPdfOcrSettings() {
+      const enabled = pdfOcrToggle.checked ? '1' : '0';
+      const maxPages = String(getOcrMaxPages());
+      pdfOcrToggle.checked = enabled === '1';
+      ocrMaxPagesInput.value = maxPages;
+      localStorage.setItem(STORAGE.pdfOcrEnabled, enabled);
+      localStorage.setItem(STORAGE.ocrMaxPages, maxPages);
+    }
+
+    function ensurePdfWorkerConfigured() {
+      if (!window.pdfjsLib || !window.pdfjsLib.GlobalWorkerOptions) return;
+      if (!window.pdfjsLib.GlobalWorkerOptions.workerSrc) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      }
+    }
+
+    function normalizeImportedMarkdown(text) {
+      const content = (text || '').replace(/\u0000/g, '').trim();
+      return content ? content + '\n' : '';
+    }
+
+    async function extractPdfPageText(page) {
+      const content = await page.getTextContent();
+      const items = content && content.items ? content.items : [];
+      return normalizeCountText(items.map((item) => item.str || '').join(' '));
+    }
+
+    async function runOcrForPdfPage(page) {
+      if (!window.Tesseract || typeof window.Tesseract.recognize !== 'function') {
+        return '';
+      }
+      const viewport = page.getViewport({ scale: 2 });
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.ceil(viewport.width);
+      canvas.height = Math.ceil(viewport.height);
+      const context = canvas.getContext('2d', { willReadFrequently: true });
+      await page.render({ canvasContext: context, viewport: viewport }).promise;
+      const result = await window.Tesseract.recognize(canvas, 'chi_sim+eng');
+      return normalizeCountText(result && result.data && result.data.text ? result.data.text : '');
+    }
+
+    async function convertPdfToMarkdown(file) {
+      if (!window.pdfjsLib || typeof window.pdfjsLib.getDocument !== 'function') {
+        throw new Error(t('pdfEngineMissing'));
+      }
+      ensurePdfWorkerConfigured();
+      const data = await file.arrayBuffer();
+      const pdf = await window.pdfjsLib.getDocument({ data: data }).promise;
+      const useOcr = Boolean(pdfOcrToggle.checked);
+      const maxOcrPages = getOcrMaxPages();
+      let usedOcrPages = 0;
+      const blocks = ['# ' + stripExtension(file.name)];
+      let textChars = 0;
+
+      for (let pageIndex = 1; pageIndex <= pdf.numPages; pageIndex += 1) {
+        readerStatus.textContent = t('pdfParsing', { page: pageIndex, total: pdf.numPages });
+        const page = await pdf.getPage(pageIndex);
+        let pageText = await extractPdfPageText(page);
+
+        const needsOcr = useOcr && (!pageText || pageText.length < 18) && usedOcrPages < maxOcrPages;
+        if (needsOcr) {
+          readerStatus.textContent = t('pdfOcring', { page: pageIndex, total: pdf.numPages });
+          const ocrText = await runOcrForPdfPage(page);
+          if (ocrText) {
+            pageText = ocrText;
+            usedOcrPages += 1;
+          }
+        }
+
+        if (!pageText) continue;
+        textChars += pageText.length;
+        blocks.push('## ' + t('pdfPageTitle', { page: pageIndex }));
+        blocks.push(pageText);
+      }
+
+      if (textChars === 0) {
+        throw new Error(t('pdfNoText'));
+      }
+
+      return normalizeImportedMarkdown(blocks.join('\n\n'));
+    }
+
+    async function convertEpubToMarkdown(file) {
+      if (!window.JSZip || typeof window.JSZip.loadAsync !== 'function') {
+        throw new Error(t('epubEngineMissing'));
+      }
+
+      const turndown = getTurndownService();
+      const data = await file.arrayBuffer();
+      const zip = await window.JSZip.loadAsync(data);
+      const paths = Object.keys(zip.files)
+        .filter((path) => {
+          const item = zip.files[path];
+          if (!item || item.dir) return false;
+          const lower = path.toLowerCase();
+          return lower.endsWith('.xhtml') || lower.endsWith('.html') || lower.endsWith('.htm');
+        })
+        .sort();
+
+      const blocks = ['# ' + stripExtension(file.name)];
+      let chapterCount = 0;
+
+      for (let i = 0; i < paths.length; i += 1) {
+        const path = paths[i];
+        readerStatus.textContent = t('epubParsing', { page: i + 1, total: paths.length });
+        const html = await zip.files[path].async('text');
+        if (!html || !html.trim()) continue;
+
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const body = doc.body || doc.documentElement;
+        if (!body) continue;
+        body.querySelectorAll('script,style,svg,noscript').forEach((node) => node.remove());
+
+        let md = '';
+        if (turndown) {
+          md = turndown.turndown(body.innerHTML || body.textContent || '');
+        } else {
+          md = normalizeCountText(body.textContent || '');
+        }
+        md = md.trim();
+        if (!md) continue;
+
+        const titleNode = body.querySelector('h1,h2,title');
+        const defaultTitle = stripExtension(path.split('/').pop() || (t('chapterPrefix') + (chapterCount + 1)));
+        const chapterTitle = normalizeCountText(titleNode ? titleNode.textContent : '') || defaultTitle;
+        blocks.push('## ' + chapterTitle);
+        blocks.push(md);
+        chapterCount += 1;
+      }
+
+      if (!chapterCount) {
+        throw new Error(t('epubNoContent'));
+      }
+
+      return normalizeImportedMarkdown(blocks.join('\n\n'));
+    }
+
+    async function convertDocumentToMarkdown(file) {
+      const ext = getFileExtension(file.name);
+      if (ext === 'md' || ext === 'markdown' || ext === 'txt') {
+        return normalizeImportedMarkdown(await file.text());
+      }
+      if (ext === 'pdf') {
+        return await convertPdfToMarkdown(file);
+      }
+      if (ext === 'epub') {
+        return await convertEpubToMarkdown(file);
+      }
+      throw new Error(t('unsupportedFormat', { ext: ext }));
+    }
+
+    function normalizeSelection(text) {
+      return text.replace(/\s+/g, ' ').trim();
+    }
+
+    function normalizeCountText(text) {
+      return (text || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function extractPlainTextFromMarkdown(markdown) {
+      if (window.marked && typeof window.marked.parse === 'function') {
+        const container = document.createElement('div');
+        container.innerHTML = window.marked.parse(markdown || '', { breaks: true });
+        return container.textContent || '';
+      }
+      return markdown || '';
+    }
+
+    function refreshOriginalReadableChars() {
+      const plain = extractPlainTextFromMarkdown(state.originalMarkdown || '');
+      state.originalReadableChars = normalizeCountText(plain).length;
+    }
+
+    function getReaderRemainingChars() {
+      if (reader.querySelector('[data-reader-end="1"]')) return 0;
+      const normalized = normalizeCountText(reader.textContent || '');
+      if (!normalized) return 0;
+      return normalized.length;
+    }
+
+    function formatProgressPercent(value) {
+      const rounded = Math.round(value * 10) / 10;
+      return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+    }
+
+    function updateReadingProgress() {
+      const total = state.originalReadableChars || 0;
+      if (total <= 0) {
+        readerProgress.textContent = t('readerProgress', { percent: 0 });
+        return;
+      }
+
+      const remaining = Math.min(total, getReaderRemainingChars());
+      const done = Math.max(0, total - remaining);
+      const percent = remaining === 0 ? 100 : (done / total) * 100;
+      readerProgress.textContent = t('readerProgress', { percent: formatProgressPercent(percent) });
+    }
+
+    function getReaderAsMarkdown() {
+      if (reader.querySelector('[data-reader-end="1"]')) {
+        return '';
+      }
+
+      const html = (reader.innerHTML || '').trim();
+      if (!html) return '';
+
+      if (window.TurndownService) {
+        if (!state.turndownService) {
+          state.turndownService = new window.TurndownService({
+            headingStyle: 'atx',
+            codeBlockStyle: 'fenced',
+            bulletListMarker: '-'
+          });
+        }
+        return state.turndownService.turndown(html).trim();
+      }
+
+      return normalizeCountText(reader.textContent || '');
+    }
+
+    function buildReaderProgressFileName(sourceName) {
+      const base = stripExtension(sourceName || t('unnamed'));
+      return sanitizeFileName(base + '——正在读.md');
+    }
+
+    function getRecentReadings() {
+      try {
+        const raw = localStorage.getItem(STORAGE.recentReadings);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (err) {
+        return [];
+      }
+    }
+
+    function setRecentReadings(list) {
+      localStorage.setItem(STORAGE.recentReadings, JSON.stringify(list));
+    }
+
+    function refreshRecentReadingActionButtons() {
+      const list = getRecentReadings();
+      const hasAny = list.length > 0;
+      const selectedValid = /^\d+$/.test(recentReadingSelect.value || '');
+      loadRecentReadingBtn.disabled = !hasAny || !selectedValid;
+      deleteRecentReadingBtn.disabled = !hasAny || !selectedValid;
+      clearRecentReadingsBtn.disabled = !hasAny;
+    }
+
+    function renderRecentReadingsSelect() {
+      const prevValue = recentReadingSelect.value || '';
+      const list = getRecentReadings();
+      recentReadingSelect.innerHTML = '';
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = list.length ? t('recentPlaceholderSelect') : t('recentPlaceholderEmpty');
+      recentReadingSelect.appendChild(placeholder);
+
+      list.forEach((item, index) => {
+        const option = document.createElement('option');
+        option.value = String(index);
+        const ts = item && item.updatedAt ? new Date(item.updatedAt).toLocaleString() : '';
+        option.textContent = (item.sourceName || t('unnamed')) + (ts ? (' · ' + ts) : '');
+        recentReadingSelect.appendChild(option);
+      });
+
+      if (prevValue && Array.from(recentReadingSelect.options).some((opt) => opt.value === prevValue)) {
+        recentReadingSelect.value = prevValue;
+      } else {
+        recentReadingSelect.value = '';
+      }
+      refreshRecentReadingActionButtons();
+    }
+
+    function removeRecentReadingAt(indexValue) {
+      const idx = Number(indexValue);
+      if (!Number.isInteger(idx) || idx < 0) return false;
+      const list = getRecentReadings();
+      if (idx >= list.length) return false;
+      list.splice(idx, 1);
+      setRecentReadings(list);
+      renderRecentReadingsSelect();
+      return true;
+    }
+
+    function clearRecentReadings() {
+      setRecentReadings([]);
+      renderRecentReadingsSelect();
+    }
+
+    function upsertRecentReadingSnapshot(workingMarkdown) {
+      const markdown = (workingMarkdown || '').trim();
+      if (!markdown) return;
+      if (!state.readingSessionId) {
+        ensureReadingSessionId();
+      }
+
+      const list = getRecentReadings();
+      const filtered = list.filter((item) => item && item.sessionId !== state.readingSessionId);
+      const entry = {
+        sessionId: state.readingSessionId,
+        sourceName: state.sourceName || t('unnamed'),
+        workingMarkdown: markdown,
+        originalReadableChars: state.originalReadableChars || normalizeCountText(markdown).length,
+        updatedAt: Date.now()
+      };
+      filtered.unshift(entry);
+      setRecentReadings(filtered.slice(0, 12));
+      renderRecentReadingsSelect();
+    }
+
+    async function writeReaderRecoveryFile(markdownText) {
+      if (!navigator.storage || !navigator.storage.getDirectory) {
+        localStorage.setItem('md_reader_working_recovery_fallback', markdownText);
+        return;
+      }
+
+      const root = await navigator.storage.getDirectory();
+      const fileHandle = await root.getFileHandle(READER_RECOVERY_FILE_NAME, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(markdownText);
+      await writable.close();
+    }
+
+    async function writeExternalReaderProgressFile(markdownText, allowPrompt) {
+      if (!state.selectedDirectoryHandle) return false;
+      const writable = await ensureDirectoryPermission(state.selectedDirectoryHandle, allowPrompt);
+      if (!writable) return false;
+
+      const fileNameToUse = buildReaderProgressFileName(state.sourceName);
+      const fileHandle = await state.selectedDirectoryHandle.getFileHandle(fileNameToUse, { create: true });
+      const writer = await fileHandle.createWritable();
+      await writer.write(markdownText);
+      await writer.close();
+      return true;
+    }
+
+    function schedulePersistReaderSnapshot() {
+      if (state.readerPersistTimer) {
+        clearTimeout(state.readerPersistTimer);
+      }
+
+      state.readerPersistTimer = setTimeout(async () => {
+        const workingMarkdown = getReaderAsMarkdown();
+        localStorage.setItem(STORAGE.workingMarkdown, workingMarkdown);
+        upsertRecentReadingSnapshot(workingMarkdown);
+
+        try {
+          await writeReaderRecoveryFile(workingMarkdown);
+          await writeExternalReaderProgressFile(workingMarkdown, false);
+        } catch (err) {
+          // Snapshot persistence should not interrupt reading flow.
+        }
+      }, 220);
+    }
+
+    function looksLikePageTitle(text) {
+      const t = (text || '').trim();
+      if (!t) return true;
+      if (/^\d{1,4}$/.test(t)) return true;
+      if (/^(第?\s*\d+\s*[页頁])$/i.test(t)) return true;
+      if (/^([Pp](age)?\.?\s*\d{1,4})$/.test(t)) return true;
+      if (/^(页码|頁碼)\s*[:：]?\s*\d{1,4}$/.test(t)) return true;
+      return false;
+    }
+
+    function extractOutlineFromMarkdown(markdown) {
+      const items = [];
+      const seen = new Set();
+      const lines = (markdown || '').split(/\r?\n/);
+      let inCodeFence = false;
+
+      for (const line of lines) {
+        const raw = (line || '').trim();
+        if (!raw) continue;
+        if (/^```/.test(raw)) {
+          inCodeFence = !inCodeFence;
+          continue;
+        }
+        if (inCodeFence) continue;
+
+        let level = 0;
+        let title = '';
+
+        const headingMatch = raw.match(/^(#{1,6})\s+(.+?)\s*$/);
+        if (headingMatch) {
+          level = Math.min(headingMatch[1].length, 4);
+          title = headingMatch[2].replace(/\s*#+\s*$/, '').trim();
+        } else {
+          if (/^[-*+]\s+/.test(raw) || /^\d+[.)]\s+/.test(raw) || raw.startsWith('>')) continue;
+
+          const chapterMatch = raw.match(/^第[\s　]*([0-9一二三四五六七八九十百千万零两〇]+)[\s　]*([章节卷部篇回])(?:[\s　]*[:：.\-、]?\s*)(.+)?$/);
+          if (chapterMatch) {
+            level = 1;
+            title = ('第' + chapterMatch[1] + chapterMatch[2] + (chapterMatch[3] ? (' ' + chapterMatch[3]) : '')).trim();
+          } else {
+            const enChapterMatch = raw.match(/^(chapter|part)\s+([0-9ivxlcdm]+)\b(?:\s*[:：.\-、]?\s*)(.+)?$/i);
+            if (enChapterMatch) {
+              level = 1;
+              const label = enChapterMatch[1].toUpperCase() + ' ' + enChapterMatch[2].toUpperCase();
+              title = (label + (enChapterMatch[3] ? (' ' + enChapterMatch[3]) : '')).trim();
+            }
+          }
+        }
+
+        if (!title || looksLikePageTitle(title)) continue;
+        const dedupeKey = title.toLowerCase();
+        if (seen.has(dedupeKey)) continue;
+        seen.add(dedupeKey);
+
+        items.push({
+          id: 'outline-' + (items.length + 1),
+          level: level || 1,
+          title: title
+        });
+      }
+
+      if (!items.length) {
+        items.push({
+          id: 'outline-1',
+          level: 1,
+          title: stripExtension(state.sourceName || t('untitled'))
+        });
+      }
+
+      return items;
+    }
+
+    function createSectionMarker(item) {
+      const marker = document.createElement('p');
+      marker.className = 'section-marker';
+      marker.dataset.outlineId = item.id;
+      marker.dataset.outlineTitle = item.title;
+      marker.setAttribute('contenteditable', 'false');
+      marker.textContent = '• ' + item.title;
+      return marker;
+    }
+
+    function ensureOutlineMarkers() {
+      state.outlineItems.forEach((item) => {
+        const exists = notes.querySelector('.section-marker[data-outline-id="' + item.id + '"]');
+        if (!exists) {
+          notes.appendChild(createSectionMarker(item));
+        }
+      });
+    }
+
+    function setActiveOutline(outlineId, options = {}) {
+      const item = state.outlineItems.find((x) => x.id === outlineId);
+      if (!item) return;
+      state.activeOutlineId = outlineId;
+      localStorage.setItem(STORAGE.activeOutlineSource, state.sourceName || '');
+      localStorage.setItem(STORAGE.activeOutlineTitle, item.title);
+      outlineStatus.textContent = t('currentOutline', { title: item.title });
+
+      const buttons = outlineNav.querySelectorAll('.outline-item-btn');
+      buttons.forEach((button) => {
+        button.classList.toggle('active', button.dataset.outlineId === outlineId);
+      });
+
+      if (options.scrollToMarker) {
+        const marker = notes.querySelector('.section-marker[data-outline-id="' + outlineId + '"]');
+        if (marker) {
+          marker.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+    }
+
+    function restoreActiveOutlineFromStorage() {
+      const savedSource = localStorage.getItem(STORAGE.activeOutlineSource) || '';
+      if (savedSource !== (state.sourceName || '')) return false;
+      const savedTitle = localStorage.getItem(STORAGE.activeOutlineTitle);
+      if (!savedTitle) return false;
+      const matched = state.outlineItems.find((item) => item.title === savedTitle);
+      if (!matched) return false;
+      state.activeOutlineId = matched.id;
+      return true;
+    }
+
+    function renderOutlineNav() {
+      outlineNav.innerHTML = '';
+      const ul = document.createElement('ul');
+      ul.className = 'outline-list';
+
+      state.outlineItems.forEach((item) => {
+        const li = document.createElement('li');
+        li.style.marginLeft = ((item.level - 1) * 14) + 'px';
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'outline-item-btn';
+        btn.dataset.outlineId = item.id;
+        btn.textContent = item.title;
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+
+      outlineNav.appendChild(ul);
+      if (!state.activeOutlineId && state.outlineItems.length) {
+        state.activeOutlineId = state.outlineItems[0].id;
+      }
+      if (state.activeOutlineId) {
+        setActiveOutline(state.activeOutlineId);
+      }
+    }
+
+    function rebuildOutlineAndNotes(resetNotes) {
+      state.outlineItems = extractOutlineFromMarkdown(state.originalMarkdown || '');
+      if (!state.outlineItems.find((x) => x.id === state.activeOutlineId)) {
+        state.activeOutlineId = '';
+      }
+      if (!state.activeOutlineId) {
+        restoreActiveOutlineFromStorage();
+      }
+      if (!state.activeOutlineId) {
+        state.activeOutlineId = state.outlineItems[0] ? state.outlineItems[0].id : '';
+      }
+      renderOutlineNav();
+
+      if (resetNotes) {
+        notes.innerHTML = '';
+        state.outlineItems.forEach((item) => {
+          notes.appendChild(createSectionMarker(item));
+        });
+      } else {
+        ensureOutlineMarkers();
+      }
+
+      if (state.activeOutlineId) {
+        setActiveOutline(state.activeOutlineId);
+      }
+    }
+
+    function getSectionInsertPoint(outlineId) {
+      const marker = notes.querySelector('.section-marker[data-outline-id="' + outlineId + '"]');
+      if (!marker) return null;
+
+      let cursor = marker.nextSibling;
+      let last = marker;
+      while (cursor) {
+        if (cursor.nodeType === Node.ELEMENT_NODE && cursor.classList && cursor.classList.contains('section-marker')) {
+          break;
+        }
+        last = cursor;
+        cursor = cursor.nextSibling;
+      }
+      return { marker: marker, last: last };
+    }
+
+    function appendNoteToOutlineId(outlineId, text, typeClass, silent) {
+      const clean = normalizeSelection(text);
+      if (!clean) return;
+      const targetId = outlineId || (state.outlineItems[0] ? state.outlineItems[0].id : '');
+      if (!targetId) return;
+      const insertPoint = getSectionInsertPoint(targetId);
+      if (!insertPoint) return;
+
+      const previousScrollTop = notes.scrollTop;
+      const block = createNoteBlock(clean, typeClass);
+      if (insertPoint.last === insertPoint.marker) {
+        insertPoint.marker.insertAdjacentElement('afterend', block);
+      } else if (insertPoint.last.nextSibling) {
+        insertPoint.last.parentNode.insertBefore(block, insertPoint.last.nextSibling);
+      } else {
+        insertPoint.last.parentNode.appendChild(block);
+      }
+      notes.scrollTop = previousScrollTop;
+      if (!silent) {
+        noteStatus.textContent = t('noteInserted');
+        scheduleSaveNotes();
+      }
+    }
+
+    function appendNoteToActiveOutline(text, typeClass) {
+      if (!state.activeOutlineId && state.outlineItems.length) {
+        state.activeOutlineId = state.outlineItems[0].id;
+      }
+      appendNoteToOutlineId(state.activeOutlineId, text, typeClass, false);
+    }
+
+    function updateSourceLabel() {
+      fileName.textContent = t('sourceCopyEditing', { name: state.sourceName });
+    }
+
+    function persistReaderState() {
+      localStorage.setItem(STORAGE.originalMarkdown, state.originalMarkdown);
+      localStorage.setItem(STORAGE.sourceName, state.sourceName);
+      localStorage.setItem(STORAGE.workingHtml, reader.innerHTML);
+      schedulePersistReaderSnapshot();
+    }
+
+    function loadMarkdownAsWorkingCopy(markdown, nameLabel, options = {}) {
+      const startNewSession = options.startNewSession !== false;
+      if (startNewSession) {
+        startNewReadingSession();
+      } else if (!state.readingSessionId) {
+        ensureReadingSessionId();
+      }
+      state.originalMarkdown = markdown;
+      refreshOriginalReadableChars();
+      state.sourceName = nameLabel;
+      state.notesFileNameMode = 'linked';
+      localStorage.setItem(STORAGE.notesFileNameMode, 'linked');
+      reader.innerHTML = markdownToHtml(markdown);
+      updateSourceLabel();
+      syncNotesFileNameWithSource(true);
+      rebuildOutlineAndNotes(true);
+      readerStatus.textContent = t('readerCopyCreated');
+      persistReaderState();
+      updateReadingProgress();
+      scheduleSaveNotes();
+    }
+
+    function resetReaderToOriginalCopy() {
+      if (!state.originalMarkdown) return;
+      reader.innerHTML = markdownToHtml(state.originalMarkdown);
+      readerStatus.textContent = t('readerResetDone');
+      persistReaderState();
+      updateReadingProgress();
+    }
+
+    function trimReaderBeforeRange(range) {
+      const trimRange = document.createRange();
+      trimRange.selectNodeContents(reader);
+      try {
+        trimRange.setEnd(range.endContainer, range.endOffset);
+      } catch (err) {
+        return;
+      }
+      if (trimRange.collapsed) return;
+
+      trimRange.deleteContents();
+
+      while (reader.firstChild && !reader.firstChild.textContent.trim()) {
+        reader.removeChild(reader.firstChild);
+      }
+
+      if (!reader.textContent.trim()) {
+        reader.innerHTML = '<p class="reader-end" data-reader-end="1">' + t('readingDone') + '</p>';
+      }
+
+      persistReaderState();
+      updateReadingProgress();
+    }
+
+    function createNoteBlock(text, typeClass) {
+      const p = document.createElement('p');
+      p.classList.add('note-block');
+      if (typeClass) {
+        p.classList.add(typeClass);
+      }
+      p.textContent = text;
+      return p;
+    }
+
+    function appendQuoteToNotes(text) {
+      appendNoteToActiveOutline(text, 'quote-note');
+    }
+
+    function findBlockElementFromNode(node) {
+      let current = node && node.nodeType === 1 ? node : node ? node.parentElement : null;
+      while (current && current !== notes) {
+        if (current.classList && current.classList.contains('section-marker')) return null;
+        if (current.classList && current.classList.contains('note-block')) return current;
+        if (/^(P|DIV|LI|BLOCKQUOTE)$/i.test(current.tagName)) return current;
+        current = current.parentElement;
+      }
+      return null;
+    }
+
+    function markCurrentBlockAsUserNote() {
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+      const anchor = selection.anchorNode;
+      if (!anchor || !notes.contains(anchor)) return;
+
+      let block = findBlockElementFromNode(anchor);
+      if (!block) {
+        block = document.createElement('p');
+        notes.appendChild(block);
+      }
+
+      if (block.classList.contains('quote-note')) {
+        return;
+      }
+
+      block.classList.add('note-block', 'user-note');
+    }
+
+    function normalizeNotesStructure() {
+      const snapshot = Array.from(notes.childNodes);
+
+      snapshot.forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent.trim();
+          if (!text) {
+            notes.removeChild(node);
+            return;
+          }
+          const block = createNoteBlock(text, null);
+          notes.replaceChild(block, node);
+          return;
+        }
+
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          const element = node;
+          if (element.classList.contains('section-marker')) {
+            return;
+          }
+          if (element.tagName === 'BR') {
+            notes.removeChild(element);
+            return;
+          }
+
+          if (!element.classList.contains('note-block')) {
+            element.classList.add('note-block');
+          }
+
+          if (!element.textContent.trim()) {
+            notes.removeChild(element);
+          }
+        }
+      });
+    }
+
+    function notesToMarkdown() {
+      normalizeNotesStructure();
+      const output = [];
+      let hasCurrentSection = false;
+      let uncategorizedAdded = false;
+      const children = Array.from(notes.children);
+
+      children.forEach((element) => {
+        if (element.classList.contains('section-marker')) {
+          const title = (element.dataset.outlineTitle || element.textContent || '').replace(/^•\s*/, '').trim();
+          if (!title || looksLikePageTitle(title)) return;
+          output.push('- ' + title);
+          hasCurrentSection = true;
+          return;
+        }
+
+        if (!element.classList.contains('note-block')) return;
+        const raw = element.innerText.replace(/\n{3,}/g, '\n\n').trim();
+        if (!raw) return;
+
+        if (!hasCurrentSection) {
+          if (!uncategorizedAdded) {
+            output.push('- ' + t('unclassified'));
+            uncategorizedAdded = true;
+          }
+          hasCurrentSection = true;
+        }
+
+        let label = '';
+        if (element.classList.contains('quote-note')) label = t('quoteLabel');
+        if (element.classList.contains('user-note')) label = t('noteLabel');
+        const firstLine = label + raw.split('\n')[0];
+        output.push('  - ' + firstLine);
+        raw.split('\n').slice(1).forEach((line) => {
+          output.push('    ' + line);
+        });
+      });
+
+      return output.join('\n').trim();
+    }
+
+    function renderNotesFromMarkdown(markdownText) {
+      rebuildOutlineAndNotes(true);
+
+      const lines = (markdownText || '').split('\n');
+      let currentOutlineId = state.outlineItems[0] ? state.outlineItems[0].id : '';
+      let buffer = '';
+      let bufferType = 'user-note';
+
+      function flushBuffer() {
+        const text = normalizeSelection(buffer.replace(/\n/g, ' '));
+        if (!text) return;
+        appendNoteToOutlineId(currentOutlineId, text, bufferType, true);
+        buffer = '';
+      }
+
+      lines.forEach((line) => {
+        const sectionMatch = line.match(/^-\s+(.+)$/);
+        if (sectionMatch) {
+          flushBuffer();
+          const title = sectionMatch[1].trim();
+          const matched = state.outlineItems.find((item) => item.title === title);
+          currentOutlineId = matched ? matched.id : currentOutlineId;
+          return;
+        }
+
+        const noteMatch = line.match(/^\s{2,}-\s+(.+)$/);
+        if (noteMatch) {
+          flushBuffer();
+          let content = noteMatch[1].trim();
+          bufferType = 'user-note';
+          if (content.startsWith('[摘录]') || content.startsWith('[Quote]')) {
+            content = content.replace(/^\[(摘录|Quote)\]\s*/, '');
+            bufferType = 'quote-note';
+          } else if (content.startsWith('[笔记]') || content.startsWith('[Note]')) {
+            content = content.replace(/^\[(笔记|Note)\]\s*/, '');
+            bufferType = 'user-note';
+          }
+          buffer = content;
+          return;
+        }
+
+        if (/^\s{4,}\S/.test(line) && buffer) {
+          buffer += '\n' + line.trim();
+          return;
+        }
+      });
+
+      flushBuffer();
+      scheduleSaveNotes();
+    }
+
+    function updateSavePathLabel(message) {
+      const file = sanitizeFileName(notesFileNameInput.value);
+      if (message) {
+        savePath.textContent = message;
+        return;
+      }
+      if (state.selectedDirectoryHandle) {
+        savePath.textContent = t('savePathExternal', { folder: state.selectedDirectoryHandle.name, file: file });
+      } else {
+        savePath.textContent = t('savePathDefault', { file: RECOVERY_FILE_NAME });
+      }
+    }
+
+    async function openHandleDb() {
+      return await new Promise((resolve, reject) => {
+        const req = indexedDB.open(HANDLE_DB_NAME, 1);
+        req.onupgradeneeded = () => {
+          req.result.createObjectStore(HANDLE_STORE);
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    async function saveDirectoryHandleToDb(handle) {
+      if (!window.indexedDB) return;
+      const db = await openHandleDb();
+      await new Promise((resolve, reject) => {
+        const tx = db.transaction(HANDLE_STORE, 'readwrite');
+        tx.objectStore(HANDLE_STORE).put(handle, HANDLE_KEY);
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+      });
+      db.close();
+    }
+
+    async function loadDirectoryHandleFromDb() {
+      if (!window.indexedDB) return null;
+      const db = await openHandleDb();
+      const handle = await new Promise((resolve, reject) => {
+        const tx = db.transaction(HANDLE_STORE, 'readonly');
+        const req = tx.objectStore(HANDLE_STORE).get(HANDLE_KEY);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error);
+      }).catch(() => null);
+      db.close();
+      return handle;
+    }
+
+    async function ensureDirectoryPermission(handle, allowPrompt) {
+      if (!handle || !handle.queryPermission) return false;
+      const query = await handle.queryPermission({ mode: 'readwrite' });
+      if (query === 'granted') return true;
+      if (!allowPrompt || !handle.requestPermission) return false;
+      const request = await handle.requestPermission({ mode: 'readwrite' });
+      return request === 'granted';
+    }
+
+    async function writeRecoveryFile(markdownText) {
+      if (!navigator.storage || !navigator.storage.getDirectory) {
+        localStorage.setItem('md_reader_recovery_fallback', markdownText);
+        return;
+      }
+
+      const root = await navigator.storage.getDirectory();
+      const fileHandle = await root.getFileHandle(RECOVERY_FILE_NAME, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(markdownText);
+      await writable.close();
+    }
+
+    async function readRecoveryFile() {
+      if (!navigator.storage || !navigator.storage.getDirectory) {
+        return localStorage.getItem('md_reader_recovery_fallback') || '';
+      }
+
+      try {
+        const root = await navigator.storage.getDirectory();
+        const fileHandle = await root.getFileHandle(RECOVERY_FILE_NAME, { create: false });
+        const file = await fileHandle.getFile();
+        return await file.text();
+      } catch (err) {
+        return '';
+      }
+    }
+
+    async function writeExternalFile(markdownText, allowPermissionPrompt) {
+      if (!state.selectedDirectoryHandle) return false;
+      const writable = await ensureDirectoryPermission(state.selectedDirectoryHandle, allowPermissionPrompt);
+      if (!writable) return false;
+
+      const fileNameToUse = sanitizeFileName(notesFileNameInput.value);
+      const fileHandle = await state.selectedDirectoryHandle.getFileHandle(fileNameToUse, { create: true });
+      const writer = await fileHandle.createWritable();
+      await writer.write(markdownText);
+      await writer.close();
+      return true;
+    }
+
+    async function saveNotesImmediately(options = {}) {
+      const allowExternalPrompt = options.allowExternalPrompt === true;
+      const markdownText = notesToMarkdown();
+      localStorage.setItem(STORAGE.notesHtml, notes.innerHTML);
+      let recoverySaved = false;
+      let externalSaved = false;
+      let externalError = '';
+      try {
+        await writeRecoveryFile(markdownText);
+        recoverySaved = true;
+      } catch (err) {
+        recoverySaved = false;
+      }
+
+      try {
+        externalSaved = await writeExternalFile(markdownText, allowExternalPrompt);
+      } catch (err) {
+        externalSaved = false;
+        externalError = err && err.message ? err.message : t('externalSaveFailed');
+      }
+
+      if (externalSaved) {
+        noteStatus.classList.add('status-strong');
+        noteStatus.textContent = t('noteSavedExternal');
+      } else if (recoverySaved) {
+        noteStatus.classList.add('status-strong');
+        noteStatus.textContent = externalError
+          ? t('noteSavedRecoveryWithExternalErr', { err: externalError })
+          : t('noteSavedRecoveryOnly');
+      } else {
+        noteStatus.classList.remove('status-strong');
+        noteStatus.textContent = t('noteSaveFailed');
+      }
+
+      updateSavePathLabel();
+    }
+
+    function scheduleSaveNotes() {
+      if (state.noteSaveTimer) {
+        clearTimeout(state.noteSaveTimer);
+      }
+      state.noteSaveTimer = setTimeout(() => {
+        saveNotesImmediately({ allowExternalPrompt: false });
+      }, 250);
+    }
+
+    function clearNotes() {
+      rebuildOutlineAndNotes(true);
+      noteStatus.classList.remove('status-strong');
+      noteStatus.textContent = t('noteCleared');
+      scheduleSaveNotes();
+    }
+
+    async function copyNotesMarkdown() {
+      const markdownText = notesToMarkdown();
+      if (!markdownText) return;
+      try {
+        await navigator.clipboard.writeText(markdownText);
+        noteStatus.textContent = t('noteCopied');
+      } catch (err) {
+        noteStatus.textContent = t('noteCopyFailed');
+      }
+    }
+
+    function handleSelectionCapture() {
+      const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+
+      const selectedText = normalizeSelection(selection.toString());
+      if (!selectedText) return;
+
+      const range = selection.getRangeAt(0).cloneRange();
+      const rootNode = range.commonAncestorContainer.nodeType === 1
+        ? range.commonAncestorContainer
+        : range.commonAncestorContainer.parentElement;
+
+      if (!rootNode || !reader.contains(rootNode)) return;
+
+      appendQuoteToNotes(selectedText);
+      trimReaderBeforeRange(range);
+      readerStatus.textContent = t('readerTrimDone');
+      selection.removeAllRanges();
+    }
+
+    function isolateReaderWheel(event) {
+      const factor = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? reader.clientHeight : 1;
+      const deltaY = event.deltaY * factor;
+      const deltaX = event.deltaX * factor;
+      event.preventDefault();
+      event.stopPropagation();
+      reader.scrollTop += deltaY;
+      reader.scrollLeft += deltaX;
+    }
+
+    async function importMarkdownFile(file) {
+      if (!file) return;
+      if (state.isImporting) {
+        readerStatus.textContent = t('importBusy');
+        return;
+      }
+
+      state.isImporting = true;
+      try {
+        readerStatus.textContent = t('importing', { name: file.name });
+        const markdown = await convertDocumentToMarkdown(file);
+        loadMarkdownAsWorkingCopy(markdown, file.name);
+        readerStatus.textContent = t('importDone', { name: file.name });
+      } catch (err) {
+        const message = err && err.message ? err.message : '';
+        readerStatus.textContent = t('importFailed', { msg: message || t('unknownError') });
+      } finally {
+        state.isImporting = false;
+      }
+    }
+
+    function importRecentReadingByIndex(indexValue) {
+      const idx = Number(indexValue);
+      if (!Number.isInteger(idx) || idx < 0) return false;
+
+      const list = getRecentReadings();
+      const entry = list[idx];
+      if (!entry || !entry.workingMarkdown) return false;
+
+      const fallbackTotal = normalizeCountText(entry.workingMarkdown).length;
+      const totalChars = Number(entry.originalReadableChars) > 0 ? Number(entry.originalReadableChars) : fallbackTotal;
+      loadMarkdownAsWorkingCopy(entry.workingMarkdown, entry.sourceName || t('recentFallbackName'));
+      state.originalReadableChars = Math.max(totalChars, normalizeCountText(extractPlainTextFromMarkdown(state.originalMarkdown)).length);
+      updateReadingProgress();
+      readerStatus.textContent = t('recentImportedCopy');
+      return true;
+    }
+
+    function openRecentReadingInNewPage(indexValue) {
+      const idx = Number(indexValue);
+      if (!Number.isInteger(idx) || idx < 0) return false;
+      const list = getRecentReadings();
+      if (idx >= list.length) return false;
+
+      const url = new URL(window.location.href);
+      url.searchParams.set('recent', String(idx));
+      const opened = window.open(url.toString(), '_blank');
+      return Boolean(opened);
+    }
+
+    function tryBootstrapRecentFromUrl() {
+      const url = new URL(window.location.href);
+      const recentParam = url.searchParams.get('recent');
+      if (recentParam === null) return false;
+
+      const loaded = importRecentReadingByIndex(recentParam);
+      if (loaded) {
+        readerStatus.textContent = t('recentImportedInNewPage');
+      }
+
+      url.searchParams.delete('recent');
+      window.history.replaceState({}, '', url.toString());
+      return loaded;
+    }
+
+    function isSupportedDocumentFile(file) {
+      if (!file) return false;
+      const ext = getFileExtension(file.name);
+      return ext === 'md' || ext === 'markdown' || ext === 'txt' || ext === 'pdf' || ext === 'epub';
+    }
+
+    function setDropActive(target, active) {
+      if (!target) return;
+      target.classList.toggle('drag-active', active);
+      if (target === reader) {
+        target.style.outline = active ? '2px dashed #8eb59f' : 'none';
+        target.style.outlineOffset = active ? '-8px' : '';
+      }
+    }
+
+    async function handleMarkdownDrop(event, source) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+      if (!file) return;
+      if (!isSupportedDocumentFile(file)) {
+        readerStatus.textContent = t('onlySupportTypes');
+        return;
+      }
+
+      await importMarkdownFile(file);
+      if (source === 'import-zone') {
+        readerStatus.textContent = t('importDropDone');
+      }
+    }
+
+    function handleTypedInputColoring() {
+      const type = state.pendingInputType || '';
+      const isTyping = type === 'insertText' || type === 'insertCompositionText';
+      if (isTyping) {
+        markCurrentBlockAsUserNote();
+      }
+      scheduleSaveNotes();
+    }
+
+    async function restoreNotesState() {
+      const savedHtml = localStorage.getItem(STORAGE.notesHtml);
+      if (savedHtml && savedHtml.trim()) {
+        notes.innerHTML = savedHtml;
+        ensureOutlineMarkers();
+        if (state.activeOutlineId) {
+          setActiveOutline(state.activeOutlineId);
+        }
+        normalizeNotesStructure();
+        noteStatus.textContent = t('noteRestoredLocal');
+        return;
+      }
+
+      const recoveryMarkdown = await readRecoveryFile();
+      if (recoveryMarkdown.trim()) {
+        renderNotesFromMarkdown(recoveryMarkdown);
+        ensureOutlineMarkers();
+        if (state.activeOutlineId) {
+          setActiveOutline(state.activeOutlineId);
+        }
+        noteStatus.textContent = t('noteRestoredRecovery');
+      } else {
+        rebuildOutlineAndNotes(true);
+      }
+    }
+
+    async function restoreDirectoryState() {
+      const savedHandle = await loadDirectoryHandleFromDb();
+      if (!savedHandle) {
+        updateSavePathLabel();
+        return;
+      }
+
+      state.selectedDirectoryHandle = savedHandle;
+      updateSavePathLabel(t('folderRecovered', { name: savedHandle.name }));
+      setTimeout(() => updateSavePathLabel(), 1200);
+    }
+
+    function restoreReaderState() {
+      const savedOriginal = localStorage.getItem(STORAGE.originalMarkdown);
+      const savedWorking = localStorage.getItem(STORAGE.workingHtml);
+      const savedSource = localStorage.getItem(STORAGE.sourceName);
+
+      if (savedOriginal) {
+        state.originalMarkdown = savedOriginal;
+        refreshOriginalReadableChars();
+        state.sourceName = savedSource || t('sourceFallback');
+        reader.innerHTML = savedWorking || markdownToHtml(savedOriginal);
+        updateSourceLabel();
+        rebuildOutlineAndNotes(false);
+        updateReadingProgress();
+        return;
+      }
+
+      loadMarkdownAsWorkingCopy(DEMO_MD, t('demoName'));
+    }
+
+    mdFile.addEventListener('change', async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      await importMarkdownFile(file);
+    });
+
+    loadDemoBtn.addEventListener('click', () => {
+      loadMarkdownAsWorkingCopy(DEMO_MD, t('demoName'));
+    });
+
+    loadRecentReadingBtn.addEventListener('click', () => {
+      const ok = openRecentReadingInNewPage(recentReadingSelect.value);
+      if (!ok) {
+        readerStatus.textContent = t('openRecentHint');
+      }
+    });
+
+    recentReadingSelect.addEventListener('change', () => {
+      refreshRecentReadingActionButtons();
+    });
+
+    deleteRecentReadingBtn.addEventListener('click', () => {
+      const ok = removeRecentReadingAt(recentReadingSelect.value);
+      if (!ok) {
+        readerStatus.textContent = t('deleteRecentHint');
+        return;
+      }
+      readerStatus.textContent = t('deletedRecent');
+    });
+
+    clearRecentReadingsBtn.addEventListener('click', () => {
+      const list = getRecentReadings();
+      if (!list.length) {
+        readerStatus.textContent = t('recentEmpty');
+        return;
+      }
+      clearRecentReadings();
+      readerStatus.textContent = t('recentCleared');
+    });
+
+    resetWorkingCopyBtn.addEventListener('click', resetReaderToOriginalCopy);
+
+    clearNotesBtn.addEventListener('click', clearNotes);
+    copyNotesBtn.addEventListener('click', copyNotesMarkdown);
+    saveNowBtn.addEventListener('click', () => {
+      saveNotesImmediately({ allowExternalPrompt: true });
+    });
+
+    themeSelect.addEventListener('change', () => {
+      applyPageTheme(themeSelect.value);
+    });
+
+    adhdModeToggle.addEventListener('change', () => {
+      setAdhdMode(adhdModeToggle.checked);
+    });
+
+    adhdFontSizeRange.addEventListener('input', () => {
+      applyAdhdFontSize(adhdFontSizeRange.value);
+    });
+
+    pdfOcrToggle.addEventListener('change', () => {
+      persistPdfOcrSettings();
+    });
+
+    ocrMaxPagesInput.addEventListener('change', () => {
+      persistPdfOcrSettings();
+    });
+
+    languageSelect.addEventListener('change', () => {
+      applyLanguage(languageSelect.value);
+    });
+
+    notesFileNameInput.addEventListener('change', () => {
+      const clean = sanitizeFileName(notesFileNameInput.value);
+      state.notesFileNameMode = 'manual';
+      localStorage.setItem(STORAGE.notesFileNameMode, 'manual');
+      setNotesFileName(clean);
+      updateSavePathLabel();
+      scheduleSaveNotes();
+    });
+
+    pickFolderBtn.addEventListener('click', async () => {
+      if (!window.showDirectoryPicker) {
+        updateSavePathLabel(t('folderUnsupported'));
+        return;
+      }
+
+      try {
+        const handle = await window.showDirectoryPicker({ mode: 'readwrite' });
+        state.selectedDirectoryHandle = handle;
+        try {
+          await saveDirectoryHandleToDb(handle);
+        } catch (err) {
+          // Continue using this session's handle even if persistence fails.
+        }
+        updateSavePathLabel();
+        await saveNotesImmediately({ allowExternalPrompt: true });
+      } catch (err) {
+        updateSavePathLabel(t('folderNotSelected'));
+      }
+    });
+
+    notes.addEventListener('beforeinput', (event) => {
+      state.pendingInputType = event.inputType || '';
+    });
+
+    notes.addEventListener('input', handleTypedInputColoring);
+    outlineNav.addEventListener('click', (event) => {
+      const target = event.target.closest('.outline-item-btn');
+      if (!target) return;
+      const outlineId = target.dataset.outlineId;
+      if (!outlineId) return;
+      setActiveOutline(outlineId, { scrollToMarker: true });
+    });
+
+    reader.addEventListener('mouseup', handleSelectionCapture);
+    reader.addEventListener('wheel', isolateReaderWheel, { passive: false });
+    reader.addEventListener('touchend', () => {
+      setTimeout(handleSelectionCapture, 100);
+    });
+
+    ['dragenter', 'dragover'].forEach((type) => {
+      reader.addEventListener(type, (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setDropActive(reader, true);
+      });
+
+      importDropZone.addEventListener(type, (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setDropActive(importDropZone, true);
+      });
+    });
+
+    ['dragleave', 'drop'].forEach((type) => {
+      reader.addEventListener(type, (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setDropActive(reader, false);
+      });
+
+      importDropZone.addEventListener(type, (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        setDropActive(importDropZone, false);
+      });
+    });
+
+    reader.addEventListener('drop', async (event) => {
+      await handleMarkdownDrop(event, 'reader');
+    });
+
+    importDropZone.addEventListener('drop', async (event) => {
+      await handleMarkdownDrop(event, 'import-zone');
+    });
+
+    async function restoreAllState() {
+      ensureReadingSessionId();
+
+      const savedLanguage = getPreferredLanguage();
+      applyLanguage(savedLanguage);
+
+      const savedMode = localStorage.getItem(STORAGE.notesFileNameMode);
+      state.notesFileNameMode = savedMode === 'manual' ? 'manual' : 'linked';
+
+      const savedPageTheme = localStorage.getItem(STORAGE.pageTheme);
+      applyPageTheme(savedPageTheme || 'paper');
+
+      const savedAdhdMode = localStorage.getItem(STORAGE.adhdMode);
+      setAdhdMode(savedAdhdMode === '1');
+
+      const savedAdhdFontSize = localStorage.getItem(STORAGE.adhdFontSize);
+      applyAdhdFontSize(savedAdhdFontSize || '20');
+
+      const savedPdfOcr = localStorage.getItem(STORAGE.pdfOcrEnabled);
+      pdfOcrToggle.checked = savedPdfOcr === '1';
+      const savedOcrMaxPages = localStorage.getItem(STORAGE.ocrMaxPages);
+      if (savedOcrMaxPages) {
+        ocrMaxPagesInput.value = savedOcrMaxPages;
+      }
+      persistPdfOcrSettings();
+
+      const bootstrapped = tryBootstrapRecentFromUrl();
+      if (!bootstrapped) {
+        restoreReaderState();
+      }
+
+      const savedNoteFileName = localStorage.getItem(STORAGE.notesFileName);
+      if (state.notesFileNameMode === 'manual' && savedNoteFileName) {
+        setNotesFileName(savedNoteFileName);
+      } else {
+        syncNotesFileNameWithSource(true);
+      }
+
+      await restoreNotesState();
+      await restoreDirectoryState();
+      updateSavePathLabel();
+      renderRecentReadingsSelect();
+    }
+
+    restoreAllState();
+  </script>
+</body>
+</html>
