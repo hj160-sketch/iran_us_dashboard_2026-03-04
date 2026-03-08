@@ -1,5 +1,6 @@
 ﻿
 const LANG_KEY = "aoe4_lang";
+const SITE_LANG_KEY = "lyralab_lang";
 const SUPPORTED_LANGS = ["zh", "en", "ja"];
 const TIME_POINTS = [4, 6, 8, 10, 12, 14, 16, 18, 20];
 
@@ -138,10 +139,10 @@ function renderSummary(sim,threat){const points=sim.points,last=points[points.le
 
 function render(){const sim=simulate();const threat=computeThreat(sim);const metric=elements.chartMetric.value;drawChart(sim.points,metric);updateStepNotes(sim.points,threat);renderSummary(sim,threat);}
 
-function applyLanguage(lang){currentLang=SUPPORTED_LANGS.includes(lang)?lang:"zh";try{localStorage.setItem(LANG_KEY,currentLang);}catch(e){}if(elements.langSelect)elements.langSelect.value=currentLang;applyStaticText();refreshSelectOptionText();createTimelineRows();render();}
+function applyLanguage(lang){currentLang=SUPPORTED_LANGS.includes(lang)?lang:"zh";try{localStorage.setItem(LANG_KEY,currentLang);}catch(e){}try{localStorage.setItem(SITE_LANG_KEY,currentLang);}catch(e){}if(elements.langSelect)elements.langSelect.value=currentLang;applyStaticText();refreshSelectOptionText();createTimelineRows();render();}
 
 function bind(){[elements.startVillagers,elements.startTc,elements.startFood,elements.startWood,elements.startGold,elements.startStone,elements.easternDifficulty,elements.chartMetric].forEach(node=>{node.addEventListener("input",render);node.addEventListener("change",render);});elements.resetPlan.addEventListener("click",()=>{plan=TIME_POINTS.map(()=>({unitId:"spearman",unitCount:0,buildTc:false,econId:"none",econCount:0}));createTimelineRows();render();});if(elements.langSelect)elements.langSelect.addEventListener("change",()=>applyLanguage(elements.langSelect.value));}
 
 bind();
-let initLang="zh";try{const s=localStorage.getItem(LANG_KEY);if(SUPPORTED_LANGS.includes(s))initLang=s;}catch(e){}
+let initLang="zh";try{const urlLang=new URLSearchParams(window.location.search).get("lang");const s=localStorage.getItem(LANG_KEY);const site=localStorage.getItem(SITE_LANG_KEY);if(SUPPORTED_LANGS.includes(urlLang))initLang=urlLang;else if(SUPPORTED_LANGS.includes(s))initLang=s;else if(SUPPORTED_LANGS.includes(site))initLang=site;}catch(e){}
 applyLanguage(initLang);

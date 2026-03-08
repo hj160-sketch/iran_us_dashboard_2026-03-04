@@ -1,5 +1,6 @@
 ﻿
 const LANG_KEY = "aoe4_lang";
+const SITE_LANG_KEY = "lyralab_lang";
 const SUPPORTED_LANGS = ["zh", "en", "ja"];
 const BASE_GATHER_RATE = { food: 40, wood: 38, gold: 36, stone: 32 };
 const VILLAGER_TRAIN_PER_MIN = 3;
@@ -167,9 +168,9 @@ function readInput(){const currentMinute=Math.max(2,Math.min(18,Number(elements.
 
 function render(){const input=readInput();const ranked=scoreStrategies(input);const best=ranked[0];const plan=generatePlan(input,best);const points=plan.points;const metric=elements.bestChartMetric.value;elements.bestPlanName.textContent=best.label;elements.bestTcMinute.textContent=plan.secondTcMinute?`${plan.secondTcMinute}:00`:t("notOpen");elements.bestFinalVillagers.textContent=fmt(points[points.length-1]?.villagers||0,0);elements.bestPlanReason.textContent=t("reason",{civ:civName(input.civId),map:mapName(input.mapId),tempo:tempoText(tempoOf(input.mapId)),best:best.label});elements.bestChartNote.textContent=t("chartNote",{metric:getMetricLabel(metric)});drawChart(points,metric);renderTable(points);renderMistakes(input,plan);}
 
-function applyLanguage(lang){currentLang=SUPPORTED_LANGS.includes(lang)?lang:"zh";try{localStorage.setItem(LANG_KEY,currentLang);}catch(e){}if(elements.langSelect)elements.langSelect.value=currentLang;applyStaticText();populateSelects();render();}
+function applyLanguage(lang){currentLang=SUPPORTED_LANGS.includes(lang)?lang:"zh";try{localStorage.setItem(LANG_KEY,currentLang);}catch(e){}try{localStorage.setItem(SITE_LANG_KEY,currentLang);}catch(e){}if(elements.langSelect)elements.langSelect.value=currentLang;applyStaticText();populateSelects();render();}
 function bind(){["bestCiv","bestMap","bestEnemyAllIn","bestCurrentMinute","bestEndMinute","bestStartVillagers","bestStartTc","bestChartMetric"].forEach(k=>{elements[k].addEventListener("input",render);elements[k].addEventListener("change",render);});if(elements.langSelect)elements.langSelect.addEventListener("change",()=>applyLanguage(elements.langSelect.value));}
 
 bind();
-let initLang="zh";try{const s=localStorage.getItem(LANG_KEY);if(SUPPORTED_LANGS.includes(s))initLang=s;}catch(e){}
+let initLang="zh";try{const urlLang=new URLSearchParams(window.location.search).get("lang");const s=localStorage.getItem(LANG_KEY);const site=localStorage.getItem(SITE_LANG_KEY);if(SUPPORTED_LANGS.includes(urlLang))initLang=urlLang;else if(SUPPORTED_LANGS.includes(s))initLang=s;else if(SUPPORTED_LANGS.includes(site))initLang=site;}catch(e){}
 applyLanguage(initLang);

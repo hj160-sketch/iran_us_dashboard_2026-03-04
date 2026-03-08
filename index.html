@@ -1333,7 +1333,8 @@
     messageForm.addEventListener("submit", submitMessage);
 
     renderPublicMessages();
-    applyLanguage(localStorage.getItem("lyralab_lang") || "zh");
+    const initialLang = new URLSearchParams(window.location.search).get("lang") || localStorage.getItem("lyralab_lang") || "zh";
+    applyLanguage(initialLang);
   </script>
 </body>
 </html>

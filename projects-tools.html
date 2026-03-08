@@ -121,7 +121,9 @@
     }
   </style>
   <script>
-    window.location.replace("legal-projects.html");
+    const redirectLang = new URLSearchParams(window.location.search).get("lang") || localStorage.getItem("lyralab_lang");
+    const redirectTarget = redirectLang ? `legal-projects.html?lang=${encodeURIComponent(redirectLang)}` : "legal-projects.html";
+    window.location.replace(redirectTarget);
   </script>
 </head>
 <body>

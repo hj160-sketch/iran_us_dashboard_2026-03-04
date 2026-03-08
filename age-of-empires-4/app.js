@@ -1,5 +1,6 @@
 ﻿
 const LANG_KEY = "aoe4_lang";
+const SITE_LANG_KEY = "lyralab_lang";
 const SUPPORTED_LANGS = ["zh", "en", "ja"];
 
 const civProfiles = {
@@ -103,6 +104,7 @@ function tempoText(tk){return tk==="fast"?t("tempoFast"):tk==="slow"?t("tempoSlo
 function applyLanguage(lang){
   currentLang = SUPPORTED_LANGS.includes(lang)?lang:"zh";
   try{localStorage.setItem(LANG_KEY,currentLang);}catch(e){}
+  try{localStorage.setItem(SITE_LANG_KEY,currentLang);}catch(e){}
   if(elements.langSelect)elements.langSelect.value=currentLang;
   Object.entries(staticIdMap).forEach(([id,key])=>{const n=document.getElementById(id);if(n)n.textContent=t(key);});
   document.title=t("pageTitle");
@@ -199,5 +201,13 @@ function wire(){
 }
 
 wire();
-let initLang="zh";try{const saved=localStorage.getItem(LANG_KEY);if(SUPPORTED_LANGS.includes(saved))initLang=saved;}catch(e){}
+let initLang="zh";
+try{
+  const urlLang = new URLSearchParams(window.location.search).get("lang");
+  const saved = localStorage.getItem(LANG_KEY);
+  const siteSaved = localStorage.getItem(SITE_LANG_KEY);
+  if(SUPPORTED_LANGS.includes(urlLang)) initLang = urlLang;
+  else if(SUPPORTED_LANGS.includes(saved)) initLang = saved;
+  else if(SUPPORTED_LANGS.includes(siteSaved)) initLang = siteSaved;
+}catch(e){}
 applyLanguage(initLang);
