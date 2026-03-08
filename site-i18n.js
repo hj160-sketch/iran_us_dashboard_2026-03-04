@@ -21,9 +21,10 @@
       footerLead: "如需讨论项目、合作、申请相关问题，或只是打个招呼，可以使用下面任一联系方式。",
       email: "Email: hj160@georgetown.edu",
       message: "留言板",
+      licensing: "授权说明",
       xiaohongshu: "小红书",
       disclaimer1:
-        "<strong>免责声明</strong>：本网站部分内容可能由 AI 基于公开信息自动检索、整理、摘要或辅助生成，仅供研究、作品展示与一般参考，不代表本人事实判断、法律意见或政治立场。",
+        "<strong>免责声明</strong>：本网站部分内容可能由 AI 基于公开信息自动检索、整理、摘要或辅助生成，仅供研究、作品展示与一般参考，不代表本人事实判断、法律意见或政治立场。本站部分第三方图片、图标、字体、界面元素或其他素材，可能依据公开许可、开源协议、平台授权、已获许可或其他适用规则使用，相关知识产权仍归原权利人所有。如相关权利人认为本站对任何素材的使用存在问题，请通过页面所示联系方式与我联系并提供权属说明，我将在核实后及时补充署名、替换、限制展示或移除相关内容。",
       disclaimer2:
         "本网站项目、文字、图片、截图及相关资料受知识产权与隐私权益保护。未经本人事先许可，不得转载、改编、传播、用于模型训练或任何商业用途；如需引用或非商业使用，请先联系本人并注明出处，本站个人信息与图片亦不得擅自使用。"
     },
@@ -41,9 +42,10 @@
         "For project discussions, collaboration, application questions, or a quick hello, use any of the contact links below.",
       email: "Email: hj160@georgetown.edu",
       message: "Message Board",
+      licensing: "Licensing",
       xiaohongshu: "Xiaohongshu",
       disclaimer1:
-        "<strong>Disclaimer</strong>: Some content on this site may be collected, organized, summarized, or assisted by AI based on publicly available information and is provided for research, portfolio, and general reference only. It does not represent my factual conclusions, legal advice, or political position.",
+        "<strong>Disclaimer</strong>: Some content on this site may be collected, organized, summarized, or assisted by AI based on publicly available information and is provided for research, portfolio, and general reference only. It does not represent my factual conclusions, legal advice, or political position. Some third-party images, icons, fonts, UI elements, or other materials on this site may be used under public licenses, open-source licenses, platform permissions, direct authorization, or other applicable rules. The related intellectual property remains with the respective rights holders. If any rights holder believes material on this site is used improperly, please contact me with ownership information and I will review and, as appropriate, add attribution, replace, restrict display of, or remove the material.",
       disclaimer2:
         "The projects, text, images, screenshots, and related materials on this site are protected by intellectual property and privacy rights. No copying, reposting, adaptation, redistribution, model training, or commercial use is permitted without my prior permission. Please contact me first for citation or non-commercial use, and do not use personal information or images from this site without authorization."
     },
@@ -61,9 +63,10 @@
         "プロジェクトの相談、コラボレーション、出願に関する質問、または簡単なご連絡は、以下の連絡先をご利用ください。",
       email: "Email: hj160@georgetown.edu",
       message: "メッセージボード",
+      licensing: "利用条件",
       xiaohongshu: "小红书",
       disclaimer1:
-        "<strong>免責事項</strong>：本サイトの一部内容は、公開情報をもとに AI が自動収集・整理・要約・生成補助したものであり、研究、作品展示、一般的な参考のために提供されています。私個人の事実認定、法的助言、政治的立場を示すものではありません。",
+        "<strong>免責事項</strong>：本サイトの一部内容は、公開情報をもとに AI が自動収集・整理・要約・生成補助したものであり、研究、作品展示、一般的な参考のために提供されています。私個人の事実認定、法的助言、政治的立場を示すものではありません。また、本サイト上の一部の第三者画像、アイコン、フォント、UI 要素、その他の素材は、公開ライセンス、オープンソースライセンス、プラットフォーム上の許諾、個別許可、またはその他適用可能なルールに基づいて使用されている場合があります。関連する知的財産権は各権利者に帰属します。使用に問題があると考える権利者の方は、権利情報を添えてご連絡ください。確認後、必要に応じて出典追記、差し替え、表示制限、または削除を行います。",
       disclaimer2:
         "本サイトのプロジェクト、文章、画像、スクリーンショット、および関連資料は、知的財産権とプライバシー権によって保護されています。事前の許可なく、転載、改変、再配布、モデル学習への利用、商用利用を行わないでください。引用または非営利利用を希望する場合は、事前にご連絡のうえ、出典を明記してください。個人情報や画像の無断利用も禁止します。"
     }
@@ -1053,6 +1056,205 @@
     }
   });
 
+  Object.assign(PAGES, {
+    "licensing.html": {
+      title: {
+        zh: "Lyra Lab - 授权说明",
+        en: "Lyra Lab - Licensing",
+        ja: "Lyra Lab - 利用条件"
+      },
+      single: {
+        ".licensing-page-title": {
+          zh: "授权说明",
+          en: "Licensing",
+          ja: "利用条件"
+        },
+        ".licensing-page-subtitle": {
+          zh: "记录本站当前可确认的第三方软件、服务、字体、参考素材与处理原则；后续如有新增会继续补充。",
+          en: "A running record of the third-party software, services, fonts, reference materials, and handling rules currently identifiable on this site.",
+          ja: "本サイトで現在確認できる第三者ソフトウェア、サービス、フォント、参照素材、および対応方針をまとめた更新ページです。"
+        },
+        ".licensing-overview-kicker": {
+          zh: "Licensing / Credits",
+          en: "Licensing / Credits",
+          ja: "Licensing / Credits"
+        },
+        ".licensing-overview-title": {
+          zh: "这页说明什么",
+          en: "What this page covers",
+          ja: "このページで扱う内容"
+        },
+        ".licensing-overview-p1": {
+          zh: "本页用于说明本站当前可确认的第三方字体、开源库、分析组件、统计与表单服务，以及部分参考截图或项目引用来源。具体版权、商标、服务条款与许可解释，以对应权利人和官方页面为准。",
+          en: "This page documents the third-party fonts, open-source libraries, analytics components, statistics and form services, and selected reference screenshots or project references currently identifiable on the site. Copyright, trademark, service terms, and license interpretation remain governed by the respective rights holders and their official pages.",
+          ja: "このページでは、本サイトで現在確認できる第三者フォント、オープンソースライブラリ、分析コンポーネント、統計・フォームサービス、および一部の参照スクリーンショットやプロジェクト参照元を記録しています。著作権、商標、サービス規約、ライセンス解釈は各権利者と公式ページに従います。"
+        },
+        ".licensing-overview-p2": {
+          zh: "除另有注明外，本站原创项目、文字、页面结构、截图、图表组织和可视化成果归本站作者所有；第三方材料仅在展示、引用、技术实现或说明所必需的范围内使用，并会在收到有效通知后及时处理。",
+          en: "Unless stated otherwise, the site's original projects, text, page structure, screenshots, chart organization, and visual outputs are owned by the site author. Third-party materials are used only to the extent reasonably necessary for display, reference, implementation, or explanation, and will be handled promptly upon valid notice.",
+          ja: "別途明記がない限り、本サイトのオリジナルプロジェクト、文章、ページ構成、スクリーンショット、図表構成、可視化成果はサイト作者に帰属します。第三者素材は、表示、参照、実装、説明に合理的に必要な範囲でのみ使用し、有効な通知を受けた場合は速やかに対応します。"
+        },
+        ".licensing-side-title": {
+          zh: "Quick Principles",
+          en: "Quick Principles",
+          ja: "Quick Principles"
+        },
+        ".licensing-card-1-title": {
+          zh: "原创内容",
+          en: "Original Work",
+          ja: "オリジナルコンテンツ"
+        },
+        ".licensing-card-1-copy": {
+          zh: "本站自行开发、编写、设计或整理形成的项目、文字、截图、结构和演示材料，不因公开展示而自动开放转载或商用。",
+          en: "Projects, writing, screenshots, structures, and demos created on this site do not become freely reusable or commercially available merely because they are publicly visible.",
+          ja: "本サイトで開発・執筆・設計・整理したプロジェクト、文章、スクリーンショット、構成、デモ資料は、公開表示されていても自動的に転載・商用利用可能にはなりません。"
+        },
+        ".licensing-card-2-title": {
+          zh: "第三方材料",
+          en: "Third-Party Materials",
+          ja: "第三者素材"
+        },
+        ".licensing-card-2-copy": {
+          zh: "第三方字体、库、服务或参考截图的权利仍归原作者、平台或项目方所有；本页仅记录当前可识别来源，不替代上游许可证文本。",
+          en: "Rights in third-party fonts, libraries, services, or reference screenshots remain with their original authors, platforms, or project owners. This page records currently identifiable sources and does not replace upstream license texts.",
+          ja: "第三者フォント、ライブラリ、サービス、参照スクリーンショットに関する権利は、元の作者、プラットフォーム、またはプロジェクト側に帰属します。このページは現時点で識別できる出所を記録するものであり、上流のライセンス本文の代替ではありません。"
+        },
+        ".licensing-card-3-title": {
+          zh: "通知与处理",
+          en: "Notice and Response",
+          ja: "通知と対応"
+        },
+        ".licensing-card-3-copy": {
+          zh: "如权利人认为本站某项素材、引用或展示存在问题，可联系我并提供权属说明；我会核实后补充署名、替换、限制展示或移除。",
+          en: "If a rights holder believes any material, reference, or display on the site is problematic, they may contact me with ownership details. I will review and, if appropriate, add attribution, replace, restrict display of, or remove the material.",
+          ja: "本サイト上の素材、参照、表示に問題があると権利者が考える場合は、権利情報を添えてご連絡ください。確認後、必要に応じて出典追記、差し替え、表示制限、または削除を行います。"
+        },
+        ".licensing-section-1-title": {
+          zh: "原创内容与使用限制",
+          en: "Original Content and Use Restrictions",
+          ja: "オリジナルコンテンツと利用制限"
+        },
+        ".licensing-section-1-intro": {
+          zh: "这部分用于明确本站作者对原创项目和展示材料保留的权利边界。",
+          en: "This section states the rights the site author retains in original projects and presentation materials.",
+          ja: "このセクションでは、本サイト作者がオリジナルプロジェクトと展示素材について保持する権利範囲を示します。"
+        },
+        ".licensing-section-2-title": {
+          zh: "当前可确认的第三方软件、服务与素材",
+          en: "Currently Identifiable Third-Party Software, Services, and Materials",
+          ja: "現在確認できる第三者ソフトウェア、サービス、素材"
+        },
+        ".licensing-section-2-intro": {
+          zh: "以下项目为当前代码或页面中能明确识别的第三方来源；具体许可文本、商标规则或服务条款，请以对应官方页面为准。",
+          en: "The items below are third-party sources currently identifiable in the codebase or published pages. For exact license text, trademark rules, or service terms, refer to the relevant official pages.",
+          ja: "以下は現在のコードベースまたは公開ページ上で確認できる第三者由来の項目です。正確なライセンス本文、商標ルール、サービス規約は各公式ページをご確認ください。"
+        },
+        ".licensing-section-3-title": {
+          zh: "权利人联系与处理机制",
+          en: "Rights Holder Contact and Handling Process",
+          ja: "権利者連絡と対応プロセス"
+        },
+        ".licensing-section-3-intro": {
+          zh: "如果你认为本站某项内容存在版权、商标、隐私或其他权益问题，可按以下方式联系我。",
+          en: "If you believe any material on the site raises copyright, trademark, privacy, or other rights issues, please use the process below.",
+          ja: "本サイト上の内容について、著作権、商標、プライバシー、その他の権利に関する懸念がある場合は、以下の方法でご連絡ください。"
+        },
+        ".licensing-section-4-title": {
+          zh: "官方页面与参考链接",
+          en: "Official Pages and Reference Links",
+          ja: "公式ページと参照リンク"
+        },
+        ".licensing-section-4-intro": {
+          zh: "以下链接用于指向对应项目或服务的官方页面，便于查看其许可证、文档或服务条款。",
+          en: "These links point to the official pages of the relevant projects or services so their licenses, documentation, or service terms can be reviewed directly.",
+          ja: "以下のリンクは、各プロジェクトやサービスの公式ページを示すもので、ライセンス、ドキュメント、サービス規約を直接確認できます。"
+        }
+      },
+      lists: {
+        ".licensing-side-list li": {
+          zh: [
+            "原创内容不因公开展示而自动开放转载、再分发或商用。",
+            "第三方材料的版权、商标和许可解释仍归原权利人及官方文本。",
+            "如收到有效通知，我会尽快核实并处理。"
+          ],
+          en: [
+            "Public visibility does not make original site content freely reusable, redistributable, or commercial-ready.",
+            "Copyright, trademark, and license interpretation for third-party materials remain with the original rights holders and official texts.",
+            "If I receive a valid notice, I will review and respond promptly."
+          ],
+          ja: [
+            "公開表示されていても、オリジナルコンテンツが自由転載・再配布・商用利用可能になるわけではありません。",
+            "第三者素材に関する著作権、商標、ライセンス解釈は元の権利者と公式文書に従います。",
+            "有効な通知を受けた場合は、速やかに確認して対応します。"
+          ]
+        },
+        ".licensing-original-list li": {
+          zh: [
+            "本站原创的项目方案、文字、页面编排、图表组织、截图、演示页、品牌表达与说明文案，除另有注明外，默认保留全部权利。",
+            "未经书面许可，不得转载、镜像、改编、重新分发、用于模型训练、产品集成或商业用途。",
+            "如需引用、教学展示或其他非商业使用，请先联系本人并注明出处。"
+          ],
+          en: [
+            "Unless otherwise stated, the site's original project designs, text, page layouts, chart arrangements, screenshots, demo pages, branding, and explanatory copy remain fully reserved.",
+            "Without written permission, they may not be copied, mirrored, adapted, redistributed, used for model training, integrated into products, or used commercially.",
+            "If you want to quote, use in teaching, or use non-commercially, please contact me first and provide clear attribution."
+          ],
+          ja: [
+            "別途明記がない限り、本サイトのオリジナルな企画、文章、ページ構成、図表構成、スクリーンショット、デモページ、ブランド表現、説明文はすべて権利留保とします。",
+            "書面による許可なく、転載、ミラー、改変、再配布、モデル学習への利用、製品組み込み、商用利用はできません。",
+            "引用、教育目的の表示、その他の非営利利用を希望する場合は、事前にご連絡のうえ出典を明記してください。"
+          ]
+        },
+        ".licensing-thirdparty-list li": {
+          zh: [
+            "GoatCounter：用于网站访问统计；相关代码、服务和条款归 GoatCounter 及其项目方所有。",
+            "Google Fonts：部分页面加载 Space Grotesk 与 Noto Sans SC；具体字体许可与使用规则以 Google Fonts 和对应字体项目说明为准。",
+            "Lightweight Charts：美国-伊朗交互分析看板中使用的图表库；版权与许可归 TradingView 的对应项目所有。",
+            "ReadQuicker 网页版：依赖 marked、Turndown、pdf.js、Tesseract.js、JSZip 等开源库；具体许可以上游项目仓库和发布说明为准。",
+            "FormSubmit：留言板表单投递依赖该第三方服务；服务条款、数据处理和可用性以上游说明为准。",
+            "SenseVoice 页面中的项目名称、仓库链接与参考界面截图用于介绍和演示说明；如相关素材权利归原项目维护者或其他权利人所有，则对应权利仍归其所有。"
+          ],
+          en: [
+            "GoatCounter: used for site analytics; the code, service, and terms remain with GoatCounter and its project owners.",
+            "Google Fonts: selected pages load Space Grotesk and Noto Sans SC; exact font licensing and usage rules remain governed by Google Fonts and the respective font projects.",
+            "Lightweight Charts: the charting library used in the U.S.-Iran dashboard; copyright and licensing remain with the relevant TradingView project.",
+            "ReadQuicker web edition: depends on open-source libraries including marked, Turndown, pdf.js, Tesseract.js, and JSZip; exact licensing remains governed by the upstream repositories and release materials.",
+            "FormSubmit: the message board form delivery relies on this third-party service; service terms, data handling, and availability remain governed by the upstream provider.",
+            "The SenseVoice detail page uses the project name, repository link, and a reference interface screenshot for descriptive and demo purposes; if those materials belong to the original maintainers or another rights holder, the related rights remain with them."
+          ],
+          ja: [
+            "GoatCounter：アクセス解析に使用しています。コード、サービス、利用条件は GoatCounter およびそのプロジェクト側に帰属します。",
+            "Google Fonts：一部ページで Space Grotesk と Noto Sans SC を読み込んでいます。正確なフォントライセンスと利用条件は Google Fonts と各フォントプロジェクトに従います。",
+            "Lightweight Charts：米・イラン分析ダッシュボードで使用しているチャートライブラリです。著作権とライセンスは TradingView 側の該当プロジェクトに帰属します。",
+            "ReadQuicker ウェブ版：marked、Turndown、pdf.js、Tesseract.js、JSZip などのオープンソースライブラリに依存しています。正確なライセンスは上流リポジトリと配布資料をご確認ください。",
+            "FormSubmit：メッセージボードのフォーム送信はこの第三者サービスに依存しています。利用条件、データ処理、可用性は上流提供元に従います。",
+            "SenseVoice 詳細ページでは、紹介とデモ目的でプロジェクト名、リポジトリリンク、参照用 UI スクリーンショットを使用しています。これらの素材が元のメンテナや別の権利者に帰属する場合、その権利は引き続き当該権利者にあります。"
+          ]
+        },
+        ".licensing-contact-list li": {
+          zh: [
+            "请通过 footer 中的邮箱联系我，并尽量附上相关页面链接、素材说明、权属证明或你希望的处理方式。",
+            "我会在核实后视情况补充署名、补充出处、替换素材、限制展示或直接移除。",
+            "如涉及个人信息、肖像或其他隐私 / 人格权益，我会优先采取下线或限制展示措施。",
+            "本页为滚动更新记录，不替代完整的开源许可证、平台规则或正式法律意见。"
+          ],
+          en: [
+            "Please contact me through the footer email and, if possible, include the page URL, a description of the material, proof of ownership, or the action you request.",
+            "After review, I may add attribution, add source information, replace the material, restrict display, or remove it entirely.",
+            "If personal information, likeness, or other privacy / personality rights are implicated, I will prioritize takedown or display restriction.",
+            "This page is a rolling record and does not replace full open-source licenses, platform rules, or formal legal advice."
+          ],
+          ja: [
+            "フッターのメールアドレスからご連絡ください。可能であれば、対象ページ URL、素材の説明、権利証明、希望する対応内容も添えてください。",
+            "確認後、必要に応じて出典追記、素材差し替え、表示制限、または削除を行います。",
+            "個人情報、肖像、その他のプライバシー / 人格権に関わる場合は、優先的に非表示または表示制限を行います。",
+            "このページは継続更新用の記録であり、完全なオープンソースライセンス、プラットフォーム規約、正式な法的助言の代替ではありません。"
+          ]
+        }
+      }
+    }
+  });
+
   const RAW_DASHBOARD = {
     title: {
       zh: "美国-伊朗局势交互看板",
@@ -1415,6 +1617,19 @@
     navContainer.prepend(link);
   }
 
+  function ensureFooterLicensingLink(lang) {
+    const links = qs(".site-footer__links");
+    if (!links) return;
+    let link = qs('.site-footer__links [data-footer-licensing="true"]');
+    if (!link) {
+      link = document.createElement("a");
+      link.setAttribute("data-footer-licensing", "true");
+      link.setAttribute("href", "licensing.html");
+      links.appendChild(link);
+    }
+    link.textContent = COMMON[lang].licensing;
+  }
+
   function ensureSwitch(lang) {
     const topbar = qs(".topbar");
     if (!topbar || qs(".lang-switch")) return;
@@ -1489,6 +1704,9 @@
     const xhsText = qs('.site-footer__links a[href*="xhslink.com"] span:last-child');
     if (xhsText) xhsText.textContent = pack.xiaohongshu;
 
+    const licensingLink = qs('.site-footer__links [data-footer-licensing="true"]');
+    if (licensingLink) licensingLink.textContent = pack.licensing;
+
     const disclaimerPs = qsa(".site-footer__disclaimer p");
     if (disclaimerPs[0]) disclaimerPs[0].innerHTML = pack.disclaimer1;
     if (disclaimerPs[1]) disclaimerPs[1].textContent = pack.disclaimer2;
@@ -1530,6 +1748,7 @@
     if (!SUPPORTED.includes(lang)) return;
     localStorage.setItem(STORAGE_KEY, lang);
     ensureHomeLink(lang);
+    ensureFooterLicensingLink(lang);
     syncUrl(lang);
     updateSwitch(lang);
     updateLinksAndFrames(lang);
@@ -1542,5 +1761,6 @@
   const initialLang = resolveLang();
   ensureSwitch(initialLang);
   ensureHomeLink(initialLang);
+  ensureFooterLicensingLink(initialLang);
   applyLanguage(initialLang);
 })();
