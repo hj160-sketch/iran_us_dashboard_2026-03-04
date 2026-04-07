@@ -725,6 +725,89 @@
       font-family: "Segoe UI", Arial, sans-serif;
     }
 
+    /* ── Footer ── */
+    .site-footer {
+      margin-top: 48px;
+      border-top: 1px solid #e5e7eb;
+      background: #f5f5f7;
+    }
+    .site-footer__inner {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 24px 0 30px;
+      color: #4b5563;
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .site-footer__top {
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .site-footer__logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex: 0 0 auto;
+    }
+    .site-footer__logo {
+      width: 178px;
+      height: auto;
+      display: block;
+    }
+    .site-footer__content {
+      flex: 1 1 640px;
+      min-width: 280px;
+      display: grid;
+      gap: 14px;
+    }
+    .site-footer__section {
+      display: grid;
+      gap: 8px;
+    }
+    .site-footer__section p {
+      margin: 0;
+      max-width: 720px;
+      line-height: 1.7;
+      font-size: 14px;
+      color: #4b5563;
+    }
+    .site-footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: center;
+    }
+    .site-footer__links a {
+      color: #0a84ff;
+      text-decoration: none;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .site-footer__disclaimer {
+      margin-top: 4px;
+      padding-top: 14px;
+      border-top: 1px solid #d9dde4;
+    }
+    .site-footer__disclaimer p {
+      max-width: none;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #6b7280;
+    }
+    .site-footer__disclaimer p + p {
+      margin-top: 8px;
+    }
+    @media (max-width: 720px) {
+      .site-footer__top {
+        gap: 18px;
+      }
+      .site-footer__logo {
+        width: 150px;
+      }
+    }
+
   </style>
 <script data-goatcounter="https://lyralab.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -894,6 +977,33 @@
     </section>
 
   </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__top">
+        <a class="site-footer__logo-link" href="./index.html#index" aria-label="LyraLab Home">
+          <img class="site-footer__logo" src="./logo.svg" alt="LyraLab logo">
+        </a>
+        <div class="site-footer__content">
+
+        <div class="site-footer__section">
+          <p>For project discussions, collaboration, application questions, or a quick hello, use any of the contact links below.</p>
+          <div class="site-footer__links">
+            <a class="contact-link" href="mailto:hj160@georgetown.edu"><span class="contact-icon contact-icon--gmail" aria-hidden="true"></span><span>Email: hj160@georgetown.edu</span></a>
+            <a href="./index.html#message">Message Board</a>
+            <a class="contact-link" href="https://xhslink.com/m/78yzft3G60q" target="_blank" rel="noopener noreferrer"><span class="contact-icon contact-icon--xhs" aria-hidden="true"></span><span>Xiaohongshu</span></a>
+          </div>
+        </div>
+
+                <div class="site-footer__section site-footer__disclaimer">
+          <p><strong>&#20813;&#36131;&#22768;&#26126;</strong>&#65306;&#26412;&#31449;&#37096;&#20998;&#20869;&#23481;&#21487;&#33021;&#30001; AI &#22522;&#20110;&#20844;&#24320;&#20449;&#24687;&#33258;&#21160;&#26816;&#32034;&#12289;&#25972;&#29702;&#12289;&#25688;&#35201;&#25110;&#36741;&#21161;&#29983;&#25104;&#65292;&#20165;&#20379;&#30740;&#31350;&#12289;&#20316;&#21697;&#23637;&#31034;&#19982;&#19968;&#33324;&#21442;&#32771;&#65292;&#19981;&#20195;&#34920;&#26412;&#20154;&#20107;&#23454;&#21028;&#26029;&#12289;&#27861;&#24459;&#24847;&#35265;&#25110;&#25919;&#27835;&#31435;&#22330;&#12290;&#26412;&#31449;&#39033;&#30446;&#12289;&#25991;&#23383;&#12289;&#22270;&#29255;&#12289;&#25130;&#22270;&#21450;&#30456;&#20851;&#36164;&#26009;&#22343;&#21463;&#30693;&#35782;&#20135;&#26435;&#19982;&#38544;&#31169;&#26435;&#30410;&#20445;&#25252;&#65292;&#26410;&#32463;&#26412;&#20154;&#20107;&#20808;&#35768;&#21487;&#65292;&#19981;&#24471;&#36716;&#36733;&#12289;&#25913;&#32534;&#12289;&#20256;&#25773;&#12289;&#29992;&#20110;&#27169;&#22411;&#35757;&#32451;&#25110;&#20219;&#20309;&#21830;&#19994;&#29992;&#36884;&#65307;&#22914;&#38656;&#24341;&#29992;&#25110;&#38750;&#21830;&#19994;&#20351;&#29992;&#65292;&#35831;&#20808;&#32852;&#31995;&#26412;&#20154;&#24182;&#27880;&#26126;&#20986;&#22788;&#12290;&#26412;&#31449;&#20010;&#20154;&#20449;&#24687;&#21450;&#22270;&#29255;&#26448;&#26009;&#31105;&#27490;&#25797;&#33258;&#20351;&#29992;&#65292;&#23588;&#20854;&#19981;&#24471;&#29992;&#20110;&#20219;&#20309;&#21830;&#19994;&#29992;&#36884;&#12290;</p>
+          <p><strong>Disclaimer</strong>: Some content on this site may be collected, organized, summarized, or assisted by AI based on publicly available information and is provided for research, portfolio, and general reference only. It does not represent my factual conclusions, legal advice, political views, or political position. Unless otherwise stated, the projects, text, images, screenshots, and related materials on this site are protected by intellectual property and privacy rights. No copying, reposting, adaptation, redistribution, model training, or commercial use is permitted without my prior permission. Please contact me first for any citation or non-commercial use, and do not use personal information or images from this site for commercial purposes.</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script>
     const I18N = {
       zh: {
