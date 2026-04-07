@@ -1326,8 +1326,18 @@
     document.head.appendChild(goatCounter);
   }
 </script>
+<style>
+  .embed-mode .floating-logo,
+  .embed-mode .topbar,
+  .embed-mode .site-footer { display: none !important; }
+</style>
 </head>
 <body>
+  <script>
+    if (new URLSearchParams(location.search).has('embed')) {
+      document.documentElement.classList.add('embed-mode');
+    }
+  </script>
   <a class="floating-logo" href="index.html#index" aria-label="LyraLab Home">
     <svg viewBox="0 0 320 64" role="img" aria-label="LyraLab">
       <circle cx="18" cy="22" r="6.5" fill="#0a84ff"></circle>
