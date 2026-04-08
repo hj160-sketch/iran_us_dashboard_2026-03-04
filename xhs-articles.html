@@ -683,6 +683,16 @@
   </footer>
 
   <script>
+    // Sort all cards by likes descending on load
+    const grid = document.getElementById('card-grid');
+    const cards = Array.from(grid.querySelectorAll('.xhs-card'));
+    cards.sort((a, b) => {
+      const likesA = parseInt(a.querySelector('.xhs-card__likes').textContent) || 0;
+      const likesB = parseInt(b.querySelector('.xhs-card__likes').textContent) || 0;
+      return likesB - likesA;
+    });
+    cards.forEach(card => grid.appendChild(card));
+
     // Filter functionality
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
