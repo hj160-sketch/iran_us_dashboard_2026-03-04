@@ -682,10 +682,26 @@
   </footer>
 
   <script>
-    // Sort all cards by likes descending on load
+    // Sort cards: pinned first in order, then rest by likes descending
     const grid = document.getElementById('card-grid');
     const cards = Array.from(grid.querySelectorAll('.xhs-card'));
+    const pinned = [
+      '66ce63bd000000001f03831a', // 小雀斑eddie
+      '67bf42c8000000000703487f', // 那些年法律博主
+      '642f635d0000000013017fa0', // 法学院快毕业啦
+    ];
+    function getPinIndex(card) {
+      const href = card.getAttribute('href') || '';
+      for (let i = 0; i < pinned.length; i++) {
+        if (href.includes(pinned[i])) return i;
+      }
+      return -1;
+    }
     cards.sort((a, b) => {
+      const pa = getPinIndex(a), pb = getPinIndex(b);
+      if (pa >= 0 && pb >= 0) return pa - pb;
+      if (pa >= 0) return -1;
+      if (pb >= 0) return 1;
       const likesA = parseInt(a.querySelector('.xhs-card__likes').textContent) || 0;
       const likesB = parseInt(b.querySelector('.xhs-card__likes').textContent) || 0;
       return likesB - likesA;
