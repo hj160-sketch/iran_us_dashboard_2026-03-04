@@ -829,8 +829,7 @@
         <a class="btn" href="about.html" id="nav_about">关于我</a>
         <a class="btn" href="legal-projects.html" id="nav_legal_projects">项目</a>
         <a class="btn" href="legal-articles.html" id="nav_legal_articles">文章</a>
-        <a class="btn" href="life-travel.html" id="nav_life_travel">自媒体-旅游/Vlog</a>
-        <a class="btn" href="xhs-articles.html" id="nav_xhs">小红书精选</a>
+        <a class="btn" href="xhs-articles.html" id="nav_life_travel">自媒体/小红书</a>
       </div>
       <div class="spacer"></div>
       <div class="lang-switch" aria-label="Language Switcher">
@@ -1016,8 +1015,7 @@
         nav_about: "关于我",
         nav_legal_projects: "项目",
         nav_legal_articles: "文章",
-        nav_life_travel: "自媒体-旅游/Vlog",
-        nav_xhs: "小红书精选",
+        nav_life_travel: "自媒体/小红书",
         hero_kicker: "Portfolio",
         hero_title: "Lyra 的项目与写作空间",
         hero_desc: "这里是你的个人主页开场。用最短的文字讲清楚你做什么、为什么做，以及别人能在这里找到什么。",
@@ -1090,8 +1088,7 @@
         nav_about: "About",
         nav_legal_projects: "Projects",
         nav_legal_articles: "Articles",
-        nav_life_travel: "Media-Travel/Vlog",
-        nav_xhs: "",
+        nav_life_travel: "Media/Travel/Vlog",
         hero_kicker: "Portfolio",
         hero_title: "Lyra's Projects and Writing Space",
         hero_desc: "This is the opening section of your homepage. In a few lines, explain what you do, why you do it, and what people can find here.",
@@ -1165,7 +1162,6 @@
         nav_legal_projects: "プロジェクト",
         nav_legal_articles: "記事",
         nav_life_travel: "発信・旅/Vlog",
-        nav_xhs: "",
         hero_kicker: "Portfolio",
         hero_title: "Lyra のプロジェクトと執筆スペース",
         hero_desc: "ここはあなたのホームページの導入です。何をしているか、なぜしているか、ここで何が見られるかを短く伝えます。",
@@ -1257,13 +1253,15 @@
           node.placeholder = pack[key];
         } else {
           node.textContent = pack[key];
-          if (node.tagName === "A") node.style.display = pack[key] ? "" : "none";
         }
       });
 
       langButtons.forEach((btn) => {
         btn.classList.toggle("active", btn.dataset.lang === selected);
       });
+
+      const navTravel = document.getElementById("nav_life_travel");
+      if (navTravel) navTravel.href = selected === "zh" ? "xhs-articles.html" : "life-travel.html";
 
       localStorage.setItem("lyralab_lang", selected);
       renderPublicMessages();
