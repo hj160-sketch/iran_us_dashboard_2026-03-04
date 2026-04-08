@@ -1,0 +1,308 @@
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/67bf42c8000000000703487f" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/67bf42c8000000000703487f_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">视频</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">那些年我曾经喜欢过的法律博主</h3>
+          <p class="xhs-card__desc">现在都在干嘛呢?🧠 为什么有人疑似卖号转型？有人半停耕状态？ 有人自媒体多年越做越好还要上脱口秀？ 今天举例几个博主，让我们一起探讨下法律博主的自媒体生存法则 从顶级律所到身心灵博主，赵丹喵的人生转折让人心疼 大律所离职后，这对夫妇为何选择...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">668 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/642f635d0000000013017fa0" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/642f635d0000000013017fa0_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">视频</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">法学院快毕业啦～</h3>
+          <p class="xhs-card__desc">乔治城的活动都还搞的搞的挺花哨的 免费的衣服和墨镜都搞得不错 衬衫是纯棉的</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">492 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/63300a13000000001703fd8a" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/63300a13000000001703fd8a_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">那年你说要去白宫旁边那个学校读法学院</h3>
+          <p class="xhs-card__desc">#今日快乐今日发 #笔记灵感 每天都痛并快乐着，一边觉得学的很充实，一边累的想辍学，上课一边觉得老师很厉害，一边又想逛丝芙兰 大家有什么关于JD申请/生活之类的问题可以评论区问我，能回答的肯定回</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">363 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/6506801200000000160310aa" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/6506801200000000160310aa_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">读JD偷懒指南</h3>
+          <p class="xhs-card__desc">第一步 1. 降低要求。 	 想学成年级前10%的话每天按照期末周学就行了 要求放低，放过自己，告诉自己每天活着就已经很棒棒了，才能获得相对正常的工作量和休息时间。 	 2. 第二步：求爷爷告奶奶得要outline 	 有几种方法获得out...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">355 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/64306e8a000000000703803b" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/64306e8a000000000703803b_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">JD找工作真正看重什么1 一人一个信息差</h3>
+          <p class="xhs-card__desc">补充了最后一张图 	 先下结论：你需要构建一个自己的故事。 	 我看到了小红书@岸边露半年不理你 问的这个问题，有点想回答。 	 需要找到这个核心逻辑之后，构建自己核心任务#1： 如何改简历和串起来自己的故事。如果某个小任务，比如clini...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">254 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/650ade74000000001303d7be" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/650ade74000000001303d7be_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">读JD偷懒指南2</h3>
+          <p class="xhs-card__desc">书接上次 ❤️ 第六步 临时抱佛脚大法，分为几个阶段 	  	 阶段一   模模糊糊得开始outline，但是发现自己完全读不懂老师在说什么。多发于考试之前一个月到三周。 这时候可以通过和朋友们一起组成学习小组的方式节省工作量。上次和卷王朋...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">92 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/681cd6ec000000002100661b" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/681cd6ec000000002100661b_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">LSAT教会我的受益终生思维模式</h3>
+          <p class="xhs-card__desc">1. 用知识而非吸收知识 	 比如托福之类语言类考试和学科考试，测试的是你是否知道/背诵出某个知识点。但是LSAT是不一样的，考察的是思维。如果LSAT是语言/知识点考试的话，那美国人就不用考了。所以这个考试不是语言考试。 	 2. 很多人...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">38 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/666a53b5000000001c03649b" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/666a53b5000000001c03649b_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">超懒四小时速通纽约bar指南</h3>
+          <p class="xhs-card__desc">#nybar #nybar备考 #nybar2024 #nybar2025 #bar #Themis #乔治城大学 #乔治城 #懒人宝典 #懒人攻略 有疑问欢迎评论区交流！大家使用这个方法的时候还是要斟酌哦 写的是不是有点像机器人？是不是下...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">29 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/636000d30000000009011f91" target="_blank" rel="noopener noreferrer" data-cat="法律/JD/职场">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/636000d30000000009011f91_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">读JD如何不脱发</h3>
+          <p class="xhs-card__desc">结论：led生发帽+米诺地尔+多睡觉/少压力 	 我作为秃头少女的生发经验（生发水+生发帽） 刚才那个朋友圈发完我突然觉得应该分享一下这个话题。 因为从小头发细软，熬夜容易掉，我很早就开始防（秃）脱（头）发。上高中的时候熬夜多，头发一梳就掉...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">8 赞</span>
+            <span class="xhs-card__cat">法律/JD/职场</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/64ecd888000000001e03e100" target="_blank" rel="noopener noreferrer" data-cat="思考/观点/读书">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/64ecd888000000001e03e100_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">用母系社会的套子，事情一下子就想明白了</h3>
+          <p class="xhs-card__desc">我最近把母系和父系社会的套子套到很多社会现象上，很多事一下子想明白了 	 就是人类的身体还是适应之前的母系社会，但是社会是父系社会 	 比如男性还是适应类似猴子的多生殖，尽量和更多女性xxoo，保证后代延续 	 女性因为生殖成本高，所以会找...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">984 赞</span>
+            <span class="xhs-card__cat">思考/观点/读书</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/63a0b99f000000001b017ec8" target="_blank" rel="noopener noreferrer" data-cat="思考/观点/读书">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/63a0b99f000000001b017ec8_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">孤独感-如果我不独自走上另外一条路，就没办</h3>
+          <p class="xhs-card__desc">如果我不独自走上另外一条路，就没办到达现在我所在的位置 微博上看到这篇突然很有感触，我从小在山东上幼儿园，然后到上海，大学到美国，博士又换了城市，每次感觉身边的人际关系都被连根拔起。是认识新朋友的机会，也确实是非常难的过程；同时年纪越大，接...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">84 赞</span>
+            <span class="xhs-card__cat">思考/观点/读书</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/6275e183000000002103a68e" target="_blank" rel="noopener noreferrer" data-cat="思考/观点/读书">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/6275e183000000002103a68e_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">读书笔记《巴菲特的护城河》</h3>
+          <p class="xhs-card__desc">#读书笔记分享 每日读书 这本有提到创造护城河的概念，醍醐灌顶，巴菲特本人在采访时候也说过，长期来看每个企业都会遇到不好的管理者，所以企业的优势不能只靠管理。 这本书给了很好的答案</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">17 赞</span>
+            <span class="xhs-card__cat">思考/观点/读书</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/6410befb000000001303db12" target="_blank" rel="noopener noreferrer" data-cat="思考/观点/读书">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/6410befb000000001303db12_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">视频</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">为什么不喜欢黑暗荣耀-不要被深渊吞噬</h3>
+          <p class="xhs-card__desc">无疑是一部好剧 但不要在生活中实践它 	  	 不要长时间 凝望深渊 	 #黑暗荣耀 #黑暗榮耀 #黑暗荣耀2</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">9 赞</span>
+            <span class="xhs-card__cat">思考/观点/读书</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/63e1be410000000008004818" target="_blank" rel="noopener noreferrer" data-cat="思考/观点/读书">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/63e1be410000000008004818_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">麦肯锡的podcast播客-产品包装</h3>
+          <p class="xhs-card__desc">这一集讲的是产品包装 🐯人们买小罐nespresso的咖啡，是因为比散装的节省时间，所以包装要做到给消费者提供价值才行。反过来说，很多产品的最大价值，就在于包装独特，就像nespresso的咖啡和散装的并没有质量上的区别。 🐯网购在向生鲜网...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">6 赞</span>
+            <span class="xhs-card__cat">思考/观点/读书</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/67c0884b000000000603bd31" target="_blank" rel="noopener noreferrer" data-cat="学习/技巧">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/67c0884b000000000603bd31_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">视频</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">托福听力满分学姐‼高效技巧大揭秘</h3>
+          <p class="xhs-card__desc">想让托福听力考满分？这些经验你一定要知道！ 听写训练：从VOA慢速到托福原文，逐步提升 心态调整：听不懂是常态，学会通过上下文推断 记笔记：形成自己的缩略词，保持英文思维 大家记得不要提前看选项，避免干扰信息 定期总结错题，找到薄弱点对症下...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">34 赞</span>
+            <span class="xhs-card__cat">学习/技巧</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/67e4b8e7000000000900d204" target="_blank" rel="noopener noreferrer" data-cat="学习/技巧">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/67e4b8e7000000000900d204_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">视频</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">纽约找房血泪史|聊聊关于租房的避坑指南</h3>
+          <p class="xhs-card__desc">纽约租房真的太难了 比如我和@罗西不闪火🗽 罗西不闪火 都深深体会到了租房的不易... 中介垄断房源  房东也要付中介费 一个月房租当中介费 住一年相当于多付14个月 最离谱的是 有些公寓竟然没有独立洗烘 还得像美剧里那样 去公共洗衣房投币...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">7 赞</span>
+            <span class="xhs-card__cat">学习/技巧</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/66ce63bd000000001f03831a" target="_blank" rel="noopener noreferrer" data-cat="生活/感悟">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/66ce63bd000000001f03831a_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">视频</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">小雀斑eddie真人真的很震撼的美</h3>
+          <p class="xhs-card__desc">见到#小雀斑埃迪 啦，之前在百老汇他有演出 the kit kat club/ Cabaret 唱功和表演超强 好像得到了新的启示🌸，人是可以努力又正直的靠好好磨练自己的技能活下去并且受到他人喜爱的，从昨天到现在的一直感受到他精神的鼓舞，很...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">3211 赞</span>
+            <span class="xhs-card__cat">生活/感悟</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/64d37419000000001201bff9" target="_blank" rel="noopener noreferrer" data-cat="生活/感悟">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/64d37419000000001201bff9_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">DC皮肤科医生推荐</h3>
+          <p class="xhs-card__desc">就是图上这个诊所 integrated dermatology 我去看了一下，医生效率很高很nice，给我的痘痘扎了一下消炎针，回去过了几天就消掉了 我当时约的是女医生 Georgetown的保险是报销一部分的</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">71 赞</span>
+            <span class="xhs-card__cat">生活/感悟</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/625101c2000000002103784c" target="_blank" rel="noopener noreferrer" data-cat="生活/感悟">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/625101c2000000002103784c_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">偶遇美国副总统的老公</h3>
+          <p class="xhs-card__desc">法学院律政俏佳人音乐剧现场 偶遇美国副总统的老公 dc真的是神奇的地方</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">18 赞</span>
+            <span class="xhs-card__cat">生活/感悟</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/666de0c8000000001d016ba7" target="_blank" rel="noopener noreferrer" data-cat="生活/感悟">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/666de0c8000000001d016ba7_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">❤️🟡🔶 和夏天一样热烈 🟣🟢🔷</h3>
+          <p class="xhs-card__desc">#我和夏天一样热烈 #乔治城大学 #最美发色 #夏季穿搭 #名为夏天的绿色 #青春是夏天的一场梦</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">14 赞</span>
+            <span class="xhs-card__cat">生活/感悟</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/62e05a58000000001b026594" target="_blank" rel="noopener noreferrer" data-cat="生活/感悟">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/62e05a58000000001b026594_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">夏天的颜色是苹果绿</h3>
+          <p class="xhs-card__desc">#绿色穿搭 #猪猪女孩打卡</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">11 赞</span>
+            <span class="xhs-card__cat">生活/感悟</span>
+          </div>
+        </div>
+      </a>
+      <a class="xhs-card" href="https://www.xiaohongshu.com/explore/6754c3f8000000000202621f" target="_blank" rel="noopener noreferrer" data-cat="生活/感悟">
+        <div class="xhs-card__img-wrap">
+          <img class="xhs-card__img" src="./xhs_images/6754c3f8000000000202621f_0.jpg" alt="" loading="lazy">
+          <span class="xhs-card__badge">图文</span>
+        </div>
+        <div class="xhs-card__body">
+          <h3 class="xhs-card__title">男性审美vs女性审美妆面？</h3>
+          <p class="xhs-card__desc">ins美妆博主的化妆对比教程，左边是男生觉得好看，右边是女生觉得好看的妆 好像确实是这样，男的喜欢偏自然的，所以妆面的特征其实都是在模仿大美女天生就会有的一些特征，高光是模仿皮肤有弹性/年轻的光滑光泽感，腮红是气血 女生其实是包容更男性的特...</p>
+          <div class="xhs-card__meta">
+            <span class="xhs-card__likes">6 赞</span>
+            <span class="xhs-card__cat">生活/感悟</span>
+          </div>
+        </div>
+      </a>

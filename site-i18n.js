@@ -14,7 +14,7 @@
         about: "关于我",
         projects: "项目",
         articles: "文章",
-        media: "自媒体-旅游/Vlog"
+        media: "自媒体/小红书"
       },
       logoSubtitle: "莱拉的实验田",
       homeLabel: "LyraLab 首页",
@@ -1680,7 +1680,7 @@
       if (pathname === "about.html" || (pathname === "index.html" && url.hash === "#about")) link.textContent = pack.nav.about;
       if (pathname === "legal-projects.html") link.textContent = pack.nav.projects;
       if (pathname === "legal-articles.html") link.textContent = pack.nav.articles;
-      if (pathname === "life-travel.html") link.textContent = pack.nav.media;
+      if (pathname === "life-travel.html" || pathname === "xhs-articles.html") link.textContent = pack.nav.media;
     });
 
     const floatingLogo = qs(".floating-logo");

@@ -1260,9 +1260,6 @@
         btn.classList.toggle("active", btn.dataset.lang === selected);
       });
 
-      const navTravel = document.getElementById("nav_life_travel");
-      if (navTravel) navTravel.href = selected === "zh" ? "xhs-articles.html" : "life-travel.html";
-
       localStorage.setItem("lyralab_lang", selected);
       renderPublicMessages();
     }
