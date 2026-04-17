@@ -834,9 +834,9 @@
           ja: "プロジェクト一覧"
         },
         ".project-summary span": {
-          zh: "4 个板块 · 5 个公开入口 + 1 个内测工具",
-          en: "4 categories · 5 public entries + 1 private beta tool",
-          ja: "4カテゴリ・公開中5件 + 内測ツール1件"
+          zh: "4 个板块 · 5 个公开入口 + 2 个内测工具",
+          en: "4 categories · 5 public entries + 2 private beta tools",
+          ja: "4カテゴリ・公開中5件 + 内測ツール2件"
         },
         ".group-legal h2": {
           zh: "法律相关",
@@ -844,9 +844,9 @@
           ja: "法務"
         },
         ".group-legal span": {
-          zh: "1 个公开项目 + 1 个内测工具",
-          en: "1 public project + 1 private beta tool",
-          ja: "公開中1件 + 内測ツール1件"
+          zh: "1 个公开项目 + 2 个内测工具",
+          en: "1 public project + 2 private beta tools",
+          ja: "公開中1件 + 内測ツール2件"
         },
         ".group-finance h2": {
           zh: "金融相关",
@@ -882,6 +882,36 @@
           zh: "法律工具",
           en: "Legal Tool",
           ja: "法務ツール"
+        },
+        ".card-accuria .tag": {
+          zh: "桥水 × 法律",
+          en: "Bridgewater × Legal",
+          ja: "Bridgewater × 法務"
+        },
+        ".card-accuria .body h3": {
+          zh: "Accuria COO Console（内测）",
+          en: "Accuria COO Console (Private Beta)",
+          ja: "Accuria COO Console（内測）"
+        },
+        ".card-accuria .body p": {
+          zh: "桥水原则 × 法律行业 × 远程小团队的轻量化数据驱动管理系统。三层架构：内部红黄绿评分 + 客户 30 秒打分 + 律师人才数据平台。带决策记录、月度报告、交叉验证预警。",
+          en: "A lightweight, data-driven management system inspired by Bridgewater principles, designed for legal teams and remote small teams. Three layers: internal red/yellow/green scoring, 30-second client ratings, and a lawyer talent data platform. Includes decision logging, monthly reports, and cross-validation alerts.",
+          ja: "Bridgewater の原則 × 法務業界 × リモート小規模チーム向けの軽量データ駆動マネジメントシステム。3層構造：内部の赤黄緑スコア + 顧客30秒評価 + 弁護士タレントデータプラットフォーム。意思決定ログ、月次レポート、クロスバリデーションアラート付き。"
+        },
+        ".card-accuria .chip": {
+          zh: "内测中",
+          en: "Private Beta",
+          ja: "内測中"
+        },
+        ".card-accuria .enter": {
+          zh: "需密码访问",
+          en: "Password Required",
+          ja: "パスワード必要"
+        },
+        ".card-accuria .action-web": {
+          zh: "查看原型（需密码）",
+          en: "View Prototype (Password)",
+          ja: "プロトタイプを見る（要パスワード）"
         },
         ".card-redaction .tag": {
           zh: "法律信息脱敏工具",

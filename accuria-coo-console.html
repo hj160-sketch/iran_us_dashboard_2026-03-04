@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accuria COO Dashboard — Prototype</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --bg-card: #1a1f2e;
+    --bg-elevated: #232938;
+    --border: #2d3548;
+    --text: #e4e8f1;
+    --text-dim: #8892a8;
+    --accent: #6366f1;
+    --accent-hover: #7c7ff5;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --blue: #3b82f6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ============ LOGIN GATE ============ */
+  #login-gate {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  .login-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 48px 40px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .login-box h1 {
+    font-size: 28px; margin-bottom: 8px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .login-box .sub {
+    color: var(--text-dim); font-size: 14px; margin-bottom: 32px;
+  }
+  .login-box input {
+    width: 100%; padding: 14px 16px;
+    background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-size: 15px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .login-box input:focus { border-color: var(--accent); }
+  .login-box button {
+    width: 100%; padding: 14px;
+    background: var(--accent); color: white; border: none;
+    border-radius: 8px; font-size: 15px; font-weight: 500;
+    cursor: pointer; margin-top: 16px;
+    transition: background 0.2s;
+  }
+  .login-box button:hover { background: var(--accent-hover); }
+  .login-error { color: var(--red); font-size: 13px; margin-top: 12px; min-height: 18px; }
+  .login-hint { color: var(--text-dim); font-size: 12px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+
+  /* ============ MAIN APP ============ */
+  #app { display: none; }
+  .topbar {
+    background: var(--bg-card); border-bottom: 1px solid var(--border);
+    padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .topbar .logo {
+    font-weight: 700; font-size: 18px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .topbar .user { color: var(--text-dim); font-size: 14px; }
+  .topbar .user .avatar {
+    display: inline-block; width: 32px; height: 32px;
+    border-radius: 50%; background: var(--accent);
+    color: white; text-align: center; line-height: 32px;
+    font-weight: 600; margin-right: 8px; vertical-align: middle;
+  }
+
+  .layout { display: flex; min-height: calc(100vh - 65px); }
+  .sidebar {
+    width: 240px; background: var(--bg-card); border-right: 1px solid var(--border);
+    padding: 24px 0;
+  }
+  .nav-section { padding: 0 16px; margin-bottom: 24px; }
+  .nav-section .label {
+    font-size: 11px; text-transform: uppercase; color: var(--text-dim);
+    margin-bottom: 8px; letter-spacing: 0.5px; padding: 0 12px;
+  }
+  .nav-item {
+    padding: 10px 12px; border-radius: 6px; cursor: pointer;
+    color: var(--text-dim); font-size: 14px; margin-bottom: 2px;
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.15s;
+  }
+  .nav-item:hover { background: var(--bg-elevated); color: var(--text); }
+  .nav-item.active { background: var(--accent); color: white; }
+  .nav-item .icon { width: 18px; text-align: center; }
+
+  .main { flex: 1; padding: 32px; overflow-y: auto; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .page-title { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+  .page-sub { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+
+  /* ============ COMPONENTS ============ */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 24px; margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px; font-weight: 600; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-title .badge {
+    font-size: 11px; padding: 3px 8px; border-radius: 12px;
+    background: var(--bg-elevated); color: var(--text-dim);
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; }
+  }
+
+  /* Stat tile */
+  .stat {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px;
+  }
+  .stat .label { color: var(--text-dim); font-size: 13px; margin-bottom: 8px; }
+  .stat .value { font-size: 28px; font-weight: 700; }
+  .stat .delta { font-size: 13px; margin-top: 4px; }
+  .stat .delta.up { color: var(--green); }
+  .stat .delta.down { color: var(--red); }
+
+  /* Traffic light buttons */
+  .traffic-light-group { display: flex; gap: 12px; margin: 16px 0; }
+  .tl-btn {
+    flex: 1; padding: 18px; border-radius: 12px; border: 2px solid var(--border);
+    background: var(--bg-elevated); color: var(--text);
+    font-size: 14px; font-weight: 500; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    transition: all 0.2s;
+  }
+  .tl-btn .dot { width: 24px; height: 24px; border-radius: 50%; }
+  .tl-btn.green .dot { background: var(--green); }
+  .tl-btn.yellow .dot { background: var(--yellow); }
+  .tl-btn.red .dot { background: var(--red); }
+  .tl-btn:hover { transform: translateY(-2px); }
+  .tl-btn.selected.green { border-color: var(--green); background: rgba(16,185,129,0.1); }
+  .tl-btn.selected.yellow { border-color: var(--yellow); background: rgba(245,158,11,0.1); }
+  .tl-btn.selected.red { border-color: var(--red); background: rgba(239,68,68,0.1); }
+
+  /* Member row */
+  .member-row {
+    display: flex; align-items: center; padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .member-row:last-child { border-bottom: none; }
+  .member-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; margin-right: 12px;
+  }
+  .member-info { flex: 1; }
+  .member-name { font-weight: 500; font-size: 14px; }
+  .member-role { color: var(--text-dim); font-size: 12px; }
+
+  /* Dimension list */
+  .dim-row {
+    display: flex; align-items: center; padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .dim-row:last-child { border-bottom: none; }
+  .dim-label { flex: 1; font-size: 14px; }
+  .dim-bar {
+    width: 200px; height: 8px; background: var(--bg-elevated);
+    border-radius: 4px; overflow: hidden; margin: 0 16px;
+  }
+  .dim-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #8b5cf6); }
+  .dim-score { font-weight: 600; min-width: 40px; text-align: right; }
+
+  /* Trend chart (simple SVG) */
+  .trend-chart { width: 100%; height: 160px; }
+
+  /* Tags */
+  .tag {
+    display: inline-block; padding: 4px 10px; border-radius: 12px;
+    font-size: 12px; font-weight: 500; margin-right: 6px; margin-bottom: 4px;
+  }
+  .tag.blue { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .tag.green { background: rgba(16,185,129,0.15); color: var(--green); }
+  .tag.yellow { background: rgba(245,158,11,0.15); color: var(--yellow); }
+  .tag.red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .tag.purple { background: rgba(139,92,246,0.15); color: #a78bfa; }
+
+  /* Decision item */
+  .decision {
+    border-left: 3px solid var(--accent); padding: 12px 16px;
+    background: var(--bg-elevated); border-radius: 0 8px 8px 0;
+    margin-bottom: 12px;
+  }
+  .decision .title { font-weight: 500; margin-bottom: 8px; font-size: 14px; }
+  .decision .meta { font-size: 12px; color: var(--text-dim); }
+  .decision .stances { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .stance {
+    font-size: 11px; padding: 3px 8px; border-radius: 10px;
+    background: var(--bg-card);
+  }
+  .stance.support { color: var(--green); }
+  .stance.against { color: var(--red); }
+  .stance.neutral { color: var(--text-dim); }
+
+  /* Alert */
+  .alert {
+    padding: 14px 16px; border-radius: 8px; margin-bottom: 16px;
+    border-left: 3px solid;
+  }
+  .alert.warning { background: rgba(245,158,11,0.1); border-color: var(--yellow); color: #fcd34d; }
+  .alert.info { background: rgba(59,130,246,0.1); border-color: var(--blue); color: #93c5fd; }
+
+  /* Client card */
+  .client-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; margin-bottom: 12px;
+  }
+  .star { color: var(--yellow); font-size: 18px; }
+
+  /* Profile / Layer 3 */
+  .profile-hero {
+    background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 32px; margin-bottom: 24px;
+  }
+  .profile-hero .name { font-size: 28px; font-weight: 700; }
+  .profile-hero .title-line { color: var(--text-dim); font-size: 14px; margin-top: 4px; }
+  .profile-hero .score-big {
+    font-size: 64px; font-weight: 800;
+    background: linear-gradient(135deg, var(--green), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  /* Radar chart placeholder */
+  .radar-placeholder {
+    background: var(--bg-elevated); border: 1px dashed var(--border);
+    border-radius: 8px; padding: 60px; text-align: center; color: var(--text-dim);
+  }
+
+  /* Mobile mockup frame */
+  .phone-frame {
+    width: 320px; margin: 0 auto;
+    border: 12px solid #2d3548; border-radius: 36px;
+    background: var(--bg); padding: 24px 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+
+  .btn {
+    padding: 10px 18px; background: var(--accent); color: white;
+    border: none; border-radius: 6px; cursor: pointer; font-size: 14px;
+    font-weight: 500; transition: background 0.2s;
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .btn.outline {
+    background: transparent; border: 1px solid var(--border); color: var(--text);
+  }
+  .btn-row { display: flex; gap: 8px; }
+
+  textarea {
+    width: 100%; background: var(--bg-elevated); border: 1px solid var(--border);
+    border-radius: 6px; padding: 10px; color: var(--text);
+    font-family: inherit; resize: vertical; min-height: 80px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ LOGIN GATE ============ -->
+<div id="login-gate">
+  <div class="login-box">
+    <h1>Accuria · COO Console</h1>
+    <p class="sub">数据驱动的内控管理系统 · 受邀访问</p>
+    <input type="password" id="pwd-input" placeholder="访问密码" autocomplete="off"/>
+    <button onclick="checkPassword()">进入</button>
+    <div class="login-error" id="login-error"></div>
+    <div class="login-hint">
+      此为产品原型。访问受限。<br>
+      问题请联系 项目负责人。
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="app">
+  <div class="topbar">
+    <div class="logo">⚡ Accuria · COO Console</div>
+    <div class="user">
+      <span class="avatar">H</span>
+      <span>Hanyu Jiang · Founder</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="nav-section">
+        <div class="label">个人</div>
+        <div class="nav-item active" onclick="showPage('home')"><span class="icon">📊</span> 我的月报</div>
+        <div class="nav-item" onclick="showPage('rate-meeting')"><span class="icon">✓</span> 会议评分</div>
+        <div class="nav-item" onclick="showPage('decisions')"><span class="icon">⚖️</span> 决策记录</div>
+      </div>
+      <div class="nav-section">
+        <div class="label">客户</div>
+        <div class="nav-item" onclick="showPage('client-rate')"><span class="icon">⭐</span> 客户评分（30秒）</div>
+        <div class="nav-item" onclick="showPage('clients')"><span class="icon">🏢</span> 客户画像</div>
+      </div>
+      <div class="nav-section">
+        <div class="label">管理层</div>
+        <div class="nav-item" onclick="showPage('manager')"><span class="icon">📈</span> 综合 Dashboard</div>
+        <div class="nav-item" onclick="showPage('crossval')"><span class="icon">🔍</span> 交叉验证警报</div>
+      </div>
+      <div class="nav-section">
+        <div class="label">数据资产 (Layer 3)</div>
+        <div class="nav-item" onclick="showPage('profile')"><span class="icon">👤</span> 律师 Profile 预览</div>
+        <div class="nav-item" onclick="showPage('intern')"><span class="icon">🎓</span> 实习生评估</div>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <!-- ============ PAGE: HOME (个人月报) ============ -->
+      <div class="page active" id="page-home">
+        <h1 class="page-title">我的月报 · 2026 年 3 月</h1>
+        <p class="page-sub">每月 1 号自动生成 · 数据匿名汇总 · 仅你本人可见</p>
+
+        <div class="grid-4">
+          <div class="stat">
+            <div class="label">综合评分</div>
+            <div class="value" style="color: var(--green)">🟢</div>
+            <div class="delta up">↑ 较上月提升 12%</div>
+          </div>
+          <div class="stat">
+            <div class="label">本月评分次数</div>
+            <div class="value">47</div>
+            <div class="delta">8 次会议 · 3 次交付</div>
+          </div>
+          <div class="stat">
+            <div class="label">决策准确率</div>
+            <div class="value">73%</div>
+            <div class="delta up">↑ 6%</div>
+          </div>
+          <div class="stat">
+            <div class="label">和团队均值差距</div>
+            <div class="value">+8%</div>
+            <div class="delta">高于平均</div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top: 20px;">
+          <div class="card">
+            <div class="card-title">各维度表现 <span class="badge">本月 vs 上月</span></div>
+            <div class="dim-row">
+              <span class="dim-label">Reliability</span>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:92%"></div></div>
+              <span class="dim-score" style="color:var(--green)">🟢</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-label">贡献质量</span>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:85%"></div></div>
+              <span class="dim-score" style="color:var(--green)">🟢</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-label">沟通清晰度</span>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:74%"></div></div>
+              <span class="dim-score" style="color:var(--yellow)">🟡</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-label">决策正确性</span>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:73%"></div></div>
+              <span class="dim-score" style="color:var(--yellow)">🟡</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-label">协作意愿</span>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:88%"></div></div>
+              <span class="dim-score" style="color:var(--green)">🟢</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-label">情绪稳定性</span>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:65%"></div></div>
+              <span class="dim-score" style="color:var(--yellow)">🟡</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">6 个月趋势</div>
+            <svg class="trend-chart" viewBox="0 0 400 160">
+              <defs>
+                <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#6366f1" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <polyline points="20,110 90,95 160,80 230,75 300,60 380,40"
+                fill="none" stroke="#6366f1" stroke-width="2.5"/>
+              <polygon points="20,110 90,95 160,80 230,75 300,60 380,40 380,160 20,160"
+                fill="url(#grad1)"/>
+              <g fill="#6366f1">
+                <circle cx="20" cy="110" r="4"/>
+                <circle cx="90" cy="95" r="4"/>
+                <circle cx="160" cy="80" r="4"/>
+                <circle cx="230" cy="75" r="4"/>
+                <circle cx="300" cy="60" r="4"/>
+                <circle cx="380" cy="40" r="4"/>
+              </g>
+              <g fill="#8892a8" font-size="10" text-anchor="middle">
+                <text x="20" y="155">10月</text>
+                <text x="90" y="155">11月</text>
+                <text x="160" y="155">12月</text>
+                <text x="230" y="155">1月</text>
+                <text x="300" y="155">2月</text>
+                <text x="380" y="155">3月</text>
+              </g>
+            </svg>
+            <p style="color: var(--text-dim); font-size: 13px; margin-top: 12px;">
+              6 个月持续上升趋势。继续保持。
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🤖 AI 改进建议（基于本月数据）</div>
+          <p style="margin-bottom: 12px;">
+            <strong style="color: var(--yellow)">沟通清晰度</strong> 是本月相对薄弱的维度。
+            分析显示，在涉及法律技术细节的会议中，团队反馈"理解成本较高"。
+          </p>
+          <p style="color: var(--text-dim); font-size: 14px; margin-bottom: 8px;">具体建议：</p>
+          <ul style="margin-left: 20px; color: var(--text-dim); font-size: 14px;">
+            <li>用 1 个具体例子替代抽象描述</li>
+            <li>会议前发送 1-page summary，让大家有准备</li>
+            <li>在解释复杂概念时主动检查"我刚才说清楚了吗？"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: RATE MEETING (会议评分) ============ -->
+      <div class="page" id="page-rate-meeting">
+        <h1 class="page-title">会议评分</h1>
+        <p class="page-sub">2026-04-16 14:00 · Accuria 周会 · 3 人参与</p>
+
+        <div class="alert info">
+          ⏱️ 此会议结束 5 分钟。完成评分需 30 秒。评分匿名，被评者只看到汇总数据。
+        </div>
+
+        <div class="card">
+          <div class="card-title">评分对象 1 / 2 · Adam Zhang</div>
+          <div style="margin-bottom: 20px;">
+            <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">准备充分度</div>
+            <div class="traffic-light-group">
+              <button class="tl-btn green selected"><div class="dot"></div>充分</button>
+              <button class="tl-btn yellow"><div class="dot"></div>一般</button>
+              <button class="tl-btn red"><div class="dot"></div>不足</button>
+            </div>
+          </div>
+          <div style="margin-bottom: 20px;">
+            <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">贡献质量</div>
+            <div class="traffic-light-group">
+              <button class="tl-btn green"><div class="dot"></div>高</button>
+              <button class="tl-btn yellow selected"><div class="dot"></div>中</button>
+              <button class="tl-btn red"><div class="dot"></div>低</button>
+            </div>
+          </div>
+          <div style="margin-bottom: 20px;">
+            <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">沟通清晰度</div>
+            <div class="traffic-light-group">
+              <button class="tl-btn green selected"><div class="dot"></div>清楚</button>
+              <button class="tl-btn yellow"><div class="dot"></div>还行</button>
+              <button class="tl-btn red"><div class="dot"></div>模糊</button>
+            </div>
+          </div>
+          <div style="margin-bottom: 20px;">
+            <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 8px;">补充说明（可选）</div>
+            <textarea>准备很充分，很用功。这次会议前提前研读了所有材料，发言条理清晰，对客户问题的预判很到位。值得肯定！</textarea>
+          </div>
+          <div class="btn-row">
+            <button class="btn">提交并评下一位 →</button>
+            <button class="btn outline">跳过</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: DECISIONS (决策记录) ============ -->
+      <div class="page" id="page-decisions">
+        <h1 class="page-title">决策记录</h1>
+        <p class="page-sub">所有重要决策及立场 · 季度回顾追踪准确率</p>
+
+        <div class="btn-row" style="margin-bottom: 20px;">
+          <button class="btn">+ 记录新决策</button>
+          <button class="btn outline">查看待回填（3）</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">本季度决策（12 项 · 7 项已回填结果）</div>
+
+          <div class="decision">
+            <div class="title">决策：使用 Postgres 而非 Google Sheets 作为内控数据存储</div>
+            <div class="meta">2026-04-15 · 决策人：Hanyu, Adam · 90 天后回填结果</div>
+            <div class="stances">
+              <span class="stance support">✓ Hanyu 支持：长期看维护成本低</span>
+              <span class="stance against">✗ Adam 反对：Sheets 更快上线</span>
+              <span class="stance neutral">○ Kaichen 中立</span>
+            </div>
+          </div>
+
+          <div class="decision" style="border-left-color: var(--green);">
+            <div class="title">决策：先做客户评分系统，暂缓供应商画像</div>
+            <div class="meta">2026-01-20 · 已回填 · 结果：✅ 正确</div>
+            <div class="stances">
+              <span class="stance support">✓ Hanyu 支持</span>
+              <span class="stance support">✓ Adam 支持</span>
+              <span class="stance against">✗ Kaichen 反对：供应商问题更急迫</span>
+            </div>
+            <p style="font-size: 12px; margin-top: 8px; color: var(--text-dim);">
+              实际结果：客户评分上线后 3 个月，回收率 68%，提升了 NPS 4 个点。
+            </p>
+          </div>
+
+          <div class="decision" style="border-left-color: var(--red);">
+            <div class="title">决策：投入 3 周做实时 dashboard</div>
+            <div class="meta">2025-12-10 · 已回填 · 结果：❌ 错误</div>
+            <div class="stances">
+              <span class="stance support">✓ Hanyu 支持</span>
+              <span class="stance against">✗ Adam 反对：会引发刷分焦虑</span>
+              <span class="stance against">✗ Kaichen 反对：浪费资源</span>
+            </div>
+            <p style="font-size: 12px; margin-top: 8px; color: var(--text-dim);">
+              实际结果：上线后团队焦虑增加，2 周后下线。Adam & Kaichen 判断准确。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: CLIENT RATE (客户 30 秒评分) ============ -->
+      <div class="page" id="page-client-rate">
+        <h1 class="page-title">客户评分页面预览</h1>
+        <p class="page-sub">客户收到的链接打开后看到的页面 · 移动端优先 · 30 秒完成</p>
+
+        <div class="phone-frame">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 8px;">Accuria</div>
+            <div style="font-size: 18px; font-weight: 600;">为 Hanyu Jiang 律师评分</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">2026-04-16 会议</div>
+          </div>
+
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 10px;">整体满意度</div>
+            <div style="text-align: center; font-size: 32px; letter-spacing: 8px;">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span style="color:var(--border)">★</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 10px;">沟通清楚吗？</div>
+            <div style="display: flex; gap: 8px;">
+              <button class="tl-btn green selected" style="padding: 12px;"><div class="dot" style="width:16px;height:16px"></div>清楚</button>
+              <button class="tl-btn yellow" style="padding: 12px;"><div class="dot" style="width:16px;height:16px"></div>还行</button>
+              <button class="tl-btn red" style="padding: 12px;"><div class="dot" style="width:16px;height:16px"></div>不清</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 10px;">问题解决了吗？</div>
+            <div style="display: flex; gap: 8px;">
+              <button class="tl-btn green selected" style="padding: 12px;"><div class="dot" style="width:16px;height:16px"></div>解决</button>
+              <button class="tl-btn yellow" style="padding: 12px;"><div class="dot" style="width:16px;height:16px"></div>部分</button>
+              <button class="tl-btn red" style="padding: 12px;"><div class="dot" style="width:16px;height:16px"></div>没有</button>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <div style="font-size: 13px; color: var(--text-dim); margin-bottom: 8px;">有什么可以改进？（可选）</div>
+            <textarea placeholder="" style="font-size: 13px; min-height: 60px;"></textarea>
+          </div>
+
+          <button class="btn" style="width: 100%; padding: 14px;">提交</button>
+          <p style="text-align: center; font-size: 11px; color: var(--text-dim); margin-top: 12px;">
+            匿名提交 · 律师不会知道是你
+          </p>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: CLIENTS (客户画像) ============ -->
+      <div class="page" id="page-clients">
+        <h1 class="page-title">客户画像</h1>
+        <p class="page-sub">内部知识库 · 帮助新人快速理解客户 · 严格保密 · 永不外传</p>
+
+        <div class="alert warning">
+          ⚠️ 此页面包含敏感内部观察。访问被审计记录。请勿截图或分享。
+        </div>
+
+        <div class="grid-2">
+          <div class="client-card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+              <div>
+                <h3 style="font-size: 16px; margin-bottom: 4px;">Goldman Sachs Legal</h3>
+                <div style="font-size: 12px; color: var(--text-dim);">企业客户 · 5 个项目</div>
+              </div>
+              <span class="tag red">高优先级</span>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <span class="tag yellow">难说话</span>
+              <span class="tag red">deadline 严</span>
+              <span class="tag green">付款及时</span>
+              <span class="tag blue">技术专业</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+              <strong>沟通建议：</strong>邮件必须当天回复。所有材料必须 100% 准确，他们 review 极细致。
+              不接受"差不多"的答案。
+            </p>
+            <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-top: 8px;">
+              <strong>todo 优先级：</strong>P0 · 任何 GS 任务优先于其他客户
+            </p>
+          </div>
+
+          <div class="client-card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+              <div>
+                <h3 style="font-size: 16px; margin-bottom: 4px;">某 Series B 创业公司</h3>
+                <div style="font-size: 12px; color: var(--text-dim);">创业公司 · 2 个项目</div>
+              </div>
+              <span class="tag yellow">中优先级</span>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <span class="tag green">好说话</span>
+              <span class="tag yellow">爱拖延付款</span>
+              <span class="tag blue">愿意学习</span>
+            </div>
+            <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+              <strong>沟通建议：</strong>可以晚 1-2 天回复，没关系。但建议主动追付款。
+              可以教育型沟通，他们愿意听解释。
+            </p>
+            <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-top: 8px;">
+              <strong>todo 优先级：</strong>P2 · 可以让位于 P0/P1 任务
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: MANAGER DASHBOARD ============ -->
+      <div class="page" id="page-manager">
+        <h1 class="page-title">管理层 Dashboard</h1>
+        <p class="page-sub">完整团队数据 · 仅 Founder/COO 可见</p>
+
+        <div class="grid-4">
+          <div class="stat">
+            <div class="label">本月评分完成率</div>
+            <div class="value">87%</div>
+            <div class="delta up">健康</div>
+          </div>
+          <div class="stat">
+            <div class="label">客户 NPS</div>
+            <div class="value">8.2</div>
+            <div class="delta up">↑ 0.4</div>
+          </div>
+          <div class="stat">
+            <div class="label">交叉验证警报</div>
+            <div class="value" style="color: var(--yellow)">2</div>
+            <div class="delta">需 review</div>
+          </div>
+          <div class="stat">
+            <div class="label">待回填决策</div>
+            <div class="value">3</div>
+            <div class="delta down">超时 1</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">团队成员表现概览</div>
+          <div class="member-row">
+            <div class="member-avatar">H</div>
+            <div class="member-info">
+              <div class="member-name">Hanyu Jiang</div>
+              <div class="member-role">Founder · CEO</div>
+            </div>
+            <div style="text-align: right; min-width: 200px;">
+              <div style="display: inline-flex; gap: 4px; align-items: center;">
+                <span style="color: var(--green); font-size: 18px;">●</span>
+                <span style="color: var(--text-dim); font-size: 12px;">综合 🟢</span>
+              </div>
+              <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
+                内部 92% · 客户 4.6/5 · 决策 73%
+              </div>
+            </div>
+          </div>
+          <div class="member-row">
+            <div class="member-avatar" style="background: #8b5cf6;">A</div>
+            <div class="member-info">
+              <div class="member-name">Adam Zhang</div>
+              <div class="member-role">Co-founder · Engineering</div>
+            </div>
+            <div style="text-align: right; min-width: 200px;">
+              <div style="display: inline-flex; gap: 4px; align-items: center;">
+                <span style="color: var(--green); font-size: 18px;">●</span>
+                <span style="color: var(--text-dim); font-size: 12px;">综合 🟢</span>
+              </div>
+              <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
+                内部 88% · 客户 4.7/5 · 决策 81%
+              </div>
+            </div>
+          </div>
+          <div class="member-row">
+            <div class="member-avatar" style="background: #ec4899;">K</div>
+            <div class="member-info">
+              <div class="member-name">Kaichen Wang</div>
+              <div class="member-role">Advisor · Legal</div>
+            </div>
+            <div style="text-align: right; min-width: 200px;">
+              <div style="display: inline-flex; gap: 4px; align-items: center;">
+                <span style="color: var(--yellow); font-size: 18px;">●</span>
+                <span style="color: var(--text-dim); font-size: 12px;">综合 🟡</span>
+              </div>
+              <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">
+                内部 76% · 客户 4.3/5 · 决策 68%
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">异常模式检测 <span class="badge">AI 自动</span></div>
+          <div class="alert warning">
+            <strong>提醒：</strong>用户 #4 在过去 30 天对所有同事打分都低于团队均值 2σ。
+            可能是评分校准问题，也可能是真实负面反馈。建议 1-on-1 沟通。
+          </div>
+          <div class="alert info">
+            <strong>正面信号：</strong>团队整体决策准确率从 Q4 的 64% 提升到本季度 74%。
+            决策记录系统正在产生学习效应。
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: CROSS VALIDATION ============ -->
+      <div class="page" id="page-crossval">
+        <h1 class="page-title">交叉验证警报</h1>
+        <p class="page-sub">内部评分 vs 客户评分 vs 决策准确率 · 信号矛盾自动标记</p>
+
+        <div class="card">
+          <div class="card-title">⚠️ 信号 1：内部高分 + 客户低分</div>
+          <div style="display: flex; gap: 24px; align-items: center; margin: 20px 0;">
+            <div class="member-avatar" style="background: #ec4899; width: 56px; height: 56px;">K</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">Kaichen Wang</div>
+              <div style="font-size: 13px; color: var(--text-dim); margin-top: 4px;">
+                同事评分：🟢 88% · 客户评分：⭐ 3.2/5
+              </div>
+            </div>
+          </div>
+          <p style="font-size: 14px; line-height: 1.6;">
+            团队认为 Kaichen 法律分析能力强、可靠，但客户评分偏低，特别是<strong>"沟通清晰度"</strong>维度。
+          </p>
+          <p style="font-size: 14px; color: var(--text-dim); margin-top: 8px;">
+            <strong>AI 假设：</strong>可能是法律术语过多，对非法律背景客户解释不够通俗。
+            建议安排沟通技巧培训或配 paralegal 做翻译层。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔍 信号 2：决策反对 + 实际正确</div>
+          <p style="font-size: 14px; line-height: 1.6;">
+            <strong>Adam Zhang</strong> 在过去 6 个月有 4 次反对团队多数派意见，事后 3 次证明他的判断更准确。
+          </p>
+          <p style="font-size: 14px; color: var(--text-dim); margin-top: 8px;">
+            <strong>建议：</strong>在涉及技术架构和产品决策时，给 Adam 的意见更高权重。
+            （这正是桥水 believability-weighted 的核心。）
+          </p>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: PROFILE (Layer 3 律师 Profile) ============ -->
+      <div class="page" id="page-profile">
+        <h1 class="page-title">律师 Profile 预览（Layer 3）</h1>
+        <p class="page-sub">未来对外的律师档案样式 · 律师本人控制可见性 · 数据来自 Layer 1+2</p>
+
+        <div class="profile-hero">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div class="name">某律师 (Demo)</div>
+              <div class="title-line">Securities Law · 5 年经验 · 纽约</div>
+              <div style="margin-top: 16px;">
+                <span class="tag purple">Top 5% in Derivatives</span>
+                <span class="tag blue">Verified by Accuria</span>
+                <span class="tag green">142 个客户评分</span>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div class="score-big">9.2</div>
+              <div style="color: var(--text-dim); font-size: 12px;">综合评分（10 分制）</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">能力雷达图</div>
+            <div class="radar-placeholder">
+              [雷达图：法律分析、客户沟通、风险识别、效率、协作、创新]
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">擅长领域</div>
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 13px; margin-bottom: 4px;">Derivatives Trading Agreements</div>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:95%"></div></div>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 13px; margin-bottom: 4px;">ISDA Master Agreement</div>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:88%"></div></div>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 13px; margin-bottom: 4px;">Cross-border Securities</div>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:72%"></div></div>
+            </div>
+            <div style="margin-bottom: 12px;">
+              <div style="font-size: 13px; margin-bottom: 4px;">M&A</div>
+              <div class="dim-bar"><div class="dim-bar-fill" style="width:45%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">12 个月表现趋势 <span class="badge">基于 312 个 data points</span></div>
+          <svg class="trend-chart" viewBox="0 0 400 160">
+            <polyline points="20,80 50,75 80,70 120,60 160,55 200,50 240,45 280,40 320,38 360,35 380,32"
+              fill="none" stroke="#10b981" stroke-width="2.5"/>
+          </svg>
+          <p style="color: var(--text-dim); font-size: 13px; margin-top: 12px;">
+            持续上升。客户满意度从 4.2 提升至 4.8。决策准确率从 68% 提升至 87%。
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">客户认证（脱敏）</div>
+          <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 12px;">
+            "解释复杂衍生品条款时极清楚，能让非法律背景的 CFO 理解。"<br>
+            <span style="font-size: 12px;">— 某 Fortune 500 CFO（2026-03）</span>
+          </p>
+          <p style="font-size: 14px; color: var(--text-dim);">
+            "ISDA 谈判中识别出对手方的隐藏风险条款，为我们省了至少 $2M。"<br>
+            <span style="font-size: 12px;">— 某对冲基金 GC（2026-02）</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- ============ PAGE: INTERN EVALUATION ============ -->
+      <div class="page" id="page-intern">
+        <h1 class="page-title">实习生评估系统</h1>
+        <p class="page-sub">基于 12 周数据 · 客观决策 return offer · 可独立产品化</p>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">实习生 A</div>
+            <div style="text-align: center; margin: 16px 0;">
+              <div style="font-size: 48px; color: var(--green);">🟢</div>
+              <div style="margin-top: 8px; font-weight: 600;">推荐 Return Offer</div>
+            </div>
+            <div style="font-size: 13px; color: var(--text-dim);">
+              <div>同事评分：🟢 91%</div>
+              <div>客户评分：⭐ 4.7/5</div>
+              <div>成长曲线：陡峭上升</div>
+              <div>主动性：超出预期</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">实习生 B</div>
+            <div style="text-align: center; margin: 16px 0;">
+              <div style="font-size: 48px; color: var(--yellow);">🟡</div>
+              <div style="margin-top: 8px; font-weight: 600;">需要进一步观察</div>
+            </div>
+            <div style="font-size: 13px; color: var(--text-dim);">
+              <div>同事评分：🟡 72%</div>
+              <div>客户评分：⭐ 4.0/5</div>
+              <div>成长曲线：缓慢但稳定</div>
+              <div>主动性：中等</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">实习生 C</div>
+            <div style="text-align: center; margin: 16px 0;">
+              <div style="font-size: 48px; color: var(--red);">🔴</div>
+              <div style="margin-top: 8px; font-weight: 600;">不建议 Return Offer</div>
+            </div>
+            <div style="font-size: 13px; color: var(--text-dim);">
+              <div>同事评分：🔴 58%</div>
+              <div>客户评分：⭐ 3.2/5</div>
+              <div>成长曲线：停滞</div>
+              <div>Reliability：多次 deadline 延误</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px; background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(34,211,238,0.08)); border: 1px solid var(--purple);">
+          <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 24px;">📱</span> QR Code 名牌评分（New · 2026-04-16）
+          </div>
+          <p style="color: var(--text-mute); margin: 12px 0;">
+            实习生工牌 / name tag 旁印 QR 码。Partner 走过 → 扫一下 → 5 秒打个红黄绿 + 一句话。
+            <strong style="color: var(--text);">把"打开 portal 找名字"变成"扫一下"</strong>，评分回收率从 20% 飙到 80%。
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px;">
+            <div style="text-align: center; padding: 16px; background: var(--bg-deep); border-radius: 8px;">
+              <div style="width: 80px; height: 80px; margin: 0 auto 8px; background: white; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="black">
+                  <rect x="4" y="4" width="16" height="16" fill="black"/><rect x="8" y="8" width="8" height="8" fill="white"/>
+                  <rect x="44" y="4" width="16" height="16" fill="black"/><rect x="48" y="8" width="8" height="8" fill="white"/>
+                  <rect x="4" y="44" width="16" height="16" fill="black"/><rect x="8" y="48" width="8" height="8" fill="white"/>
+                  <rect x="24" y="4" width="4" height="4"/><rect x="32" y="8" width="4" height="4"/><rect x="36" y="4" width="4" height="4"/>
+                  <rect x="24" y="24" width="4" height="4"/><rect x="32" y="28" width="4" height="4"/><rect x="40" y="24" width="4" height="4"/>
+                  <rect x="28" y="36" width="4" height="4"/><rect x="36" y="40" width="4" height="4"/><rect x="44" y="32" width="4" height="4"/>
+                  <rect x="24" y="48" width="4" height="4"/><rect x="32" y="52" width="4" height="4"/><rect x="40" y="56" width="4" height="4"/>
+                  <rect x="52" y="48" width="4" height="4"/><rect x="56" y="44" width="4" height="4"/>
+                </svg>
+              </div>
+              <div style="font-weight: 600; color: var(--text); font-size: 14px;">实习生 A</div>
+              <div style="font-size: 11px; color: var(--text-mute);">扫码评分</div>
+            </div>
+            <div style="text-align: center; padding: 16px; background: var(--bg-deep); border-radius: 8px;">
+              <div style="font-size: 32px; margin-bottom: 8px;">📲</div>
+              <div style="font-weight: 600; color: var(--text); font-size: 14px;">扫码后弹出</div>
+              <div style="display: flex; gap: 4px; justify-content: center; margin-top: 8px;">
+                <span style="font-size: 24px;">🟢</span>
+                <span style="font-size: 24px;">🟡</span>
+                <span style="font-size: 24px;">🔴</span>
+              </div>
+              <div style="font-size: 11px; color: var(--text-mute); margin-top: 4px;">+ 一句话评论</div>
+            </div>
+            <div style="text-align: center; padding: 16px; background: var(--bg-deep); border-radius: 8px;">
+              <div style="font-size: 32px; margin-bottom: 8px;">⏱️</div>
+              <div style="font-weight: 600; color: var(--text); font-size: 14px;">总耗时 5 秒</div>
+              <div style="font-size: 11px; color: var(--text-mute); margin-top: 4px;">每人每天限评 1 次<br/>同 IP 防刷分</div>
+            </div>
+          </div>
+          <div style="margin-top: 16px; padding: 12px; background: rgba(34,211,238,0.08); border-left: 3px solid var(--cyan); border-radius: 4px; font-size: 13px;">
+            🚀 <strong>衍生场景：</strong>律所招聘会候选人胸牌、Partner retreat、conference 演讲者评价、客户进会议室扫律师胸牌……
+            这个 feature 单拎出来就是个 SaaS（医院/咨询/教育/HR tech 全部能用），<strong>一周末能写 demo</strong>。
+          </div>
+        </div>
+
+        <div class="alert info">
+          💡 <strong>商业化潜力：</strong>这套实习生评估系统可以作为独立产品卖给律所。
+          预估年费 $20K-50K/律所。市场约 200 家律所有 summer associate 项目。
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script>
+  // 简单的密码门 - SHA-256 hash of password
+  // 密码: Accuria2026
+  const PASSWORD_HASH = "70bb3ee71b87a3f37a3b2960e4051df9e7d9be1d8a9f4ef4cd8c7c1e6f0e5d52";
+
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkPassword() {
+    const input = document.getElementById('pwd-input').value;
+    const errorEl = document.getElementById('login-error');
+
+    // 简化版：直接比对（用于演示）
+    if (input === 'Accuria2026') {
+      sessionStorage.setItem('accuria_authed', '1');
+      document.getElementById('login-gate').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      errorEl.textContent = '';
+    } else {
+      errorEl.textContent = '密码错误';
+      document.getElementById('pwd-input').value = '';
+    }
+  }
+
+  // 已登录则跳过密码门
+  if (sessionStorage.getItem('accuria_authed') === '1') {
+    document.getElementById('login-gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+
+  // 回车提交密码
+  document.getElementById('pwd-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  // 页面切换
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    event.target.closest('.nav-item').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // 红黄绿按钮交互
+  document.querySelectorAll('.traffic-light-group').forEach(group => {
+    group.querySelectorAll('.tl-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.tl-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
