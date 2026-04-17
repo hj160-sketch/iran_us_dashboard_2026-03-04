@@ -94,6 +94,7 @@
   .sidebar {
     width: 240px; background: var(--bg-card); border-right: 1px solid var(--border);
     padding: 24px 0;
+    display: flex; flex-direction: column;
   }
   .nav-section { padding: 0 16px; margin-bottom: 24px; }
   .nav-section .label {
@@ -339,6 +340,15 @@
         <div class="label">数据资产 (Layer 3)</div>
         <div class="nav-item" onclick="showPage('profile')"><span class="icon">👤</span> 律师 Profile 预览</div>
         <div class="nav-item" onclick="showPage('intern')"><span class="icon">🎓</span> 实习生评估</div>
+      </div>
+      <div class="nav-section">
+        <div class="label">实验室 🧪</div>
+        <div class="nav-item" onclick="showPage('lab')"><span class="icon">🦹</span> Wild Ideas / 实验室</div>
+      </div>
+      <div style="margin-top: auto; padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 11px; color: var(--text-dim); line-height: 1.5;">
+        <div style="opacity: 0.6;">Internal codename:</div>
+        <div style="color: #ec4899; font-weight: 600; margin-top: 2px;">Project Evil COO 🦹</div>
+        <div style="opacity: 0.5; margin-top: 4px; font-style: italic;">we know what this looks like — that's why we're being careful.</div>
       </div>
     </aside>
 
@@ -965,6 +975,151 @@
         <div class="alert info">
           💡 <strong>商业化潜力：</strong>这套实习生评估系统可以作为独立产品卖给律所。
           预估年费 $20K-50K/律所。市场约 200 家律所有 summer associate 项目。
+        </div>
+      </div>
+
+      <!-- ============ PAGE: WILD IDEAS / LAB ============ -->
+      <div class="page" id="page-lab">
+        <h1 class="page-title">🧪 Wild Ideas / 实验室</h1>
+        <p class="page-sub">
+          内部代号 <strong style="color: #ec4899;">Project Evil COO</strong> 🦹 ·
+          我们知道这看起来像黑镜，所以我们在设计时就把伦理边界当成第一约束。
+        </p>
+
+        <div class="alert info" style="margin-bottom: 24px;">
+          💡 <strong>核心洞察：</strong>当你能精确量化一个人的"可靠度 / 决策质量 / 协作风格"，
+          这些数据的应用边界远超法律行业。下面是我们脑暴中冒出来的 5 个"不太正经但其实严肃"的方向。
+          标 ⚠️ 的我们短期内不会做，但数据结构会预留。
+        </div>
+
+        <div class="grid-2">
+          <!-- 恋爱市场 -->
+          <div class="card">
+            <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">💘</span> Trust Graph for Dating
+              <span style="font-size: 11px; padding: 2px 8px; background: rgba(236,72,153,0.2); color: #ec4899; border-radius: 999px;">⚠️ 不会做</span>
+            </div>
+            <p style="color: var(--text-mute); margin: 12px 0; font-size: 14px; line-height: 1.6;">
+              Reliability、决策质量、情绪稳定性 — 这三个维度其实是择偶的核心指标，
+              比 LinkedIn 简历有用 10 倍。<br/><br/>
+              <strong>设想：</strong>opt-in 的用户可以把自己的"可信度报告"匿名化授权给相亲平台，
+              替代传统的"自我陈述 + 颜值"匹配模式。
+            </p>
+            <div style="padding: 12px; background: rgba(239,68,68,0.08); border-left: 3px solid #ef4444; border-radius: 4px; font-size: 12px;">
+              <strong>为什么不做：</strong>把人的"可信度"商品化跨过了我们设的伦理红线。
+              但理论上证明了这套数据 schema 的通用性。
+            </div>
+          </div>
+
+          <!-- 供应商打分 -->
+          <div class="card">
+            <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">🏭</span> 供应商内部画像
+              <span style="font-size: 11px; padding: 2px 8px; background: rgba(34,211,238,0.2); color: var(--cyan); border-radius: 999px;">内部已规划</span>
+            </div>
+            <p style="color: var(--text-mute); margin: 12px 0; font-size: 14px; line-height: 1.6;">
+              "某律所 paralegal vendor 态度好但拖延"、"某 expert witness 价格贵但 deposition 表现稳"
+              — 这些信息现在靠老员工口口相传，新人接手就丢了。<br/><br/>
+              <strong>方案：</strong>每次合作后 30 秒红黄绿 + 一句话评论，
+              加密存储，仅内部访问，绝不出售。
+            </p>
+            <div style="padding: 12px; background: rgba(34,211,238,0.08); border-left: 3px solid var(--cyan); border-radius: 4px; font-size: 12px;">
+              <strong>风险防控：</strong>供应商数据物理隔离 + MFA + 审计日志。
+              一旦泄露是 PR 灾难，所以加密级别 = 客户 PII。
+            </div>
+          </div>
+
+          <!-- 客户性格 → 任务优先级 -->
+          <div class="card">
+            <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">🎯</span> 客户性格驱动 todo 优先级
+              <span style="font-size: 11px; padding: 2px 8px; background: rgba(34,197,94,0.2); color: var(--green); border-radius: 999px;">已立项</span>
+            </div>
+            <p style="color: var(--text-mute); margin: 12px 0; font-size: 14px; line-height: 1.6;">
+              高盛难说话 → 内部 todo 优先；某中小客户好说话 → 稍微 delay 没事。<br/><br/>
+              <strong>算法：</strong>客户耐心度 × 任务紧急度 × 合同金额 = 真实 priority。
+              AI 自动重排所有人的 daily todo list。
+            </p>
+            <div style="padding: 12px; background: rgba(168,85,247,0.08); border-left: 3px solid var(--purple); border-radius: 4px; font-size: 12px;">
+              <strong>商业化：</strong>这个单独拎出来就是个律所运营 SaaS，
+              年费 $30K-100K（按律师数收）。
+            </div>
+          </div>
+
+          <!-- Universal Trust Graph -->
+          <div class="card">
+            <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">🌐</span> Universal Trust Graph
+              <span style="font-size: 11px; padding: 2px 8px; background: rgba(251,191,36,0.2); color: var(--yellow); border-radius: 999px;">长期愿景</span>
+            </div>
+            <p style="color: var(--text-mute); margin: 12px 0; font-size: 14px; line-height: 1.6;">
+              如果"可信度评分"能跨行业流通：招聘、合伙人匹配、宠物寄养、租客背调、
+              远程工作平台 hiring — 都能用同一套底层 schema。<br/><br/>
+              <strong>类比：</strong>FICO 评分之于信贷 = Accuria Trust Score 之于"人际可信度"。
+            </p>
+            <div style="padding: 12px; background: rgba(251,191,36,0.08); border-left: 3px solid var(--yellow); border-radius: 4px; font-size: 12px;">
+              <strong>前提：</strong>必须 opt-in、必须可删除、必须经过法律 review。
+              先在法律行业证明价值，10 年后再考虑跨行业。
+            </div>
+          </div>
+
+          <!-- Investor / 合伙人 due diligence -->
+          <div class="card">
+            <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">🤝</span> 合伙人 / Co-founder 兼容性匹配
+              <span style="font-size: 11px; padding: 2px 8px; background: rgba(168,85,247,0.2); color: var(--purple); border-radius: 999px;">研究中</span>
+            </div>
+            <p style="color: var(--text-mute); margin: 12px 0; font-size: 14px; line-height: 1.6;">
+              创业失败的最大原因之一是 co-founder 矛盾。
+              如果有可量化的"决策风格 / 冲突反应模式 / 情绪稳定性"数据，
+              提前 90 天就能预测一段合伙关系的健康度。<br/><br/>
+              <strong>受众：</strong>YC / a16z 等加速器、企业 M&A due diligence、
+              律所合伙人 promotion 评估。
+            </p>
+            <div style="padding: 12px; background: rgba(99,102,241,0.08); border-left: 3px solid #6366f1; border-radius: 4px; font-size: 12px;">
+              <strong>切入点：</strong>先做"内部合伙人健康度报告"
+              — Accuria 自己跑 12 个月，再决定要不要对外。
+            </div>
+          </div>
+
+          <!-- 公司文化 fit -->
+          <div class="card">
+            <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">🏢</span> 候选人 ↔ 公司文化 fit 预测
+              <span style="font-size: 11px; padding: 2px 8px; background: rgba(34,197,94,0.2); color: var(--green); border-radius: 999px;">中期可做</span>
+            </div>
+            <p style="color: var(--text-mute); margin: 12px 0; font-size: 14px; line-height: 1.6;">
+              律所招人最大的 lemon problem：简历漂亮、面试好，入职 6 个月就发现"不 fit"。
+              如果候选人有 portable 的"协作风格 / 反馈接受度 / 压力反应"数据，
+              律所能提前预测匹配度。<br/><br/>
+              <strong>颠覆点：</strong>把"reference check"从 3 个朋友的 generic 推荐信
+              升级成 50 个同事的量化评分。
+            </p>
+            <div style="padding: 12px; background: rgba(34,197,94,0.08); border-left: 3px solid var(--green); border-radius: 4px; font-size: 12px;">
+              <strong>护城河：</strong>这就是 Layer 3 的最有价值版本，
+              直接对标 LinkedIn × Glassdoor × Chambers。
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top: 24px; background: linear-gradient(135deg, rgba(236,72,153,0.12), rgba(168,85,247,0.08)); border: 1px solid #ec4899;">
+          <div class="card-title" style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 22px;">🦹</span> Project Evil COO — 自我警示清单
+          </div>
+          <p style="color: var(--text); font-size: 14px; line-height: 1.7; margin: 12px 0;">
+            我们给自己定的硬约束（违反任意一条 = stop ship）：
+          </p>
+          <ul style="color: var(--text-mute); font-size: 14px; line-height: 1.9; padding-left: 20px;">
+            <li><strong>红线 1：</strong>个人评分数据**绝不**未经本人同意对外销售或公开</li>
+            <li><strong>红线 2：</strong>评分用于"成长 / 决策参考"，**不直接**触发裁人或扣薪</li>
+            <li><strong>红线 3：</strong>评分原始数据加密存储，管理层也只能看聚合 / 匿名化结果</li>
+            <li><strong>红线 4：</strong>用户随时可导出全部数据 + 一键删除（GDPR-grade right-to-be-forgotten）</li>
+            <li><strong>红线 5：</strong>任何"跨行业流通"功能必须经过法律 review + 至少 6 个月公开 RFC 期</li>
+          </ul>
+          <p style="font-size: 13px; color: var(--text-dim); margin-top: 16px; font-style: italic;">
+            "我们要拿到桥水 80% 的洞察，但只承担它 20% 的 toxic 副作用。"
+            — 这句话每次代码 review 都贴在屏幕上。
+          </p>
         </div>
       </div>
 
